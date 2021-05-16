@@ -20,7 +20,14 @@ public class Usuario {
 	private String email;
 	private String password;
 	private String rol;
+	private String user;
 	
+	public String getUser() {
+		return user;
+	}
+	public void setUser(String user) {
+		this.user = user;
+	}
 	public Long getId() {
 		return id;
 	}
