@@ -8,6 +8,8 @@
 </head>
 <body>
   <p>hola ${usuario} esta es tu cuenta</p>
+  <a href="buscarTurno">solicitar turno</a>
+ 
   <a href="loginVeterinaria">cerrar sesion</a>
 </body>
 </html>
