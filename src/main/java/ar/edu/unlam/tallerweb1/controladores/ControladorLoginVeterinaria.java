@@ -23,7 +23,6 @@ public class ControladorLoginVeterinaria {
 		this.servicio = servicio;	
 	}
 	
-	
 	@RequestMapping("/loginVeterinaria")
 	public ModelAndView mostrarLoginVeterinaria() {
 		return new ModelAndView("ingresoVeterinaria");
@@ -110,6 +109,11 @@ public class ControladorLoginVeterinaria {
 		
 		return new ModelAndView("cuentaUsuario", modelo);
 		
+	}
+	
+	@RequestMapping(path = "/", method = RequestMethod.GET)
+	public ModelAndView inicio() {
+		return new ModelAndView("redirect:/loginVeterinaria");
 	}
 
 }
