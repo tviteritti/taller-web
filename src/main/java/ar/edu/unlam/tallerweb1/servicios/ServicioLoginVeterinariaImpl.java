@@ -30,6 +30,18 @@ public class ServicioLoginVeterinariaImpl implements ServicioLoginVeterinaria{
 		
 		return false;
 	}
+
+	@Override
+	public Boolean guardarUsuario(String pass, String repass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean validarUsuario(String pass, String repass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 

@@ -7,5 +7,9 @@ public interface ServicioLoginVeterinaria {
 	Boolean buscarUsuario(String usuario, String password);
 	
 	Boolean validarPassRePass(String pass, String repass);
+	
+	Boolean guardarUsuario(String pass, String repass);
+	
+	Boolean validarUsuario(String pass, String repass);
 
 }
