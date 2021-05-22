@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
@@ -34,6 +35,11 @@ public class ServicioLoginImpl implements ServicioLogin {
 	@Override
 	public Usuario registrarUsuario(Usuario usuario) {
 		return servicioLoginDao.registrarUsuario(usuario);
+	}
+
+	@Override
+	public List<Usuario> getUsuarios() {
+		return servicioLoginDao.getUsuarios();
 	}
 
 }

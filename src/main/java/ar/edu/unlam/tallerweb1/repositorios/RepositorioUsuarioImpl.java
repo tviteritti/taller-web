@@ -1,13 +1,19 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import java.util.List;
+
+
+
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 // implelemtacion del repositorio de usuarios, la anotacion @Repository indica a Spring que esta clase es un componente que debe
 // ser manejado por el framework, debe indicarse en applicationContext que busque en el paquete ar.edu.unlam.tallerweb1.dao
@@ -42,5 +48,16 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		sessionFactory.getCurrentSession().save(usuario);
 		return null;
 	}
+
+	@Override
+	@Transactional
+	public List<Usuario> getUsuarios() {
+		final Session session = sessionFactory.getCurrentSession();
+		Query<Usuario> miQuery=session.createQuery("from Usuario", Usuario.class);
+		List<Usuario> usuarios=miQuery.getResultList();
+		return usuarios;
+	}
+
+	
 
 }

@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,10 +16,20 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 @Controller
 public class ControladorIndex {
 	
-
+	private ServicioLogin servicio;
+	
+	@Autowired
+	public ControladorIndex(ServicioLogin servicio) {
+		
+		this.servicio = servicio;	
+	}
+	
+	
 	@RequestMapping("/index")
-	public ModelAndView irIndex() {
-
-		return new ModelAndView("index");
+	public ModelAndView mostrarCuentaUsuario() {
+		List<Usuario> listaUsuarios=servicio.getUsuarios();
+		ModelMap modelo = new ModelMap();
+		modelo.put("listaUsuarios", listaUsuarios);
+		return new ModelAndView("index", modelo);
 	}
 }

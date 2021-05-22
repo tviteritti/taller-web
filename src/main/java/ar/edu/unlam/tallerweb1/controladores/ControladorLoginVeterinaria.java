@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLoginVeterinaria;
 
@@ -18,12 +19,14 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioLoginVeterinaria;
 public class ControladorLoginVeterinaria {
 	
 	private ServicioLoginVeterinaria servicio;
+
 	
 	@Autowired
 	public ControladorLoginVeterinaria(ServicioLoginVeterinaria servicio) {
 		
 		this.servicio = servicio;	
 	}
+	
 	
 	@RequestMapping("/loginVeterinaria")
 	public ModelAndView mostrarLoginVeterinaria() {

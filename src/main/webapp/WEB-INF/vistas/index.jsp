@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -19,7 +21,28 @@
 
 	<jsp:include page="navSinLog.jsp" flush="true" />
 	
-
+	 <table>
+	  
+	  	<tr>
+	  		<th>id</th>
+	  		<th>email</th>
+	  		<th>password</th>
+	  		<th>rol</th>
+	  		<th>user</th>
+	  	</tr>
+	  	
+	  	<c:forEach var="usuario" items="${listaUsuarios }">
+	  	
+	  	<tr>
+	  		<th>${usuario.id}</th>
+	  		<th>${usuario.email}</th>
+	  		<th>${usuario.password}</th>
+	  		<th>${usuario.rol}</th>
+	  		<th>${usuario.user}</th>
+	  	</tr>
+	  	</c:forEach>
+	  	
+	  </table>
 
 	
     <!-- Optional JavaScript -->
