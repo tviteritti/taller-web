@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,5 +32,25 @@ public class ControladorIndex {
 		ModelMap modelo = new ModelMap();
 		modelo.put("listaUsuarios", listaUsuarios);
 		return new ModelAndView("index", modelo);
+	}
+	
+	@RequestMapping("/formRegistrar")
+	public ModelAndView mostrarFormRegistrar() {
+		ModelMap modelo = new ModelMap();
+		Usuario usuario = new Usuario();
+		modelo.put("usuario", usuario);
+		return new ModelAndView("formRegistrar", modelo);
+	}
+	
+	@RequestMapping(path = "/insertarUsuario", method = RequestMethod.POST)
+	public ModelAndView ingresarUsuario(@ModelAttribute("usuario") Usuario usuario) {
+		ModelMap modelo = new ModelMap();
+		if(usuario!=null) {
+			servicio.ingresarUsuario(usuario);
+			return new ModelAndView("redirect:/index");
+		}else {
+			modelo.put("error", "registro vacio");
+		}
+		return new ModelAndView("formRegistro");
 	}
 }

@@ -42,4 +42,9 @@ public class ServicioLoginImpl implements ServicioLogin {
 		return servicioLoginDao.getUsuarios();
 	}
 
+	@Override
+	public void ingresarUsuario(Usuario usuario) {
+		servicioLoginDao.ingresarUsuario(usuario);
+	}
+
 }

@@ -58,6 +58,13 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		return usuarios;
 	}
 
+	@Override
+	public void ingresarUsuario(Usuario usuario) {
+		final Session session = sessionFactory.getCurrentSession();
+		session.save(usuario);
+		
+	}
+
 	
 
 }

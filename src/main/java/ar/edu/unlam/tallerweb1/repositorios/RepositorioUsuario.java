@@ -9,4 +9,5 @@ public interface RepositorioUsuario {
 	Usuario consultarUsuario (Usuario usuario);
 	Usuario registrarUsuario (Usuario usuario);
 	List<Usuario> getUsuarios();
+	void ingresarUsuario (Usuario usuario);
 }

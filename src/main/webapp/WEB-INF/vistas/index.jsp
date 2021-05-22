@@ -21,29 +21,38 @@
 
 	<jsp:include page="navSinLog.jsp" flush="true" />
 	
-	 <table>
-	  
-	  	<tr>
-	  		<th>id</th>
-	  		<th>email</th>
-	  		<th>password</th>
-	  		<th>rol</th>
-	  		<th>user</th>
-	  	</tr>
+	<div class="container mt-3">
+    	<div class="row">
+    		<div class="col-12">
+				<table class="table table-striped ">
+	  				<thead class="thead-inverse">
+	  					<tr>
+					  		<th>id</th>
+					  		<th>email</th>
+					  		<th>password</th>
+					  		<th>rol</th>
+					  		<th>user</th>
+	  					</tr>
+					</thead>
+					
+				  	<c:forEach var="usuario" items="${listaUsuarios}">
+				  	
+				  	<tr>
+				  		<td>${usuario.id}</td>
+				  		<td>${usuario.email}</td>
+				  		<td>${usuario.password}</td>
+				  		<td>${usuario.rol}</td>
+				  		<td>${usuario.user}</td>
+				  	</tr>
+				  	
+				  	</c:forEach>
 	  	
-	  	<c:forEach var="usuario" items="${listaUsuarios }">
-	  	
-	  	<tr>
-	  		<th>${usuario.id}</th>
-	  		<th>${usuario.email}</th>
-	  		<th>${usuario.password}</th>
-	  		<th>${usuario.rol}</th>
-	  		<th>${usuario.user}</th>
-	  	</tr>
-	  	</c:forEach>
-	  	
-	  </table>
-
+	  			</table>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container mt-3"><h3><a class="btn btn-success w-100" href="formRegistrar">ingresar usuario</a></h3></div>
 	
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
