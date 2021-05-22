@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -26,6 +28,11 @@ public class ControladorLoginVeterinaria {
 	@RequestMapping("/loginVeterinaria")
 	public ModelAndView mostrarLoginVeterinaria() {
 		return new ModelAndView("ingresoVeterinaria");
+	}
+	
+	@RequestMapping("/cuentaUsuario")
+	public ModelAndView mostrarCuentaUsuario() {
+		return new ModelAndView("cuentaUsuario");
 	}
 	
 	@RequestMapping("/iniciarSesion")
@@ -98,16 +105,18 @@ public class ControladorLoginVeterinaria {
 	@RequestMapping(path="validarLoginUsuario", method= RequestMethod.POST)
 	public ModelAndView validarDatosUsuario(
 		
-	@ModelAttribute("usuario") Usuario user ) {
+	@ModelAttribute("usuario") Usuario user, HttpServletRequest request ) {
 		
 		ModelMap modelo = new ModelMap();
 		
 		if(servicio.buscarUsuario(user.getUser(), user.getPassword())) {
-			
-			modelo.put("usuario", user.getUser());
+			request.getSession().setAttribute("usuario", user.getUser());
+			return new ModelAndView("redirect:/cuentaUsuario");
+		}else {
+			modelo.put("error", "Usuario o clave incorrecta");
 		}
 		
-		return new ModelAndView("cuentaUsuario", modelo);
+		return new ModelAndView("formUser", modelo);
 		
 	}
 	

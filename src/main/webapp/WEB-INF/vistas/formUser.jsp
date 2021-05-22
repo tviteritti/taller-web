@@ -14,6 +14,6 @@
      <form:input type="password" name="password" path="password"/>
      <button type="submit">INGRESAR</button>
   </form:form>
-
+<h4><span>${error}</span></h4>
 </body>
 </html>

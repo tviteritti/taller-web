@@ -31,4 +31,9 @@ public class ServicioLoginImpl implements ServicioLogin {
 		return servicioLoginDao.consultarUsuario(usuario);
 	}
 
+	@Override
+	public Usuario registrarUsuario(Usuario usuario) {
+		return servicioLoginDao.registrarUsuario(usuario);
+	}
+
 }
