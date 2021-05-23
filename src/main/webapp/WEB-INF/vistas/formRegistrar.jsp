@@ -21,12 +21,12 @@
 	<div class="container">
         <div class="row vh-100 justify-content-center align-items-center">
             <div class="col-auto bg-light p-5">
-                <form:form action="insertarUsuario" method="POSt" modelAttribute="usuario">
+                <form:form action="insertarUsuario" method="POST" modelAttribute="usuario">
                 	<div class="input-group p-2">
                         <h3>Registrar Usuario</h3>
                     </div>
                     <div class="input-group p-2">
-                        <form:input class="form-control" placeholder="Id" path="id"/>
+                        <form:hidden path="id"/>
                     </div>
                     <div class="input-group p-2">
                         <form:input class="form-control" placeholder="email" path="email"/>

@@ -10,4 +10,5 @@ public interface RepositorioUsuario {
 	Usuario registrarUsuario (Usuario usuario);
 	List<Usuario> getUsuarios();
 	void ingresarUsuario (Usuario usuario);
+	Usuario getUsuario(Long id);
 }

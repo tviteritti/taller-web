@@ -59,10 +59,20 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 	}
 
 	@Override
+	@Transactional
 	public void ingresarUsuario(Usuario usuario) {
 		final Session session = sessionFactory.getCurrentSession();
-		session.save(usuario);
+		session.saveOrUpdate(usuario);
 		
+	}
+
+	@Override
+	@Transactional
+	public Usuario getUsuario(Long id) {
+		final Session session = sessionFactory.getCurrentSession();
+		Usuario usuario = session.get(Usuario.class, id);
+		
+		return usuario;
 	}
 
 	

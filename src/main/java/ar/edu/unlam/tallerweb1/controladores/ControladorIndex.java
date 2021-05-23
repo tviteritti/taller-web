@@ -53,4 +53,13 @@ public class ControladorIndex {
 		}
 		return new ModelAndView("formRegistro");
 	}
+	
+	@RequestMapping("/formActualizar")
+	public ModelAndView formActualizar(@RequestParam("usuarioId") Long id) {
+		ModelMap modelo = new ModelMap();
+		Usuario usuario = servicio.getUsuario(id);
+		modelo.put("usuario",usuario);
+		return new ModelAndView("formRegistrar", modelo);
+	}
+	
 }

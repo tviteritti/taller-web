@@ -32,18 +32,26 @@
 					  		<th>password</th>
 					  		<th>rol</th>
 					  		<th>user</th>
+					  		<th>modificar</th>
 	  					</tr>
 					</thead>
 					
 				  	<c:forEach var="usuario" items="${listaUsuarios}">
 				  	
-				  	<tr>
-				  		<td>${usuario.id}</td>
-				  		<td>${usuario.email}</td>
-				  		<td>${usuario.password}</td>
-				  		<td>${usuario.rol}</td>
-				  		<td>${usuario.user}</td>
-				  	</tr>
+				  		<c:url var="linkActualizar" value="/formActualizar">
+				  		
+				  			<c:param name="usuarioId" value="${usuario.id }"/>
+				  		
+				  		</c:url>
+				  		
+					  	<tr>
+					  		<td>${usuario.id}</td>
+					  		<td>${usuario.email}</td>
+					  		<td>${usuario.password}</td>
+					  		<td>${usuario.rol}</td>
+					  		<td>${usuario.user}</td>
+					  		<td><a href="${linkActualizar }"><input type="button" value="modificar"/></a></td>
+					  	</tr>
 				  	
 				  	</c:forEach>
 	  	
