@@ -33,6 +33,7 @@
 					  		<th>rol</th>
 					  		<th>user</th>
 					  		<th>modificar</th>
+					  		<th>eliminar</th>
 	  					</tr>
 					</thead>
 					
@@ -44,13 +45,21 @@
 				  		
 				  		</c:url>
 				  		
+				  		<c:url var="linkEliminar" value="/eliminar">
+				  		
+				  			<c:param name="usuarioId" value="${usuario.id }"/>
+				  		
+				  		</c:url>
+				  		
 					  	<tr>
 					  		<td>${usuario.id}</td>
 					  		<td>${usuario.email}</td>
 					  		<td>${usuario.password}</td>
 					  		<td>${usuario.rol}</td>
 					  		<td>${usuario.user}</td>
-					  		<td><a href="${linkActualizar }"><input type="button" value="modificar"/></a></td>
+					  		<td><a href="${linkActualizar }"><input type="button" class='btn btn-warning ms-auto' value="modificar"/></a></td>
+					  		<td><a href="${linkEliminar }"><input type="button" class='btn btn-danger ms-auto' value="eliminar" 
+					  		onClick="if(!(confirm('¿Estas seguro que quieres eliminar  un registro?'))) return false"/></a></td>
 					  	</tr>
 				  	
 				  	</c:forEach>

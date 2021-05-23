@@ -53,4 +53,10 @@ public class ServicioLoginImpl implements ServicioLogin {
 		
 	}
 
+	@Override
+	public void eliminarUsuario(Long id) {
+		servicioLoginDao.eliminarUsuario(id);
+		
+	}
+
 }

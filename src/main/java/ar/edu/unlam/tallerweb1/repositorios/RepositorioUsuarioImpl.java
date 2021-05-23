@@ -75,6 +75,19 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		return usuario;
 	}
 
+	@Override
+	@Transactional
+	public void eliminarUsuario(Long id) {
+		final Session session = sessionFactory.getCurrentSession();
+		
+		Query consulta = session.createQuery("delete from Usuario where id=:idUsuario");
+		
+		consulta.setParameter("idUsuario", id);
+		
+		consulta.executeUpdate();
+		
+	}
+
 	
 
 }

@@ -62,4 +62,11 @@ public class ControladorIndex {
 		return new ModelAndView("formRegistrar", modelo);
 	}
 	
+	@RequestMapping("/eliminar")
+	public ModelAndView eliminarUsuario(@RequestParam("usuarioId") Long id) {
+		servicio.eliminarUsuario(id);
+		return new ModelAndView("redirect:/index");
+		
+	}
+	
 }
