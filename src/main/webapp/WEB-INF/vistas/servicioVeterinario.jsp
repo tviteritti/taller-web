@@ -9,43 +9,63 @@
 <body>
   <h2>Encontra el especialista y solicita un turno</h2>
   
-  <div>
+  <form action="generarTurno" method="post">
     <p>Nombre veterinario</p>
     <p>Calificacion</p>
     <p>Descripcion</p>
-    <p>Calendario con horarios disponibles</p>
-    <a href="generarTurno">solicitar turno</a>
-  </div>
+    <p>Dias y Horarios disponibles</p>
+    <input type="date" name="fecha">
+    <input type="time" name="hora">
+    <input type="hidden" value="${servicio}" name="servicio">
+    <input type="hidden" value="${zona}" name="zona">
+    <br><br>
+    <button type="submit">solicitar turno</button>
+  </form>
   
   <br>
   
-  <div>
+   <form action="generarTurno" method="post">
     <p>Nombre veterinario</p>
     <p>Calificacion</p>
     <p>Descripcion</p>
-    <p>Calendario con horarios disponibles</p>
-    <a href="generarTurno">solicitar turno</a>
-  </div>
+    <p>Dias y Horarios disponibles</p>
+    <input type="date" name="fecha">
+    <input type="time" name="hora">
+    <input type="hidden" value="${servicio}" name="servicio">
+    <input type="hidden" value="${zona}" name="zona">
+    <br><br>
+    <button type="submit">solicitar turno</button>
+  </form>
   
   <br>
   
-  <div>
+   <form action="generarTurno" method="post">
     <p>Nombre veterinario</p>
     <p>Calificacion</p>
     <p>Descripcion</p>
-    <p>Calendario con horarios disponibles</p>
-    <a href="generarTurno">solicitar turno</a>
-  </div>
+    <p>Dias y Horarios disponibles</p>
+    <input type="date" name="fecha">
+    <input type="time" name="hora">
+    <input type="hidden" value="${servicio}" name="servicio">
+    <input type="hidden" value="${zona}" name="zona">
+    <br><br>
+    <button type="submit">solicitar turno</button>
+  </form>
   
   <br>
   
-  <div>
+   <form action="generarTurno" method="post">
     <p>Nombre veterinario</p>
     <p>Calificacion</p>
     <p>Descripcion</p>
-    <p>Calendario con horarios disponibles</p>
-    <a href="generarTurno">solicitar turno</a>
-  </div>
+    <p>Dias y Horarios disponibles</p>
+    <input type="date" name="fecha">
+    <input type="time" name="hora">
+    <input type="hidden" value="${servicio}" name="servicio">
+    <input type="hidden" value="${zona}" name="zona">
+    <br><br>
+    <button type="submit">solicitar turno</button>
+  </form>
   
   
   
