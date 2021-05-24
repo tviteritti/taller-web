@@ -61,7 +61,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
                     </div>
                     <br>
                     
-                    <label>Especialidad</label>
+                    <label>Especialidad</label><br>
 					     <select name="select">
 						  <option value="value1">Especialidades clinicas</option>
 						  <option value="value2" selected>Especialidades por especie</option>

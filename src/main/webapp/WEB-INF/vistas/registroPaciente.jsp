@@ -48,16 +48,6 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
                      <div class="input-group p-2">
                         <input type="text" class="form-control" name="re-password" placeholder="re ingresar contraseña">
                     </div>
-                    <br>
-                    
-                    <label>Especialidad</label>
-					     <select name="select">
-						  <option value="value1">Especialidades clinicas</option>
-						  <option value="value2" selected>Especialidades por especie</option>
-						  <option value="value3">Especialidades con énfasis académico</option>
-						  <option value="value4">Especialidades en relación a ayudas diagnósticas</option>
-						  <option value="value5">Especialidades con énfasis académico</option>
-						</select>
 					<br><br>
 					<input type="submit" class="btn btn-success w-100" value="registrar">
                 </form:form>

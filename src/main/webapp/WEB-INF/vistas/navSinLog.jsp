@@ -24,11 +24,8 @@
 	        <a class="nav-link disabled" href="#">Disabled</a>
 	      </li>
 	    </ul>
-	    <form class="form-inline my-2 my-lg-0">
-	      <input class="form-control mr-sm-2" type="text" placeholder="e-mail" >
-	      <input class="form-control mr-sm-2" type="password" placeholder="password" >
-	      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">iniciar sesion</button>
-	    </form>
+	    <a class="btn btn-outline-success my-2 my-sm-0" href="iniciarSesion">INICIAR SESION</a>
+	    <a class="btn btn-outline-primary my-2 my-sm-0" href="registrarUsuario">REGISTRARME</a>
 	  </div>
 	</nav>
 </body>

@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +42,10 @@ public class ControladorLoginVeterinaria {
 	
 	@RequestMapping("/loginVeterinaria")
 	public ModelAndView mostrarLoginVeterinaria() {
-		return new ModelAndView("ingresoVeterinaria");
+		List<Usuario> listaVeterinarios=servicio.getUsuarios();
+		ModelMap modelo = new ModelMap();
+		modelo.put("listaVeterinarios", listaVeterinarios);
+		return new ModelAndView("ingresoVeterinaria", modelo);
 	}
 	
 	@RequestMapping("/cuentaUsuario")
