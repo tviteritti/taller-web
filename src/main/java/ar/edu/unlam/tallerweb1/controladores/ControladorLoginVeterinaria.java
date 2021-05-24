@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLoginVeterinaria;
-import ar.edu.unlam.tallerweb1.servicios.ServicioVeterinario;
+import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
 @Controller
 public class ControladorLoginVeterinaria {
@@ -29,11 +29,11 @@ public class ControladorLoginVeterinaria {
 	}
 	*/
 	
-	private ServicioVeterinario servicio;
+	private ServicioUsuario servicio;
 
 	
 	@Autowired
-	public ControladorLoginVeterinaria(ServicioVeterinario servicio) {
+	public ControladorLoginVeterinaria(ServicioUsuario servicio) {
 		
 		this.servicio = servicio;	
 	}
@@ -88,12 +88,16 @@ public class ControladorLoginVeterinaria {
 			ModelMap modelo = new ModelMap();
 		
 		if(servicio.validarPassRePass(user.getPassword(), repass)) { 
+			servicio.registrarOMOdificarUsuario(user);
 			modelo.put("usuario", user);
 			modelo.put("mensaje", "registro exitoso");
+			return new ModelAndView("redirect:/iniciarSesion");
+		}else {
+			modelo.put("error", "las password no coinciden");
 		}
 		
 		
-		return new ModelAndView("resultadoRegistro", modelo);
+		return new ModelAndView("registroVeterinario", modelo);
 	}
 	
 	@RequestMapping(path="procesarDatosPaciente", method= RequestMethod.POST)

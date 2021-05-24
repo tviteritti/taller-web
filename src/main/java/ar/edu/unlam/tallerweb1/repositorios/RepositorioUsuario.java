@@ -7,9 +7,11 @@ import ar.edu.unlam.tallerweb1.modelo.Usuario;
 public interface RepositorioUsuario {
 	
 	Usuario consultarUsuario (Usuario usuario);
-	Usuario registrarUsuario (Usuario usuario);
 	List<Usuario> getUsuarios();
-	void ingresarUsuario (Usuario usuario);
+	void registrarOMOdificarUsuario (Usuario usuario);
 	Usuario getUsuario(Long id);
 	void eliminarUsuario(Long id);
+	
+	Boolean buscarUsuario(String usuario, String password);
+	Boolean validarPassRePass(String pass, String repass);
 }

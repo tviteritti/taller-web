@@ -43,11 +43,6 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 				.uniqueResult();
 	}
 
-	@Override
-	public Usuario registrarUsuario(Usuario usuario) {
-		sessionFactory.getCurrentSession().save(usuario);
-		return null;
-	}
 
 	@Override
 	@Transactional
@@ -60,7 +55,7 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 
 	@Override
 	@Transactional
-	public void ingresarUsuario(Usuario usuario) {
+	public void registrarOMOdificarUsuario(Usuario usuario) {
 		final Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(usuario);
 		
@@ -88,6 +83,28 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		
 	}
 
+	@Override
+	public Boolean buscarUsuario(String usuario, String password) {
+		if(usuario.equals("julieta") && password.equals("1234")) {
+			
+			return true;
+			
+		}
+		
+		return false;
+	}
+
+
+	@Override
+	public Boolean validarPassRePass(String pass, String repass) {
+		if(pass.equals(repass)) {
+			
+			return true;
+			
+		}
+		
+		return false;
+	}
 	
 
 }

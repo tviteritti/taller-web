@@ -2,15 +2,16 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import java.util.List;
 
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.Veterinario;
 
-public interface ServicioVeterinario {
+public interface ServicioUsuario {
 	
 	
-	List<Veterinario> getVeterinarios();
-	void registrarOMOdificarVeterinario (Veterinario veterinario);
-	Veterinario getVeterinario(Long id);
-	void eliminarVeterinario(Long id);
+	List<Usuario> getUsuarios();
+	void registrarOMOdificarUsuario (Usuario usuario);
+	Usuario getUsuario(Long id);
+	void eliminarUsuario(Long id);
 	
 	Boolean buscarUsuario(String usuario, String password);
 	Boolean validarPassRePass(String pass, String repass);

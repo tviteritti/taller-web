@@ -33,18 +33,13 @@ public class ServicioLoginImpl implements ServicioLogin {
 	}
 
 	@Override
-	public Usuario registrarUsuario(Usuario usuario) {
-		return servicioLoginDao.registrarUsuario(usuario);
-	}
-
-	@Override
 	public List<Usuario> getUsuarios() {
 		return servicioLoginDao.getUsuarios();
 	}
 
 	@Override
 	public void ingresarUsuario(Usuario usuario) {
-		servicioLoginDao.ingresarUsuario(usuario);
+		servicioLoginDao.registrarOMOdificarUsuario(usuario);
 	}
 
 	@Override
