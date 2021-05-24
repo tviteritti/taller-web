@@ -52,6 +52,16 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		List<Usuario> usuarios=miQuery.getResultList();
 		return usuarios;
 	}
+	
+	@Override
+	public List<Usuario> getVeterinarios() {
+		final Session session = sessionFactory.getCurrentSession();
+		Query<Usuario> miQuery=session.createQuery("from Usuario where rol=:rolUsuario", Usuario.class);
+		String rol="veterinario";
+		miQuery.setParameter("rolUsuario", rol);
+		List<Usuario> usuarios=miQuery.getResultList();
+		return usuarios;
+	}
 
 	@Override
 	@Transactional

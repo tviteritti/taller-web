@@ -30,6 +30,11 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 		
 		return ServicioUsuarioDao.getUsuarios();
 	}
+	
+	@Override
+	public List<Usuario> getVeterinarios() {
+		return ServicioUsuarioDao.getVeterinarios();
+	}
 
 	@Override
 	public void registrarOMOdificarUsuario(Usuario usuario) {
@@ -58,5 +63,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 	public Boolean validarPassRePass(String pass, String repass) {
 		return ServicioUsuarioDao.validarPassRePass(pass, repass);
 	}
+
+
 
 }

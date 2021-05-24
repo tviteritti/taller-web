@@ -42,7 +42,7 @@ public class ControladorLoginVeterinaria {
 	
 	@RequestMapping("/loginVeterinaria")
 	public ModelAndView mostrarLoginVeterinaria() {
-		List<Usuario> listaVeterinarios=servicio.getUsuarios();
+		List<Usuario> listaVeterinarios=servicio.getVeterinarios();
 		ModelMap modelo = new ModelMap();
 		modelo.put("listaVeterinarios", listaVeterinarios);
 		return new ModelAndView("ingresoVeterinaria", modelo);
@@ -124,7 +124,7 @@ public class ControladorLoginVeterinaria {
 			modelo.put("error", "las password no coinciden");
 		}
 		
-		return new ModelAndView("resultadoRegistro", modelo);
+		return new ModelAndView("registroPaciente", modelo);
 	}
 	
 

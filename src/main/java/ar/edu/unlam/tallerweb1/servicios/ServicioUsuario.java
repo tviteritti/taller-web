@@ -9,6 +9,7 @@ public interface ServicioUsuario {
 	
 	
 	List<Usuario> getUsuarios();
+	List<Usuario> getVeterinarios();
 	void registrarOMOdificarUsuario (Usuario usuario);
 	Usuario getUsuario(Long id);
 	void eliminarUsuario(Long id);

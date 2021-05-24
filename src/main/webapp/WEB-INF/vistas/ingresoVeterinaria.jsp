@@ -32,16 +32,19 @@
 	  					<tr>
 					  		<th>id</th>
 					  		<th>email</th>
+					  		<th>password</th>
+					  		<th>rol</th>
 					  		<th>user</th>
 	  					</tr>
 					</thead>
 					
 				  	<c:forEach var="usuario" items="${listaVeterinarios}">
-				  	
 				  		
 					  	<tr>
 					  		<td>${usuario.id}</td>
 					  		<td>${usuario.email}</td>
+					  		<td>${usuario.password}</td>
+					  		<td>${usuario.rol}</td>
 					  		<td>${usuario.user}</td>
 					  	</tr>
 				  	
