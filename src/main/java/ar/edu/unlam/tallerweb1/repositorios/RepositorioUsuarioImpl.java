@@ -101,7 +101,7 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		List<Usuario> usuarios=miQuery.getResultList();
 		
 		for (Usuario usuario2 : usuarios) {
-			if(usuario2.getUser().equals(usuario) && usuario2.getPassword().equals(password)) {
+			if(usuario2.getUser()!=null && usuario2.getPassword()!=null && usuario2.getUser().equals(usuario) && usuario2.getPassword().equals(password)) {
 				return true;
 			}
 		}
