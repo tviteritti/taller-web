@@ -16,6 +16,9 @@ public class Veterinario extends Usuario {
 	private String nombre;
 	private String apellido;
 	
+	@ManyToOne
+	private Zona zona;
+	
 	
 	public Long getId() {
 		return id;
