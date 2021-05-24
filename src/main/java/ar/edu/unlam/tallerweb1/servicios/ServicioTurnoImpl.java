@@ -64,4 +64,11 @@ public class ServicioTurnoImpl implements ServicioTurno {
 		return repositorioTurno.obtenerTurnos(servicio);
 	}
 
+
+	@Override
+	public List<Turno> listarTurnos() {
+		
+		return repositorioTurno.listarTurnos();
+	}
+
 }

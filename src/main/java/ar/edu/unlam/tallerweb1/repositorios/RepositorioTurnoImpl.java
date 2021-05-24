@@ -100,6 +100,17 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		
 		return turnosSolicitados;
 	}
+
+	@Override
+	public List<Turno> listarTurnos() {
+		
+		List<Turno> turnos = null;
+		turnos = (List<Turno>) sessionFactory.getCurrentSession()
+				 .createCriteria(Veterinario.class)
+				 .list();
+		
+		return turnos;
+	}
  
 
 }
