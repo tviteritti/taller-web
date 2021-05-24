@@ -8,8 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.modelo.Localidad;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.Veterinario;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioLocalidad;
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioTurno;
 
 
 @Service
@@ -17,10 +19,13 @@ import ar.edu.unlam.tallerweb1.repositorios.RepositorioLocalidad;
 public class ServicioTurnoImpl implements ServicioTurno {
 	
 	private RepositorioLocalidad repositorio;
+	private RepositorioTurno repositorioTurno;
+
 
 	@Autowired
-	public ServicioTurnoImpl(RepositorioLocalidad repositorioLocalidad){
+	public ServicioTurnoImpl(RepositorioLocalidad repositorioLocalidad, RepositorioTurno repositorioTurno){
 		this.repositorio = repositorioLocalidad;
+		this.repositorioTurno = repositorioTurno;
 	}
 
 
@@ -28,6 +33,13 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	public List<Localidad> obtenerLocalidades(String zona) {
 		
 		return repositorio.obtenerLocalidades(zona);
+	}
+
+
+	@Override
+	public List<Veterinario> obtenerVeterinariosPorZona(String zona) {
+		
+		return repositorioTurno.obtenerVeterinariosPorZona(zona);
 	}
 
 }
