@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.modelo.Localidad;
+import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.Veterinario;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
@@ -40,6 +41,27 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	public List<Veterinario> obtenerVeterinariosPorZona(String zona) {
 		
 		return repositorioTurno.obtenerVeterinariosPorZona(zona);
+	}
+
+
+	@Override
+	public Boolean cancelarTurno(Turno turno) {
+		
+		return repositorioTurno.cancelarTurno(turno);
+	}
+
+
+	@Override
+	public List<Turno> obtenerTurnos(Veterinario veterinario) {
+		
+		return repositorioTurno.obtenerTurnos(veterinario);
+	}
+
+
+	@Override
+	public List<Turno> obtenerTurnos(String servicio) {
+		
+		return repositorioTurno.obtenerTurnos(servicio);
 	}
 
 }

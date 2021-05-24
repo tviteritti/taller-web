@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Localidad;
+import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Veterinario;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 
@@ -60,8 +61,45 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		
 	}
 
-	
-    
-    
+	@Override
+	public Boolean cancelarTurno(Turno turno) {
+		
+		Boolean turnoCancelado = false;
+		
+		turnoCancelado = (Boolean)sessionFactory.getCurrentSession()
+				 .createCriteria(Turno.class)
+				 .add(Restrictions.eq( "id", turno.getId()))
+				 .uniqueResult();
+		
+		return turnoCancelado;
+	}
+
+	@Override
+	public List<Turno> obtenerTurnos(Veterinario veterinario) {
+		
+		List<Turno> turnosSolicitados = null;
+		
+		turnosSolicitados = (List<Turno>) sessionFactory.getCurrentSession()
+				 .createCriteria(Veterinario.class)
+				 .createAlias("veterinario", "vBuscado")
+				 .add(Restrictions.eq("vBuscado.apellido", veterinario.getApellido()))
+				 .list();
+		
+		return turnosSolicitados;
+	}
+
+	@Override
+	public List<Turno> obtenerTurnos(String servicio) {
+		
+		List<Turno> turnosSolicitados = null;
+		
+		turnosSolicitados = (List<Turno>) sessionFactory.getCurrentSession()
+				 .createCriteria(Veterinario.class)
+				 .add(Restrictions.eq("servicio", servicio))
+				 .list();
+		
+		return turnosSolicitados;
+	}
+ 
 
 }
