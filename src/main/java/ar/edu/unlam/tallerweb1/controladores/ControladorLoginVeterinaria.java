@@ -110,9 +110,13 @@ public class ControladorLoginVeterinaria {
 		
 		ModelMap modelo = new ModelMap();
 		
-		if(servicio.validarPassRePass(user.getPassword(), repass)) {
+		if(servicio.validarPassRePass(user.getPassword(), repass)) { 
+			servicio.registrarOMOdificarUsuario(user);
 			modelo.put("usuario", user);
 			modelo.put("mensaje", "registro exitoso");
+			return new ModelAndView("redirect:/iniciarSesion");
+		}else {
+			modelo.put("error", "las password no coinciden");
 		}
 		
 		return new ModelAndView("resultadoRegistro", modelo);

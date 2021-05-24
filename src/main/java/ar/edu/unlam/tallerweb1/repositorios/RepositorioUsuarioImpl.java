@@ -85,10 +85,15 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 
 	@Override
 	public Boolean buscarUsuario(String usuario, String password) {
-		if(usuario.equals("julieta") && password.equals("1234")) {
-			
-			return true;
-			
+		
+		final Session session = sessionFactory.getCurrentSession();
+		Query<Usuario> miQuery=session.createQuery("from Usuario", Usuario.class);
+		List<Usuario> usuarios=miQuery.getResultList();
+		
+		for (Usuario usuario2 : usuarios) {
+			if(usuario2.getUser().equals(usuario) && usuario2.getPassword().equals(password)) {
+				return true;
+			}
 		}
 		
 		return false;
