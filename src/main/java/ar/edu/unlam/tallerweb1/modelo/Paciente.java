@@ -4,9 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Paciente {
+public class Paciente extends Usuario  {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,6 +15,18 @@ public class Paciente {
 	
 	private String nombre;
 	private Integer edad;
+	private String fechaNacimiento;
+	
+	@ManyToOne
+	private Duenio duenio;
+	
+	@ManyToOne
+	private TipoAnimal tipo;
+	
+	@ManyToOne 
+	private HistoriaClinica hc;
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -32,8 +45,29 @@ public class Paciente {
 	public void setEdad(Integer edad) {
 		this.edad = edad;
 	}
+	public String getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+	public void setFechaNacimiento(String fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+	public TipoAnimal getTipo() {
+		return tipo;
+	}
+	public void setTipo(TipoAnimal tipo) {
+		this.tipo = tipo;
+	}
+	public Duenio getDuenio() {
+		return duenio;
+	}
+	public void setDuenio(Duenio duenio) {
+		this.duenio = duenio;
+	}
+	public HistoriaClinica getHc() {
+		return hc;
+	}
+	public void setHc(HistoriaClinica hc) {
+		this.hc = hc;
+	}
 	
-	
-
-
 }
