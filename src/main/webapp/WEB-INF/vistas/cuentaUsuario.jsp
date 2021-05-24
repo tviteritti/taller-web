@@ -9,7 +9,7 @@
 </head>
 <body>
 <h4>Mi perfil</h4>
-   <a href="verTurnos">ver mi perfil</a>
+   <a href="verPefil">ver mi perfil</a>
    <br><br>
   <h4>Hola ${usuario} esta es tu cuenta</h4>
   <h4>Turno</h4>
