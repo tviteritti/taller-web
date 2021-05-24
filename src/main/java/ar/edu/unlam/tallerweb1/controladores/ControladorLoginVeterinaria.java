@@ -14,11 +14,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLoginVeterinaria;
+import ar.edu.unlam.tallerweb1.servicios.ServicioVeterinario;
 
 @Controller
 public class ControladorLoginVeterinaria {
 	
-	private ServicioLoginVeterinaria servicio;
+	/*private ServicioLoginVeterinaria servicio;
 
 	
 	@Autowired
@@ -26,7 +27,16 @@ public class ControladorLoginVeterinaria {
 		
 		this.servicio = servicio;	
 	}
+	*/
 	
+	private ServicioVeterinario servicio;
+
+	
+	@Autowired
+	public ControladorLoginVeterinaria(ServicioVeterinario servicio) {
+		
+		this.servicio = servicio;	
+	}
 	
 	@RequestMapping("/loginVeterinaria")
 	public ModelAndView mostrarLoginVeterinaria() {

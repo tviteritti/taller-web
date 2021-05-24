@@ -12,11 +12,6 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 
-
-
-
-
-
 @Repository("RepositorioVeterinario")
 public class RepositorioVeterinarioImpl implements RepositorioVeterinario{
 	
@@ -25,17 +20,6 @@ public class RepositorioVeterinarioImpl implements RepositorioVeterinario{
     @Autowired
 	public RepositorioVeterinarioImpl(SessionFactory sessionFactory){
 		this.sessionFactory = sessionFactory;
-	}
-
-	@Override
-	public Veterinario consultarVeterinario(Veterinario veterinario) {
-		
-		final Session session = sessionFactory.getCurrentSession();
-		return (Veterinario) session.createCriteria(Veterinario.class)
-				.add(Restrictions.eq("email", veterinario.getEmail()))
-				.add(Restrictions.eq("password", veterinario.getPassword()))
-				.uniqueResult();
-		
 	}
 
 
@@ -76,6 +60,30 @@ public class RepositorioVeterinarioImpl implements RepositorioVeterinario{
 		
 		consulta.executeUpdate();
 		
+	}
+
+
+	@Override
+	public Boolean buscarUsuario(String usuario, String password) {
+		if(usuario.equals("julieta") && password.equals("1234")) {
+			
+			return true;
+			
+		}
+		
+		return false;
+	}
+
+
+	@Override
+	public Boolean validarPassRePass(String pass, String repass) {
+		if(pass.equals(repass)) {
+			
+			return true;
+			
+		}
+		
+		return false;
 	}
 
 }

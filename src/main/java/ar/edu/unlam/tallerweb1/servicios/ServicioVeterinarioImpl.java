@@ -21,11 +21,6 @@ public class ServicioVeterinarioImpl implements ServicioVeterinario {
 	public ServicioVeterinarioImpl(RepositorioVeterinario servicioVeterinarioDao){
 		this.servicioVeterinarioDao = servicioVeterinarioDao;
 	}
-	
-	@Override
-	public Veterinario consultarVeterinario(Veterinario veterinario) {
-		return servicioVeterinarioDao.consultarVeterinario(veterinario);
-	}
 
 	@Override
 	public List<Veterinario> getVeterinarios() {
@@ -48,6 +43,17 @@ public class ServicioVeterinarioImpl implements ServicioVeterinario {
 	public void eliminarVeterinario(Long id) {
 		servicioVeterinarioDao.eliminarVeterinario(id);
 		
+	}
+
+	@Override
+	public Boolean buscarUsuario(String usuario, String password) {
+		return servicioVeterinarioDao.buscarUsuario(usuario, password);
+		
+	}
+
+	@Override
+	public Boolean validarPassRePass(String pass, String repass) {
+		return servicioVeterinarioDao.validarPassRePass(pass, repass);
 	}
 
 }
