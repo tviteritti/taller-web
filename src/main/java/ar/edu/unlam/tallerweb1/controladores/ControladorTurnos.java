@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.Veterinario;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLoginVeterinaria;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTurno;
@@ -43,12 +46,17 @@ private ServicioTurno servicio;
 		ModelMap modelo = new ModelMap();
 		modelo.put("servicio", servicioSolicitado);
 		modelo.put("zona", zona);
+		List<Veterinario>veterinariosEncontrados =servicio.obtenerVeterinariosPorZona(zona.getDescripcion());
+		modelo.put("veterinarios", veterinariosEncontrados);
+		Veterinario vt = new Veterinario ();
+		modelo.put("vt", vt);
 		
 		return new ModelAndView("servicioVeterinario", modelo);
 	}
 	
 	@RequestMapping("generarTurno")
 	public ModelAndView mostrarTurnoSolicitado(
+	@ModelAttribute("veterinario") Veterinario veterinario,
 	@RequestParam(value="servicio",required=false) String servicioSolicitado,
 	@RequestParam(value="fecha",required=false) String dia,
 	@RequestParam(value="hora",required=false) String hora
@@ -57,13 +65,15 @@ private ServicioTurno servicio;
 		
 		ModelMap modelo = new ModelMap();
 		
-		modelo.put("veterinario", "Nombre Veterinario");
+		modelo.put("veterinarioNom", veterinario.getNombre());
+		modelo.put("veterinarioAp", veterinario.getApellido());
 		modelo.put("especialidad", servicioSolicitado);
 		modelo.put("localidad", "Localidad Veterinaria");
 		modelo.put("direccion", "Direccion Veterinaria");
 		modelo.put("fecha", dia);
 		modelo.put("hora", hora);
 		
+	
 		return new ModelAndView("turnoSolicitado", modelo);
 	}
 	
