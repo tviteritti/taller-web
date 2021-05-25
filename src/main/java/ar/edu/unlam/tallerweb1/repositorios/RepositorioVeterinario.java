@@ -10,7 +10,5 @@ public interface RepositorioVeterinario {
 	Veterinario getVeterinario(Long id);
 	void eliminarVeterinario(Long id);
 	
-	Boolean buscarUsuario(String usuario, String password);
-	Boolean validarPassRePass(String pass, String repass);
 
 }

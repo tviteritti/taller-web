@@ -13,8 +13,8 @@ public class Paciente extends Usuario  {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String nombre;
-	private Integer edad;
+	/*private String nombre; si paciente y usuario tienen nombre es mejor que lo hereden de usuario
+	private Integer edad; la edad se saca con la fechaNacimiento por que si no se tiene que cambiar todos los años*/
 	private String fechaNacimiento;
 	
 	@ManyToOne
@@ -33,7 +33,7 @@ public class Paciente extends Usuario  {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNombre() {
+	/*public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
@@ -44,7 +44,7 @@ public class Paciente extends Usuario  {
 	}
 	public void setEdad(Integer edad) {
 		this.edad = edad;
-	}
+	}*/
 	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}

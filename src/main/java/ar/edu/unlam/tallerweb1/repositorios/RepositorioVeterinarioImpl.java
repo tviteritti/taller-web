@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.Veterinario;
 import org.hibernate.query.Query;
 import org.hibernate.Session;
@@ -60,30 +61,6 @@ public class RepositorioVeterinarioImpl implements RepositorioVeterinario{
 		
 		consulta.executeUpdate();
 		
-	}
-
-
-	@Override
-	public Boolean buscarUsuario(String usuario, String password) {
-		if(usuario.equals("julieta") && password.equals("1234")) {
-			
-			return true;
-			
-		}
-		
-		return false;
-	}
-
-
-	@Override
-	public Boolean validarPassRePass(String pass, String repass) {
-		if(pass.equals(repass)) {
-			
-			return true;
-			
-		}
-		
-		return false;
 	}
 
 }
