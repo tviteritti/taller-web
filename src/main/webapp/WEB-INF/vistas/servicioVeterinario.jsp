@@ -19,10 +19,14 @@
 					   	 <c:out value="${v.nombre} ${v.apellido}" />
 					    </p>
 					    <p>Calificacion</p>
-					    <p>Descripcion</p>
+					    <p>Descripcion: </p>
+					    <br>
+					    <p><c:out value="${v.descripcion}" /></p>
 					    <p>Dias y Horarios disponibles</p>
 					    <input type="date" name="fecha">
 					    <input type="time" name="hora">
+					    <p>Ubicacion:</p> <p name="direccion"><c:out value="${v.direccion}"/></p>
+					    , <!--  <p name="localidad">(${localidad})</p>-->
 					    <input type="hidden" value="${servicio}" name="servicio">
 					    <input type="hidden" value="${zona}" name="zona">
 					    <br><br>
