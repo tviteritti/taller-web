@@ -4,12 +4,11 @@ import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 public interface ServicioLoginVeterinaria {
 	
-	Boolean buscarUsuario(String usuario, String password);
-	
+
 	Boolean validarPassRePass(String pass, String repass);
 	
-	Boolean guardarUsuario(String pass, String repass);
+	void guardarUsuario(Usuario user);
 	
-	Boolean validarUsuario(String pass, String repass);
+	Boolean validarUsuario(Usuario user);
 
 }

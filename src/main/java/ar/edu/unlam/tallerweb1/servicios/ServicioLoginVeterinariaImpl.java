@@ -1,24 +1,23 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioLocalidad;
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioTurno;
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 
 @Service
 public class ServicioLoginVeterinariaImpl implements ServicioLoginVeterinaria{
+	
+	private RepositorioUsuario repositorio;
+	
 
-	@Override
-	public Boolean buscarUsuario(String usuario, String password) {
-		
-		
-		if(usuario.equals("julieta") && password.equals("1234")) {
-			
-			return true;
-			
-		}
-		
-		return false;
+	@Autowired
+	public ServicioLoginVeterinariaImpl(RepositorioUsuario respositorioU){
+		this.repositorio = respositorioU;	
 	}
-
+		
 	@Override
 	public Boolean validarPassRePass(String pass, String repass) {
 		
@@ -32,15 +31,22 @@ public class ServicioLoginVeterinariaImpl implements ServicioLoginVeterinaria{
 	}
 
 	@Override
-	public Boolean guardarUsuario(String pass, String repass) {
-		// TODO Auto-generated method stub
-		return null;
+	public void guardarUsuario(Usuario user) {
+		
+		repositorio.registrarOMOdificarUsuario(user);
 	}
 
 	@Override
-	public Boolean validarUsuario(String pass, String repass) {
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean validarUsuario(Usuario user) {
+		
+		Usuario usuarioBuscado = repositorio.consultarUsuario(user);
+		
+		if(usuarioBuscado.equals(user)) {
+			
+			return true;
+			
+		}
+		return false;
 	}
 	
 	
