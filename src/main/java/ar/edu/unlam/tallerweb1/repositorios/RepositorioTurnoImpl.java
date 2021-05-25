@@ -80,7 +80,7 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		List<Turno> turnosSolicitados = null;
 		
 		turnosSolicitados = (List<Turno>) sessionFactory.getCurrentSession()
-				 .createCriteria(Veterinario.class)
+				 .createCriteria(Turno.class)
 				 .createAlias("veterinario", "vBuscado")
 				 .add(Restrictions.eq("vBuscado.apellido", veterinario.getApellido()))
 				 .list();
@@ -94,7 +94,7 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		List<Turno> turnosSolicitados = null;
 		
 		turnosSolicitados = (List<Turno>) sessionFactory.getCurrentSession()
-				 .createCriteria(Veterinario.class)
+				 .createCriteria(Turno.class)
 				 .add(Restrictions.eq("servicio", servicio))
 				 .list();
 		
@@ -106,7 +106,7 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		
 		List<Turno> turnos = null;
 		turnos = (List<Turno>) sessionFactory.getCurrentSession()
-				 .createCriteria(Veterinario.class)
+				 .createCriteria(Turno.class)
 				 .list();
 		
 		return turnos;
