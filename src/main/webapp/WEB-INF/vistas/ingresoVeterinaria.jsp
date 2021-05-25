@@ -30,11 +30,12 @@
 				<table class="table table-striped ">
 	  				<thead class="thead-inverse">
 	  					<tr>
-					  		<th>id</th>
-					  		<th>email</th>
-					  		<th>password</th>
-					  		<th>rol</th>
-					  		<th>user</th>
+					  		<th>imagen</th>
+					  		<th>nombre y apellido</th>
+					  		<th>telefono</th>
+					  		<th>direccion</th>
+					  		<th>horarios</th>
+					  		<th>solicitar turno</th>
 	  					</tr>
 					</thead>
 					
@@ -46,6 +47,7 @@
 					  		<td>${usuario.password}</td>
 					  		<td>${usuario.rol}</td>
 					  		<td>${usuario.user}</td>
+					  		<td><a href="#">pedir turno</a></td>
 					  	</tr>
 				  	
 				  	</c:forEach>

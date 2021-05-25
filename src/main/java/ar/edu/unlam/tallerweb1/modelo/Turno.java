@@ -15,11 +15,15 @@ public class Turno {
 	@ManyToOne
 	private Veterinario veterinario;
 	@ManyToOne
-	private Paciente paciente;
+	private Paciente paciente;/*eliminar*/
 	
-	private String fecha;
-	private String horario;
+	/*@ManyToOne
+	private Duenio duenio; la idea es que el usuario sea el dueño de la mascota y no la mascota*/
+	
+	private String fecha;/*date*/
+	private String horario;/*date*/
 	private String servicio;
+	private Boolean estado;
 	
 	public Long getId() {
 		return id;
@@ -56,6 +60,12 @@ public class Turno {
 	}
 	public void setServicio(String servicio) {
 		this.servicio = servicio;
+	}
+	public Boolean getEstado() {
+		return estado;
+	}
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
 	}
 	
 	
