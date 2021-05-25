@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.mysql.cj.jdbc.Blob;
+
 @Entity
 public class Mascota {
 
@@ -15,7 +17,8 @@ public class Mascota {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	/*private Blob historial_clinico; */
+	private byte[] historial_clinico; 
+	
 	private Date fecha_nacimiento;
 	
 	@ManyToOne
@@ -37,5 +40,22 @@ public class Mascota {
 	public void setFecha_nacimiento(Date fecha_nacimiento) {
 		this.fecha_nacimiento = fecha_nacimiento;
 	}
-	
+	public byte[] getHistorial_clinico() {
+		return historial_clinico;
+	}
+	public void setHistorial_clinico(byte[] historial_clinico) {
+		this.historial_clinico = historial_clinico;
+	}
+	public Duenio getDuenio() {
+		return duenio;
+	}
+	public void setDuenio(Duenio duenio) {
+		this.duenio = duenio;
+	}
+	public TipoAnimal getTipo() {
+		return tipo;
+	}
+	public void setTipo(TipoAnimal tipo) {
+		this.tipo = tipo;
+	}
 }

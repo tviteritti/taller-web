@@ -1,5 +1,8 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+import java.sql.Date;
+import java.sql.Time;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,16 +15,17 @@ public class Turno {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@ManyToOne
 	private Veterinario veterinario;
+//	@ManyToOne
+//	private Paciente paciente;
+	
 	@ManyToOne
-	private Paciente paciente;/*eliminar*/
+	private Duenio duenio;
 	
-	/*@ManyToOne
-	private Duenio duenio; la idea es que el usuario sea el dueño de la mascota y no la mascota*/
-	
-	private String fecha;/*date*/
-	private String horario;/*date*/
+	private Date fecha;
+	private Time horario;
 	private String servicio;
 	private Boolean estado;
 	
@@ -37,22 +41,22 @@ public class Turno {
 	public void setVeterinario(Veterinario veterinario) {
 		this.veterinario = veterinario;
 	}
-	public Paciente getPaciente() {
-		return paciente;
-	}
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
-	}
-	public String getFecha() {
+//	public Paciente getPaciente() {
+//		return paciente;
+//	}
+//	public void setPaciente(Paciente paciente) {
+//		this.paciente = paciente;
+//	}
+	public Date getFecha() {
 		return fecha;
 	}
-	public void setFecha(String fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	public String getHorario() {
+	public Time getHorario() {
 		return horario;
 	}
-	public void setHorario(String horario) {
+	public void setHorario(Time horario) {
 		this.horario = horario;
 	}
 	public String getServicio() {
@@ -67,7 +71,12 @@ public class Turno {
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
-	
+	public Duenio getDuenio() {
+		return duenio;
+	}
+	public void setDuenio(Duenio duenio) {
+		this.duenio = duenio;
+	}
 	
 	
 	

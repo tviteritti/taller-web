@@ -7,13 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Duenio {
+public class Duenio extends Usuario{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String nombre;
+	/*private String nombre;
 	private String apellido;
 	private String email;
 	private Integer telefono;
@@ -21,12 +21,12 @@ public class Duenio {
 	@ManyToOne
 	private Direccion direccion;
 	
-	public Long getId() {
+	*/public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
+	}/*
 	public String getNombre() {
 		return nombre;
 	}
@@ -50,7 +50,7 @@ public class Duenio {
 	}
 	public void setTelefono(Integer telefono) {
 		this.telefono = telefono;
-	}
+	}*/
 	
 	
 	

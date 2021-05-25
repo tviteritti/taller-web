@@ -14,27 +14,19 @@
 integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
- <!-- <h1>VETERIANARIA</h1>
-  <form:form action="procesarDatosPaciente" method="post" modelAttribute="usuario">
-     <form:input type="text" name="usuario" placeholder="usuario" path="user"/><br>
-     <form:input type="text" name="email" placeholder="email" path="email"/><br>
-     <form:input type="text" name="password" placeholder="contraseña" path="password"/><br>
-     <input type="text" name="re-password" placeholder="re ingresar contraseña"><br>
-     <button type="submit">REGISTRARSE</button>
-  </form:form> -->
   
   <div class="container">
         <div class="row vh-100 justify-content-center align-items-center">
             <div class="col-auto bg-light p-5">
-                <form:form action="procesarDatosPaciente" method="POST" modelAttribute="usuario">
+                <form:form action="procesarDatosDueño" method="POST" modelAttribute="usuario">
                 	<div class="input-group p-2">
-                        <h3>Registrar Paciente</h3>
+                        <h3>Registrar Dueño</h3>
                     </div>
                     <div class="input-group p-2">
                         <form:hidden path="id"/>
                     </div>
                     <div class="input-group p-2">
-                        <form:hidden path="rol" value="paciente"/>
+                        <form:hidden path="rol" value="duenio"/>
                     </div>
                     <div class="input-group p-2">
                         <form:input class="form-control" placeholder="email" path="email"/>

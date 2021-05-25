@@ -48,9 +48,13 @@ public class ControladorLoginVeterinaria {
 		return new ModelAndView("ingresoVeterinaria", modelo);
 	}
 	
-	@RequestMapping("/cuentaUsuario")
+	@RequestMapping("/cuentaDuenio")
 	public ModelAndView mostrarCuentaUsuario() {
-		return new ModelAndView("cuentaUsuario");
+		return new ModelAndView("cuentaDuenio");
+	}
+	@RequestMapping("/cuentaVeterinario")
+	public ModelAndView mostrarCuentaVeterinario() {
+		return new ModelAndView("cuentaVeterinario");
 	}
 	
 	@RequestMapping("/iniciarSesion")
@@ -75,12 +79,12 @@ public class ControladorLoginVeterinaria {
 		return new ModelAndView("registroVeterinario", modelo);
 	}
 	
-	@RequestMapping("/registrarPaciente")
-	public ModelAndView registrarPaciente() {
+	@RequestMapping("/registrarDuenio")
+	public ModelAndView registrarDueño() {
 			ModelMap modelo = new ModelMap();
 			Usuario usuario = new Usuario();
 			modelo.put("usuario", usuario);
-		return new ModelAndView("registroPaciente", modelo);
+		return new ModelAndView("registroDuenio", modelo);
 	}
 	
 	@RequestMapping(path="procesarDatosVeterinario", method= RequestMethod.POST)
@@ -105,7 +109,7 @@ public class ControladorLoginVeterinaria {
 		return new ModelAndView("registroVeterinario", modelo);
 	}
 	
-	@RequestMapping(path="procesarDatosPaciente", method= RequestMethod.POST)
+	@RequestMapping(path="procesarDatosDueño", method= RequestMethod.POST)
 	public ModelAndView validarDatosPaciente(
 			
 			@ModelAttribute("usuario") Usuario user,
@@ -124,7 +128,7 @@ public class ControladorLoginVeterinaria {
 			modelo.put("error", "las password no coinciden");
 		}
 		
-		return new ModelAndView("registroPaciente", modelo);
+		return new ModelAndView("registroDuenio", modelo);
 	}
 	
 
@@ -137,7 +141,11 @@ public class ControladorLoginVeterinaria {
 		
 		if(servicio.buscarUsuario(user.getUser(), user.getPassword())) {
 			request.getSession().setAttribute("usuario", user.getUser());
-			return new ModelAndView("redirect:/cuentaUsuario");
+			if(user.getRol()=="Duenio") {
+				return new ModelAndView("redirect:/cuentaDuenio");/*no funciona*/
+			}else{
+				return new ModelAndView("redirect:/cuentaVeterinario");
+			}
 		}else {
 			modelo.put("error", "Usuario o clave incorrecta");
 		}

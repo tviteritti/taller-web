@@ -9,7 +9,7 @@
 <body>
 
 <h1>VETERIANARIA</h1>
-	<a href="registrarPaciente"><h3>Soy paciente</h3></a>
+	<a href="registrarDuenio"><h3>Soy Dueño de una mascota</h3></a>
 	<a href="registrarVeterinario"><h3>Soy veterinario</h3></a>
 </body>
 </html>
