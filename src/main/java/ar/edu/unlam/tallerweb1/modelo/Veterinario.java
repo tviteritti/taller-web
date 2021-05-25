@@ -15,9 +15,13 @@ public class Veterinario extends Usuario {
 	
 	private String nombre;
 	private String apellido;
+	private String descripcion;
 	
 	@ManyToOne
 	private Zona zona;
+	
+	@ManyToOne
+	private Direccion direccion;
 	
 	
 	public Long getId() {
@@ -43,6 +47,34 @@ public class Veterinario extends Usuario {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
+
+	public Zona getZona() {
+		return zona;
+	}
+
+	public void setZona(Zona zona) {
+		this.zona = zona;
+	}
+
+	public Direccion getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(Direccion direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	
+	
+	
+	
 	
 
 
