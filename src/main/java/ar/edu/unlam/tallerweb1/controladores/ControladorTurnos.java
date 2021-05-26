@@ -80,28 +80,26 @@ private ServicioTurno servicio;
 		return new ModelAndView("turnoSolicitado", modelo);
 	}
 	
-	@RequestMapping("verTurnos")
-	public ModelAndView mostrarTurnoSolicitado() {
-		
+	@RequestMapping(path = "verTurnos")
+	public ModelAndView mostrarTurnos() {
 		ModelMap modelo = new ModelMap();
 		List<Turno> turnos = servicio.listarTurnos();
 		modelo.put("turnos", turnos);
 		return new ModelAndView("misTurnos", modelo);
 	}
 	
-	@RequestMapping("cancelarTurno")
-	public ModelAndView mostrarTurnoSolicitado(
-	@RequestParam(value="fecha",required=false) Turno turno
+	@RequestMapping(path="cancelarTurno", method= RequestMethod.POST)
+	public ModelAndView mostrarTurnosSolicitados(
+	@RequestParam(value="id_turno",required=false) Long idTurno	
 			) {
 		
-		ModelMap modelo = new ModelMap();
-		List<Turno> turnos = servicio.listarTurnos();
-		modelo.put("turnos", turnos);
-		if(servicio.cancelarTurno(turno)) {
+		//ModelMap modelo = new ModelMap();
+		servicio.cancelarTurno(idTurno);
+		/*if(servicio.cancelarTurno(idTurno)) {
 			modelo.put("mensaje","Turno cancelado con exito!");	
-		}
+		}*/
 		
-		return new ModelAndView("cancelarTurno", modelo);
+		return new ModelAndView("misTurnos");
 	}
 	
 	
