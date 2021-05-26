@@ -62,16 +62,18 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 	}
 
 	@Override
-	public Boolean cancelarTurno(Turno turno) {
+	public void cancelarTurno(Long idTurno) {
 		
-		Boolean turnoCancelado = false;
+		Turno turnoACancelar = null;
 		
-		turnoCancelado = (Boolean)sessionFactory.getCurrentSession()
+		
+		turnoACancelar = (Turno)sessionFactory.getCurrentSession()
 				 .createCriteria(Turno.class)
-				 .add(Restrictions.eq( "id", turno.getId()))
+				 .add(Restrictions.eq( "id", idTurno))
 				 .uniqueResult();
 		
-		return turnoCancelado;
+		sessionFactory.getCurrentSession().delete(turnoACancelar);
+		
 	}
 
 	@Override

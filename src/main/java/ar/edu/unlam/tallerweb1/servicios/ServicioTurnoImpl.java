@@ -45,9 +45,9 @@ public class ServicioTurnoImpl implements ServicioTurno {
 
 
 	@Override
-	public Boolean cancelarTurno(Turno turno) {
+	public void cancelarTurno(Long idTurno) {
 		
-		return repositorioTurno.cancelarTurno(turno);
+		repositorioTurno.cancelarTurno(idTurno);
 	}
 
 

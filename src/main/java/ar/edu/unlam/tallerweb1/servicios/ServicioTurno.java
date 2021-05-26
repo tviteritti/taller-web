@@ -15,6 +15,6 @@ public interface ServicioTurno {
 	List<Turno> obtenerTurnos(Veterinario veterinario);
 	List<Turno> obtenerTurnos(String servicio);
 	List<Turno> listarTurnos();
-	Boolean cancelarTurno(Turno turno);
+	void cancelarTurno(Long idTurno);
 
 }
