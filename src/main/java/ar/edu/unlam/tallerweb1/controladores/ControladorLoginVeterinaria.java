@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLoginVeterinaria;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
@@ -141,11 +141,11 @@ public class ControladorLoginVeterinaria {
 		
 		if(servicio.buscarUsuario(user.getUser(), user.getPassword())) {
 			request.getSession().setAttribute("usuario", user.getUser());
-			if(user.getRol()=="Duenio") {
-				return new ModelAndView("redirect:/cuentaDuenio");/*no funciona*/
-			}else{
+			/*if(user.getRol()=="Duenio") {
+				//return new ModelAndView("redirect:/cuentaDuenio");    /*no funciona*/
+			//}else{
 				return new ModelAndView("redirect:/cuentaVeterinario");
-			}
+			
 		}else {
 			modelo.put("error", "Usuario o clave incorrecta");
 		}
