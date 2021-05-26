@@ -58,12 +58,15 @@ public class TestVeterinaria extends SpringTest{
 		session().save(vt);
 		
 		Zona zonaBD = session().get(Zona.class, 1L);
-		/*Veterinario vtBD = session().get(Veterinario.class, 1L);
-		Veterinario vtBuscado =(Veterinario) rt.obtenerVeterinariosPorZona(zonaBD.getDescripcion());*/
+		Veterinario vtBD = session().get(Veterinario.class, 1L);
+		Veterinario vtBuscado =(Veterinario) rt.obtenerVeterinariosPorZona(zonaBD.getDescripcion());
 		
-		assertEquals( zonaBD.getDescripcion(),"oeste");
-
 		//assertEquals((Long)zona.getId(), (Long)1L);
+		//assertEquals( zonaBD.getDescripcion(),"oeste");
+		
+		assertEquals(vtBuscado.getZona().getDescripcion(), "oeste");
+
+		
 	}
 
 }
