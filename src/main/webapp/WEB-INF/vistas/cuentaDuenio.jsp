@@ -13,9 +13,10 @@
    <br><br>
   <h4>Hola ${usuario} esta es tu cuenta</h4>
   <h4>Turno</h4>
+  
    <a href="verTurnos">mis turnos</a>
    <a href="buscarTurno">solicitar turno</a>
-   <a href="cancelarTurno">cancelar turno</a>
+ 
    <br><br>
    <h4>Consultas</h4>
    <a href="consultar">realizar consulta</a>
