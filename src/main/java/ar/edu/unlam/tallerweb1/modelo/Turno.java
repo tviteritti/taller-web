@@ -11,24 +11,40 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Turno {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	@ManyToOne
 	private Veterinario veterinario;
-//	@ManyToOne
-//	private Paciente paciente;
+	/*@ManyToOne
+	private Paciente paciente;*/
 	
-	@ManyToOne
-	private Duenio duenio;
+	/*@ManyToOne
+	private Duenio duenio;*/
 	
-	private Date fecha;
-	private Time horario;
+	private String fecha;
+	private String horario;
 	private String servicio;
 	private Boolean estado;
 	
+//	private Date fecha;
+//	private Time horario;
+
+	
+//	public void setFecha(Date fecha) {
+//		this.fecha = fecha;
+//	}
+//	public void setHorario(Time horario) {
+//		this.horario = horario;
+//	}
+	
+	public Boolean getEstado() {
+		return estado;
+	}
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -47,39 +63,46 @@ public class Turno {
 //	public void setPaciente(Paciente paciente) {
 //		this.paciente = paciente;
 //	}
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-	public Time getHorario() {
+	public String getHorario() {
 		return horario;
 	}
-	public void setHorario(Time horario) {
+	public void setHorario(String horario) {
 		this.horario = horario;
 	}
 	public String getServicio() {
 		return servicio;
 	}
+
 	public void setServicio(String servicio) {
 		this.servicio = servicio;
 	}
-	public Boolean getEstado() {
-		return estado;
-	}
-	public void setEstado(Boolean estado) {
-		this.estado = estado;
-	}
-	public Duenio getDuenio() {
-		return duenio;
-	}
-	public void setDuenio(Duenio duenio) {
-		this.duenio = duenio;
-	}
+//	public Date getFecha() {
+//		return fecha;
+//	}
+//	public Time getHorario() {
+//		return horario;
+//	}
+//	public Duenio getDuenio() {
+//		return duenio;
+//	}
+//	public void setDuenio(Duenio duenio) {
+//		this.duenio = duenio;
+//	}
 	
 	
 	
 	
+
+
+
+
+
+
 
 }

@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import com.mysql.cj.jdbc.Blob;
 
 @Entity
-public class Veterinario extends Usuario {
+public class Veterinario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,15 +22,15 @@ public class Veterinario extends Usuario {
 	private Date dias_que_atiende;
 	private Time horario_que_atiende;
 	
-	/*private String nombre;
+	private String nombre;
 	private String apellido;
 	private String descripcion;
 	
 	@ManyToOne
 	private Zona zona;
 	
-	@ManyToOne
-	private Direccion direccion;*/
+	
+	private String direccion;
 	
 	
 	public Long getId() {
@@ -65,15 +65,15 @@ public class Veterinario extends Usuario {
 		this.horario_que_atiende = horario_que_atiende;
 	}
 
-	/*public String getNombre() {
+   public String getNombre() {
 		return nombre;
 	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}*/
+	}
 
-	/*public String getApellido() {
+	public String getApellido() {
 		return apellido;
 	}
 
@@ -89,11 +89,11 @@ public class Veterinario extends Usuario {
 		this.zona = zona;
 	}
 
-	public Direccion getDireccion() {
+	public String getDireccion() {
 		return direccion;
 	}
 
-	public void setDireccion(Direccion direccion) {
+	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
 
@@ -103,12 +103,7 @@ public class Veterinario extends Usuario {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
-	}*/
-	
-	
-	
-	
-	
+	}
 
 
 
