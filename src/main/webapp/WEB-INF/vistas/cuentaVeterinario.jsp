@@ -13,7 +13,7 @@
    <br><br>
   <h4>Hola ${usuario} esta es tu cuenta</h4>
   <h4>Mi agenda</h4>
-   <a href="verTurnos">Turnos</a>
+   <a href="verTurnosPacientes">Turnos</a>
    <a href="verPacientes">mis pacientes</a>
    <a href="buscarHC">historia clinica</a>
    <br><br>
