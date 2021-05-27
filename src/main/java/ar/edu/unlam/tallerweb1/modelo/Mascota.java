@@ -21,6 +21,8 @@ public class Mascota {
 	
 	private Date fecha_nacimiento;
 	
+	private String nombre;
+	
 	@ManyToOne
 	private Duenio duenio;
 	
@@ -58,4 +60,12 @@ public class Mascota {
 	public void setTipo(TipoAnimal tipo) {
 		this.tipo = tipo;
 	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	
 }
