@@ -28,37 +28,14 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		
 		List<Veterinario> veterinarios = null;
 		
-		switch(buscarPorZona) {
-		
-		case "norte":
-			veterinarios = (List<Veterinario>) sessionFactory.getCurrentSession()
+	
+		veterinarios = (List<Veterinario>) sessionFactory.getCurrentSession()
 						 .createCriteria(Veterinario.class)
 						 .createAlias("zona", "zonaBuscada")
 						 .add(Restrictions.eq("zonaBuscada.descripcion", buscarPorZona))
 						 .list();			 
-			break;
-		case "sur":
-			veterinarios = (List<Veterinario>) sessionFactory.getCurrentSession()
-			 .createCriteria(Veterinario.class)
-			 .createAlias("zona", "zonaBuscada")
-			 .add(Restrictions.eq("zonaBuscada.descripcion", buscarPorZona))
-			 .list();
-			
-			break;
-			
-		case "oeste":
-			veterinarios = (List<Veterinario>) sessionFactory.getCurrentSession()
-			 .createCriteria(Veterinario.class)
-			 .createAlias("zona", "zonaBuscada")
-			 .add(Restrictions.eq("zonaBuscada.descripcion", buscarPorZona))
-			 .list();
-			
-			break;	
 		
-		
-		}
-		return veterinarios;
-		
+		return veterinarios;	
 	}
 
 	@Override
