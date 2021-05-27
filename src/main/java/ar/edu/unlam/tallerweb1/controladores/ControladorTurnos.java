@@ -11,23 +11,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.modelo.Mascota;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.Veterinario;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLoginVeterinaria;
+import ar.edu.unlam.tallerweb1.servicios.ServicioMascotas;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTurno;
 
 @Controller
 public class ControladorTurnos {
 	
 private ServicioTurno servicio;
+private ServicioMascotas servicioM;
 
 	
 	@Autowired
-	public ControladorTurnos(ServicioTurno servicioTurno) {
+	public ControladorTurnos(ServicioTurno servicioTurno, ServicioMascotas servicioM) {
 		
 		this.servicio = servicioTurno;	
+		this.servicioM=servicioM;
+		
 	}
 	
 	@RequestMapping("buscarTurno")
@@ -87,6 +92,24 @@ private ServicioTurno servicio;
 		modelo.put("turnos", turnos);
 		return new ModelAndView("misTurnos", modelo);
 	}
+	
+	@RequestMapping(path = "verTurnosPacientes")
+	public ModelAndView mostrarTurnosPacientes() {
+		ModelMap modelo = new ModelMap();
+		List<Turno> turnos = servicio.listarTurnos();
+		modelo.put("turnos", turnos);
+		return new ModelAndView("turnosPacientes", modelo);
+	}
+	
+	/*@RequestMapping("verPacientes")
+	public ModelAndView mostrarListadoPacientes() {
+		ModelMap modelo = new ModelMap();
+		List<Mascota> mascotas  = servicioM.listarMascotas();
+		modelo.put("pacientes", mascotas);
+		return new ModelAndView("pacientes", modelo);
+	}*/
+	
+	
 	
 	@RequestMapping(path="cancelarTurno", method= RequestMethod.POST)
 	public ModelAndView mostrarTurnosSolicitados(
