@@ -61,7 +61,7 @@ private ServicioMascotas servicioMascotas;
 	}
 	
 	@RequestMapping(path="generarTurno", method= RequestMethod.POST)
-	public ModelAndView mostrarTurnoSolicitado(
+	public ModelAndView generarTurno(
 	@ModelAttribute("veterinario") Veterinario veterinario,
 	@RequestParam(value="servicio",required=false) String servicioSolicitado,
 	@RequestParam(value="direccion",required=false) String direccion,
