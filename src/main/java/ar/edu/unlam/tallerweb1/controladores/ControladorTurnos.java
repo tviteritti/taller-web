@@ -23,15 +23,15 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioTurno;
 @Controller
 public class ControladorTurnos {
 	
-private ServicioTurno servicio;
-private ServicioMascotas servicioM;
+private ServicioTurno servicioTurno;
+private ServicioMascotas servicioMascotas;
 
 	
 	@Autowired
-	public ControladorTurnos(ServicioTurno servicioTurno, ServicioMascotas servicioM) {
+	public ControladorTurnos(ServicioTurno servicioTurno, ServicioMascotas servicioMascotas) {
 		
-		this.servicio = servicioTurno;	
-		this.servicioM=servicioM;
+		this.servicioTurno = servicioTurno;	
+		this.servicioMascotas=servicioMascotas;
 		
 	}
 	
@@ -53,7 +53,7 @@ private ServicioMascotas servicioM;
 		ModelMap modelo = new ModelMap();
 		modelo.put("servicio", servicioSolicitado);
 		modelo.put("zona", zona);
-		List<Veterinario>veterinariosEncontrados =servicio.obtenerVeterinariosPorZona(zona.getDescripcion());
+		List<Veterinario>veterinariosEncontrados =servicioTurno.obtenerVeterinariosPorZona(zona.getDescripcion());
 		modelo.put("veterinarios", veterinariosEncontrados);
 		Veterinario vt = new Veterinario ();
 		modelo.put("vt", vt);
@@ -88,7 +88,7 @@ private ServicioMascotas servicioM;
 	@RequestMapping(path = "verTurnos")
 	public ModelAndView mostrarTurnos() {
 		ModelMap modelo = new ModelMap();
-		List<Turno> turnos = servicio.listarTurnos();
+		List<Turno> turnos = servicioTurno.listarTurnos();
 		modelo.put("turnos", turnos);
 		return new ModelAndView("misTurnos", modelo);
 	}
@@ -96,7 +96,7 @@ private ServicioMascotas servicioM;
 	@RequestMapping(path = "verTurnosPacientes")
 	public ModelAndView mostrarTurnosPacientes() {
 		ModelMap modelo = new ModelMap();
-		List<Turno> turnos = servicio.listarTurnos();
+		List<Turno> turnos = servicioTurno.listarTurnos();
 		modelo.put("turnos", turnos);
 		return new ModelAndView("turnosPacientes", modelo);
 	}
@@ -117,7 +117,7 @@ private ServicioMascotas servicioM;
 			) {
 		
 		//ModelMap modelo = new ModelMap();
-		servicio.cancelarTurno(idTurno);
+		servicioTurno.cancelarTurno(idTurno);
 		/*if(servicio.cancelarTurno(idTurno)) {
 			modelo.put("mensaje","Turno cancelado con exito!");	
 		}*/
