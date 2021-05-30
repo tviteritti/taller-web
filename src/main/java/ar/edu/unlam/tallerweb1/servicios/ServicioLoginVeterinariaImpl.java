@@ -10,12 +10,12 @@ import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 @Service
 public class ServicioLoginVeterinariaImpl implements ServicioLoginVeterinaria{
 	
-	private RepositorioUsuario repositorio;
+	private RepositorioUsuario repositorioUsuario;
 	
 
 	@Autowired
-	public ServicioLoginVeterinariaImpl(RepositorioUsuario respositorioU){
-		this.repositorio = respositorioU;	
+	public ServicioLoginVeterinariaImpl(RepositorioUsuario repositorioUsuario){
+		this.repositorioUsuario = repositorioUsuario;	
 	}
 		
 	@Override
@@ -33,13 +33,13 @@ public class ServicioLoginVeterinariaImpl implements ServicioLoginVeterinaria{
 	@Override
 	public void guardarUsuario(Usuario user) {
 		
-		repositorio.registrarOMOdificarUsuario(user);
+		repositorioUsuario.registrarOMOdificarUsuario(user);
 	}
 
 	@Override
 	public Boolean validarUsuario(Usuario user) {
 		
-		Usuario usuarioBuscado = repositorio.consultarUsuario(user);
+		Usuario usuarioBuscado = repositorioUsuario.consultarUsuario(user);
 		
 		if(usuarioBuscado.equals(user)) {
 			
