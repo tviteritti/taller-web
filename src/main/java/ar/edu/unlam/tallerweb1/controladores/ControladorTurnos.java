@@ -22,15 +22,15 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioTurno;
 @Controller
 public class ControladorTurnos {
 	
-private ServicioTurno servicioTurno;
-private ServicioMascotas servicioMascota;
+private ServicioTurno servicio;
+private ServicioMascotas servicioM;
 
 	
 	@Autowired
 	public ControladorTurnos(ServicioTurno servicioTurno, ServicioMascotas servicioM) {
 		
-		this.servicioTurno = servicioTurno;	
-		this.servicioMascota=servicioMascota;
+		this.servicio = servicioTurno;	
+		this.servicioM=servicioM;
 		
 	}
 	
@@ -52,7 +52,7 @@ private ServicioMascotas servicioMascota;
 //		ModelMap modelo = new ModelMap();
 //		modelo.put("servicio", servicioSolicitado);
 //		modelo.put("zona", zona);
-//		List<Veterinario>veterinariosEncontrados =servicioTurno.obtenerVeterinariosPorZona(zona.getDescripcion());
+//		List<Veterinario>veterinariosEncontrados =servicio.obtenerVeterinariosPorZona(zona.getDescripcion());
 //		modelo.put("veterinarios", veterinariosEncontrados);
 //		Veterinario vt = new Veterinario ();
 //		modelo.put("vt", vt);
@@ -60,7 +60,7 @@ private ServicioMascotas servicioMascota;
 //	}
 //	
 //	@RequestMapping(path="generarTurno", method= RequestMethod.POST)
-//	public ModelAndView generarTurno(
+//	public ModelAndView mostrarTurnoSolicitado(
 //	@ModelAttribute("veterinario") Veterinario veterinario,
 //	@RequestParam(value="servicio",required=false) String servicioSolicitado,
 //	@RequestParam(value="direccion",required=false) String direccion,
@@ -87,7 +87,7 @@ private ServicioMascotas servicioMascota;
 	@RequestMapping(path = "verTurnos")
 	public ModelAndView mostrarTurnos() {
 		ModelMap modelo = new ModelMap();
-		List<Turno> turnos = servicioTurno.listarTurnos();
+		List<Turno> turnos = servicio.listarTurnos();
 		modelo.put("turnos", turnos);
 		return new ModelAndView("misTurnos", modelo);
 	}
@@ -95,7 +95,7 @@ private ServicioMascotas servicioMascota;
 	@RequestMapping(path = "verTurnosPacientes")
 	public ModelAndView mostrarTurnosPacientes() {
 		ModelMap modelo = new ModelMap();
-		List<Turno> turnos = servicioTurno.listarTurnos();
+		List<Turno> turnos = servicio.listarTurnos();
 		modelo.put("turnos", turnos);
 		return new ModelAndView("turnosPacientes", modelo);
 	}
@@ -116,7 +116,7 @@ private ServicioMascotas servicioMascota;
 			) {
 		
 		//ModelMap modelo = new ModelMap();
-		servicioTurno.cancelarTurno(idTurno);
+		servicio.cancelarTurno(idTurno);
 		/*if(servicio.cancelarTurno(idTurno)) {
 			modelo.put("mensaje","Turno cancelado con exito!");	
 		}*/
