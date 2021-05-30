@@ -53,7 +53,7 @@ private ServicioMascotas servicioMascotas;
 		ModelMap modelo = new ModelMap();
 		modelo.put("servicio", servicioSolicitado);
 		modelo.put("zona", zona);
-		List<Veterinario>veterinariosEncontrados =servicioTurno.obtenerVeterinariosPorZona(zona.getDescripcion());
+		List<Usuario>veterinariosEncontrados =servicioTurno.obtenerVeterinariosPorZona(zona.getDescripcion());
 		modelo.put("veterinarios", veterinariosEncontrados);
 		Veterinario vt = new Veterinario ();
 		modelo.put("vt", vt);
@@ -62,7 +62,7 @@ private ServicioMascotas servicioMascotas;
 	
 	@RequestMapping(path="generarTurno", method= RequestMethod.POST)
 	public ModelAndView generarTurno(
-	@ModelAttribute("veterinario") Veterinario veterinario,
+	@ModelAttribute("veterinario") Usuario veterinario,
 	@RequestParam(value="servicio",required=false) String servicioSolicitado,
 	@RequestParam(value="direccion",required=false) String direccion,
 	/*@RequestParam(value="localidad",required=false) String localidad,*/

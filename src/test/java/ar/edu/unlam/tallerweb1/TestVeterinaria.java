@@ -7,7 +7,7 @@ import java.util.List;
 import org.hibernate.criterion.Restrictions;
 import org.junit.Test;
 
-import ar.edu.unlam.tallerweb1.modelo.Veterinario;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioTurnoImpl;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,7 @@ public class TestVeterinaria extends SpringTest{
 	@Transactional
 	public void testQueGuardeVeterinariosEnLaBD() {
 	
-		Veterinario vt = new Veterinario();
+		Usuario vt = new Usuario();
 		
 		Zona zona  = new Zona();
 		zona.setDescripcion("oeste");
@@ -32,7 +32,7 @@ public class TestVeterinaria extends SpringTest{
 		session().save(vt);
 		
 		Zona zonaBD = session().get(Zona.class, 1L);
-		Veterinario vtBD = session().get(Veterinario.class, 1L);
+		Usuario vtBD = session().get(Usuario.class, 1L);
 		
 		assertEquals((Long)vtBD.getId(), (Long)1L);
 		
@@ -44,7 +44,7 @@ public class TestVeterinaria extends SpringTest{
 		
 		RepositorioTurnoImpl rt = new RepositorioTurnoImpl(sessionFactory);
 		
-		Veterinario vt = new Veterinario();
+		Usuario vt = new Usuario();
 		
 		Zona zona  = new Zona();
 		zona.setDescripcion("oeste");
@@ -58,13 +58,13 @@ public class TestVeterinaria extends SpringTest{
 		session().save(vt);
 		
 		Zona zonaBD = session().get(Zona.class, 1L);
-		Veterinario vtBD = session().get(Veterinario.class, 1L);
-		Veterinario vtBuscado =(Veterinario) rt.obtenerVeterinariosPorZona(zonaBD.getDescripcion());
+		Usuario vtBD = session().get(Usuario.class, 1L);
+		List<Usuario> vtBuscado =(List<Usuario>) rt.obtenerVeterinariosPorZona(zonaBD.getDescripcion());
 		
 		//assertEquals((Long)zona.getId(), (Long)1L);
 		//assertEquals( zonaBD.getDescripcion(),"oeste");
 		
-		assertEquals(vtBuscado.getZona().getDescripcion(), "oeste");
+		assertEquals("oeste",vtBuscado.get(0).getZona().getDescripcion() );
 
 		
 	}

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Localidad;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
-import ar.edu.unlam.tallerweb1.modelo.Veterinario;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 
 @Repository
@@ -23,14 +23,14 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 	}
 
 	@Override
-	public List<Veterinario> obtenerVeterinariosPorZona(String zona) {
+	public List<Usuario> obtenerVeterinariosPorZona(String zona) {
 	String buscarPorZona = zona; 
 		
-		List<Veterinario> veterinarios = null;
+		List<Usuario> veterinarios = null;
 		
 	
-		veterinarios = (List<Veterinario>) sessionFactory.getCurrentSession()
-						 .createCriteria(Veterinario.class)
+		veterinarios = (List<Usuario>) sessionFactory.getCurrentSession()
+						 .createCriteria(Usuario.class)
 						 .createAlias("zona", "zonaBuscada")
 						 .add(Restrictions.eq("zonaBuscada.descripcion", buscarPorZona))
 						 .list();			 
@@ -54,7 +54,7 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 	}
 
 	@Override
-	public List<Turno> obtenerTurnos(Veterinario veterinario) {
+	public List<Turno> obtenerTurnos(Usuario veterinario) {
 		
 		List<Turno> turnosSolicitados = null;
 		
