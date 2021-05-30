@@ -1,5 +1,8 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+import java.sql.Date;
+import java.sql.Time;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,9 +28,17 @@ public class Usuario {
 	private String nombre;
 	private String apellido;
 	private String telefono;
+	private byte[] foto;
+	private Date dias_que_atiende;
+	private Time horario_que_atiende;
+	private String descripcion;
+	private String direccion;
 	
 	@ManyToOne
-	private Direccion direccion;
+	private Zona zona;
+
+	/*@ManyToOne
+	private Direccion direccion;*/
 	
 	public String getUser() {
 		return user;
@@ -77,10 +88,48 @@ public class Usuario {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-	public Direccion getDireccion() {
+	/*public Direccion getDireccion() {
 		return direccion;
 	}
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
+	}*/
+	public byte[] getFoto() {
+		return foto;
 	}
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
+	public Date getDias_que_atiende() {
+		return dias_que_atiende;
+	}
+	public void setDias_que_atiende(Date dias_que_atiende) {
+		this.dias_que_atiende = dias_que_atiende;
+	}
+	public Time getHorario_que_atiende() {
+		return horario_que_atiende;
+	}
+	public void setHorario_que_atiende(Time horario_que_atiende) {
+		this.horario_que_atiende = horario_que_atiende;
+	}
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	public String getDireccion() {
+		return direccion;
+	}
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+	public Zona getZona() {
+		return zona;
+	}
+	public void setZona(Zona zona) {
+		this.zona = zona;
+	}
+	
+	
 }
