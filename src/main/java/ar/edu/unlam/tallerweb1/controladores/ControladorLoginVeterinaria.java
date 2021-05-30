@@ -31,18 +31,18 @@ public class ControladorLoginVeterinaria {
 	}
 	*/
 	
-	private ServicioUsuario servicio;
+	private ServicioUsuario servicioUsuario;
 
 	
 	@Autowired
-	public ControladorLoginVeterinaria(ServicioUsuario servicio) {
+	public ControladorLoginVeterinaria(ServicioUsuario servicioUsuario) {
 		
-		this.servicio = servicio;	
+		this.servicioUsuario = servicioUsuario;	
 	}
 	
 	@RequestMapping("/loginVeterinaria")
 	public ModelAndView mostrarLoginVeterinaria() {
-		List<Usuario> listaVeterinarios=servicio.getVeterinarios();
+		List<Usuario> listaVeterinarios=servicioUsuario.getVeterinarios();
 		ModelMap modelo = new ModelMap();
 		modelo.put("listaVeterinarios", listaVeterinarios);
 		return new ModelAndView("ingresoVeterinaria", modelo);
@@ -96,8 +96,8 @@ public class ControladorLoginVeterinaria {
 		
 			ModelMap modelo = new ModelMap();
 		
-		if(servicio.validarPassRePass(user.getPassword(), repass)) { 
-			servicio.registrarOMOdificarUsuario(user);
+		if(servicioUsuario.validarPassRePass(user.getPassword(), repass)) { 
+			servicioUsuario.registrarOMOdificarUsuario(user);
 			modelo.put("usuario", user);
 			modelo.put("mensaje", "registro exitoso");
 			return new ModelAndView("redirect:/iniciarSesion");
@@ -119,8 +119,8 @@ public class ControladorLoginVeterinaria {
 		
 		ModelMap modelo = new ModelMap();
 		
-		if(servicio.validarPassRePass(user.getPassword(), repass)) { 
-			servicio.registrarOMOdificarUsuario(user);
+		if(servicioUsuario.validarPassRePass(user.getPassword(), repass)) { 
+			servicioUsuario.registrarOMOdificarUsuario(user);
 			modelo.put("usuario", user);
 			modelo.put("mensaje", "registro exitoso");
 			return new ModelAndView("redirect:/iniciarSesion");
@@ -139,7 +139,7 @@ public class ControladorLoginVeterinaria {
 		
 		ModelMap modelo = new ModelMap();
 		
-		if(servicio.buscarUsuario(user.getUser(), user.getPassword())) {
+		if(servicioUsuario.buscarUsuario(user.getUser(), user.getPassword())) {
 			request.getSession().setAttribute("usuario", user.getUser());
 			/*if(user.getRol()=="Duenio") {
 				//return new ModelAndView("redirect:/cuentaDuenio");    /*no funciona*/

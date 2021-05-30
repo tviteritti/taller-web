@@ -17,18 +17,18 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 @Controller
 public class ControladorIndex {
 	
-	private ServicioLogin servicio;
+	private ServicioLogin servicioLogin;
 	
 	@Autowired
-	public ControladorIndex(ServicioLogin servicio) {
+	public ControladorIndex(ServicioLogin servicioLogin) {
 		
-		this.servicio = servicio;	
+		this.servicioLogin = servicioLogin;	
 	}
 	
 	
 	@RequestMapping("/index")
 	public ModelAndView mostrarCuentaUsuario() {
-		List<Usuario> listaUsuarios=servicio.getUsuarios();
+		List<Usuario> listaUsuarios=servicioLogin.getUsuarios();
 		ModelMap modelo = new ModelMap();
 		modelo.put("listaUsuarios", listaUsuarios);
 		return new ModelAndView("index", modelo);
@@ -46,7 +46,7 @@ public class ControladorIndex {
 	public ModelAndView ingresarUsuario(@ModelAttribute("usuario") Usuario usuario) {
 		ModelMap modelo = new ModelMap();
 		if(usuario!=null) {
-			servicio.ingresarUsuario(usuario);
+			servicioLogin.ingresarUsuario(usuario);
 			return new ModelAndView("redirect:/index");
 		}else {
 			modelo.put("error", "registro vacio");
@@ -57,14 +57,14 @@ public class ControladorIndex {
 	@RequestMapping("/formActualizar")
 	public ModelAndView formActualizar(@RequestParam("usuarioId") Long id) {
 		ModelMap modelo = new ModelMap();
-		Usuario usuario = servicio.getUsuario(id);
+		Usuario usuario = servicioLogin.getUsuario(id);
 		modelo.put("usuario",usuario);
 		return new ModelAndView("formRegistrar", modelo);
 	}
 	
 	@RequestMapping("/eliminar")
 	public ModelAndView eliminarUsuario(@RequestParam("usuarioId") Long id) {
-		servicio.eliminarUsuario(id);
+		servicioLogin.eliminarUsuario(id);
 		return new ModelAndView("redirect:/index");
 		
 	}
