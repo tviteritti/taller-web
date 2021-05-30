@@ -19,12 +19,14 @@ public class Mascota {
 	
 	private byte[] historial_clinico; 
 	
+	/*private String nombre; si paciente y usuario tienen nombre es mejor que lo hereden de usuario
+	private Integer edad; la edad se saca con la fechaNacimiento por que si no se tiene que cambiar todos los años*/
 	private Date fecha_nacimiento;
 	
 	private String nombre;
 	
 	@ManyToOne
-	private Duenio duenio;
+	private Usuario duenio;
 	
 	@ManyToOne
 	private TipoAnimal tipo;
@@ -48,10 +50,11 @@ public class Mascota {
 	public void setHistorial_clinico(byte[] historial_clinico) {
 		this.historial_clinico = historial_clinico;
 	}
-	public Duenio getDuenio() {
+	
+	public Usuario getDuenio() {
 		return duenio;
 	}
-	public void setDuenio(Duenio duenio) {
+	public void setDuenio(Usuario duenio) {
 		this.duenio = duenio;
 	}
 	public TipoAnimal getTipo() {
