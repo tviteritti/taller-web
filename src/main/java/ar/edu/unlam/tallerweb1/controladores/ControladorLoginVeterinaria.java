@@ -23,6 +23,7 @@ import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDias;
 import ar.edu.unlam.tallerweb1.servicios.ServicioHorarios;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLoginVeterinaria;
+import ar.edu.unlam.tallerweb1.servicios.ServicioTurno;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
 @Controller
@@ -41,14 +42,16 @@ public class ControladorLoginVeterinaria {
 	private ServicioUsuario servicioVeterinario;
 	private ServicioHorarios servicioHorarios;
 	private ServicioDias servicioDias;
+	private ServicioTurno servicioTurno;
 
 	
 	@Autowired
-	public ControladorLoginVeterinaria(ServicioUsuario servicioVeterinario, ServicioHorarios servicioHorarios, ServicioDias servicioDias) {
+	public ControladorLoginVeterinaria(ServicioUsuario servicioVeterinario, ServicioHorarios servicioHorarios, ServicioDias servicioDias, ServicioTurno servicioTurno) {
 		
 		this.servicioVeterinario = servicioVeterinario;	
 		this.servicioHorarios = servicioHorarios;
 		this.servicioDias = servicioDias;
+		this.servicioTurno = servicioTurno;
 	}
 	
 	@RequestMapping("/loginVeterinaria")
@@ -381,11 +384,36 @@ public class ControladorLoginVeterinaria {
 			ModelMap modelo = new ModelMap();
 		
 			if(1==1) {
-				return new ModelAndView("redirect:/iniciarSesion");
+				return new ModelAndView("redirect:/generarTurnos");
 			}else {
 				
 			}
 		return new ModelAndView("horariosDomingo", modelo);
 	}
+	
+	/*--------------------------------------------------------- TURNOS ------------------------------------------------------------------*/
+	
+	@RequestMapping("/generarTurnos")
+	public ModelAndView generarTurnos() {
+		ModelMap modelo = new ModelMap();
+		Horarios horario = new Horarios();
+		modelo.put("horario", horario);
 
+	return new ModelAndView("generarTurnos", modelo);
+	}
+
+	
+	@RequestMapping(path="procesarDatosGenerarTurno", method= RequestMethod.POST)
+	public ModelAndView procesarDatosGenerarTurno(
+			@RequestParam(value="id",required=false) Long id,
+			@RequestParam(value="id_dias",required=false) Long id_dias){
+		
+		servicioTurno.generarTurnoPorIdDia(id_dias);
+			if(1==1) {
+				return new ModelAndView("redirect:/loginVeterinaria");
+			}else {
+				
+			}
+		return new ModelAndView("procesarDatosGenerarTurno");
+	}
 }

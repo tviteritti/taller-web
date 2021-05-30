@@ -1,15 +1,18 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
+import ar.edu.unlam.tallerweb1.modelo.Dias;
+import ar.edu.unlam.tallerweb1.modelo.Horarios;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
-
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 
 @Repository
@@ -90,6 +93,64 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		
 		return turnos;
 	}
+	
+	@Override
+	public void generarTurnoPorIdDia(Long id_dia) {
+		final Session session = sessionFactory.getCurrentSession();
+		
+		Dias dia = new Dias();
+		
+		dia = (Dias)sessionFactory.getCurrentSession()
+				 .createCriteria(Dias.class)
+				 .add(Restrictions.eq( "id", id_dia))
+				 .uniqueResult();
+		
+		
+		Usuario veterinario = dia.getVeterinario();
+		Date hora_inicio = dia.getLunes().getHora_inicio();
+		Boolean estado = false;
+		
+		Turno turno = new Turno();
+		turno.setVeterinario(veterinario);
+		turno.setHorario(hora_inicio);
+		turno.setEstado(estado);
+		session.saveOrUpdate(turno);
+		
+	}
+
+	@Override
+	public Usuario devolverVeterinarioDeunDia(Long id_dia) {
+		Dias dia = new Dias();
+		
+		dia = (Dias)sessionFactory.getCurrentSession()
+				 .createCriteria(Dias.class)
+				 .add(Restrictions.eq( "id", id_dia))
+				 .uniqueResult();
+		
+		
+		return dia.getVeterinario();
+	}
+	
+	@Override
+	public Horarios devolverDialunes(Long id_dia) {
+		Dias dia = new Dias();
+		
+		dia = (Dias)sessionFactory.getCurrentSession()
+				 .createCriteria(Dias.class)
+				 .add(Restrictions.eq( "id", id_dia))
+				 .uniqueResult();
+		
+		
+		return dia.getLunes();
+	}
+
+	@Override
+	public void generarTurno(Turno turno) {
+		final Session session = sessionFactory.getCurrentSession();
+		session.save(turno);
+		
+	}
+	
  
 
 }

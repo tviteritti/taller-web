@@ -31,7 +31,9 @@ public class RepositorioHorariosImpl implements RepositorioHorarios{
 
 	@Override
 	public Horarios registrarOMOdificarHorarios(String duracion_sesion, String hora_fin, String hora_inicio)  throws ParseException{
+		Horarios h = new Horarios();
 		final Session session = sessionFactory.getCurrentSession();
+		if(duracion_sesion != "" && hora_fin!= "" && hora_inicio!= "") {
 		Integer d_sesion = Integer.parseInt(duracion_sesion);
 		SimpleDateFormat formato = new SimpleDateFormat("hh:mm");
 		Date h_final;
@@ -42,13 +44,15 @@ public class RepositorioHorariosImpl implements RepositorioHorarios{
 		h_inicio = new java.util.Date(nfecha2.getTime());
 		
 		
-		Horarios h = new Horarios();
+		
 		h.setDuracion_sesion(d_sesion);
 		h.setHora_fin(h_final);
 		h.setHora_inicio(h_inicio);
-		session.save(h);
 		
+		}
+		session.save(h);
 		return h;
+		
 	}
 
 }

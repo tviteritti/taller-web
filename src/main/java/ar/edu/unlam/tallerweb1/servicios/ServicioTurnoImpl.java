@@ -1,12 +1,13 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+import ar.edu.unlam.tallerweb1.modelo.Horarios;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
@@ -69,6 +70,48 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	public List<Turno> listarTurnos() {
 		
 		return repositorioTurno.listarTurnos();
+	}
+
+
+	
+	
+
+
+
+	@Override
+	public Usuario devolverVeterinarioDeunDia(Long id_dia) {
+		return repositorioTurno.devolverVeterinarioDeunDia(id_dia);
+	}
+
+
+	@Override
+	public Horarios devolverDialunes(Long id_dia) {
+		return repositorioTurno.devolverDialunes(id_dia);
+	}
+
+
+	@Override
+	public void generarTurnoPorIdDia(Long id) {
+		Horarios lunes =repositorioTurno.devolverDialunes(id);
+		Usuario veterinario = repositorioTurno.devolverVeterinarioDeunDia(id);
+		Integer h_inicio = (int) lunes.getHora_inicio().getTime();
+		Integer h_fin = (int) lunes.getHora_fin().getTime();
+		Integer duracion = lunes.getDuracion_sesion() * 60000;
+		Integer cont=h_inicio;
+		
+		
+		do {
+			Turno turno = new Turno();
+			turno.setVeterinario(veterinario);
+			Date d= new Date();
+			d.setTime(cont);
+			turno.setHorario(d);
+			turno.setEstado(false);
+			repositorioTurno.generarTurno(turno);
+			cont+=duracion;
+			
+		}while(cont<=h_fin);
+		
 	}
 
 }

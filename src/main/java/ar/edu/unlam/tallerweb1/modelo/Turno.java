@@ -1,13 +1,15 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.util.Date;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Turno {
@@ -21,9 +23,13 @@ public class Turno {
 	
 	@ManyToOne
 	private Usuario duenio;
-
+	
+	@Temporal(TemporalType.DATE)
 	private Date fecha;
-	private Time horario;
+	
+	@Temporal(TemporalType.TIME)
+	private Date horario;
+	
 	private String servicio;
 	private Boolean estado;
 	
@@ -58,10 +64,10 @@ public class Turno {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	public Time getHorario() {
+	public Date getHorario() {
 		return horario;
 	}
-	public void setHorario(Time horario) {
+	public void setHorario(Date horario) {
 		this.horario = horario;
 	}
 	public String getServicio() {
