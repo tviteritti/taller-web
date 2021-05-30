@@ -7,14 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Paciente extends Usuario  {
+public class Paciente {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	/*private String nombre; si paciente y usuario tienen nombre es mejor que lo hereden de usuario
-	private Integer edad; la edad se saca con la fechaNacimiento por que si no se tiene que cambiar todos los años*/
+	
 	private String fechaNacimiento;
 	
 	@ManyToOne

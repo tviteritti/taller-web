@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Duenio extends Usuario{
+public class Duenio {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
