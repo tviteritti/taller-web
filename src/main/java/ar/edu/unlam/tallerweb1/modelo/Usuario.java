@@ -25,10 +25,20 @@ public class Usuario {
 	private String nombre;
 	private String apellido;
 	private String telefono;
+	private byte[] foto;
 	
 	@ManyToOne
 	private Direccion direccion;
 	
+	@ManyToOne
+	private Especialidad especialdad;
+	
+	public Especialidad getEspecialdad() {
+		return especialdad;
+	}
+	public void setEspecialdad(Especialidad especialdad) {
+		this.especialdad = especialdad;
+	}
 	public String getUser() {
 		return user;
 	}
@@ -82,5 +92,11 @@ public class Usuario {
 	}
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
+	}
+	public byte[] getFoto() {
+		return foto;
+	}
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
 	}
 }

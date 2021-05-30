@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
 import ar.edu.unlam.tallerweb1.modelo.TipoAnimal;
-import ar.edu.unlam.tallerweb1.repositorios.RepositorioLocalidad;
+
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioMascotas;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioTurno;
 

@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.mysql.cj.jdbc.Blob;
+
 
 @Entity
 public class Mascota {
@@ -24,7 +24,7 @@ public class Mascota {
 	private String nombre;
 	
 	@ManyToOne
-	private Duenio duenio;
+	private Usuario duenio;
 	
 	@ManyToOne
 	private TipoAnimal tipo;
@@ -48,10 +48,10 @@ public class Mascota {
 	public void setHistorial_clinico(byte[] historial_clinico) {
 		this.historial_clinico = historial_clinico;
 	}
-	public Duenio getDuenio() {
+	public Usuario getDuenio() {
 		return duenio;
 	}
-	public void setDuenio(Duenio duenio) {
+	public void setDuenio(Usuario duenio) {
 		this.duenio = duenio;
 	}
 	public TipoAnimal getTipo() {

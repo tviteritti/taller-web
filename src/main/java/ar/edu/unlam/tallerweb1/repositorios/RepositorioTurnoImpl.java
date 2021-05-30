@@ -7,9 +7,9 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import ar.edu.unlam.tallerweb1.modelo.Localidad;
+
 import ar.edu.unlam.tallerweb1.modelo.Turno;
-import ar.edu.unlam.tallerweb1.modelo.Veterinario;
+
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 
 @Repository
@@ -22,21 +22,21 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		this.sessionFactory = sessionFactory;
 	}
 
-	@Override
-	public List<Veterinario> obtenerVeterinariosPorZona(String zona) {
-	String buscarPorZona = zona; 
-		
-		List<Veterinario> veterinarios = null;
-		
-	
-		veterinarios = (List<Veterinario>) sessionFactory.getCurrentSession()
-						 .createCriteria(Veterinario.class)
-						 .createAlias("zona", "zonaBuscada")
-						 .add(Restrictions.eq("zonaBuscada.descripcion", buscarPorZona))
-						 .list();			 
-		
-		return veterinarios;	
-	}
+//	@Override
+//	public List<Veterinario> obtenerVeterinariosPorZona(String zona) {
+//	String buscarPorZona = zona; 
+//		
+//		List<Veterinario> veterinarios = null;
+//		
+//	
+//		veterinarios = (List<Veterinario>) sessionFactory.getCurrentSession()
+//						 .createCriteria(Veterinario.class)
+//						 .createAlias("zona", "zonaBuscada")
+//						 .add(Restrictions.eq("zonaBuscada.descripcion", buscarPorZona))
+//						 .list();			 
+//		
+//		return veterinarios;	
+//	}
 
 	@Override
 	public void cancelarTurno(Long idTurno) {
@@ -53,19 +53,19 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		
 	}
 
-	@Override
-	public List<Turno> obtenerTurnos(Veterinario veterinario) {
-		
-		List<Turno> turnosSolicitados = null;
-		
-		turnosSolicitados = (List<Turno>) sessionFactory.getCurrentSession()
-				 .createCriteria(Turno.class)
-				 .createAlias("veterinario", "vBuscado")
-				 .add(Restrictions.eq("vBuscado.apellido", veterinario.getApellido()))
-				 .list();
-		
-		return turnosSolicitados;
-	}
+//	@Override
+//	public List<Turno> obtenerTurnos(Veterinario veterinario) {
+//		
+//		List<Turno> turnosSolicitados = null;
+//		
+//		turnosSolicitados = (List<Turno>) sessionFactory.getCurrentSession()
+//				 .createCriteria(Turno.class)
+//				 .createAlias("veterinario", "vBuscado")
+//				 .add(Restrictions.eq("vBuscado.apellido", veterinario.getApellido()))
+//				 .list();
+//		
+//		return turnosSolicitados;
+//	}
 
 	@Override
 	public List<Turno> obtenerTurnos(String servicio) {

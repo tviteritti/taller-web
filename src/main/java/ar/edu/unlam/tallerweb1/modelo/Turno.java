@@ -15,29 +15,18 @@ public class Turno {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@ManyToOne
-	private Veterinario veterinario;
-	/*@ManyToOne
-	private Paciente paciente;*/
+	private Usuario veterinario;
 	
-	/*@ManyToOne
-	private Duenio duenio;*/
-	
-	private String fecha;
-	private String horario;
+	@ManyToOne
+	private Usuario duenio;
+
+	private Date fecha;
+	private Time horario;
 	private String servicio;
 	private Boolean estado;
 	
-//	private Date fecha;
-//	private Time horario;
-
-	
-//	public void setFecha(Date fecha) {
-//		this.fecha = fecha;
-//	}
-//	public void setHorario(Time horario) {
-//		this.horario = horario;
-//	}
 	
 	public Boolean getEstado() {
 		return estado;
@@ -51,28 +40,28 @@ public class Turno {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Veterinario getVeterinario() {
+	public Usuario getVeterinario() {
 		return veterinario;
 	}
-	public void setVeterinario(Veterinario veterinario) {
+	public void setVeterinario(Usuario veterinario) {
 		this.veterinario = veterinario;
 	}
-//	public Paciente getPaciente() {
-//		return paciente;
-//	}
-//	public void setPaciente(Paciente paciente) {
-//		this.paciente = paciente;
-//	}
-	public String getFecha() {
+	public Usuario getDuenio() {
+		return duenio;
+	}
+	public void setDuenio(Usuario duenio) {
+		this.duenio = duenio;
+	}
+	public Date getFecha() {
 		return fecha;
 	}
-	public void setFecha(String fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	public String getHorario() {
+	public Time getHorario() {
 		return horario;
 	}
-	public void setHorario(String horario) {
+	public void setHorario(Time horario) {
 		this.horario = horario;
 	}
 	public String getServicio() {
@@ -82,27 +71,5 @@ public class Turno {
 	public void setServicio(String servicio) {
 		this.servicio = servicio;
 	}
-//	public Date getFecha() {
-//		return fecha;
-//	}
-//	public Time getHorario() {
-//		return horario;
-//	}
-//	public Duenio getDuenio() {
-//		return duenio;
-//	}
-//	public void setDuenio(Duenio duenio) {
-//		this.duenio = duenio;
-//	}
-	
-	
-	
-	
-
-
-
-
-
-
 
 }
