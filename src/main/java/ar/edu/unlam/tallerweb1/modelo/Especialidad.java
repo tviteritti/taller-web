@@ -16,7 +16,7 @@ public class Especialidad {
 	private String descripcion;
 	
 	@ManyToOne
-	private Veterinario veterinario;
+	private Usuario veterinario;
 
 	public Long getId() {
 		return id;
@@ -34,13 +34,23 @@ public class Especialidad {
 		this.descripcion = descripcion;
 	}
 
-	public Veterinario getVeterinario() {
+	public Usuario getVeterinario() {
+		return veterinario;
+	}
+
+	public void setVeterinario(Usuario veterinario) {
+		this.veterinario = veterinario;
+	}
+
+	/*public Veterinario getVeterinario() {
 		return veterinario;
 	}
 
 	public void setVeterinario(Veterinario veterinario) {
 		this.veterinario = veterinario;
-	}
+	}*/
+	
+	
 	
 	
 
