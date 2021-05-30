@@ -27,35 +27,16 @@ public class RepositorioLocalidadImpl implements RepositorioLocalidad{
 		
 		List<Localidad> localidades = null;
 		
-		switch(buscarPorZona) {
 		
-		case "norte":
-			localidades = (List<Localidad>) sessionFactory.getCurrentSession()
+		localidades = (List<Localidad>) sessionFactory.getCurrentSession()
 						 .createCriteria(Localidad.class)
 						 .createAlias("zona", "zonaBuscada")
 						 .add(Restrictions.eq("zonaBuscada.descripcion", buscarPorZona))
 						 .list();			 
-			break;
-		case "sur":
-			 localidades = (List<Localidad>) sessionFactory.getCurrentSession()
-			 .createCriteria(Localidad.class)
-			 .createAlias("zona", "zonaBuscada")
-			 .add(Restrictions.eq("zonaBuscada.descripcion", buscarPorZona))
-			 .list();
-			
-			break;
-			
-		case "oeste":
-			 localidades = (List<Localidad>) sessionFactory.getCurrentSession()
-			 .createCriteria(Localidad.class)
-			 .createAlias("zona", "zonaBuscada")
-			 .add(Restrictions.eq("zonaBuscada.descripcion", buscarPorZona))
-			 .list();
-			
-			break;	
+	
 		
 		
-		}
+		
 		return localidades;
 	}
 
