@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import java.util.List;
 
+import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 
@@ -16,7 +17,10 @@ public interface ServicioUsuario {
 	
 	void registrarOMOdificarUsuario (Usuario usuario);
 	void eliminarUsuario(Long id);
+	void ingresarEspecialidad(Long id, Long id_especialidad);
 	
 	Boolean validarPassRePass(String pass, String repass);
+	
+	List<Especialidad> getEspecialidades();
 
 }

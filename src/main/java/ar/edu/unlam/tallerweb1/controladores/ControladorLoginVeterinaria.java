@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Dias;
+import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Horarios;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
@@ -148,6 +149,8 @@ public class ControladorLoginVeterinaria {
 	public ModelAndView registrarVeterinario() {
 			ModelMap modelo = new ModelMap();
 			Usuario usuario = new Usuario();
+			List<Especialidad> listadoEspecialidad=servicioUsuario.getEspecialidades();
+			modelo.put("listadoEspecialidad", listadoEspecialidad);
 			modelo.put("usuario", usuario);
 
 		return new ModelAndView("registroVeterinario", modelo);
@@ -157,7 +160,7 @@ public class ControladorLoginVeterinaria {
 	@RequestMapping(path="procesarDatosVeterinario", method= RequestMethod.POST)
 	public ModelAndView validarDatosVeterinario(
 			@ModelAttribute("usuario") Usuario user,HttpServletRequest request,
-			
+			@RequestParam(value="id_especialidad",required=false) Long id_especialidad,
 			@RequestParam(value="re-password",required=false) String repass
 			
 			) {
@@ -168,6 +171,7 @@ public class ControladorLoginVeterinaria {
 			
 		if(servicioUsuario.validarPassRePass(user.getPassword(), repass)) { 
 			servicioUsuario.registrarOMOdificarUsuario(user);
+			servicioUsuario.ingresarEspecialidad(user.getId(), id_especialidad);
 			servicioDias.registrarOModificarDiasVeterinario(user, dias.getId());
 			modelo.put("usuario", user);
 			modelo.put("mensaje", "registro exitoso");

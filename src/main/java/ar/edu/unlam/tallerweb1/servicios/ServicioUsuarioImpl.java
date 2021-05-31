@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
-
+import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 
@@ -84,6 +84,17 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<Especialidad> getEspecialidades() {
+		return ServicioUsuarioDao.getEspecialidades();
+	}
+
+	@Override
+	public void ingresarEspecialidad(Long id, Long id_especialidad) {
+		ServicioUsuarioDao.ingresarEspecialidad(id, id_especialidad);
+		
 	}
 
 }

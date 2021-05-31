@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,15 +43,14 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
                         <input type="text" class="form-control" name="re-password" placeholder="re ingresar contraseña">
                     </div>
                     <br>
-                    
-                    <label>Especialidad</label><br>
-					     <select name="select">
-						  <option value="value1">Especialidades clinicas</option>
-						  <option value="value2" selected>Especialidades por especie</option>
-						  <option value="value3">Especialidades con énfasis académico</option>
-						  <option value="value4">Especialidades en relación a ayudas diagnósticas</option>
-						  <option value="value5">Especialidades con énfasis académico</option>
-						</select>
+                    <div class="input-group p-2">
+                    <select class="form-control" name="id_especialidad">
+				       <option >Seleccione Especialidad</option> 
+				       <c:forEach items="${listadoEspecialidad}" var="especialidad">
+				          <option value="${especialidad.id}">${especialidad.descripcion}</option>
+				       </c:forEach>
+					</select>
+					</div>
 					<br><br>
 					<input type="submit" class="btn btn-success w-100" value="registrar">
 					<br><br>

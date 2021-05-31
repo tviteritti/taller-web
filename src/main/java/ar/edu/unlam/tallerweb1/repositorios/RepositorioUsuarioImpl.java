@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import ar.edu.unlam.tallerweb1.modelo.Dias;
+import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import org.hibernate.query.Query;
 import org.hibernate.Session;
@@ -90,6 +92,37 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		consulta.setParameter("idUsuario", id);
 		
 		consulta.executeUpdate();
+		
+	}
+
+	@Override
+	public List<Especialidad> getEspecialidades() {
+		final Session session = sessionFactory.getCurrentSession();
+		Query<Especialidad> miQuery=session.createQuery("from Especialidad", Especialidad.class);
+		List<Especialidad> especialidad=miQuery.getResultList();
+		return especialidad;
+		
+	}
+
+	@Override
+	public void ingresarEspecialidad(Long id, Long id_especialidad) {
+		final Session session = sessionFactory.getCurrentSession();
+		Usuario veterinario = new Usuario();
+		
+		veterinario = (Usuario)sessionFactory.getCurrentSession()
+				 .createCriteria(Usuario.class)
+				 .add(Restrictions.eq( "id", id))
+				 .uniqueResult();
+		
+		Especialidad especialidad = new Especialidad();
+		
+		especialidad = (Especialidad)sessionFactory.getCurrentSession()
+				 .createCriteria(Especialidad.class)
+				 .add(Restrictions.eq( "id", id_especialidad))
+				 .uniqueResult();
+		
+		veterinario.setEspecialdad(especialidad);
+		session.saveOrUpdate(veterinario);
 		
 	}
 	
