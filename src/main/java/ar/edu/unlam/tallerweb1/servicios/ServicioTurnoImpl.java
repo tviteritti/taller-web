@@ -81,8 +81,13 @@ public class ServicioTurnoImpl implements ServicioTurno {
 
 	
 	
+	
+	
 
-
+	@Override
+	public List<Turno> listarTurnosSinTomar() {
+		return repositorioTurno.listarTurnosSinTomar();
+	}
 
 	@Override
 	public Usuario devolverVeterinarioDeunDia(Long id_dia) {
@@ -97,7 +102,7 @@ public class ServicioTurnoImpl implements ServicioTurno {
 
 
 	@Override
-	public void generarTurnoPorIdDia(Long id) {
+	public void generarTurnoPorIdDiaLunes(Long id) {
 		Horarios lunes =repositorioTurno.devolverDialunes(id);
 		Usuario veterinario = repositorioTurno.devolverVeterinarioDeunDia(id);
 		Integer h_inicio = (int) lunes.getHora_inicio().getTime();	/*PASO A MILISEGUNDOS*/
@@ -122,10 +127,10 @@ public class ServicioTurnoImpl implements ServicioTurno {
 			fecha =  LocalDate.now().plusDays(3);
 			break;
 		case SATURDAY:
-			fecha =  LocalDate.now().plusDays(1);
+			fecha =  LocalDate.now().plusDays(2);
 			break;
 		case SUNDAY:
-			fecha =  LocalDate.now().plusDays(2);
+			fecha =  LocalDate.now().plusDays(1);
 			break;
 		case THURSDAY:
 			fecha =  LocalDate.now().plusDays(4);
@@ -168,5 +173,410 @@ public class ServicioTurnoImpl implements ServicioTurno {
 		repositorioTurno.tomarTurno(id, duenio);
 		
 	}
+
+
+	@Override
+	public void generarTurnoPorIdDiaMartes(Long id) {
+		Horarios martes =repositorioTurno.devolverDiaMartes(id);
+		Usuario veterinario = repositorioTurno.devolverVeterinarioDeunDia(id);
+		Integer h_inicio = (int) martes.getHora_inicio().getTime();	
+		Integer h_fin = (int) martes.getHora_fin().getTime();		
+		Integer duracion = martes.getDuracion_sesion() * 60000;		
+		
+		
+		Integer cont=h_inicio;								
+		
+		LocalDate fechaActual =  LocalDate.now();			
+		
+		LocalDate localDate = LocalDate.of(2016, 8, 19);	
+		
+		LocalDate fecha=LocalDate.now();					
+		
+	
+		switch (fechaActual.getDayOfWeek()) {				
+		case MONDAY:
+			fecha =  LocalDate.now().plusDays(1);
+			break;
+		case FRIDAY:
+			fecha =  LocalDate.now().plusDays(4);
+			break;
+		case SATURDAY:
+			fecha =  LocalDate.now().plusDays(3);
+			break;
+		case SUNDAY:
+			fecha =  LocalDate.now().plusDays(2);
+			break;
+		case THURSDAY:
+			fecha =  LocalDate.now().plusDays(5);
+			break;
+		case TUESDAY:
+			fecha =  LocalDate.now().plusDays(7);
+			break;
+		case WEDNESDAY:
+			fecha =  LocalDate.now().plusDays(6);
+			break;
+
+		default:
+			break;
+		}
+	
+		
+		
+		
+		ZoneId defaultZoneId = ZoneId.systemDefault();		
+		Date date = Date.from(fecha.atStartOfDay(defaultZoneId).toInstant());
+		
+		do {
+			Turno turno = new Turno();
+			Date d= new Date();
+			d.setTime(cont);			
+			turno.setHorario(d);
+			turno.setVeterinario(veterinario);
+			turno.setEstado(false);
+			turno.setFecha(date);
+			repositorioTurno.generarTurno(turno);
+			cont+=duracion;
+			
+		}while(cont<=h_fin);
+		
+	}
+
+
+	@Override
+	public void generarTurnoPorIdDiaMiercoles(Long id) {
+		Horarios miercoles =repositorioTurno.devolverDiaMiercoles(id);
+		Usuario veterinario = repositorioTurno.devolverVeterinarioDeunDia(id);
+		Integer h_inicio = (int) miercoles.getHora_inicio().getTime();	
+		Integer h_fin = (int) miercoles.getHora_fin().getTime();		
+		Integer duracion = miercoles.getDuracion_sesion() * 60000;		
+		
+		
+		Integer cont=h_inicio;								
+		
+		LocalDate fechaActual =  LocalDate.now();			
+		
+		LocalDate localDate = LocalDate.of(2016, 8, 19);	
+		
+		LocalDate fecha=LocalDate.now();					
+		
+	
+		switch (fechaActual.getDayOfWeek()) {				
+		case MONDAY:
+			fecha =  LocalDate.now().plusDays(2);
+			break;
+		case FRIDAY:
+			fecha =  LocalDate.now().plusDays(5);
+			break;
+		case SATURDAY:
+			fecha =  LocalDate.now().plusDays(4);
+			break;
+		case SUNDAY:
+			fecha =  LocalDate.now().plusDays(3);
+			break;
+		case THURSDAY:
+			fecha =  LocalDate.now().plusDays(6);
+			break;
+		case TUESDAY:
+			fecha =  LocalDate.now().plusDays(1);
+			break;
+		case WEDNESDAY:
+			fecha =  LocalDate.now().plusDays(0);
+			break;
+
+		default:
+			break;
+		}
+	
+		
+		
+		
+		ZoneId defaultZoneId = ZoneId.systemDefault();		
+		Date date = Date.from(fecha.atStartOfDay(defaultZoneId).toInstant());
+		
+		do {
+			Turno turno = new Turno();
+			Date d= new Date();
+			d.setTime(cont);			
+			turno.setHorario(d);
+			turno.setVeterinario(veterinario);
+			turno.setEstado(false);
+			turno.setFecha(date);
+			repositorioTurno.generarTurno(turno);
+			cont+=duracion;
+			
+		}while(cont<=h_fin);
+		
+	}
+
+
+	@Override
+	public void generarTurnoPorIdDiaJueves(Long id) {
+		Horarios jueves =repositorioTurno.devolverDiaJueves(id);
+		Usuario veterinario = repositorioTurno.devolverVeterinarioDeunDia(id);
+		Integer h_inicio = (int) jueves.getHora_inicio().getTime();	
+		Integer h_fin = (int) jueves.getHora_fin().getTime();		
+		Integer duracion = jueves.getDuracion_sesion() * 60000;		
+		
+		
+		Integer cont=h_inicio;								
+		
+		LocalDate fechaActual =  LocalDate.now();			
+		
+		LocalDate localDate = LocalDate.of(2016, 8, 19);	
+		
+		LocalDate fecha=LocalDate.now();					
+		
+	
+		switch (fechaActual.getDayOfWeek()) {				
+		case MONDAY:
+			fecha =  LocalDate.now().plusDays(3);
+			break;
+		case FRIDAY:
+			fecha =  LocalDate.now().plusDays(6);
+			break;
+		case SATURDAY:
+			fecha =  LocalDate.now().plusDays(5);
+			break;
+		case SUNDAY:
+			fecha =  LocalDate.now().plusDays(4);
+			break;
+		case THURSDAY:
+			fecha =  LocalDate.now().plusDays(0);
+			break;
+		case TUESDAY:
+			fecha =  LocalDate.now().plusDays(2);
+			break;
+		case WEDNESDAY:
+			fecha =  LocalDate.now().plusDays(1);
+			break;
+
+		default:
+			break;
+		}
+	
+		
+		
+		
+		ZoneId defaultZoneId = ZoneId.systemDefault();		
+		Date date = Date.from(fecha.atStartOfDay(defaultZoneId).toInstant());
+		
+		do {
+			Turno turno = new Turno();
+			Date d= new Date();
+			d.setTime(cont);			
+			turno.setHorario(d);
+			turno.setVeterinario(veterinario);
+			turno.setEstado(false);
+			turno.setFecha(date);
+			repositorioTurno.generarTurno(turno);
+			cont+=duracion;
+			
+		}while(cont<=h_fin);
+		
+	}
+
+
+	@Override
+	public void generarTurnoPorIdDiaViernes(Long id) {
+		Horarios viernes =repositorioTurno.devolverDiaViernes(id);
+		Usuario veterinario = repositorioTurno.devolverVeterinarioDeunDia(id);
+		Integer h_inicio = (int) viernes.getHora_inicio().getTime();	
+		Integer h_fin = (int) viernes.getHora_fin().getTime();		
+		Integer duracion = viernes.getDuracion_sesion() * 60000;		
+		
+		
+		Integer cont=h_inicio;								
+		
+		LocalDate fechaActual =  LocalDate.now();			
+		
+		LocalDate localDate = LocalDate.of(2016, 8, 19);	
+		
+		LocalDate fecha=LocalDate.now();					
+		
+	
+		switch (fechaActual.getDayOfWeek()) {				
+		case MONDAY:
+			fecha =  LocalDate.now().plusDays(4);
+			break;
+		case FRIDAY:
+			fecha =  LocalDate.now().plusDays(0);
+			break;
+		case SATURDAY:
+			fecha =  LocalDate.now().plusDays(6);
+			break;
+		case SUNDAY:
+			fecha =  LocalDate.now().plusDays(5);
+			break;
+		case THURSDAY:
+			fecha =  LocalDate.now().plusDays(1);
+			break;
+		case TUESDAY:
+			fecha =  LocalDate.now().plusDays(3);
+			break;
+		case WEDNESDAY:
+			fecha =  LocalDate.now().plusDays(2);
+			break;
+
+		default:
+			break;
+		}
+	
+		
+		
+		
+		ZoneId defaultZoneId = ZoneId.systemDefault();		
+		Date date = Date.from(fecha.atStartOfDay(defaultZoneId).toInstant());
+		
+		do {
+			Turno turno = new Turno();
+			Date d= new Date();
+			d.setTime(cont);			
+			turno.setHorario(d);
+			turno.setVeterinario(veterinario);
+			turno.setEstado(false);
+			turno.setFecha(date);
+			repositorioTurno.generarTurno(turno);
+			cont+=duracion;
+			
+		}while(cont<=h_fin);
+		
+	}
+
+
+	@Override
+	public void generarTurnoPorIdDiaSabado(Long id) {
+		Horarios sabado =repositorioTurno.devolverDiaSabado(id);
+		Usuario veterinario = repositorioTurno.devolverVeterinarioDeunDia(id);
+		Integer h_inicio = (int) sabado.getHora_inicio().getTime();	
+		Integer h_fin = (int) sabado.getHora_fin().getTime();		
+		Integer duracion = sabado.getDuracion_sesion() * 60000;		
+		
+		
+		Integer cont=h_inicio;								
+		
+		LocalDate fechaActual =  LocalDate.now();			
+		
+		LocalDate localDate = LocalDate.of(2016, 8, 19);	
+		
+		LocalDate fecha=LocalDate.now();					
+		
+	
+		switch (fechaActual.getDayOfWeek()) {				
+		case MONDAY:
+			fecha =  LocalDate.now().plusDays(5);
+			break;
+		case FRIDAY:
+			fecha =  LocalDate.now().plusDays(1);
+			break;
+		case SATURDAY:
+			fecha =  LocalDate.now().plusDays(0);
+			break;
+		case SUNDAY:
+			fecha =  LocalDate.now().plusDays(6);
+			break;
+		case THURSDAY:
+			fecha =  LocalDate.now().plusDays(2);
+			break;
+		case TUESDAY:
+			fecha =  LocalDate.now().plusDays(4);
+			break;
+		case WEDNESDAY:
+			fecha =  LocalDate.now().plusDays(3);
+			break;
+
+		default:
+			break;
+		}
+	
+		
+		
+		
+		ZoneId defaultZoneId = ZoneId.systemDefault();		
+		Date date = Date.from(fecha.atStartOfDay(defaultZoneId).toInstant());
+		
+		do {
+			Turno turno = new Turno();
+			Date d= new Date();
+			d.setTime(cont);			
+			turno.setHorario(d);
+			turno.setVeterinario(veterinario);
+			turno.setEstado(false);
+			turno.setFecha(date);
+			repositorioTurno.generarTurno(turno);
+			cont+=duracion;
+			
+		}while(cont<=h_fin);
+		
+	}
+
+
+	@Override
+	public void generarTurnoPorIdDiaDomingo(Long id) {
+		Horarios domingo =repositorioTurno.devolverDiaDomingo(id);
+		Usuario veterinario = repositorioTurno.devolverVeterinarioDeunDia(id);
+		Integer h_inicio = (int) domingo.getHora_inicio().getTime();	
+		Integer h_fin = (int) domingo.getHora_fin().getTime();		
+		Integer duracion = domingo.getDuracion_sesion() * 60000;		
+		
+		
+		Integer cont=h_inicio;								
+		
+		LocalDate fechaActual =  LocalDate.now();			
+		
+		LocalDate localDate = LocalDate.of(2016, 8, 19);	
+		
+		LocalDate fecha=LocalDate.now();					
+		
+	
+		switch (fechaActual.getDayOfWeek()) {				
+		case MONDAY:
+			fecha =  LocalDate.now().plusDays(6);
+			break;
+		case FRIDAY:
+			fecha =  LocalDate.now().plusDays(2);
+			break;
+		case SATURDAY:
+			fecha =  LocalDate.now().plusDays(1);
+			break;
+		case SUNDAY:
+			fecha =  LocalDate.now().plusDays(0);
+			break;
+		case THURSDAY:
+			fecha =  LocalDate.now().plusDays(3);
+			break;
+		case TUESDAY:
+			fecha =  LocalDate.now().plusDays(5);
+			break;
+		case WEDNESDAY:
+			fecha =  LocalDate.now().plusDays(4);
+			break;
+
+		default:
+			break;
+		}
+	
+		
+		
+		
+		ZoneId defaultZoneId = ZoneId.systemDefault();		
+		Date date = Date.from(fecha.atStartOfDay(defaultZoneId).toInstant());
+		
+		do {
+			Turno turno = new Turno();
+			Date d= new Date();
+			d.setTime(cont);			
+			turno.setHorario(d);
+			turno.setVeterinario(veterinario);
+			turno.setEstado(false);
+			turno.setFecha(date);
+			repositorioTurno.generarTurno(turno);
+			cont+=duracion;
+			
+		}while(cont<=h_fin);
+		
+	}
+
+
+
 
 }

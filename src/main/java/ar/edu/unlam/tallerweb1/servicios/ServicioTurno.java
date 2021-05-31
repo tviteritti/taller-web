@@ -18,10 +18,18 @@ public interface ServicioTurno {
 	List<Turno> listarTurnos();
 	void cancelarTurno(Long idTurno);
 	
-	void generarTurnoPorIdDia(Long id);
+	List<Turno> listarTurnosSinTomar();
 	Usuario devolverVeterinarioDeunDia(Long id_dia);
 	Horarios devolverDialunes(Long id_dia);
 	void tomarTurno(Long id, Usuario duenio);
+	
+	void generarTurnoPorIdDiaLunes(Long id);
+	void generarTurnoPorIdDiaMartes(Long id);
+	void generarTurnoPorIdDiaMiercoles(Long id);
+	void generarTurnoPorIdDiaJueves(Long id);
+	void generarTurnoPorIdDiaViernes(Long id);
+	void generarTurnoPorIdDiaSabado(Long id);
+	void generarTurnoPorIdDiaDomingo(Long id);
 	
 
 }

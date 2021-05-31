@@ -105,28 +105,20 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 	
 	
 	
+	
+	
+	
+	
 	@Override
-	public void generarTurnoPorIdDia(Long id_dia) {
-		final Session session = sessionFactory.getCurrentSession();
+	public List<Turno> listarTurnosSinTomar() {
+		Boolean estado= false;
+		List<Turno> turnos = null;
+		turnos = (List<Turno>) sessionFactory.getCurrentSession()
+				 .createCriteria(Turno.class)
+				 .add(Restrictions.eq( "estado", estado))
+				 .list();
 		
-		Dias dia = new Dias();
-		
-		dia = (Dias)sessionFactory.getCurrentSession()
-				 .createCriteria(Dias.class)
-				 .add(Restrictions.eq( "id", id_dia))
-				 .uniqueResult();
-		
-		
-		Usuario veterinario = dia.getVeterinario();
-		Date hora_inicio = dia.getLunes().getHora_inicio();
-		Boolean estado = false;
-		
-		Turno turno = new Turno();
-		turno.setVeterinario(veterinario);
-		turno.setHorario(hora_inicio);
-		turno.setEstado(estado);
-		session.saveOrUpdate(turno);
-		
+		return turnos;
 	}
 
 	@Override
@@ -140,19 +132,6 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		
 		
 		return dia.getVeterinario();
-	}
-	
-	@Override
-	public Horarios devolverDialunes(Long id_dia) {
-		Dias dia = new Dias();
-		
-		dia = (Dias)sessionFactory.getCurrentSession()
-				 .createCriteria(Dias.class)
-				 .add(Restrictions.eq( "id", id_dia))
-				 .uniqueResult();
-		
-		
-		return dia.getLunes();
 	}
 
 	@Override
@@ -173,10 +152,104 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 				 .uniqueResult();
 		
 		turno.setDuenio(duenio);
+		turno.setEstado(true);
 		session.saveOrUpdate(turno);
 		
 		
 	}
+	
+	@Override
+	public Horarios devolverDialunes(Long id_dia) {
+		Dias dia = new Dias();
+		
+		dia = (Dias)sessionFactory.getCurrentSession()
+				 .createCriteria(Dias.class)
+				 .add(Restrictions.eq( "id", id_dia))
+				 .uniqueResult();
+		
+		
+		return dia.getLunes();
+	}
+	
+	@Override
+	public Horarios devolverDiaMartes(Long id_dia) {
+		Dias dia = new Dias();
+		
+		dia = (Dias)sessionFactory.getCurrentSession()
+				 .createCriteria(Dias.class)
+				 .add(Restrictions.eq( "id", id_dia))
+				 .uniqueResult();
+		
+		
+		return dia.getMartes();
+	}
+	
+	@Override
+	public Horarios devolverDiaMiercoles(Long id_dia) {
+		Dias dia = new Dias();
+		
+		dia = (Dias)sessionFactory.getCurrentSession()
+				 .createCriteria(Dias.class)
+				 .add(Restrictions.eq( "id", id_dia))
+				 .uniqueResult();
+		
+		
+		return dia.getMiercoles();
+	}
+	
+	@Override
+	public Horarios devolverDiaJueves(Long id_dia) {
+		Dias dia = new Dias();
+		
+		dia = (Dias)sessionFactory.getCurrentSession()
+				 .createCriteria(Dias.class)
+				 .add(Restrictions.eq( "id", id_dia))
+				 .uniqueResult();
+		
+		
+		return dia.getJueves();
+	}
+	
+	@Override
+	public Horarios devolverDiaViernes(Long id_dia) {
+		Dias dia = new Dias();
+		
+		dia = (Dias)sessionFactory.getCurrentSession()
+				 .createCriteria(Dias.class)
+				 .add(Restrictions.eq( "id", id_dia))
+				 .uniqueResult();
+		
+		
+		return dia.getViernes();
+	}
+	
+	@Override
+	public Horarios devolverDiaSabado(Long id_dia) {
+		Dias dia = new Dias();
+		
+		dia = (Dias)sessionFactory.getCurrentSession()
+				 .createCriteria(Dias.class)
+				 .add(Restrictions.eq( "id", id_dia))
+				 .uniqueResult();
+		
+		
+		return dia.getSabado();
+	}
+	
+	@Override
+	public Horarios devolverDiaDomingo(Long id_dia) {
+		Dias dia = new Dias();
+		
+		dia = (Dias)sessionFactory.getCurrentSession()
+				 .createCriteria(Dias.class)
+				 .add(Restrictions.eq( "id", id_dia))
+				 .uniqueResult();
+		
+		
+		return dia.getDomingo();
+	}
+	
+
 
 	
  

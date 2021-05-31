@@ -52,7 +52,7 @@ public class ControladorLoginVeterinaria {
 	
 	@RequestMapping("/loginVeterinaria")
 	public ModelAndView mostrarLoginVeterinaria() {
-		List<Turno> listaTurnos=servicioTurno.listarTurnos();
+		List<Turno> listaTurnos=servicioTurno.listarTurnosSinTomar();
 		ModelMap modelo = new ModelMap();
 		modelo.put("listaTurnos", listaTurnos);
 		return new ModelAndView("ingresoVeterinaria", modelo);
@@ -320,7 +320,13 @@ public class ControladorLoginVeterinaria {
 			@RequestParam(value="id",required=false) Long id,
 			@RequestParam(value="id_dias",required=false) Long id_dias){
 		
-			servicioTurno.generarTurnoPorIdDia(id_dias);
+			servicioTurno.generarTurnoPorIdDiaLunes(id_dias);
+			servicioTurno.generarTurnoPorIdDiaMartes(id_dias);
+			servicioTurno.generarTurnoPorIdDiaMiercoles(id_dias);
+			servicioTurno.generarTurnoPorIdDiaJueves(id_dias);
+			servicioTurno.generarTurnoPorIdDiaViernes(id_dias);
+			servicioTurno.generarTurnoPorIdDiaSabado(id_dias);
+			servicioTurno.generarTurnoPorIdDiaDomingo(id_dias);
 
 		return new ModelAndView("redirect:/loginVeterinaria");
 
