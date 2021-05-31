@@ -31,23 +31,27 @@ public class RepositorioHorariosImpl implements RepositorioHorarios{
 
 	@Override
 	public Horarios registrarOMOdificarHorarios(String duracion_sesion, String hora_fin, String hora_inicio)  throws ParseException{
+		
 		Horarios h = new Horarios();
 		final Session session = sessionFactory.getCurrentSession();
-		if(duracion_sesion != "" && hora_fin!= "" && hora_inicio!= "") {
-		Integer d_sesion = Integer.parseInt(duracion_sesion);
-		SimpleDateFormat formato = new SimpleDateFormat("hh:mm");
-		Date h_final;
-		Date h_inicio;
-		java.util.Date nfecha = formato.parse(hora_fin);
-		java.util.Date nfecha2 = formato.parse(hora_inicio);
-		h_final = new java.util.Date(nfecha.getTime());
-		h_inicio = new java.util.Date(nfecha2.getTime());
 		
-		
-		
-		h.setDuracion_sesion(d_sesion);
-		h.setHora_fin(h_final);
-		h.setHora_inicio(h_inicio);
+		if(duracion_sesion != "" && hora_fin!= "" && hora_inicio!= "") { 	/*ACEPTA HORARIOS NULOS*/
+			
+			Integer d_sesion = Integer.parseInt(duracion_sesion);			/*DE STRING A INTEGER*/
+			
+			SimpleDateFormat formato = new SimpleDateFormat("hh:mm");
+			Date h_final;
+			Date h_inicio;
+			java.util.Date nfecha = formato.parse(hora_fin);				/*DE STRING A DATE*/
+			java.util.Date nfecha2 = formato.parse(hora_inicio);			/*DE STRING A DATE*/
+			h_final = new java.util.Date(nfecha.getTime());
+			h_inicio = new java.util.Date(nfecha2.getTime());
+			
+			
+			
+			h.setDuracion_sesion(d_sesion);
+			h.setHora_fin(h_final);
+			h.setHora_inicio(h_inicio);
 		
 		}
 		session.save(h);

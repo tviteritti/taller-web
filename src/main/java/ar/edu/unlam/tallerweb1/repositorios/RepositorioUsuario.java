@@ -9,11 +9,10 @@ public interface RepositorioUsuario {
 	Usuario consultarUsuario (Usuario usuario);
 	List<Usuario> getUsuarios();
 	List<Usuario> getVeterinarios();
-	void registrarOMOdificarUsuario (Usuario usuario);
 	Usuario getUsuario(Long id);
+	
+	void registrarOMOdificarUsuario (Usuario usuario);
 	void eliminarUsuario(Long id);
 	
-	Boolean buscarUsuario(String usuario, String password);
-	Usuario devolverUsuario(String usuario, String password);
-	Boolean validarPassRePass(String pass, String repass);
+
 }

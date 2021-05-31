@@ -22,22 +22,12 @@ import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDias;
 import ar.edu.unlam.tallerweb1.servicios.ServicioHorarios;
-import ar.edu.unlam.tallerweb1.servicios.ServicioLoginVeterinaria;
+
 import ar.edu.unlam.tallerweb1.servicios.ServicioTurno;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
 @Controller
 public class ControladorLoginVeterinaria {
-	
-	/*private ServicioLoginVeterinaria servicio;
-
-	
-	@Autowired
-	public ControladorLoginVeterinaria(ServicioLoginVeterinaria servicio) {
-		
-		this.servicio = servicio;	
-	}
-	*/
 	
 	private ServicioUsuario servicioUsuario;
 	private ServicioHorarios servicioHorarios;
@@ -54,6 +44,12 @@ public class ControladorLoginVeterinaria {
 		this.servicioTurno = servicioTurno;
 	}
 	
+	
+	@RequestMapping(path = "/", method = RequestMethod.GET)
+	public ModelAndView inicio() {
+		return new ModelAndView("redirect:/loginVeterinaria");
+	}
+	
 	@RequestMapping("/loginVeterinaria")
 	public ModelAndView mostrarLoginVeterinaria() {
 		List<Turno> listaTurnos=servicioTurno.listarTurnos();
@@ -62,14 +58,7 @@ public class ControladorLoginVeterinaria {
 		return new ModelAndView("ingresoVeterinaria", modelo);
 	}
 	
-	@RequestMapping("/cuentaDuenio")
-	public ModelAndView mostrarCuentaUsuario() {
-		return new ModelAndView("cuentaDuenio");
-	}
-	@RequestMapping("/cuentaVeterinario")
-	public ModelAndView mostrarCuentaVeterinario() {
-		return new ModelAndView("cuentaVeterinario");
-	}
+	/*----------------------------- INICIO DE SESION -----------------------------------------------*/
 	
 	@RequestMapping("/iniciarSesion")
 	public ModelAndView iniciarSesion() {
@@ -79,12 +68,50 @@ public class ControladorLoginVeterinaria {
 		return new ModelAndView("formUser", modelo);
 	}
 	
+	@RequestMapping(path="validarLoginUsuario", method= RequestMethod.POST)
+	public ModelAndView validarDatosUsuario(
+			@RequestParam(value="user",required=false) String user, 
+			@RequestParam(value="password",required=false) String password, HttpServletRequest request ) {
+		
+		Usuario usuario = servicioUsuario.devolverUsuario(user, password);
+		
+		ModelMap modelo = new ModelMap();
+		
+		if(servicioUsuario.buscarUsuario(user, password)) {
+			request.getSession().setAttribute("usuario", user);
+			
+			
+			if(usuario.getRol()=="duenio") {
+				return new ModelAndView("redirect:/cuentaDuenio");    /*no funciona*/
+			}else{
+				return new ModelAndView("redirect:/cuentaVeterinario");
+			}
+		}else {
+			modelo.put("error", "Usuario o clave incorrecta");
+		}
+		
+		return new ModelAndView("formUser", modelo);
+	
+	}
+	
+	@RequestMapping("/cuentaDuenio")
+	public ModelAndView mostrarCuentaUsuario() {
+		return new ModelAndView("cuentaDuenio");
+	}
+	
+	@RequestMapping("/cuentaVeterinario")
+	public ModelAndView mostrarCuentaVeterinario() {
+		return new ModelAndView("cuentaVeterinario");
+	}
 
+	/*---------------------------------------- REGISTRAR USUARIO ---------------------------------------------*/
+	
 	@RequestMapping("/registrarUsuario")
 	public ModelAndView mostrarFormRegistroUsuario() {
 		return new ModelAndView("registroUsuario");
 	}
 	
+	/*---------------------------------------- REGISTRAR DUENIO ---------------------------------------------*/
 	@RequestMapping("/registrarDuenio")
 	public ModelAndView registrarDueño() {
 			ModelMap modelo = new ModelMap();
@@ -107,42 +134,13 @@ public class ControladorLoginVeterinaria {
 			servicioUsuario.registrarOMOdificarUsuario(user);
 			modelo.put("usuario", user);
 			modelo.put("mensaje", "registro exitoso");
-			return new ModelAndView("redirect:/iniciarSesion");
+			return new ModelAndView("redirect:/loginVeterinaria");
 		}else {
 			modelo.put("error", "las password no coinciden");
 		}
 		
 		return new ModelAndView("registroDuenio", modelo);
 	}
-	
-
-	@RequestMapping(path="validarLoginUsuario", method= RequestMethod.POST)
-	public ModelAndView validarDatosUsuario(
-		
-	@ModelAttribute("usuario") Usuario user, HttpServletRequest request ) {
-		
-		ModelMap modelo = new ModelMap();
-		
-		if(servicioUsuario.buscarUsuario(user.getUser(), user.getPassword())) {
-			request.getSession().setAttribute("usuario", user.getUser());
-			/*if(user.getRol()=="Duenio") {
-				//return new ModelAndView("redirect:/cuentaDuenio");    /*no funciona*/
-			//}else{
-				return new ModelAndView("redirect:/cuentaVeterinario");
-			
-		}else {
-			modelo.put("error", "Usuario o clave incorrecta");
-		}
-		
-		return new ModelAndView("formUser", modelo);
-		
-	}
-	
-	@RequestMapping(path = "/", method = RequestMethod.GET)
-	public ModelAndView inicio() {
-		return new ModelAndView("redirect:/loginVeterinaria");
-	}
-	
 	
 	/*-------------------------------------- REGISTRO VETERINARIO -----------------------------------------------------------*/
 	
@@ -184,11 +182,7 @@ public class ControladorLoginVeterinaria {
 	
 	@RequestMapping("/horariosLunes")
 	public ModelAndView registrarHorariosLunes() {
-			ModelMap modelo = new ModelMap();
-			Horarios horario = new Horarios();
-			modelo.put("horario", horario);
-
-		return new ModelAndView("horariosLunes", modelo);
+		return new ModelAndView("horariosLunes");
 	}
 	
 	@RequestMapping(path="procesarDatosVeterinarioDiaLunes", method= RequestMethod.POST)
@@ -201,24 +195,13 @@ public class ControladorLoginVeterinaria {
 		
 			
 			servicioDias.registrarOModificarDiasLunes(servicioHorarios.registrarOMOdificarHorarios(duracion_sesion, hora_fin, hora_inicio), id_dias);
-			ModelMap modelo = new ModelMap();
 			
-			
-		if(1==1) {
-			return new ModelAndView("redirect:/horariosMartes");
-		}else {
-			
-		}
-		return new ModelAndView("horariosLunes", modelo);
+		return new ModelAndView("redirect:/horariosMartes");
 	}
 	
 	@RequestMapping("/horariosMartes")
 	public ModelAndView registrarHorariosMartes() {
-			ModelMap modelo = new ModelMap();
-			Horarios horario = new Horarios();
-			modelo.put("horario", horario);
-
-		return new ModelAndView("horariosMartes", modelo);
+		return new ModelAndView("horariosMartes");
 	}
 	
 	@RequestMapping(path="procesarDatosVeterinarioDiaMartes", method= RequestMethod.POST)
@@ -230,25 +213,13 @@ public class ControladorLoginVeterinaria {
 			@RequestParam(value="hora_inicio",required=false) String hora_inicio) throws ParseException {
 		
 			servicioDias.registrarOModificarDiasMartes(servicioHorarios.registrarOMOdificarHorarios(duracion_sesion, hora_fin, hora_inicio), id_dias);
-			ModelMap modelo = new ModelMap();
-			
-		
-		if(1==1) {
-			return new ModelAndView("redirect:/horariosMiercoles");
-		}else {
-				
-		}		
-		
-		return new ModelAndView("horariosMartes", modelo);
+
+		return new ModelAndView("redirect:/horariosMiercoles");
 	}
 	
 	@RequestMapping("/horariosMiercoles")
 	public ModelAndView registrarHorariosMiercoles() {
-			ModelMap modelo = new ModelMap();
-			Horarios horario = new Horarios();
-			modelo.put("horario", horario);
-
-		return new ModelAndView("horariosMiercoles", modelo);
+		return new ModelAndView("horariosMiercoles");
 	}
 	
 	@RequestMapping(path="procesarDatosVeterinarioDiaMiercoles", method= RequestMethod.POST)
@@ -257,27 +228,16 @@ public class ControladorLoginVeterinaria {
 			@RequestParam(value="id_dias",required=false) Long id_dias,
 			@RequestParam(value="duracion_sesion",required=false) String duracion_sesion,
 			@RequestParam(value="hora_fin",required=false) String hora_fin,
-			@RequestParam(value="hora_inicio",required=false) String hora_inicio) throws ParseException {
-		
+			@RequestParam(value="hora_inicio",required=false) String hora_inicio) throws ParseException {		
 
 			servicioDias.registrarOModificarDiasMiercoles(servicioHorarios.registrarOMOdificarHorarios(duracion_sesion, hora_fin, hora_inicio), id_dias);
-			ModelMap modelo = new ModelMap();
-		
-			if(1==1) {
-				return new ModelAndView("redirect:/horariosJueves");
-			}else {
-				
-			}
-		return new ModelAndView("horariosMiercoles", modelo);
+			
+		return new ModelAndView("redirect:/horariosJueves");
 	}
 	
 	@RequestMapping("/horariosJueves")
 	public ModelAndView registrarHorariosJueves() {
-			ModelMap modelo = new ModelMap();
-			Horarios horario = new Horarios();
-			modelo.put("horario", horario);
-
-		return new ModelAndView("horariosJueves", modelo);
+		return new ModelAndView("horariosJueves");
 	}
 	
 	@RequestMapping(path="procesarDatosVeterinarioDiaJueves", method= RequestMethod.POST)
@@ -288,26 +248,14 @@ public class ControladorLoginVeterinaria {
 			@RequestParam(value="hora_fin",required=false) String hora_fin,
 			@RequestParam(value="hora_inicio",required=false) String hora_inicio) throws ParseException {
 		
-
 			servicioDias.registrarOModificarDiasJueves(servicioHorarios.registrarOMOdificarHorarios(duracion_sesion, hora_fin, hora_inicio), id_dias);
-			ModelMap modelo = new ModelMap();
 		
-			if(1==1) {
-				return new ModelAndView("redirect:/horariosViernes");
-			}else {
-				
-			}
-		
-		return new ModelAndView("horariosJueves", modelo);
+		return new ModelAndView("redirect:/horariosViernes");
 	}
 	
 	@RequestMapping("/horariosViernes")
 	public ModelAndView registrarHorariosViernes() {
-			ModelMap modelo = new ModelMap();
-			Horarios horario = new Horarios();
-			modelo.put("horario", horario);
-
-		return new ModelAndView("horariosViernes", modelo);
+		return new ModelAndView("horariosViernes");
 	}
 	
 	@RequestMapping(path="procesarDatosVeterinarioDiaViernes", method= RequestMethod.POST)
@@ -317,28 +265,15 @@ public class ControladorLoginVeterinaria {
 			@RequestParam(value="duracion_sesion",required=false) String duracion_sesion,
 			@RequestParam(value="hora_fin",required=false) String hora_fin,
 			@RequestParam(value="hora_inicio",required=false) String hora_inicio) throws ParseException {
-		
 
 			servicioDias.registrarOModificarDiasViernes(servicioHorarios.registrarOMOdificarHorarios(duracion_sesion, hora_fin, hora_inicio), id_dias);
-			ModelMap modelo = new ModelMap();
-			
-			if(1==1) {
-				return new ModelAndView("redirect:/horariosSabado");
-			}else {
-				
-			}
-		
-		
-		return new ModelAndView("horariosViernes", modelo);
+
+		return new ModelAndView("redirect:/horariosSabado");
 	}
 	
 	@RequestMapping("/horariosSabado")
 	public ModelAndView registrarHorariosSabado() {
-			ModelMap modelo = new ModelMap();
-			Horarios horario = new Horarios();
-			modelo.put("horario", horario);
-
-		return new ModelAndView("horariosSabado", modelo);
+		return new ModelAndView("horariosSabado");
 	}
 	
 	@RequestMapping(path="procesarDatosVeterinarioDiaSabado", method= RequestMethod.POST)
@@ -348,27 +283,15 @@ public class ControladorLoginVeterinaria {
 			@RequestParam(value="duracion_sesion",required=false) String duracion_sesion,
 			@RequestParam(value="hora_fin",required=false) String hora_fin,
 			@RequestParam(value="hora_inicio",required=false) String hora_inicio) throws ParseException {
-		
 
 			servicioDias.registrarOModificarDiasSabado(servicioHorarios.registrarOMOdificarHorarios(duracion_sesion, hora_fin, hora_inicio), id_dias);
-			ModelMap modelo = new ModelMap();
-		
-			if(1==1) {
-				return new ModelAndView("redirect:/horariosDomingo");
-			}else {
-				
-			}
-			
-		return new ModelAndView("horariosSabado", modelo);
+
+		return new ModelAndView("redirect:/horariosDomingo");
 	}
 	
 	@RequestMapping("/horariosDomingo")
 	public ModelAndView registrarHorariosDomingo() {
-			ModelMap modelo = new ModelMap();
-			Horarios horario = new Horarios();
-			modelo.put("horario", horario);
-
-		return new ModelAndView("horariosDomingo", modelo);
+		return new ModelAndView("horariosDomingo");
 	}
 	
 	@RequestMapping(path="procesarDatosVeterinarioDiaDomingo", method= RequestMethod.POST)
@@ -379,27 +302,16 @@ public class ControladorLoginVeterinaria {
 			@RequestParam(value="hora_fin",required=false) String hora_fin,
 			@RequestParam(value="hora_inicio",required=false) String hora_inicio) throws ParseException {
 		
-
 			servicioDias.registrarOModificarDiasDomingo(servicioHorarios.registrarOMOdificarHorarios(duracion_sesion, hora_fin, hora_inicio), id_dias);
-			ModelMap modelo = new ModelMap();
-		
-			if(1==1) {
-				return new ModelAndView("redirect:/generarTurnos");
-			}else {
-				
-			}
-		return new ModelAndView("horariosDomingo", modelo);
+
+		return new ModelAndView("redirect:/generarTurnos");
 	}
 	
 	/*--------------------------------------------------------- TURNOS ------------------------------------------------------------------*/
 	
 	@RequestMapping("/generarTurnos")
 	public ModelAndView generarTurnos() {
-		ModelMap modelo = new ModelMap();
-		Horarios horario = new Horarios();
-		modelo.put("horario", horario);
-
-	return new ModelAndView("generarTurnos", modelo);
+	return new ModelAndView("generarTurnos");
 	}
 
 	
@@ -408,24 +320,17 @@ public class ControladorLoginVeterinaria {
 			@RequestParam(value="id",required=false) Long id,
 			@RequestParam(value="id_dias",required=false) Long id_dias){
 		
-		servicioTurno.generarTurnoPorIdDia(id_dias);
-			if(1==1) {
-				return new ModelAndView("redirect:/loginVeterinaria");
-			}else {
-				
-			}
-		return new ModelAndView("procesarDatosGenerarTurno");
+			servicioTurno.generarTurnoPorIdDia(id_dias);
+
+		return new ModelAndView("redirect:/loginVeterinaria");
+
 	}
 	
 	@RequestMapping("/tomarUnTurno")
 	public ModelAndView tomarUnTurno(@RequestParam("turnoId") Long id,HttpServletRequest request) {
-		ModelMap modelo = new ModelMap();
-		Horarios horario = new Horarios();
-		modelo.put("horario", horario);
-		
 		request.getSession().setAttribute("id_turno", id);
 		
-	return new ModelAndView("formVerificarSesion", modelo);
+	return new ModelAndView("formVerificarSesion");
 	}
 	
 	@RequestMapping(path="procesarDatosSesion", method= RequestMethod.POST)
@@ -438,7 +343,7 @@ public class ControladorLoginVeterinaria {
 			if(servicioUsuario.buscarUsuario(user, password)) {
 				Usuario duenio = servicioUsuario.devolverUsuario(user, password);
 				servicioTurno.tomarTurno(id, duenio);
-				return new ModelAndView("redirect:/iniciarSesion");
+				return new ModelAndView("redirect:/loginVeterinaria");
 			}else {
 				modelo.put("error", "usuario no encontrado");
 			}

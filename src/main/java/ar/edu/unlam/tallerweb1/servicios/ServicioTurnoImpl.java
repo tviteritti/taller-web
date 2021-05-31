@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ar.edu.unlam.tallerweb1.modelo.Direccion;
 import ar.edu.unlam.tallerweb1.modelo.Horarios;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
@@ -36,18 +37,18 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	}
 
 
-//	@Override
-//	public List<Localidad> obtenerLocalidades(String zona) {
-//		
-//		return repositorio.obtenerLocalidades(zona);
-//	}
+	@Override
+	public List<Direccion> obtenerLocalidades(String zona) {
+		
+		return repositorioTurno.obtenerLocalidades(zona);
+	}
 
 
-//	@Override
-//	public List<Veterinario> obtenerVeterinariosPorZona(String zona) {
-//		
-//		return repositorioTurno.obtenerVeterinariosPorZona(zona);
-//	}
+	@Override
+	public List<Usuario> obtenerVeterinariosPorZona(String zona) {
+		
+		return repositorioTurno.obtenerVeterinariosPorZona(zona);
+	}
 
 
 	@Override
@@ -57,11 +58,11 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	}
 
 
-//	@Override
-//	public List<Turno> obtenerTurnos(Veterinario veterinario) {
-//		
-//		return repositorioTurno.obtenerTurnos(veterinario);
-//	}
+	@Override
+	public List<Turno> obtenerTurnos(Usuario veterinario) {
+		
+		return repositorioTurno.obtenerTurnos(veterinario);
+	}
 
 
 	@Override
@@ -99,21 +100,21 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	public void generarTurnoPorIdDia(Long id) {
 		Horarios lunes =repositorioTurno.devolverDialunes(id);
 		Usuario veterinario = repositorioTurno.devolverVeterinarioDeunDia(id);
-		Integer h_inicio = (int) lunes.getHora_inicio().getTime();
-		Integer h_fin = (int) lunes.getHora_fin().getTime();
-		Integer duracion = lunes.getDuracion_sesion() * 60000;
+		Integer h_inicio = (int) lunes.getHora_inicio().getTime();	/*PASO A MILISEGUNDOS*/
+		Integer h_fin = (int) lunes.getHora_fin().getTime();		/*PASO A MILISEGUNDOS*/
+		Integer duracion = lunes.getDuracion_sesion() * 60000;		/*PASO A MILISEGUNDOS*/
 		
 		
-		Integer cont=h_inicio;
+		Integer cont=h_inicio;								/*SUMA LA DURACION DE LOS TURNOS, PARA CREAR LA HORA DEL TURNO*/
 		
-		LocalDate fechaActual =  LocalDate.now();
+		LocalDate fechaActual =  LocalDate.now();			/*FECHA ACTUAL*/
 		
-		LocalDate localDate = LocalDate.of(2016, 8, 19);	
+		LocalDate localDate = LocalDate.of(2016, 8, 19);	/*NO SIRVE DE NADA*/
 		
-		LocalDate fecha=LocalDate.now();
+		LocalDate fecha=LocalDate.now();					/*FECHA QUE PASA DE DIAS*/
 		
 	
-		switch (fechaActual.getDayOfWeek()) {
+		switch (fechaActual.getDayOfWeek()) {				/*DEPENDIENDO QUE FECHA ES HOY, PASO DE DIAS PARA LLEGAR AL LUNES MAS CERCANO*/
 		case MONDAY:
 			fecha =  LocalDate.now().plusDays(0);
 			break;
@@ -143,15 +144,15 @@ public class ServicioTurnoImpl implements ServicioTurno {
 		
 		
 		
-		ZoneId defaultZoneId = ZoneId.systemDefault();
+		ZoneId defaultZoneId = ZoneId.systemDefault();		/*PASO LOCALDATE DATE*/
 		Date date = Date.from(fecha.atStartOfDay(defaultZoneId).toInstant());
 		
 		do {
 			Turno turno = new Turno();
-			turno.setVeterinario(veterinario);
 			Date d= new Date();
-			d.setTime(cont);
+			d.setTime(cont);			/*PASO DE INTEGER DATE*/
 			turno.setHorario(d);
+			turno.setVeterinario(veterinario);
 			turno.setEstado(false);
 			turno.setFecha(date);
 			repositorioTurno.generarTurno(turno);

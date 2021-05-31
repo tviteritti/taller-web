@@ -15,22 +15,22 @@ import ar.edu.unlam.tallerweb1.modelo.Mascota;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
-import ar.edu.unlam.tallerweb1.servicios.ServicioLoginVeterinaria;
+
 import ar.edu.unlam.tallerweb1.servicios.ServicioMascotas;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTurno;
 
 @Controller
 public class ControladorTurnos {
 	
-private ServicioTurno servicio;
-private ServicioMascotas servicioM;
+private ServicioTurno servicioTurno;
+private ServicioMascotas servicioMascota;
 
 	
 	@Autowired
-	public ControladorTurnos(ServicioTurno servicioTurno, ServicioMascotas servicioM) {
+	public ControladorTurnos(ServicioTurno servicioTurno, ServicioMascotas servicioMascota) {
 		
-		this.servicio = servicioTurno;	
-		this.servicioM=servicioM;
+		this.servicioTurno = servicioTurno;	
+		this.servicioMascota=servicioMascota;
 		
 	}
 	
@@ -43,51 +43,51 @@ private ServicioMascotas servicioM;
 		return new ModelAndView("buscarTurno", modelo);
 	}
 
-//	@RequestMapping(path="buscarServicioVeterinario", method= RequestMethod.POST)
-//	public ModelAndView mostrarServicioVeterinario(
-//			
-//			@RequestParam(value="servicio",required=false) String servicioSolicitado,
-//			@ModelAttribute("zona") Zona zona) {
-//		
-//		ModelMap modelo = new ModelMap();
-//		modelo.put("servicio", servicioSolicitado);
-//		modelo.put("zona", zona);
-//		List<Veterinario>veterinariosEncontrados =servicio.obtenerVeterinariosPorZona(zona.getDescripcion());
-//		modelo.put("veterinarios", veterinariosEncontrados);
-//		Veterinario vt = new Veterinario ();
-//		modelo.put("vt", vt);
-//		return new ModelAndView("servicioVeterinario", modelo);
-//	}
-//	
-//	@RequestMapping(path="generarTurno", method= RequestMethod.POST)
-//	public ModelAndView mostrarTurnoSolicitado(
-//	@ModelAttribute("veterinario") Veterinario veterinario,
-//	@RequestParam(value="servicio",required=false) String servicioSolicitado,
-//	@RequestParam(value="direccion",required=false) String direccion,
-//	/*@RequestParam(value="localidad",required=false) String localidad,*/
-//	@RequestParam(value="fecha",required=false) String dia,
-//	@RequestParam(value="hora",required=false) String hora
-//	
-//			) {
-//		
-//		ModelMap modelo = new ModelMap();
-//		
-//		modelo.put("veterinarioNom", veterinario.getNombre());
-//		modelo.put("veterinarioAp", veterinario.getApellido());
-//		modelo.put("especialidad", servicioSolicitado);
-//		/*modelo.put("localidad", localidad);*/
-//		modelo.put("direccion", direccion);
-//		modelo.put("fecha", dia);
-//		modelo.put("hora", hora);
-//		
-//	
-//		return new ModelAndView("turnoSolicitado", modelo);
-//	}
+	@RequestMapping(path="buscarServicioVeterinario", method= RequestMethod.POST)
+	public ModelAndView mostrarServicioVeterinario(
+			
+			@RequestParam(value="servicio",required=false) String servicioSolicitado,
+			@ModelAttribute("zona") Zona zona) {
+		
+		ModelMap modelo = new ModelMap();
+		modelo.put("servicio", servicioSolicitado);
+		modelo.put("zona", zona);
+		List<Usuario>veterinariosEncontrados =servicioTurno.obtenerVeterinariosPorZona(zona.getDescripcion());
+		modelo.put("veterinarios", veterinariosEncontrados);
+		Usuario vt = new Usuario ();
+		modelo.put("vt", vt);
+		return new ModelAndView("servicioVeterinario", modelo);
+	}
+	
+	@RequestMapping(path="generarTurno", method= RequestMethod.POST)
+	public ModelAndView mostrarTurnoSolicitado(
+	@ModelAttribute("veterinario") Usuario veterinario,
+	@RequestParam(value="servicio",required=false) String servicioSolicitado,
+	@RequestParam(value="direccion",required=false) String direccion,
+	/*@RequestParam(value="localidad",required=false) String localidad,*/
+	@RequestParam(value="fecha",required=false) String dia,
+	@RequestParam(value="hora",required=false) String hora
+	
+			) {
+		
+		ModelMap modelo = new ModelMap();
+		
+		modelo.put("veterinarioNom", veterinario.getNombre());
+		modelo.put("veterinarioAp", veterinario.getApellido());
+		modelo.put("especialidad", servicioSolicitado);
+		/*modelo.put("localidad", localidad);*/
+		modelo.put("direccion", direccion);
+		modelo.put("fecha", dia);
+		modelo.put("hora", hora);
+		
+	
+		return new ModelAndView("turnoSolicitado", modelo);
+	}
 	
 	@RequestMapping(path = "verTurnos")
 	public ModelAndView mostrarTurnos() {
 		ModelMap modelo = new ModelMap();
-		List<Turno> turnos = servicio.listarTurnos();
+		List<Turno> turnos = servicioTurno.listarTurnos();
 		modelo.put("turnos", turnos);
 		return new ModelAndView("misTurnos", modelo);
 	}
@@ -95,7 +95,7 @@ private ServicioMascotas servicioM;
 	@RequestMapping(path = "verTurnosPacientes")
 	public ModelAndView mostrarTurnosPacientes() {
 		ModelMap modelo = new ModelMap();
-		List<Turno> turnos = servicio.listarTurnos();
+		List<Turno> turnos = servicioTurno.listarTurnos();
 		modelo.put("turnos", turnos);
 		return new ModelAndView("turnosPacientes", modelo);
 	}
@@ -103,7 +103,7 @@ private ServicioMascotas servicioM;
 	/*@RequestMapping("verPacientes")
 	public ModelAndView mostrarListadoPacientes() {
 		ModelMap modelo = new ModelMap();
-		List<Mascota> mascotas  = servicioM.listarMascotas();
+		List<Mascota> mascotas  = servicioMascota.listarMascotas();
 		modelo.put("pacientes", mascotas);
 		return new ModelAndView("pacientes", modelo);
 	}*/
@@ -116,10 +116,10 @@ private ServicioMascotas servicioM;
 			) {
 		
 		//ModelMap modelo = new ModelMap();
-		servicio.cancelarTurno(idTurno);
-		/*if(servicio.cancelarTurno(idTurno)) {
-			modelo.put("mensaje","Turno cancelado con exito!");	
-		}*/
+				servicioTurno.cancelarTurno(idTurno);
+				/*if(servicio.cancelarTurno(idTurno)) {
+					modelo.put("mensaje","Turno cancelado con exito!");	
+				}*/
 		
 		return new ModelAndView("misTurnos");
 	}

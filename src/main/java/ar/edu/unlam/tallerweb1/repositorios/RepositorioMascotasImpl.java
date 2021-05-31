@@ -11,12 +11,12 @@ import ar.edu.unlam.tallerweb1.modelo.TipoAnimal;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 
 @Repository
-public class RespositorioMascotasImpl implements RepositorioMascotas{
+public class RepositorioMascotasImpl implements RepositorioMascotas{
 	
 	private SessionFactory sessionFactory;
 	
 	@Autowired
-	public RespositorioMascotasImpl(SessionFactory sessionFactory){
+	public RepositorioMascotasImpl(SessionFactory sessionFactory){
 		this.sessionFactory = sessionFactory;
 	}
 

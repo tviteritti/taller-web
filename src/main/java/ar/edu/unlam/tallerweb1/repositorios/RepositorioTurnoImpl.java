@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Dias;
+import ar.edu.unlam.tallerweb1.modelo.Direccion;
 import ar.edu.unlam.tallerweb1.modelo.Horarios;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
@@ -25,50 +26,35 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		this.sessionFactory = sessionFactory;
 	}
 
-//	@Override
-//	public List<Veterinario> obtenerVeterinariosPorZona(String zona) {
-//	String buscarPorZona = zona; 
-//		
-//		List<Veterinario> veterinarios = null;
-//		
-//	
-//		veterinarios = (List<Veterinario>) sessionFactory.getCurrentSession()
-//						 .createCriteria(Veterinario.class)
-//						 .createAlias("zona", "zonaBuscada")
-//						 .add(Restrictions.eq("zonaBuscada.descripcion", buscarPorZona))
-//						 .list();			 
-//		
-//		return veterinarios;	
-//	}
-
 	@Override
-	public void cancelarTurno(Long idTurno) {
+	public List<Usuario> obtenerVeterinariosPorZona(String zona) {
+	String buscarPorZona = zona; 
 		
-		Turno turnoACancelar = null;
+		List<Usuario> veterinarios = null;
 		
+	
+		veterinarios = (List<Usuario>) sessionFactory.getCurrentSession()
+						 .createCriteria(Usuario.class)
+						 .createAlias("zona", "zonaBuscada")
+						 .add(Restrictions.eq("zonaBuscada.descripcion", buscarPorZona))
+						 .list();			 
 		
-		turnoACancelar = (Turno)sessionFactory.getCurrentSession()
-				 .createCriteria(Turno.class)
-				 .add(Restrictions.eq( "id", idTurno))
-				 .uniqueResult();
-		
-		sessionFactory.getCurrentSession().delete(turnoACancelar);
-		
+		return veterinarios;	
 	}
-
-//	@Override
-//	public List<Turno> obtenerTurnos(Veterinario veterinario) {
-//		
-//		List<Turno> turnosSolicitados = null;
-//		
-//		turnosSolicitados = (List<Turno>) sessionFactory.getCurrentSession()
-//				 .createCriteria(Turno.class)
-//				 .createAlias("veterinario", "vBuscado")
-//				 .add(Restrictions.eq("vBuscado.apellido", veterinario.getApellido()))
-//				 .list();
-//		
-//		return turnosSolicitados;
-//	}
+	
+	@Override
+	public List<Turno> obtenerTurnos(Usuario veterinario) {
+		
+		List<Turno> turnosSolicitados = null;
+		
+		turnosSolicitados = (List<Turno>) sessionFactory.getCurrentSession()
+				 .createCriteria(Turno.class)
+				 .createAlias("veterinario", "vBuscado")
+				 .add(Restrictions.eq("vBuscado.apellido", veterinario.getApellido()))
+				 .list();
+		
+		return turnosSolicitados;
+	}
 
 	@Override
 	public List<Turno> obtenerTurnos(String servicio) {
@@ -93,6 +79,31 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		
 		return turnos;
 	}
+	
+	@Override
+	public void cancelarTurno(Long idTurno) {
+		
+		Turno turnoACancelar = null;
+		
+		
+		turnoACancelar = (Turno)sessionFactory.getCurrentSession()
+				 .createCriteria(Turno.class)
+				 .add(Restrictions.eq( "id", idTurno))
+				 .uniqueResult();
+		
+		sessionFactory.getCurrentSession().delete(turnoACancelar);
+		
+	}
+	
+	@Override
+	public List<Direccion> obtenerLocalidades(String zona) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	
+	
 	
 	@Override
 	public void generarTurnoPorIdDia(Long id_dia) {
@@ -166,6 +177,7 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		
 		
 	}
+
 	
  
 

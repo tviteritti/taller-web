@@ -21,7 +21,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
             <div class="col-auto bg-light p-5">
                 <form action="procesarDatosSesion" method="POST" >
                 	<div class="input-group p-2">
-                        <h3>horariso dia Domingo</h3>
+                        <h3>Iniciar sesion</h3>
                     </div><br>
                     <div class="input-group p-2">
                         <input type="hidden" name="id"/>
@@ -56,4 +56,4 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   
 </body>
-</html>html>
+</html>

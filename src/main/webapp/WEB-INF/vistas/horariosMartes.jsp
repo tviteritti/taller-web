@@ -30,7 +30,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
                         <input type="hidden" name="id_dias" value="${id_dias }"/>
                     </div><br>                   
                 	<div class="input-group p-2">
-                    	<label>Duracion de cada Sesion (minutos)${id_dias }</label><br>
+                    	<label>Duracion de cada Sesion (minutos)</label><br>
                         <input type="number" class="form-control" name="duracion_sesion"/>
                     </div>
                     <div class="input-group p-2">

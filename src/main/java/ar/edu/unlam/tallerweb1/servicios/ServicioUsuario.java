@@ -10,12 +10,13 @@ public interface ServicioUsuario {
 	
 	List<Usuario> getUsuarios();
 	List<Usuario> getVeterinarios();
-	void registrarOMOdificarUsuario (Usuario usuario);
 	Usuario getUsuario(Long id);
-	void eliminarUsuario(Long id);
-	
 	Boolean buscarUsuario(String usuario, String password);
 	Usuario devolverUsuario(String usuario, String password);
+	
+	void registrarOMOdificarUsuario (Usuario usuario);
+	void eliminarUsuario(Long id);
+	
 	Boolean validarPassRePass(String pass, String repass);
 
 }
