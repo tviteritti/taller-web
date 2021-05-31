@@ -64,6 +64,12 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 		return ServicioUsuarioDao.validarPassRePass(pass, repass);
 	}
 
+	@Override
+	public Usuario devolverUsuario(String usuario, String password) {
+		
+		return ServicioUsuarioDao.devolverUsuario(usuario, password);
+	}
+
 
 
 }

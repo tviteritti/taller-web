@@ -120,6 +120,20 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		
 		return false;
 	}
+
+	@Override
+	public Usuario devolverUsuario(String usuario, String password) {
+		final Session session = sessionFactory.getCurrentSession();
+		Query<Usuario> miQuery=session.createQuery("from Usuario", Usuario.class);
+		List<Usuario> usuarios=miQuery.getResultList();
+		
+		for (Usuario usuario2 : usuarios) {
+			if(usuario2.getUser()!=null && usuario2.getPassword()!=null && usuario2.getUser().equals(usuario) && usuario2.getPassword().equals(password)) {
+				return usuario2;
+			}
+		}
+		return null;
+	}
 	
 
 }

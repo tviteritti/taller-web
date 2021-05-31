@@ -19,6 +19,7 @@ public interface RepositorioTurno {
 	Usuario devolverVeterinarioDeunDia(Long id_dia);
 	Horarios devolverDialunes(Long id_dia);
 	void generarTurno(Turno turno);
+	void tomarTurno(Long id, Usuario duenio);
 
 
 }

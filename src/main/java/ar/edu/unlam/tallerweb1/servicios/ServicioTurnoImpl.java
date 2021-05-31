@@ -161,4 +161,11 @@ public class ServicioTurnoImpl implements ServicioTurno {
 		
 	}
 
+
+	@Override
+	public void tomarTurno(Long id, Usuario duenio) {
+		repositorioTurno.tomarTurno(id, duenio);
+		
+	}
+
 }

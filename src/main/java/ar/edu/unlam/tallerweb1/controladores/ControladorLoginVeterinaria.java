@@ -39,7 +39,7 @@ public class ControladorLoginVeterinaria {
 	}
 	*/
 	
-	private ServicioUsuario servicioVeterinario;
+	private ServicioUsuario servicioUsuario;
 	private ServicioHorarios servicioHorarios;
 	private ServicioDias servicioDias;
 	private ServicioTurno servicioTurno;
@@ -48,7 +48,7 @@ public class ControladorLoginVeterinaria {
 	@Autowired
 	public ControladorLoginVeterinaria(ServicioUsuario servicioVeterinario, ServicioHorarios servicioHorarios, ServicioDias servicioDias, ServicioTurno servicioTurno) {
 		
-		this.servicioVeterinario = servicioVeterinario;	
+		this.servicioUsuario = servicioVeterinario;	
 		this.servicioHorarios = servicioHorarios;
 		this.servicioDias = servicioDias;
 		this.servicioTurno = servicioTurno;
@@ -56,9 +56,9 @@ public class ControladorLoginVeterinaria {
 	
 	@RequestMapping("/loginVeterinaria")
 	public ModelAndView mostrarLoginVeterinaria() {
-		List<Usuario> listaVeterinarios=servicioVeterinario.getVeterinarios();
+		List<Turno> listaTurnos=servicioTurno.listarTurnos();
 		ModelMap modelo = new ModelMap();
-		modelo.put("listaVeterinarios", listaVeterinarios);
+		modelo.put("listaTurnos", listaTurnos);
 		return new ModelAndView("ingresoVeterinaria", modelo);
 	}
 	
@@ -103,8 +103,8 @@ public class ControladorLoginVeterinaria {
 		
 		ModelMap modelo = new ModelMap();
 		
-		if(servicioVeterinario.validarPassRePass(user.getPassword(), repass)) { 
-			servicioVeterinario.registrarOMOdificarUsuario(user);
+		if(servicioUsuario.validarPassRePass(user.getPassword(), repass)) { 
+			servicioUsuario.registrarOMOdificarUsuario(user);
 			modelo.put("usuario", user);
 			modelo.put("mensaje", "registro exitoso");
 			return new ModelAndView("redirect:/iniciarSesion");
@@ -123,7 +123,7 @@ public class ControladorLoginVeterinaria {
 		
 		ModelMap modelo = new ModelMap();
 		
-		if(servicioVeterinario.buscarUsuario(user.getUser(), user.getPassword())) {
+		if(servicioUsuario.buscarUsuario(user.getUser(), user.getPassword())) {
 			request.getSession().setAttribute("usuario", user.getUser());
 			/*if(user.getRol()=="Duenio") {
 				//return new ModelAndView("redirect:/cuentaDuenio");    /*no funciona*/
@@ -168,8 +168,8 @@ public class ControladorLoginVeterinaria {
 			Dias dias = new Dias();
 			servicioDias.registrarOModificarDias(dias);
 			
-		if(servicioVeterinario.validarPassRePass(user.getPassword(), repass)) { 
-			servicioVeterinario.registrarOMOdificarUsuario(user);
+		if(servicioUsuario.validarPassRePass(user.getPassword(), repass)) { 
+			servicioUsuario.registrarOMOdificarUsuario(user);
 			servicioDias.registrarOModificarDiasVeterinario(user, dias.getId());
 			modelo.put("usuario", user);
 			modelo.put("mensaje", "registro exitoso");
@@ -416,4 +416,33 @@ public class ControladorLoginVeterinaria {
 			}
 		return new ModelAndView("procesarDatosGenerarTurno");
 	}
+	
+	@RequestMapping("/tomarUnTurno")
+	public ModelAndView tomarUnTurno(@RequestParam("turnoId") Long id,HttpServletRequest request) {
+		ModelMap modelo = new ModelMap();
+		Horarios horario = new Horarios();
+		modelo.put("horario", horario);
+		
+		request.getSession().setAttribute("id_turno", id);
+		
+	return new ModelAndView("formVerificarSesion", modelo);
+	}
+	
+	@RequestMapping(path="procesarDatosSesion", method= RequestMethod.POST)
+	public ModelAndView procesarDatosSesion(
+			@RequestParam(value="id_turno",required=false) Long id,
+			@RequestParam(value="user",required=false) String user,
+			@RequestParam(value="password",required=false) String password){
+			ModelMap modelo = new ModelMap();
+		
+			if(servicioUsuario.buscarUsuario(user, password)) {
+				Usuario duenio = servicioUsuario.devolverUsuario(user, password);
+				servicioTurno.tomarTurno(id, duenio);
+				return new ModelAndView("redirect:/iniciarSesion");
+			}else {
+				modelo.put("error", "usuario no encontrado");
+			}
+		return new ModelAndView("formVerificarSesion",modelo);
+	}
+	
 }

@@ -30,24 +30,29 @@
 				<table class="table table-striped ">
 	  				<thead class="thead-inverse">
 	  					<tr>
-					  		<th>imagen</th>
-					  		<th>nombre y apellido</th>
-					  		<th>telefono</th>
-					  		<th>direccion</th>
-					  		<th>horarios</th>
+					  		<th>veterinario</th>
+					  		<th>fecha</th>
+					  		<th>horario</th>
+					  		<th>servicio</th>
 					  		<th>solicitar turno</th>
 	  					</tr>
 					</thead>
 					
-				  	<c:forEach var="usuario" items="${listaVeterinarios}">
+				  	<c:forEach var="turno" items="${listaTurnos}">
+				  		
+				  		<c:url var="linkTomarUnTurno" value="/tomarUnTurno">
+				  		
+				  			<c:param name="turnoId" value="${turno.id }"/>
+				  		
+				  		</c:url>
 				  		
 					  	<tr>
-					  		<td>${usuario.id}</td>
-					  		<td>${usuario.email}</td>
-					  		<td>${usuario.password}</td>
-					  		<td>${usuario.rol}</td>
-					  		<td>${usuario.user}</td>
-					  		<td><a href="#">pedir turno</a></td>
+					  		<td>${turno.veterinario}</td>
+					  		<td>${turno.fecha}</td>
+					  		<td>${turno.horario}</td>
+					  		<td>${turno.servicio}</td>
+					  		<td><a href="${linkTomarUnTurno }"><input type="button" class='btn btn-success ms-auto' value="tomar turno" 
+					  		onClick="if(!(confirm('¿Estas seguro que quieres tomar este turno?'))) return false"/></a></td>
 					  	</tr>
 				  	
 				  	</c:forEach>

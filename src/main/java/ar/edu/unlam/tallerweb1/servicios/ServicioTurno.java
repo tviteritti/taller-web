@@ -20,6 +20,7 @@ public interface ServicioTurno {
 	void generarTurnoPorIdDia(Long id);
 	Usuario devolverVeterinarioDeunDia(Long id_dia);
 	Horarios devolverDialunes(Long id_dia);
+	void tomarTurno(Long id, Usuario duenio);
 	
 
 }

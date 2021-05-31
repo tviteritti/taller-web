@@ -14,5 +14,6 @@ public interface RepositorioUsuario {
 	void eliminarUsuario(Long id);
 	
 	Boolean buscarUsuario(String usuario, String password);
+	Usuario devolverUsuario(String usuario, String password);
 	Boolean validarPassRePass(String pass, String repass);
 }

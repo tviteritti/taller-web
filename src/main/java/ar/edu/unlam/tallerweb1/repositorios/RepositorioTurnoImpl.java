@@ -150,6 +150,22 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		session.save(turno);
 		
 	}
+
+	@Override
+	public void tomarTurno(Long id, Usuario duenio) {
+		final Session session = sessionFactory.getCurrentSession();
+		
+		Turno turno = new Turno();
+		turno = (Turno)sessionFactory.getCurrentSession()
+				 .createCriteria(Turno.class)
+				 .add(Restrictions.eq( "id", id))
+				 .uniqueResult();
+		
+		turno.setDuenio(duenio);
+		session.saveOrUpdate(turno);
+		
+		
+	}
 	
  
 
