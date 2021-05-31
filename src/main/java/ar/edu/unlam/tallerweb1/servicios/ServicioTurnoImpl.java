@@ -1,7 +1,12 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -97,8 +102,49 @@ public class ServicioTurnoImpl implements ServicioTurno {
 		Integer h_inicio = (int) lunes.getHora_inicio().getTime();
 		Integer h_fin = (int) lunes.getHora_fin().getTime();
 		Integer duracion = lunes.getDuracion_sesion() * 60000;
+		
+		
 		Integer cont=h_inicio;
 		
+		LocalDate fechaActual =  LocalDate.now();
+		
+		LocalDate localDate = LocalDate.of(2016, 8, 19);	
+		
+		LocalDate fecha=LocalDate.now();
+		
+	
+		switch (fechaActual.getDayOfWeek()) {
+		case MONDAY:
+			fecha =  LocalDate.now().plusDays(0);
+			break;
+		case FRIDAY:
+			fecha =  LocalDate.now().plusDays(3);
+			break;
+		case SATURDAY:
+			fecha =  LocalDate.now().plusDays(1);
+			break;
+		case SUNDAY:
+			fecha =  LocalDate.now().plusDays(2);
+			break;
+		case THURSDAY:
+			fecha =  LocalDate.now().plusDays(4);
+			break;
+		case TUESDAY:
+			fecha =  LocalDate.now().plusDays(6);
+			break;
+		case WEDNESDAY:
+			fecha =  LocalDate.now().plusDays(5);
+			break;
+
+		default:
+			break;
+		}
+	
+		
+		
+		
+		ZoneId defaultZoneId = ZoneId.systemDefault();
+		Date date = Date.from(fecha.atStartOfDay(defaultZoneId).toInstant());
 		
 		do {
 			Turno turno = new Turno();
@@ -107,6 +153,7 @@ public class ServicioTurnoImpl implements ServicioTurno {
 			d.setTime(cont);
 			turno.setHorario(d);
 			turno.setEstado(false);
+			turno.setFecha(date);
 			repositorioTurno.generarTurno(turno);
 			cont+=duracion;
 			
