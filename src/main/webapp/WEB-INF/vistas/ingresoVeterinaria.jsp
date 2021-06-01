@@ -43,8 +43,8 @@
 				  		
 					  	<tr>
 					  		<td>${usuario.id}</td>
-					  		<td>${usuario.email}</td>
-					  		<td>${usuario.password}</td>
+					  		<td>${usuario.nombre}, ${usuario.apellido}</td>
+					  		<td>${usuario.telefono}</td>
 					  		<td>${usuario.rol}</td>
 					  		<td>${usuario.user}</td>
 					  		<td><a href="#">pedir turno</a></td>
