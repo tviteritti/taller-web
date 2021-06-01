@@ -13,8 +13,8 @@ public interface ServicioTurno {
 	
 	List<Localidad> obtenerLocalidades(String zona);
 	List<Usuario> obtenerVeterinariosPorZona(String zona);
-	List<Turno> obtenerTurnos(Usuario veterinario);
-	List<Turno> obtenerTurnos(String servicio);
+	List<Turno> obtenerTurnosPorVeterinario(Usuario veterinario);
+	List<Turno> obtenerTurnosPorEspecialidad(String servicio);
 	List<Turno> listarTurnos();
 	void cancelarTurno(Long idTurno);
 	void asignarTurno(Long idTurno, Mascota mascota);

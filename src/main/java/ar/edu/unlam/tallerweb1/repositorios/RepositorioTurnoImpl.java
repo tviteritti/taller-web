@@ -57,7 +57,7 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 	}
 
 	@Override
-	public List<Turno> obtenerTurnos(Usuario veterinario) {
+	public List<Turno> obtenerTurnosPorVeterinario(Usuario veterinario) {
 		
 		List<Turno> turnosSolicitados = null;
 		
@@ -72,7 +72,7 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 	}
 
 	@Override
-	public List<Turno> obtenerTurnos(String servicio) {
+	public List<Turno> obtenerTurnosPorEspecialidad(String servicio) {
 		
 		List<Turno> turnosSolicitados = null;
 		

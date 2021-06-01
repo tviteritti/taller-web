@@ -52,16 +52,16 @@ public class ServicioTurnoImpl implements ServicioTurno {
 
 
 	@Override
-	public List<Turno> obtenerTurnos(Usuario veterinario) {
+	public List<Turno> obtenerTurnosPorVeterinario(Usuario veterinario) {
 		
-		return repositorioTurno.obtenerTurnos(veterinario);
+		return repositorioTurno.obtenerTurnosPorVeterinario(veterinario);
 	}
 
 
 	@Override
-	public List<Turno> obtenerTurnos(String servicio) {
+	public List<Turno> obtenerTurnosPorEspecialidad(String servicio) {
 		
-		return repositorioTurno.obtenerTurnos(servicio);
+		return repositorioTurno.obtenerTurnosPorEspecialidad(servicio);
 	}
 
 
