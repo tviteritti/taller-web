@@ -10,6 +10,7 @@ import java.util.List;
 
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
+import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 
@@ -96,5 +97,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 		ServicioUsuarioDao.ingresarEspecialidad(id, id_especialidad);
 		
 	}
+
+
 
 }

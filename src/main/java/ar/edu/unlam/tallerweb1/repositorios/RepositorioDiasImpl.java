@@ -24,6 +24,7 @@ public class RepositorioDiasImpl implements RepositorioDias{
 	@Override
 	public void registrarOModificarDiasLunes(Horarios horarios, Long id_dia) {
 		final Session session = sessionFactory.getCurrentSession();
+		if(horarios!=null) {
 		Dias dia = null;
 		dia = (Dias)sessionFactory.getCurrentSession()
 				 .createCriteria(Dias.class)
@@ -33,6 +34,7 @@ public class RepositorioDiasImpl implements RepositorioDias{
 		dia.setLunes(horarios);
 
 		session.saveOrUpdate(dia);
+		}
 		
 	}
 

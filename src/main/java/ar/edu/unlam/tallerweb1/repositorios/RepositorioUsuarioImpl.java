@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Dias;
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
+import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import org.hibernate.query.Query;
 import org.hibernate.Session;
@@ -125,6 +126,7 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		session.saveOrUpdate(veterinario);
 		
 	}
+
 	
 
 }

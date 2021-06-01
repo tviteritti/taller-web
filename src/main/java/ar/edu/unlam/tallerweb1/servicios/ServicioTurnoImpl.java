@@ -103,12 +103,19 @@ public class ServicioTurnoImpl implements ServicioTurno {
 
 	@Override
 	public void generarTurnoPorIdDiaLunes(Long id) {
+		
 		Horarios lunes =repositorioTurno.devolverDialunes(id);
 		Usuario veterinario = repositorioTurno.devolverVeterinarioDeunDia(id);
-		Integer h_inicio = (int) lunes.getHora_inicio().getTime();	/*PASO A MILISEGUNDOS*/
-		Integer h_fin = (int) lunes.getHora_fin().getTime();		/*PASO A MILISEGUNDOS*/
-		Integer duracion = lunes.getDuracion_sesion() * 60000;		/*PASO A MILISEGUNDOS*/
+		Integer h_inicio=0;
+		Integer h_fin=0;
+		Integer duracion=0;
+		if(lunes==null) {
+			return;
+		}
 		
+		h_inicio = (int) lunes.getHora_inicio().getTime();		/*PASO A MILISEGUNDOS*/
+		h_fin = (int) lunes.getHora_fin().getTime();			/*PASO A MILISEGUNDOS*/
+		duracion = lunes.getDuracion_sesion() * 60000;			/*PASO A MILISEGUNDOS*/
 		
 		Integer cont=h_inicio;								/*SUMA LA DURACION DE LOS TURNOS, PARA CREAR LA HORA DEL TURNO*/
 		
@@ -152,19 +159,21 @@ public class ServicioTurnoImpl implements ServicioTurno {
 		ZoneId defaultZoneId = ZoneId.systemDefault();		/*PASO LOCALDATE DATE*/
 		Date date = Date.from(fecha.atStartOfDay(defaultZoneId).toInstant());
 		
-		do {
-			Turno turno = new Turno();
-			Date d= new Date();
-			d.setTime(cont);			/*PASO DE INTEGER DATE*/
-			turno.setHorario(d);
-			turno.setVeterinario(veterinario);
-			turno.setEstado(false);
-			turno.setFecha(date);
-			repositorioTurno.generarTurno(turno);
-			cont+=duracion;
-			
-		}while(cont<=h_fin);
-		
+		if(lunes.getHora_inicio()!=null) {
+			do {
+				
+				Turno turno = new Turno();
+				Date d= new Date();
+				d.setTime(cont);							/*PASO DE INTEGER DATE*/
+				turno.setHorario(d);
+				turno.setVeterinario(veterinario);
+				turno.setEstado(false);
+				turno.setFecha(date);
+				repositorioTurno.generarTurno(turno);
+				cont+=duracion;
+				
+			}while(cont<=h_fin-duracion);
+		}
 	}
 
 
@@ -179,9 +188,16 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	public void generarTurnoPorIdDiaMartes(Long id) {
 		Horarios martes =repositorioTurno.devolverDiaMartes(id);
 		Usuario veterinario = repositorioTurno.devolverVeterinarioDeunDia(id);
-		Integer h_inicio = (int) martes.getHora_inicio().getTime();	
-		Integer h_fin = (int) martes.getHora_fin().getTime();		
-		Integer duracion = martes.getDuracion_sesion() * 60000;		
+		Integer h_inicio=0;
+		Integer h_fin=0;
+		Integer duracion=0;
+		if(martes==null) {
+			return;
+		}
+		
+			h_inicio = (int) martes.getHora_inicio().getTime();		/*PASO A MILISEGUNDOS*/
+			h_fin = (int) martes.getHora_fin().getTime();			/*PASO A MILISEGUNDOS*/
+			duracion = martes.getDuracion_sesion() * 60000;			/*PASO A MILISEGUNDOS*/
 		
 		
 		Integer cont=h_inicio;								
@@ -226,18 +242,21 @@ public class ServicioTurnoImpl implements ServicioTurno {
 		ZoneId defaultZoneId = ZoneId.systemDefault();		
 		Date date = Date.from(fecha.atStartOfDay(defaultZoneId).toInstant());
 		
-		do {
-			Turno turno = new Turno();
-			Date d= new Date();
-			d.setTime(cont);			
-			turno.setHorario(d);
-			turno.setVeterinario(veterinario);
-			turno.setEstado(false);
-			turno.setFecha(date);
-			repositorioTurno.generarTurno(turno);
-			cont+=duracion;
-			
-		}while(cont<=h_fin);
+		if(martes.getHora_inicio()!=null) {
+			do {
+				
+				Turno turno = new Turno();
+				Date d= new Date();
+				d.setTime(cont);			/*PASO DE INTEGER DATE*/
+				turno.setHorario(d);
+				turno.setVeterinario(veterinario);
+				turno.setEstado(false);
+				turno.setFecha(date);
+				repositorioTurno.generarTurno(turno);
+				cont+=duracion;
+				
+			}while(cont<=h_fin-duracion);
+		}
 		
 	}
 
@@ -246,9 +265,16 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	public void generarTurnoPorIdDiaMiercoles(Long id) {
 		Horarios miercoles =repositorioTurno.devolverDiaMiercoles(id);
 		Usuario veterinario = repositorioTurno.devolverVeterinarioDeunDia(id);
-		Integer h_inicio = (int) miercoles.getHora_inicio().getTime();	
-		Integer h_fin = (int) miercoles.getHora_fin().getTime();		
-		Integer duracion = miercoles.getDuracion_sesion() * 60000;		
+		Integer h_inicio=0;
+		Integer h_fin=0;
+		Integer duracion=0;
+		if(miercoles==null) {
+			return;
+		}
+		
+			h_inicio = (int) miercoles.getHora_inicio().getTime();		/*PASO A MILISEGUNDOS*/
+			h_fin = (int) miercoles.getHora_fin().getTime();			/*PASO A MILISEGUNDOS*/
+			duracion = miercoles.getDuracion_sesion() * 60000;			/*PASO A MILISEGUNDOS*/
 		
 		
 		Integer cont=h_inicio;								
@@ -293,18 +319,21 @@ public class ServicioTurnoImpl implements ServicioTurno {
 		ZoneId defaultZoneId = ZoneId.systemDefault();		
 		Date date = Date.from(fecha.atStartOfDay(defaultZoneId).toInstant());
 		
-		do {
-			Turno turno = new Turno();
-			Date d= new Date();
-			d.setTime(cont);			
-			turno.setHorario(d);
-			turno.setVeterinario(veterinario);
-			turno.setEstado(false);
-			turno.setFecha(date);
-			repositorioTurno.generarTurno(turno);
-			cont+=duracion;
-			
-		}while(cont<=h_fin);
+		if(miercoles.getHora_inicio()!=null) {
+			do {
+				
+				Turno turno = new Turno();
+				Date d= new Date();
+				d.setTime(cont);			/*PASO DE INTEGER DATE*/
+				turno.setHorario(d);
+				turno.setVeterinario(veterinario);
+				turno.setEstado(false);
+				turno.setFecha(date);
+				repositorioTurno.generarTurno(turno);
+				cont+=duracion;
+				
+			}while(cont<=h_fin-duracion);
+		}
 		
 	}
 
@@ -313,10 +342,16 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	public void generarTurnoPorIdDiaJueves(Long id) {
 		Horarios jueves =repositorioTurno.devolverDiaJueves(id);
 		Usuario veterinario = repositorioTurno.devolverVeterinarioDeunDia(id);
-		Integer h_inicio = (int) jueves.getHora_inicio().getTime();	
-		Integer h_fin = (int) jueves.getHora_fin().getTime();		
-		Integer duracion = jueves.getDuracion_sesion() * 60000;		
+		Integer h_inicio=0;
+		Integer h_fin=0;
+		Integer duracion=0;
+		if(jueves==null) {
+			return;
+		}
 		
+			h_inicio = (int) jueves.getHora_inicio().getTime();		/*PASO A MILISEGUNDOS*/
+			h_fin = (int) jueves.getHora_fin().getTime();			/*PASO A MILISEGUNDOS*/
+			duracion = jueves.getDuracion_sesion() * 60000;			/*PASO A MILISEGUNDOS*/
 		
 		Integer cont=h_inicio;								
 		
@@ -360,18 +395,21 @@ public class ServicioTurnoImpl implements ServicioTurno {
 		ZoneId defaultZoneId = ZoneId.systemDefault();		
 		Date date = Date.from(fecha.atStartOfDay(defaultZoneId).toInstant());
 		
-		do {
-			Turno turno = new Turno();
-			Date d= new Date();
-			d.setTime(cont);			
-			turno.setHorario(d);
-			turno.setVeterinario(veterinario);
-			turno.setEstado(false);
-			turno.setFecha(date);
-			repositorioTurno.generarTurno(turno);
-			cont+=duracion;
-			
-		}while(cont<=h_fin);
+		if(jueves.getHora_inicio()!=null) {
+			do {
+				
+				Turno turno = new Turno();
+				Date d= new Date();
+				d.setTime(cont);			/*PASO DE INTEGER DATE*/
+				turno.setHorario(d);
+				turno.setVeterinario(veterinario);
+				turno.setEstado(false);
+				turno.setFecha(date);
+				repositorioTurno.generarTurno(turno);
+				cont+=duracion;
+				
+			}while(cont<=h_fin-duracion);
+		}
 		
 	}
 
@@ -380,10 +418,16 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	public void generarTurnoPorIdDiaViernes(Long id) {
 		Horarios viernes =repositorioTurno.devolverDiaViernes(id);
 		Usuario veterinario = repositorioTurno.devolverVeterinarioDeunDia(id);
-		Integer h_inicio = (int) viernes.getHora_inicio().getTime();	
-		Integer h_fin = (int) viernes.getHora_fin().getTime();		
-		Integer duracion = viernes.getDuracion_sesion() * 60000;		
+		Integer h_inicio=0;
+		Integer h_fin=0;
+		Integer duracion=0;
+		if(viernes==null) {
+			return;
+		}
 		
+			h_inicio = (int) viernes.getHora_inicio().getTime();		/*PASO A MILISEGUNDOS*/
+			h_fin = (int) viernes.getHora_fin().getTime();			/*PASO A MILISEGUNDOS*/
+			duracion = viernes.getDuracion_sesion() * 60000;			/*PASO A MILISEGUNDOS*/
 		
 		Integer cont=h_inicio;								
 		
@@ -427,18 +471,21 @@ public class ServicioTurnoImpl implements ServicioTurno {
 		ZoneId defaultZoneId = ZoneId.systemDefault();		
 		Date date = Date.from(fecha.atStartOfDay(defaultZoneId).toInstant());
 		
-		do {
-			Turno turno = new Turno();
-			Date d= new Date();
-			d.setTime(cont);			
-			turno.setHorario(d);
-			turno.setVeterinario(veterinario);
-			turno.setEstado(false);
-			turno.setFecha(date);
-			repositorioTurno.generarTurno(turno);
-			cont+=duracion;
-			
-		}while(cont<=h_fin);
+		if(viernes.getHora_inicio()!=null) {
+			do {
+				
+				Turno turno = new Turno();
+				Date d= new Date();
+				d.setTime(cont);			/*PASO DE INTEGER DATE*/
+				turno.setHorario(d);
+				turno.setVeterinario(veterinario);
+				turno.setEstado(false);
+				turno.setFecha(date);
+				repositorioTurno.generarTurno(turno);
+				cont+=duracion;
+				
+			}while(cont<=h_fin-duracion);
+		}
 		
 	}
 
@@ -447,9 +494,16 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	public void generarTurnoPorIdDiaSabado(Long id) {
 		Horarios sabado =repositorioTurno.devolverDiaSabado(id);
 		Usuario veterinario = repositorioTurno.devolverVeterinarioDeunDia(id);
-		Integer h_inicio = (int) sabado.getHora_inicio().getTime();	
-		Integer h_fin = (int) sabado.getHora_fin().getTime();		
-		Integer duracion = sabado.getDuracion_sesion() * 60000;		
+		Integer h_inicio=0;
+		Integer h_fin=0;
+		Integer duracion=0;
+		if(sabado==null) {
+			return;
+		}
+		
+			h_inicio = (int) sabado.getHora_inicio().getTime();		/*PASO A MILISEGUNDOS*/
+			h_fin = (int) sabado.getHora_fin().getTime();			/*PASO A MILISEGUNDOS*/
+			duracion = sabado.getDuracion_sesion() * 60000;			/*PASO A MILISEGUNDOS*/
 		
 		
 		Integer cont=h_inicio;								
@@ -494,18 +548,21 @@ public class ServicioTurnoImpl implements ServicioTurno {
 		ZoneId defaultZoneId = ZoneId.systemDefault();		
 		Date date = Date.from(fecha.atStartOfDay(defaultZoneId).toInstant());
 		
-		do {
-			Turno turno = new Turno();
-			Date d= new Date();
-			d.setTime(cont);			
-			turno.setHorario(d);
-			turno.setVeterinario(veterinario);
-			turno.setEstado(false);
-			turno.setFecha(date);
-			repositorioTurno.generarTurno(turno);
-			cont+=duracion;
-			
-		}while(cont<=h_fin);
+		if(sabado.getHora_inicio()!=null) {
+			do {
+				
+				Turno turno = new Turno();
+				Date d= new Date();
+				d.setTime(cont);			/*PASO DE INTEGER DATE*/
+				turno.setHorario(d);
+				turno.setVeterinario(veterinario);
+				turno.setEstado(false);
+				turno.setFecha(date);
+				repositorioTurno.generarTurno(turno);
+				cont+=duracion;
+				
+			}while(cont<=h_fin-duracion);
+		}
 		
 	}
 
@@ -514,10 +571,17 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	public void generarTurnoPorIdDiaDomingo(Long id) {
 		Horarios domingo =repositorioTurno.devolverDiaDomingo(id);
 		Usuario veterinario = repositorioTurno.devolverVeterinarioDeunDia(id);
-		Integer h_inicio = (int) domingo.getHora_inicio().getTime();	
-		Integer h_fin = (int) domingo.getHora_fin().getTime();		
-		Integer duracion = domingo.getDuracion_sesion() * 60000;		
+		Integer h_inicio=0;
+		Integer h_fin=0;
+		Integer duracion=0;
+		if(domingo==null) {
+			
+			return;
+		}
 		
+			h_inicio = (int) domingo.getHora_inicio().getTime();		/*PASO A MILISEGUNDOS*/
+			h_fin = (int) domingo.getHora_fin().getTime();			/*PASO A MILISEGUNDOS*/
+			duracion = domingo.getDuracion_sesion() * 60000;			/*PASO A MILISEGUNDOS*/
 		
 		Integer cont=h_inicio;								
 		
@@ -561,20 +625,24 @@ public class ServicioTurnoImpl implements ServicioTurno {
 		ZoneId defaultZoneId = ZoneId.systemDefault();		
 		Date date = Date.from(fecha.atStartOfDay(defaultZoneId).toInstant());
 		
-		do {
-			Turno turno = new Turno();
-			Date d= new Date();
-			d.setTime(cont);			
-			turno.setHorario(d);
-			turno.setVeterinario(veterinario);
-			turno.setEstado(false);
-			turno.setFecha(date);
-			repositorioTurno.generarTurno(turno);
-			cont+=duracion;
-			
-		}while(cont<=h_fin);
+		if(domingo.getHora_inicio()!=null) {
+			do {
+				
+				Turno turno = new Turno();
+				Date d= new Date();
+				d.setTime(cont);			/*PASO DE INTEGER DATE*/
+				turno.setHorario(d);
+				turno.setVeterinario(veterinario);
+				turno.setEstado(false);
+				turno.setFecha(date);
+				repositorioTurno.generarTurno(turno);
+				cont+=duracion;
+				
+			}while(cont<=h_fin-duracion);
+		}
 		
 	}
+	
 
 
 
