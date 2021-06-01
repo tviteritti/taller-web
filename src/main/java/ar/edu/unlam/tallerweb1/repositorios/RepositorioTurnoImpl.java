@@ -59,16 +59,16 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 	@Override
 	public List<Turno> obtenerTurnosPorVeterinario(Usuario veterinario) {
 		
-		List<Turno> turnosSolicitados = null;
+		List<Turno> turnos = null;
 		
-		turnosSolicitados = (List<Turno>) sessionFactory.getCurrentSession()
+		turnos = (List<Turno>) sessionFactory.getCurrentSession()
 				 .createCriteria(Turno.class)
 				 .createAlias("veterinario", "vBuscado")
 				 .add(Restrictions.eq("vBuscado.apellido", veterinario.getApellido()))
 				 .add(Restrictions.eq("vBuscado.rol", "veterinario"))
 				 .list();
 		
-		return turnosSolicitados;
+		return turnos;
 	}
 
 	@Override
