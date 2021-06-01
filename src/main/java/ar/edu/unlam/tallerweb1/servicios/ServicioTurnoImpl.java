@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.modelo.Localidad;
+import ar.edu.unlam.tallerweb1.modelo.Mascota;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
@@ -69,5 +70,15 @@ public class ServicioTurnoImpl implements ServicioTurno {
 		
 		return repositorioTurno.listarTurnos();
 	}
+
+
+	@Override
+	public void asignarTurno(Long idTurno, Mascota mascota) {
+		
+		repositorioTurno.asignarTurno(idTurno, mascota);
+		
+	}
+	
+	
 
 }

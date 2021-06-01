@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Localidad;
+import ar.edu.unlam.tallerweb1.modelo.Mascota;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
@@ -92,6 +93,19 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		
 		return turnos;
 	}
+
+	@Override
+	public void asignarTurno(Long idTurno, Mascota mascota) {
+		
+		    	 Turno turnoBuscado = (Turno) sessionFactory.getCurrentSession()
+				 .createCriteria(Turno.class)
+				 .add(Restrictions.eq("id", idTurno))
+				 .uniqueResult();
+		    	 
+		    	 turnoBuscado.setMascota(mascota);
+		    	
+	}
  
+	
 
 }
