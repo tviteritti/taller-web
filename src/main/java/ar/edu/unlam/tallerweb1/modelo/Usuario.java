@@ -32,13 +32,13 @@ public class Usuario {
 	private Date dias_que_atiende;
 	private Time horario_que_atiende;
 	private String descripcion;
-	private String direccion;
+	//private String direccion;
 	
 	@ManyToOne
 	private Zona zona;
 
-	/*@ManyToOne
-	private Direccion direccion;*/
+	@ManyToOne
+	private Direccion direccion;
 	
 	public String getUser() {
 		return user;
@@ -118,10 +118,10 @@ public class Usuario {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public String getDireccion() {
+	public Direccion getDireccion() {
 		return direccion;
 	}
-	public void setDireccion(String direccion) {
+	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
 	}
 	public Zona getZona() {
