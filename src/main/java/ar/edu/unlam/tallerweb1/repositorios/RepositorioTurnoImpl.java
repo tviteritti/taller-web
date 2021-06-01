@@ -51,7 +51,8 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 				 .add(Restrictions.eq( "id", idTurno))
 				 .uniqueResult();
 		
-		sessionFactory.getCurrentSession().delete(turnoACancelar);
+		turnoACancelar.setMascota(null);
+		turnoACancelar.setEstado("disponible");
 		
 	}
 
@@ -103,6 +104,7 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 				 .uniqueResult();
 		    	 
 		    	 turnoBuscado.setMascota(mascota);
+		    	 turnoBuscado.setEstado("no disponible");
 		    	
 	}
  
