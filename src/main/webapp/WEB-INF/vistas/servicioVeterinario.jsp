@@ -29,9 +29,23 @@
 					    , <!--  <p name="localidad">(${localidad})</p>-->
 					    <input type="hidden" value="${servicio}" name="servicio">
 					    <input type="hidden" value="${zona}" name="zona">
-					    <br><br>
+					    <p>Turnos</p>
+					    <br>
+					    <p>Turno 1</p>
+					    <input type="radio" name="turno" id="turno1" value="turno1">
+					    <label for="turno1">
+					      <p>Fecha: <p name="fecha">14/06/2021</p> </p>
+					      <p>Hora: <p name="horario">15hs</p> </p>
+					    </label><br>
+					    <div>Turno 2</div>
+					    <input type="radio" name="turno" id="turno2" value="turno2">
+					    <label for="turno2">
+					     <p>Fecha: <p name="fecha">14/06/2021</p> </p>
+					      <p>Hora: <p name="horario">16hs</p> </p></label>
+					    
 					    <button type="submit">solicitar turno</button>
   					</form:form>
+  					<br>
   					
 				</c:forEach>
 </body>
