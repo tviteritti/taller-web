@@ -17,16 +17,14 @@ public class Turno {
 	private Long id;
 	@ManyToOne
 	private Usuario veterinario;
-	/*@ManyToOne
-	private Paciente paciente;*/
 	
-	/*@ManyToOne
-	private Duenio duenio;*/
+	@ManyToOne
+	private Mascota mascota;
 	
 	private String fecha;
 	private String horario;
 	private String servicio;
-	private Boolean estado;
+	private String estado;
 	
 //	private Date fecha;
 //	private Time horario;
@@ -39,10 +37,10 @@ public class Turno {
 //		this.horario = horario;
 //	}
 	
-	public Boolean getEstado() {
+	public String getEstado() {
 		return estado;
 	}
-	public void setEstado(Boolean estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 	public Long getId() {
@@ -94,6 +92,14 @@ public class Turno {
 //	public void setDuenio(Duenio duenio) {
 //		this.duenio = duenio;
 //	}
+	public Mascota getMascota() {
+		return mascota;
+	}
+	public void setMascota(Mascota mascota) {
+		this.mascota = mascota;
+	}
+	
+	
 	
 	
 	
