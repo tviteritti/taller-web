@@ -33,6 +33,7 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 						 .createCriteria(Usuario.class)
 						 .createAlias("zona", "zonaBuscada")
 						 .add(Restrictions.eq("zonaBuscada.descripcion", buscarPorZona))
+						 .add(Restrictions.eq("rol", "veterinario"))
 						 .list();			 
 		
 		return veterinarios;	
