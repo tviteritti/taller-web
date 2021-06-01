@@ -63,6 +63,7 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 				 .createCriteria(Turno.class)
 				 .createAlias("veterinario", "vBuscado")
 				 .add(Restrictions.eq("vBuscado.apellido", veterinario.getApellido()))
+				 .add(Restrictions.eq("vBuscado.rol", "veterinario"))
 				 .list();
 		
 		return turnosSolicitados;
