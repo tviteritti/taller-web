@@ -7,11 +7,9 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import ar.edu.unlam.tallerweb1.modelo.Localidad;
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
-import ar.edu.unlam.tallerweb1.modelo.Zona;
 
 @Repository
 public class RepositorioTurnoImpl implements RepositorioTurno{
@@ -64,7 +62,7 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		turnos = (List<Turno>) sessionFactory.getCurrentSession()
 				 .createCriteria(Turno.class)
 				 .createAlias("veterinario", "vBuscado")
-				 .add(Restrictions.eq("vBuscado.apellido", veterinario.getApellido()))
+				 .add(Restrictions.eq("vBuscado.id", veterinario.getId()))
 				 .add(Restrictions.eq("vBuscado.rol", "veterinario"))
 				 .list();
 		
