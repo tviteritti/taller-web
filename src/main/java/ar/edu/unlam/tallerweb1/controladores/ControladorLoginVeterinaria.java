@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLoginVeterinaria;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
@@ -32,12 +33,15 @@ public class ControladorLoginVeterinaria {
 	*/
 	
 	private ServicioUsuario servicioUsuario;
+	private ServicioLogin servicioLogin;
+	
 
 	
 	@Autowired
-	public ControladorLoginVeterinaria(ServicioUsuario servicioUsuario) {
+	public ControladorLoginVeterinaria(ServicioUsuario servicioUsuario, ServicioLogin servicioLogin) {
 		
 		this.servicioUsuario = servicioUsuario;	
+		this.servicioLogin = servicioLogin;
 	}
 	
 	@RequestMapping("/loginVeterinaria")
@@ -138,20 +142,21 @@ public class ControladorLoginVeterinaria {
 	@ModelAttribute("usuario") Usuario user, HttpServletRequest request ) {
 		
 		ModelMap modelo = new ModelMap();
+		/*modelo.put("usuario", user);*/
 		
-		if(servicioUsuario.buscarUsuario(user.getUser(), user.getPassword())) {
+		if(servicioUsuario.buscarUsuario(user.getUser(), user.getPassword()) ) {
 			request.getSession().setAttribute("usuario", user.getUser());
-			/*if(user.getRol()=="Duenio") {
-				//return new ModelAndView("redirect:/cuentaDuenio");    /*no funciona*/
+			
+			/*if(user.getRol().equals("duenio")) {
+				return new ModelAndView("redirect:/cuentaDuenio");    /*no funciona*/
 			//}else{
-				return new ModelAndView("redirect:/cuentaVeterinario");
+				return new ModelAndView("redirect:/cuentaVeterinario");//}
 			
 		}else {
 			modelo.put("error", "Usuario o clave incorrecta");
 		}
 		
 		return new ModelAndView("formUser", modelo);
-		
 	}
 	
 	@RequestMapping(path = "/", method = RequestMethod.GET)
