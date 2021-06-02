@@ -55,19 +55,32 @@ private ServicioMascotas servicioMascotas;
 		modelo.put("zona", zona);
 		List<Usuario>veterinariosEncontrados =servicioTurno.obtenerVeterinariosPorZona(zona.getDescripcion());
 		modelo.put("veterinarios", veterinariosEncontrados);
+		
+		List<Turno>turnosVeterinario=null;
+		
+		for(Usuario v : veterinariosEncontrados) {
+			
+			turnosVeterinario=servicioTurno.obtenerTurnosPorVeterinario(v);	
+		}
+		
+		modelo.put("turnosPorVT", turnosVeterinario);
 		Veterinario vt = new Veterinario ();
 		modelo.put("vt", vt);
 		return new ModelAndView("servicioVeterinario", modelo);
 	}
-	
+
 	@RequestMapping(path="generarTurno", method= RequestMethod.POST)
-	public ModelAndView generarTurno(
+	public ModelAndView crearTurno(
 	@ModelAttribute("veterinario") Usuario veterinario,
-	@RequestParam(value="servicio",required=false) String servicioSolicitado,
-	@RequestParam(value="direccion",required=false) String direccion,
-	/*@RequestParam(value="localidad",required=false) String localidad,*/
+	@RequestParam(value="servicio",required=false) String servicioSolicitado
+	/*@RequestParam(value="direccion",required=false) String direccion,
+	@RequestParam(value="localidad",required=false) String localidad,
 	@RequestParam(value="fecha",required=false) String dia,
-	@RequestParam(value="hora",required=false) String hora
+	@RequestParam(value="hora",required=false) String hora,
+	@RequestParam(value="hora",required=false) Long idTurno,
+	@ModelAttribute("mascota") Mascota mascota,
+	
+	*/
 	
 			) {
 		
@@ -76,11 +89,11 @@ private ServicioMascotas servicioMascotas;
 		modelo.put("veterinarioNom", veterinario.getNombre());
 		modelo.put("veterinarioAp", veterinario.getApellido());
 		modelo.put("especialidad", servicioSolicitado);
-		/*modelo.put("localidad", localidad);*/
+		/*modelo.put("localidad", localidad);
 		modelo.put("direccion", direccion);
 		modelo.put("fecha", dia);
-		modelo.put("hora", hora);
-		
+		modelo.put("hora", hora);*/
+		//servicioTurno.asignarTurno(Long idTurno, Mascota mascota);
 	
 		return new ModelAndView("turnoSolicitado", modelo);
 	}
