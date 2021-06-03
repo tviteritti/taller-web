@@ -1,7 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
-import ar.edu.unlam.tallerweb1.modelo.Veterinario;
 import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -26,16 +25,16 @@ public class RepositorioVeterinarioImpl implements RepositorioVeterinario{
 
 	@Override
 	@Transactional
-	public List<Veterinario> getVeterinarios() {
+	public List<Usuario> getVeterinarios() {
 		final Session session = sessionFactory.getCurrentSession();
-		Query<Veterinario> miQuery=session.createQuery("from veterinario", Veterinario.class);
-		List<Veterinario> veterinarios=miQuery.getResultList();
+		Query<Usuario> miQuery=session.createQuery("from veterinario", Usuario.class);
+		List<Usuario> veterinarios=miQuery.getResultList();
 		return veterinarios;
 	}
 
 	@Override
 	@Transactional
-	public void registrarOMOdificarVeterinario(Veterinario veterinario) {
+	public void registrarOMOdificarVeterinario(Usuario veterinario) {
 		final Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(veterinario);
 		
@@ -43,9 +42,9 @@ public class RepositorioVeterinarioImpl implements RepositorioVeterinario{
 
 	@Override
 	@Transactional
-	public Veterinario getVeterinario(Long id) {
+	public Usuario getVeterinario(Long id) {
 		final Session session = sessionFactory.getCurrentSession();
-		Veterinario veterinario = session.get(Veterinario.class, id);
+		Usuario veterinario = session.get(Usuario.class, id);
 		
 		return veterinario;
 	}
