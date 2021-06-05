@@ -1,12 +1,16 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
-import java.sql.Date;
+
+
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 
@@ -19,6 +23,7 @@ public class Mascota {
 	
 	private byte[] historial_clinico; 
 	
+	@Temporal(TemporalType.DATE)
 	private Date fecha_nacimiento;
 	
 	private String nombre;

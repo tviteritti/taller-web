@@ -11,7 +11,7 @@
 <h4>Mi perfil</h4>
    <a href="verPefil">ver mi perfil</a>
    <br><br>
-  <h4>Hola ${usuario} esta es tu cuenta</h4>
+  <h4>Hola ${usuario.user} esta es tu cuenta</h4>
   <h4>Mi agenda</h4>
    <a href="verTurnosPacientes">Turnos</a>
    <a href="verPacientes">mis pacientes</a>

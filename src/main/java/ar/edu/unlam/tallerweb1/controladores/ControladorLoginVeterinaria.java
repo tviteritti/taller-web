@@ -79,7 +79,7 @@ public class ControladorLoginVeterinaria {
 		ModelMap modelo = new ModelMap();
 		
 		if(servicioUsuario.buscarUsuario(user, password)) {
-			request.getSession().setAttribute("usuario", user);
+			request.getSession().setAttribute("usuario", usuario);
 			
 			
 			if(usuario.getRol().equals("duenio")) {
@@ -161,9 +161,7 @@ public class ControladorLoginVeterinaria {
 	public ModelAndView validarDatosVeterinario(
 			@ModelAttribute("usuario") Usuario user,HttpServletRequest request,
 			@RequestParam(value="id_especialidad",required=false) Long id_especialidad,
-			@RequestParam(value="re-password",required=false) String repass
-			
-			) {
+			@RequestParam(value="re-password",required=false) String repass) {
 		
 			ModelMap modelo = new ModelMap();
 			Dias dias = new Dias();
