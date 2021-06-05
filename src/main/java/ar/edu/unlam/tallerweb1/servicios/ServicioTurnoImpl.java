@@ -14,11 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.modelo.Direccion;
 import ar.edu.unlam.tallerweb1.modelo.Horarios;
+import ar.edu.unlam.tallerweb1.modelo.Localidad;
+import ar.edu.unlam.tallerweb1.modelo.Mascota;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 import ar.edu.unlam.tallerweb1.modelo.Zona;
-
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioLocalidad;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioTurno;
 
 
@@ -27,20 +29,21 @@ import ar.edu.unlam.tallerweb1.repositorios.RepositorioTurno;
 public class ServicioTurnoImpl implements ServicioTurno {
 	
 	
+	private RepositorioLocalidad repositorioLocalidad;
 	private RepositorioTurno repositorioTurno;
 
 
 	@Autowired
-	public ServicioTurnoImpl( RepositorioTurno repositorioTurno){
-		
+	public ServicioTurnoImpl(RepositorioLocalidad repositorioLocalidad, RepositorioTurno repositorioTurno){
+		this.repositorioLocalidad = repositorioLocalidad;
 		this.repositorioTurno = repositorioTurno;
 	}
 
 
 	@Override
-	public List<Direccion> obtenerLocalidades(String zona) {
+	public List<Localidad> obtenerLocalidades(String zona) {
 		
-		return repositorioTurno.obtenerLocalidades(zona);
+		return repositorioLocalidad.obtenerLocalidades(zona);
 	}
 
 
@@ -59,16 +62,16 @@ public class ServicioTurnoImpl implements ServicioTurno {
 
 
 	@Override
-	public List<Turno> obtenerTurnos(Usuario veterinario) {
+	public List<Turno> obtenerTurnosPorVeterinario(Usuario veterinario) {
 		
-		return repositorioTurno.obtenerTurnos(veterinario);
+		return repositorioTurno.obtenerTurnosPorVeterinario(veterinario);
 	}
 
 
 	@Override
-	public List<Turno> obtenerTurnos(String servicio) {
+	public List<Turno> obtenerTurnosPorEspecialidad(String servicio) {
 		
-		return repositorioTurno.obtenerTurnos(servicio);
+		return repositorioTurno.obtenerTurnosPorEspecialidad(servicio);
 	}
 
 
@@ -76,6 +79,14 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	public List<Turno> listarTurnos() {
 		
 		return repositorioTurno.listarTurnos();
+	}
+
+
+	@Override
+	public void asignarTurno(Long idTurno, Mascota mascota) {
+		
+		repositorioTurno.asignarTurno(idTurno, mascota);
+		
 	}
 
 

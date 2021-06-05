@@ -33,6 +33,8 @@ public class Turno {
 	private String servicio;
 	private Boolean estado;
 	
+	@ManyToOne
+	private Mascota mascota;
 	
 	public Boolean getEstado() {
 		return estado;
@@ -76,6 +78,13 @@ public class Turno {
 
 	public void setServicio(String servicio) {
 		this.servicio = servicio;
+	}
+	
+	public Mascota getMascota() {
+		return mascota;
+	}
+	public void setMascota(Mascota mascota) {
+		this.mascota = mascota;
 	}
 
 }

@@ -16,9 +16,11 @@ public class Direccion {
 	
 	private Integer numero;
 	private String calle;
-	private String localidad;
 	private String piso;
 	private String departamento;
+	
+  @ManyToOne
+	private Localidad localidad;
 	
    @ManyToOne
    private Zona zona;
@@ -70,12 +72,12 @@ public class Direccion {
 	public void setZona(Zona zona) {
 		this.zona = zona;
 	}
-
-	public String getLocalidad() {
+	
+	public Localidad getLocalidad() {
 		return localidad;
 	}
 
-	public void setLocalidad(String localidad) {
+	public void setLocalidad(Localidad localidad) {
 		this.localidad = localidad;
 	}
 

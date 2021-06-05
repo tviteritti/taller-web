@@ -26,12 +26,36 @@
 					    <input type="date" name="fecha">
 					    <input type="time" name="hora">
 					    <p>Ubicacion:</p> <p name="direccion"><c:out value="${v.direccion}"/></p>
-					    , <!--  <p name="localidad">(${localidad})</p>-->
+					     <!--  ,<p name="localidad">(${localidad})</p>-->
 					    <input type="hidden" value="${servicio}" name="servicio">
 					    <input type="hidden" value="${zona}" name="zona">
-					    <br><br>
+					    <p>Turnos</p>
+					    <br>
+					     <c:forEach items="${turnosPorVT}" var="t">
+					     
+						     <c:if test="${t.veterinario.id eq v.id}">
+						    
+							     
+							    <input type="radio" name="turno" id="turno${t.id}" value="turno${t.id}">
+							    <label for="turno${t.id}">
+							      <p>Fecha: 
+							        <p name="fecha${t.id}">
+							         <c:out value="${t.fecha}" />
+							         </p> 
+							       </p>
+							      <p>Hora: 
+							        <p name="horario${t.id}"> 
+							           <c:out value="${t.horario}" /> 
+							         </p> 
+							     </p>
+							    </label><br>
+							    
+							</c:if>      
+					    </c:forEach>
+					    
 					    <button type="submit">solicitar turno</button>
   					</form:form>
+  					<br>
   					
 				</c:forEach>
 </body>
