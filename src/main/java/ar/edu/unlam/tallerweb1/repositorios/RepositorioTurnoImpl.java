@@ -3,15 +3,22 @@ package ar.edu.unlam.tallerweb1.repositorios;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Dias;
 import ar.edu.unlam.tallerweb1.modelo.Direccion;
+
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
+
+import ar.edu.unlam.tallerweb1.modelo.HistoriaClinica;
+
 import ar.edu.unlam.tallerweb1.modelo.Horarios;
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
@@ -37,7 +44,8 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 	
 		veterinarios = (List<Usuario>) sessionFactory.getCurrentSession()
 						 .createCriteria(Usuario.class)
-						 .createAlias("zona", "zonaBuscada")
+						 .createAlias("direccion", "dBuscada")
+						 .createAlias("dBuscada.zona", "zonaBuscada")
 						 .add(Restrictions.eq("zonaBuscada.descripcion", buscarPorZona))
 						 .add(Restrictions.eq("rol", "veterinario"))
 						 .list();			 
@@ -47,11 +55,8 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 
 	@Override
 	public void cancelarTurno(Long idTurno) {
-		
-		Turno turnoACancelar = null;
-		
-		
-		turnoACancelar = (Turno)sessionFactory.getCurrentSession()
+
+		Turno turnoACancelar = (Turno)sessionFactory.getCurrentSession()
 				 .createCriteria(Turno.class)
 				 .add(Restrictions.eq( "id", idTurno))
 				 .uniqueResult();
@@ -64,9 +69,7 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 	@Override
 	public List<Turno> obtenerTurnosPorVeterinario(Usuario veterinario) {
 		
-		List<Turno> turnos = null;
-		
-		turnos = (List<Turno>) sessionFactory.getCurrentSession()
+	List<Turno>	turnos = (List<Turno>) sessionFactory.getCurrentSession()
 				 .createCriteria(Turno.class)
 				 .createAlias("veterinario", "vBuscado")
 				 .add(Restrictions.eq("vBuscado.id", veterinario.getId()))
@@ -79,23 +82,20 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 	@Override
 	public List<Turno> obtenerTurnosPorEspecialidad(String servicio) {
 		
-		List<Turno> turnosSolicitados = null;
-		
-		turnosSolicitados = (List<Turno>) sessionFactory.getCurrentSession()
-				 .createCriteria(Turno.class)
-				 .add(Restrictions.eq("servicio", servicio))
-				 .list();
+		List<Turno> turnosSolicitados = (List<Turno>) sessionFactory.getCurrentSession()
+					 .createCriteria(Turno.class)
+					 .add(Restrictions.eq("servicio", servicio))
+					 .list();
 		
 		return turnosSolicitados;
 	}
 
 	@Override
 	public List<Turno> listarTurnos() {
-		
-		List<Turno> turnos = null;
-		turnos = (List<Turno>) sessionFactory.getCurrentSession()
-				 .createCriteria(Turno.class)
-				 .list();
+	
+		List<Turno>turnos = (List<Turno>) sessionFactory.getCurrentSession()
+					 .createCriteria(Turno.class)
+					 .list();
 		
 		return turnos;
 	}
@@ -114,14 +114,6 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 	}
 	
 
-	
-	
-	
-	
-	
-	
-	
-	
 	@Override
 	public List<Turno> listarTurnosSinTomar() {
 		Boolean estado= false;
@@ -277,10 +269,6 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		return dia.getDomingo();
 	}
 
-	
 
-
-	
- 
 
 }

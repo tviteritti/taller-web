@@ -28,14 +28,14 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 @Controller
 public class ControladorDuenio {
 	
-	private ServicioUsuario servuicioDuenio;
+	private ServicioUsuario servicioDuenio;
 	private ServicioMascotas servicioMascota;
 
 	
 	@Autowired
 	public ControladorDuenio( ServicioUsuario servuicioDuenio, ServicioMascotas servicioMascota) {
 		
-		this.servuicioDuenio = servuicioDuenio;	
+		this.servicioDuenio = servicioDuenio;	
 		this.servicioMascota = servicioMascota;
 	}
 	

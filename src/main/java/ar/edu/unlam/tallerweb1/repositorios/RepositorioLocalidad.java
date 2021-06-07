@@ -7,6 +7,6 @@ import ar.edu.unlam.tallerweb1.modelo.Zona;
 
 public interface RepositorioLocalidad {
 	
-	List<Localidad> obtenerLocalidades(String zona);
+	List<Localidad> obtenerLocalidadesPorZona(String zona);
 
 }

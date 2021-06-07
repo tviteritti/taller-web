@@ -14,8 +14,12 @@
   <h4>Hola ${usuario.user} esta es tu cuenta</h4>
   <h4>Mi agenda</h4>
    <a href="verTurnosPacientes">Turnos</a>
-   <a href="verPacientes">mis pacientes</a>
-   <a href="buscarHC">historia clinica</a>
+  <br>
+   <form action="verPacientes" method="post">
+    <input type="hidden" name="veterinarioId" value="${usuario.id}"/>
+   	<button type="submit">mis pacientes</button>
+   </form>
+   
    <br><br>
   <a href="loginVeterinaria">cerrar sesion</a>
   

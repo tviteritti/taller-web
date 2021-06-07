@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,48 +20,63 @@ import ar.edu.unlam.tallerweb1.modelo.Zona;
 
 import ar.edu.unlam.tallerweb1.servicios.ServicioMascotas;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTurno;
+import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
 @Controller
 public class ControladorTurnos {
 	
 private ServicioTurno servicioTurno;
 private ServicioMascotas servicioMascotas;
+private ServicioUsuario servicioUsuario;
 
 	
 	@Autowired
-	public ControladorTurnos(ServicioTurno servicioTurno, ServicioMascotas servicioMascotas) {
+	public ControladorTurnos(ServicioTurno servicioTurno, 
+							 ServicioMascotas servicioMascotas, 
+							 ServicioUsuario servicioUsuario) {
 		
 		this.servicioTurno = servicioTurno;	
 		this.servicioMascotas=servicioMascotas;
+		this.servicioUsuario =servicioUsuario;
 		
 	}
 	
 	@RequestMapping("buscarTurno")
-	public ModelAndView buscarServicioVeterinario() {
+	public ModelAndView buscarServicioVeterinario(
+		@RequestParam(value="duenioId",required=false) Long duenioId) {
 		ModelMap modelo = new ModelMap();
 		
 		Zona zona = new Zona();
+		Usuario duenio = servicioUsuario.getUsuario(duenioId);
+		
 		modelo.put("zona", zona);
+		modelo.put("duenio", duenio);
+		
 		return new ModelAndView("buscarTurno", modelo);
 	}
-
+	
 	@RequestMapping(path="buscarServicioVeterinario", method= RequestMethod.POST)
 	public ModelAndView mostrarServicioVeterinario(
-			
 			@RequestParam(value="servicio",required=false) String servicioSolicitado,
+			@RequestParam(value="duenioId",required=false) Long duenioId,
 			@ModelAttribute("zona") Zona zona) {
 		
 		ModelMap modelo = new ModelMap();
 		modelo.put("servicio", servicioSolicitado);
 		modelo.put("zona", zona);
+		
+		Usuario duenio = servicioUsuario.getUsuario(duenioId);
+		modelo.put("duenio", duenio);
+		
 		List<Usuario>veterinariosEncontrados =servicioTurno.obtenerVeterinariosPorZona(zona.getDescripcion());
 		modelo.put("veterinarios", veterinariosEncontrados);
 		
-		List<Turno>turnosVeterinario=null;
+		List<Turno>turnosVeterinario=new ArrayList<>();
 		
 		for(Usuario v : veterinariosEncontrados) {
 			
-			turnosVeterinario=servicioTurno.obtenerTurnosPorVeterinario(v);	
+			Turno turnos =(Turno) servicioTurno.obtenerTurnosPorVeterinario(v);
+			turnosVeterinario.add(turnos);
 		}
 		
 		modelo.put("turnosPorVT", turnosVeterinario);
@@ -72,28 +88,33 @@ private ServicioMascotas servicioMascotas;
 	@RequestMapping(path="generarTurno", method= RequestMethod.POST)
 	public ModelAndView crearTurno(
 	@ModelAttribute("veterinario") Usuario veterinario,
-	@RequestParam(value="servicio",required=false) String servicioSolicitado
-	/*@RequestParam(value="direccion",required=false) String direccion,
+	@RequestParam(value="servicio",required=false) String servicioSolicitado,
+	@RequestParam(value="direccion",required=false) String direccion,
 	@RequestParam(value="localidad",required=false) String localidad,
 	@RequestParam(value="fecha",required=false) String dia,
-	@RequestParam(value="hora",required=false) String hora,
-	@RequestParam(value="hora",required=false) Long idTurno,
-	@ModelAttribute("mascota") Mascota mascota,
-	
-	*/
-	
-			) {
+	@RequestParam(value="horario",required=false) String hora,
+	@RequestParam(value="idTurno",required=false) Long idTurno,
+	@RequestParam(value="duenioId",required=false) Long duenioId
+	//@ModelAttribute("mascota") Mascota mascota
+	) {
 		
 		ModelMap modelo = new ModelMap();
 		
-		modelo.put("veterinarioNom", veterinario.getNombre());
-		modelo.put("veterinarioAp", veterinario.getApellido());
+		Usuario duenio = servicioUsuario.getUsuario(duenioId);
+		modelo.put("duenio", duenio);
+		
+		Mascota mascota = servicioMascotas.buscarMascotaPorDuenio(duenio);
+		modelo.put("mascota", mascota);
+		
+		modelo.put("veterinario", veterinario);
 		modelo.put("especialidad", servicioSolicitado);
-		/*modelo.put("localidad", localidad);
+		modelo.put("localidad", localidad);
 		modelo.put("direccion", direccion);
 		modelo.put("fecha", dia);
-		modelo.put("hora", hora);*/
-		//servicioTurno.asignarTurno(Long idTurno, Mascota mascota);
+		modelo.put("hora", hora);
+		
+		servicioTurno.asignarTurno(idTurno, mascota);
+		
 	
 		return new ModelAndView("turnoSolicitado", modelo);
 	}
@@ -114,26 +135,13 @@ private ServicioMascotas servicioMascotas;
 		return new ModelAndView("turnosPacientes", modelo);
 	}
 	
-	/*@RequestMapping("verPacientes")
-	public ModelAndView mostrarListadoPacientes() {
-		ModelMap modelo = new ModelMap();
-		List<Mascota> mascotas  = servicioM.listarMascotas();
-		modelo.put("pacientes", mascotas);
-		return new ModelAndView("pacientes", modelo);
-	}*/
-	
-	
 	
 	@RequestMapping(path="cancelarTurno", method= RequestMethod.POST)
 	public ModelAndView mostrarTurnosSolicitados(
 	@RequestParam(value="id_turno",required=false) Long idTurno	
 			) {
 		
-		//ModelMap modelo = new ModelMap();
 		servicioTurno.cancelarTurno(idTurno);
-		/*if(servicio.cancelarTurno(idTurno)) {
-			modelo.put("mensaje","Turno cancelado con exito!");	
-		}*/
 		
 		return new ModelAndView("misTurnos");
 	}

@@ -13,10 +13,19 @@ import ar.edu.unlam.tallerweb1.modelo.Zona;
 public interface ServicioTurno {
 	
 	
-	List<Localidad> obtenerLocalidades(String zona);
+	List<Localidad> obtenerLocalidadesPorZona(String zona);
 	List<Usuario> obtenerVeterinariosPorZona(String zona);
+	
 	List<Turno> obtenerTurnosPorVeterinario(Usuario veterinario);
 	List<Turno> obtenerTurnosPorEspecialidad(String servicio);
+	
+	List<Mascota> obtenerMascotasPorTurno(Long idVeterinario);
+
+	
+	Boolean comprobarTurnoExistente(Usuario duenio,Mascota mascota, Usuario veterinario);
+	Boolean comprobarTurnoExistente(Mascota mascota, Usuario veterinario);
+	//List<Usuario> obtenerVeterinarioPorTurno(Turno turno);
+	
 	List<Turno> listarTurnos();
 	void cancelarTurno(Long idTurno);
 	void asignarTurno(Long idTurno, Mascota mascota);
