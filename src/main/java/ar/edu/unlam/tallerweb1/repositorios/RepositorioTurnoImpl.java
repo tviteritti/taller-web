@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Dias;
 import ar.edu.unlam.tallerweb1.modelo.Direccion;
+import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Horarios;
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
@@ -127,6 +128,8 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		List<Turno> turnos = null;
 		turnos = (List<Turno>) sessionFactory.getCurrentSession()
 				 .createCriteria(Turno.class)
+				 .createAlias("veterinario", "vet")
+				 .add(Restrictions.eq( "vet.id", 1L))
 				 .add(Restrictions.eq( "estado", estado))
 				 .list();
 		
@@ -144,6 +147,19 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		
 		
 		return dia.getVeterinario();
+	}
+	
+	@Override
+	public Especialidad devolverEspecialidadDeunDia(Long id_dia) {
+		Dias dia = new Dias();
+		
+		dia = (Dias)sessionFactory.getCurrentSession()
+				 .createCriteria(Dias.class)
+				 .add(Restrictions.eq( "id", id_dia))
+				 .uniqueResult();
+		
+		
+		return dia.getVeterinario().getEspecialdad();
 	}
 
 	@Override

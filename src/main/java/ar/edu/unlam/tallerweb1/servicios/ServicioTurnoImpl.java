@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.modelo.Direccion;
+import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Horarios;
 import ar.edu.unlam.tallerweb1.modelo.Localidad;
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
@@ -116,6 +117,7 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	public void generarTurnoPorIdDiaLunes(Long id) {
 		
 		Horarios lunes =repositorioTurno.devolverDialunes(id);
+		Especialidad especialidad =repositorioTurno.devolverEspecialidadDeunDia(id);
 		Usuario veterinario = repositorioTurno.devolverVeterinarioDeunDia(id);
 		Integer h_inicio=0;
 		Integer h_fin=0;
@@ -180,6 +182,7 @@ public class ServicioTurnoImpl implements ServicioTurno {
 				turno.setVeterinario(veterinario);
 				turno.setEstado(false);
 				turno.setFecha(date);
+				turno.setServicio(especialidad.getDescripcion());
 				repositorioTurno.generarTurno(turno);
 				cont+=duracion;
 				
@@ -198,6 +201,7 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	@Override
 	public void generarTurnoPorIdDiaMartes(Long id) {
 		Horarios martes =repositorioTurno.devolverDiaMartes(id);
+		Especialidad especialidad =repositorioTurno.devolverEspecialidadDeunDia(id);
 		Usuario veterinario = repositorioTurno.devolverVeterinarioDeunDia(id);
 		Integer h_inicio=0;
 		Integer h_fin=0;
@@ -263,6 +267,7 @@ public class ServicioTurnoImpl implements ServicioTurno {
 				turno.setVeterinario(veterinario);
 				turno.setEstado(false);
 				turno.setFecha(date);
+				turno.setServicio(especialidad.getDescripcion());
 				repositorioTurno.generarTurno(turno);
 				cont+=duracion;
 				
@@ -275,6 +280,7 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	@Override
 	public void generarTurnoPorIdDiaMiercoles(Long id) {
 		Horarios miercoles =repositorioTurno.devolverDiaMiercoles(id);
+		Especialidad especialidad =repositorioTurno.devolverEspecialidadDeunDia(id);
 		Usuario veterinario = repositorioTurno.devolverVeterinarioDeunDia(id);
 		Integer h_inicio=0;
 		Integer h_fin=0;
@@ -340,6 +346,7 @@ public class ServicioTurnoImpl implements ServicioTurno {
 				turno.setVeterinario(veterinario);
 				turno.setEstado(false);
 				turno.setFecha(date);
+				turno.setServicio(especialidad.getDescripcion());
 				repositorioTurno.generarTurno(turno);
 				cont+=duracion;
 				
@@ -352,6 +359,7 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	@Override
 	public void generarTurnoPorIdDiaJueves(Long id) {
 		Horarios jueves =repositorioTurno.devolverDiaJueves(id);
+		Especialidad especialidad =repositorioTurno.devolverEspecialidadDeunDia(id);
 		Usuario veterinario = repositorioTurno.devolverVeterinarioDeunDia(id);
 		Integer h_inicio=0;
 		Integer h_fin=0;
@@ -416,6 +424,7 @@ public class ServicioTurnoImpl implements ServicioTurno {
 				turno.setVeterinario(veterinario);
 				turno.setEstado(false);
 				turno.setFecha(date);
+				turno.setServicio(especialidad.getDescripcion());
 				repositorioTurno.generarTurno(turno);
 				cont+=duracion;
 				
@@ -428,6 +437,7 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	@Override
 	public void generarTurnoPorIdDiaViernes(Long id) {
 		Horarios viernes =repositorioTurno.devolverDiaViernes(id);
+		Especialidad especialidad =repositorioTurno.devolverEspecialidadDeunDia(id);
 		Usuario veterinario = repositorioTurno.devolverVeterinarioDeunDia(id);
 		Integer h_inicio=0;
 		Integer h_fin=0;
@@ -492,6 +502,7 @@ public class ServicioTurnoImpl implements ServicioTurno {
 				turno.setVeterinario(veterinario);
 				turno.setEstado(false);
 				turno.setFecha(date);
+				turno.setServicio(especialidad.getDescripcion());
 				repositorioTurno.generarTurno(turno);
 				cont+=duracion;
 				
@@ -504,6 +515,7 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	@Override
 	public void generarTurnoPorIdDiaSabado(Long id) {
 		Horarios sabado =repositorioTurno.devolverDiaSabado(id);
+		Especialidad especialidad =repositorioTurno.devolverEspecialidadDeunDia(id);
 		Usuario veterinario = repositorioTurno.devolverVeterinarioDeunDia(id);
 		Integer h_inicio=0;
 		Integer h_fin=0;
@@ -569,6 +581,7 @@ public class ServicioTurnoImpl implements ServicioTurno {
 				turno.setVeterinario(veterinario);
 				turno.setEstado(false);
 				turno.setFecha(date);
+				turno.setServicio(especialidad.getDescripcion());
 				repositorioTurno.generarTurno(turno);
 				cont+=duracion;
 				
@@ -581,6 +594,7 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	@Override
 	public void generarTurnoPorIdDiaDomingo(Long id) {
 		Horarios domingo =repositorioTurno.devolverDiaDomingo(id);
+		Especialidad especialidad =repositorioTurno.devolverEspecialidadDeunDia(id);
 		Usuario veterinario = repositorioTurno.devolverVeterinarioDeunDia(id);
 		Integer h_inicio=0;
 		Integer h_fin=0;
@@ -646,6 +660,7 @@ public class ServicioTurnoImpl implements ServicioTurno {
 				turno.setVeterinario(veterinario);
 				turno.setEstado(false);
 				turno.setFecha(date);
+				turno.setServicio(especialidad.getDescripcion());
 				repositorioTurno.generarTurno(turno);
 				cont+=duracion;
 				

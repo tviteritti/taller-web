@@ -30,6 +30,7 @@
 				<table class="table table-striped ">
 	  				<thead class="thead-inverse">
 	  					<tr>
+	  						<th>nombre</th>
 					  		<th>veterinario</th>
 					  		<th>fecha</th>
 					  		<th>horario</th>
@@ -47,6 +48,7 @@
 				  		</c:url>
 				  		
 					  	<tr>
+					  		<td>${usuario.email}</td>
 					  		<td>${turno.veterinario}</td>
 					  		<td>${turno.fecha}</td>
 					  		<td>${turno.horario}</td>

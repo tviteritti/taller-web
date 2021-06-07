@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.repositorios;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Direccion;
+import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Horarios;
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
@@ -21,6 +22,7 @@ public interface RepositorioTurno {
 	
 	List<Turno> listarTurnosSinTomar();
 	Usuario devolverVeterinarioDeunDia(Long id_dia);
+	Especialidad devolverEspecialidadDeunDia(Long id_dia);
 	void generarTurno(Turno turno);
 	void tomarTurno(Long id, Usuario duenio);
 	
