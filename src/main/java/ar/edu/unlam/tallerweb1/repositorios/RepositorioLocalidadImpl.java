@@ -21,7 +21,7 @@ public class RepositorioLocalidadImpl implements RepositorioLocalidad{
 	}
 
 	@Override
-	public List<Localidad> obtenerLocalidades(String zona) {
+	public List<Localidad> obtenerLocalidadesPorZona(String zona) {
 		
 		String buscarPorZona = zona; 
 		
