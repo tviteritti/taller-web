@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.servicios;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -41,9 +42,9 @@ public class ServicioTurnoImpl implements ServicioTurno {
 
 
 	@Override
-	public List<Localidad> obtenerLocalidades(String zona) {
+	public List<Localidad> obtenerLocalidadesPorZona(String zona) {
 		
-		return repositorioLocalidad.obtenerLocalidades(zona);
+		return repositorioLocalidad.obtenerLocalidadesPorZona(zona);
 	}
 
 
@@ -87,6 +88,61 @@ public class ServicioTurnoImpl implements ServicioTurno {
 		
 		repositorioTurno.asignarTurno(idTurno, mascota);
 		
+	}
+
+	@Override
+	public List<Mascota> obtenerMascotasPorTurno(Long idVeterinario) {
+		
+		List<Mascota> mascotas =new ArrayList<Mascota>();
+		List<Turno> turnos =  repositorioTurno.listarTurnos();
+		
+		for(Turno turno:turnos) {
+			
+			if(turno.getVeterinario().getId().equals(idVeterinario)) {
+				
+				mascotas.add(turno.getMascota());
+				
+			}
+			
+		}
+		
+		return mascotas;
+	}
+	
+
+	@Override
+	public Boolean comprobarTurnoExistente(Usuario duenio, Mascota mascota, Usuario veterinario) {
+		
+		List <Turno> turnos= repositorioTurno.listarTurnos();
+		
+		for(Turno turno : turnos){
+			
+			if(turno.getDuenio().equals(duenio) 
+				&& turno.getMascota().equals(mascota)
+				&& turno.getVeterinario().equals(veterinario)) {
+				
+				return true;
+			}
+			
+		}
+		return false;
+	}
+	
+	@Override
+	public Boolean comprobarTurnoExistente(Mascota mascota, Usuario veterinario) {
+		
+		List <Turno> turnos= repositorioTurno.listarTurnos();
+		
+		for(Turno turno : turnos){
+			
+			if(turno.getMascota().equals(mascota)
+				&& turno.getVeterinario().equals(veterinario)) {
+				
+				return true;
+			}
+			
+		}
+		return false;
 	}
 
 
@@ -653,9 +709,8 @@ public class ServicioTurnoImpl implements ServicioTurno {
 		}
 		
 	}
+
+
 	
-
-
-
 
 }
