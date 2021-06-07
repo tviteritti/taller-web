@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Hole!</title>
+<title>Hola!</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -21,7 +21,12 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
   <h4>Turno</h4>
   
    <a href="verTurnos">mis turnos</a>
-   <a href="buscarTurno">solicitar turno</a>
+   
+   <form action="buscarTurno" method="get">
+   <input type="hidden" name="duenioId" value="${usuario.id}"/>
+    <button type="submit">solicitar turno</button>
+   </form>
+  
    <a href="cargarMascota">cargar mascota</a>
   
    <br><br>
