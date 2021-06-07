@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
 import ar.edu.unlam.tallerweb1.modelo.TipoAnimal;
-
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioMascotas;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioTurno;
 
@@ -36,11 +36,54 @@ public class ServicioMascotasImpl implements ServicioMascotas{
 		
 		return servicioMascotasDao.listarTipoAnimal();
 	}
+	
+	
 
 	@Override
 	public void cargarMascota(Long id_tipo, Long id_duenio, String fecha_nac, String nombre)
 			throws ParseException {
 		servicioMascotasDao.cargarMascota(id_tipo, id_duenio, fecha_nac, nombre);
+	}
+
+	@Override
+	public Mascota obtenerMascota(Long id) {
+		
+		List <Mascota> mascotas = servicioMascotasDao.listarMascotas();
+		Mascota mascotaEncontrada = null;
+		
+		for(Mascota mascota:mascotas) {
+			
+			if(mascota.getId().equals(id)) {
+				
+				mascotaEncontrada=mascota;
+				break;
+				
+			}
+			
+		}
+		return mascotaEncontrada;
+	}
+
+	@Override
+	public Mascota buscarMascotaPorDuenio(Usuario duenio) {
+		List <Mascota> mascotas = servicioMascotasDao.listarMascotas();
+		
+		Mascota mascotaEncontrada = null;
+		
+		for(Mascota mascota:mascotas) {
+			
+			if(mascota.getDuenio().equals(duenio)) {
+				
+				mascotaEncontrada=mascota;
+				break;
+				
+			}
+			
+		}
+		
+		return mascotaEncontrada;
+		
+		
 	}
 	
 	
