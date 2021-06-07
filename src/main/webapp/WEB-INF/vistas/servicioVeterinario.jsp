@@ -21,12 +21,12 @@
 					    <p>Calificacion</p>
 					    <p>Descripcion: </p>
 					    <br>
-					    <p><c:out value="${v.descripcion}" /></p>
+					    <!--  <p><c:out value="${v.descripcion}" /></p>-->
 					    <p>Dias y Horarios disponibles</p>
 					    <input type="date" name="fecha">
 					    <input type="time" name="hora">
 					    <p>Ubicacion:</p> <p name="direccion"><c:out value="${v.direccion}"/></p>
-					     <!--  ,<p name="localidad">(${localidad})</p>-->
+					    <p name="localidad">${v.direccion.zona.localidad.descripcion}</p>
 					    <input type="hidden" value="${servicio}" name="servicio">
 					    <input type="hidden" value="${zona}" name="zona">
 					    <p>Turnos</p>
@@ -36,15 +36,16 @@
 						     <c:if test="${t.veterinario.id eq v.id}">
 						    
 							     
-							    <input type="radio" name="turno" id="turno${t.id}" value="turno${t.id}">
-							    <label for="turno${t.id}">
+							    <input type="radio" name="turno" id="turno" value="turno${t.id}">
+							    <input type="hidden" name="idTurno" id="turno" value="${t.id}">
+							    <label for="turno">
 							      <p>Fecha: 
-							        <p name="fecha${t.id}">
+							        <p name="fecha">
 							         <c:out value="${t.fecha}" />
 							         </p> 
 							       </p>
 							      <p>Hora: 
-							        <p name="horario${t.id}"> 
+							        <p name="horario"> 
 							           <c:out value="${t.horario}" /> 
 							         </p> 
 							     </p>
@@ -52,7 +53,7 @@
 							    
 							</c:if>      
 					    </c:forEach>
-					    
+					    <input type="hidden" value="${duenio.id}" name="idDuenio">
 					    <button type="submit">solicitar turno</button>
   					</form:form>
   					<br>
