@@ -35,7 +35,7 @@ public class ServicioHistoriaClinicaImpl implements ServicioHistoriaClinica{
 	public List<HistoriaClinica> buscarHCPorMascota(Long idMascota) {
 		
 		List<HistoriaClinica> historiaClinica = repositorioHistoriaClinica.obtenerHistoriaClinica();
-		List<HistoriaClinica>hcEncontrada =  new ArrayList<>();;
+		List<HistoriaClinica>hcEncontrada =  new ArrayList<>();
 		
 		for(HistoriaClinica hc: historiaClinica) {
 			if(hc.getMascota().getId().equals(idMascota)) {
