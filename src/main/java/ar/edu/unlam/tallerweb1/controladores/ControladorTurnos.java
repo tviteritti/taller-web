@@ -69,10 +69,7 @@ private ServicioUsuario servicioUsuario;
 		modelo.put("duenio", duenio);
 		
 		List<Usuario>veterinariosEncontrados = servicioUsuario.buscarVeterinariosPorEspecialidadYZona(servicioSolicitado, zona.getDescripcion());
-		//servicioTurno.obtenerVeterinariosPorZona(zona.getDescripcion());
-		//servicioTurno.obtenerTurnosPorEspecialidadZonaYVeterinario(servicioSolicitado, servicioSolicitado, duenio);
-		//servicioTurno.obtenerTurnosPorVeterinario(v)
-		//servicioTurno.obtenerTurnosPorEspecialidadZonaYVeterinario(servicioSolicitado, zona.getDescripcion(), v)
+		
 		modelo.put("veterinarios", veterinariosEncontrados);
 		
 		List<Turno>turnosVeterinario=new ArrayList<>();
@@ -88,8 +85,7 @@ private ServicioUsuario servicioUsuario;
 		}
 		
 		modelo.put("turnosPorVT", turnosVeterinario);
-		/*Usuario vt = new Usuario ();
-		modelo.put("vt", vt);*/
+		
 		return new ModelAndView("servicioVeterinario", modelo);
 	}
 
@@ -116,8 +112,6 @@ private ServicioUsuario servicioUsuario;
 		Mascota mascota = servicioMascotas.buscarMascotaPorDuenio(duenio);
 		modelo.put("mascota", mascota);
 		
-		/*modelo.put("veterinarioNombre", veterinario.getNombre());
-		modelo.put("veterinarioApellido", veterinario.getApellido());*/
 		modelo.put("especialidad", servicioSolicitado);
 		modelo.put("localidad", localidad);
 		modelo.put("direccion", direccion);
