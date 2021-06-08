@@ -85,9 +85,9 @@ public class ServicioTurnoImpl implements ServicioTurno {
 
 
 	@Override
-	public void asignarTurno(Long idTurno, Mascota mascota) {
+	public void asignarTurno(Long idTurno, Mascota mascota, Usuario duenio) {
 		
-		repositorioTurno.asignarTurno(idTurno, mascota);
+		repositorioTurno.asignarTurno(idTurno, mascota,  duenio);
 		
 	}
 
@@ -109,6 +109,7 @@ public class ServicioTurnoImpl implements ServicioTurno {
 		
 		return mascotas;
 	}
+	
 	
 
 	@Override
@@ -147,10 +148,49 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	}
 
 
+	@Override
+	public List<Turno> buscarTurnoPorUsuario(Usuario usuario) {
+		
+		List<Turno>turnos = repositorioTurno.listarTurnos();
+		
+		List<Turno>turnosEncontrados = new ArrayList<>();
+		
+		for(Turno turno : turnos){
+			
+			
+			if(usuario.getRol().equalsIgnoreCase("duenio")) {
+				
+				if(turno.getDuenio().getId().equals(usuario.getId())) {
+					
+					turnosEncontrados.add(turno);
+					
+				}
+				
+			}else {
+				
+				
+				if(turno.getVeterinario().getId().equals(usuario.getId())) {
+					
+					turnosEncontrados.add(turno);
+					
+				}
+				
+				
+			}
+				
 	
+		}
 	
-	
-	
+		
+		return turnosEncontrados;
+	}
+
+	@Override
+	public List<Turno> obtenerTurnosPorEspecialidadZonaYVeterinario(String servicio, String zona, Usuario veterinario) {
+		
+		return repositorioTurno.obtenerTurnosPorEspecialidadZonaYVeterinario(servicio, zona, veterinario);
+	}
+
 
 	@Override
 	public List<Turno> listarTurnosSinTomar() {
@@ -724,6 +764,17 @@ public class ServicioTurnoImpl implements ServicioTurno {
 		}
 		
 	}
+
+
+	@Override
+	public void cargarTurno(Turno turno) {
+		repositorioTurno.cargarTurno(turno);
+		
+	}
+
+
+
+
 
 
 	

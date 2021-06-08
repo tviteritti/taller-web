@@ -15,11 +15,15 @@ public interface ServicioTurno {
 	
 	List<Localidad> obtenerLocalidadesPorZona(String zona);
 	List<Usuario> obtenerVeterinariosPorZona(String zona);
-	
+
 	List<Turno> obtenerTurnosPorVeterinario(Usuario veterinario);
 	List<Turno> obtenerTurnosPorEspecialidad(String servicio);
+	List<Turno> obtenerTurnosPorEspecialidadZonaYVeterinario(String servicio, String zona, Usuario veterinario);
+	List<Turno> buscarTurnoPorUsuario(Usuario usuario);
+	
 	
 	List<Mascota> obtenerMascotasPorTurno(Long idVeterinario);
+	
 
 	
 	Boolean comprobarTurnoExistente(Usuario duenio,Mascota mascota, Usuario veterinario);
@@ -28,7 +32,8 @@ public interface ServicioTurno {
 	
 	List<Turno> listarTurnos();
 	void cancelarTurno(Long idTurno);
-	void asignarTurno(Long idTurno, Mascota mascota);
+	void asignarTurno(Long idTurno, Mascota mascota, Usuario duenio);
+	void cargarTurno(Turno turno);
 	
 	
 	List<Turno> listarTurnosSinTomar();
