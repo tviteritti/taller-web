@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.controladores;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -29,6 +30,7 @@ private ServicioTurno servicioTurno;
 private ServicioMascotas servicioMascotas;
 private ServicioUsuario servicioUsuario;
 
+
 	
 	@Autowired
 	public ControladorTurnos(ServicioTurno servicioTurno, 
@@ -38,6 +40,7 @@ private ServicioUsuario servicioUsuario;
 		this.servicioTurno = servicioTurno;	
 		this.servicioMascotas=servicioMascotas;
 		this.servicioUsuario =servicioUsuario;
+		
 		
 	}
 	
@@ -118,13 +121,20 @@ private ServicioUsuario servicioUsuario;
 		modelo.put("fecha", dia);
 		modelo.put("hora", hora);
 		
-		servicioTurno.asignarTurno(idTurno, mascota , duenio);
+		Turno turno = new Turno();
+		turno.setVeterinario(veterinario);
+		turno.setMascota(mascota);
+		turno.setDuenio(duenio);
+		turno.setServicio(servicioSolicitado);
+		//servicioTurno.asignarTurno(idTurno, mascota , duenio);
+		
+		servicioTurno.cargarTurno(turno);
 		
 	
 		return new ModelAndView("turnoSolicitado", modelo);
 	}
 	
-	@RequestMapping(path = "verTurnos")
+	@RequestMapping("misTurnos")
 	public ModelAndView mostrarTurnos(
 		@RequestParam(value="duenioId",required=false) Long duenioId) {
 		ModelMap modelo = new ModelMap();
