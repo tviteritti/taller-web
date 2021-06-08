@@ -12,6 +12,7 @@
 <body>
       <h3>Turnos Solicitados</h3>
       <br>
+       <c:if test="${not empty turnos}">
 		 <c:forEach items="${turnos}" var="t">
 			  
 					<form action="cancelarTurno" method="post">
@@ -26,5 +27,14 @@
 						  
 			  					
 			 </c:forEach> <!---->
+	</c:if>
+	<c:if test="${empty turnos}">
+	   <h3>Aun no posee turnos</h3>
+	   ¿Desea solicitar turno?
+	   <form action="buscarTurno" method="get">
+	      <input type="hidden" name="duenioId" value="${idUsuario}"/>
+	     <button>solcitar turno</button>
+	   </form>
+	</c:if> 
 </body>
 </html>
