@@ -13,6 +13,7 @@ public interface RepositorioUsuario {
 	List<Usuario> getUsuarios();
 	List<Usuario> getVeterinarios();
 	Usuario getUsuario(Long id);
+	List<Usuario> listarVeterinarios();
 	
 	void registrarOMOdificarUsuario (Usuario usuario);
 	void eliminarUsuario(Long id);

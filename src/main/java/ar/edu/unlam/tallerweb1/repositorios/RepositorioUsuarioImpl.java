@@ -65,6 +65,18 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		List<Usuario> usuarios=miQuery.getResultList();
 		return usuarios;
 	}
+	
+	@Override
+	public List<Usuario> listarVeterinarios() {
+		
+		List<Usuario> veterinarios = (List<Usuario>)sessionFactory.getCurrentSession()
+				 .createCriteria(Usuario.class)
+				 .add(Restrictions.eq( "rol", "veterinario"))
+				 .list();
+		
+		return  veterinarios;
+	
+	}
 
 	@Override
 	@Transactional
