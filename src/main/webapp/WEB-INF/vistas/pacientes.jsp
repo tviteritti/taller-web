@@ -12,9 +12,9 @@
 		 <c:forEach items="${pacientes}" var="p">
 			  
 					<form action="verHistoriaClinica" method="post">
-					   <p>Nombre del paciente: </p><p name="nombreMascota">${p.nombre}	</p>
-					   <p>Fecha de nacimiento: </p><p name="fechaNacimiento">${p.fecha_nacimiento}</p>
-					   <p>Duenio: </p><p name="duenioNombre">${p.duenio.nombre}</p>
+					   <p>Nombre del paciente: </p><p >${p.nombre}</p>
+					   <p>Fecha de nacimiento: </p><p >${p.fecha_nacimiento}</p>
+					   <p>Duenio: </p><p>${p.duenio.nombre}</p>
 					   <br>
 					   <input type="hidden" name="duenioId" value="${p.duenio.id}"/>
 					   <input type="hidden" name="mascotaId" value="${p.id}"/>
