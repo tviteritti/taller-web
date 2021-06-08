@@ -48,8 +48,8 @@ public class ControladorVeterinario {
 		ModelMap modelo = new ModelMap();
 		
 		List<Mascota> pacientes =servicioTurno.obtenerMascotasPorTurno(idVeterinario);
-		
-		modelo.put("pacientes", pacientes);
+	
+		modelo.put("mascotas", pacientes);
 		
 		return new ModelAndView("pacientes",modelo);
 	}
