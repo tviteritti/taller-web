@@ -10,9 +10,9 @@
 <h2>Turno solicitado con exito!</h2>
 
 <div>
-  <p>Veterinario: ${veterinario.nombre},  ${veterinario.apellido} </p>
+  <p>Veterinario: ${veterinario.nombre} ${veterinario.apellido}  </p>
   <p>Servicio solicitado: ${especialidad}</p>
-  <p>Ubicado en ${localidad} , ${direccion}</p>
+  <p>Ubicado en ${localidad} , ${direccion} </p>
   <p>Para el dia ${fecha}, a las ${hora} horas.</p>
 </div>
 <a href="volverACuenta">volver a mi cuenta</a>

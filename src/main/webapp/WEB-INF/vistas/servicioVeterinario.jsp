@@ -14,19 +14,30 @@
 
 			     <c:forEach items="${veterinarios}" var="v">
 			     
-				     <form:form action="generarTurno" method="post" modelAttribute="veterinario">
+				     <form action="generarTurno" method="post">
 					    <p> 
 					   	 <c:out value="${v.nombre} ${v.apellido}" />
+					   	 <input type="hidden" name="veterinarioId" value="${v.id}"/>
 					    </p>
 					    <p>Calificacion</p>
 					    <p>Descripcion: </p>
-					    <br>
-					    <!--  <p><c:out value="${v.descripcion}" /></p>-->
-					    <p>Dias y Horarios disponibles</p>
-					    <input type="date" name="fecha">
-					    <input type="time" name="hora">
-					    <p>Ubicacion:</p> <p name="direccion"><c:out value="${v.direccion}"/></p>
-					    <p name="localidad">${v.direccion.zona.localidad.descripcion}</p>
+					    <p>
+					    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat.
+					    </p>
+	
+					    <p>Ubicacion:</p> <p >
+					    <c:out value="${v.direccion.calle} ${v.direccion.numero}"/>
+					   
+					     <input type="hidden" name="direccion" value="${v.direccion.calle} ${v.direccion.numero}" >
+					    </p>
+					    <p >
+					     ${v.direccion.localidad.descripcion}
+					     <input type="hidden" name="localidad" value=" ${v.direccion.localidad.descripcion}">
+					    </p>
+					    
 					    <input type="hidden" value="${servicio}" name="servicio">
 					    <input type="hidden" value="${zona}" name="zona">
 					    <p>Turnos</p>
@@ -34,28 +45,31 @@
 					     <c:forEach items="${turnosPorVT}" var="t">
 					     
 						     <c:if test="${t.veterinario.id eq v.id}">
-						    
-							     
-							    <input type="radio" name="turno" id="turno" value="turno${t.id}">
-							    <input type="hidden" name="idTurno" id="turno" value="${t.id}">
+						         
+						         
+						        <input type="radio" name="turno" id="turno"/>
+							    <input type="hidden" name="idTurno" value="${t.id}">
+							    
 							    <label for="turno">
 							      <p>Fecha: 
-							        <p name="fecha">
+							        <p >
 							         <c:out value="${t.fecha}" />
+							         <input type="hidden" value="${t.fecha}" name="fecha">
 							         </p> 
 							       </p>
 							      <p>Hora: 
-							        <p name="horario"> 
-							           <c:out value="${t.horario}" /> 
+							        <p > 
+							           <c:out value="${t.horario}" />
+							           <input type="hidden" value="${t.horario}" name="hora"> 
 							         </p> 
 							     </p>
 							    </label><br>
-							    
+							 
 							</c:if>      
 					    </c:forEach>
 					    <input type="hidden" value="${duenio.id}" name="idDuenio">
 					    <button type="submit">solicitar turno</button>
-  					</form:form>
+  					</form>
   					<br>
   					
 				</c:forEach>
