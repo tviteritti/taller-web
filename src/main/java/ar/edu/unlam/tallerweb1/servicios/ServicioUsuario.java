@@ -12,6 +12,7 @@ public interface ServicioUsuario {
 	
 	List<Usuario> getUsuarios();
 	List<Usuario> getVeterinarios();
+	List<Usuario> buscarVeterinariosPorEspecialidadYZona(String especialidad, String zona);
 	Usuario getUsuario(Long id);
 	Boolean buscarUsuario(String usuario, String password);
 	Usuario devolverUsuario(String usuario, String password);

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
@@ -97,6 +98,27 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 		ServicioUsuarioDao.ingresarEspecialidad(id, id_especialidad);
 		
 	}
+
+	@Override
+	public List<Usuario> buscarVeterinariosPorEspecialidadYZona(String especialidad, String zona) {
+		
+		List<Usuario> veterinarios = ServicioUsuarioDao.listarVeterinarios();
+		List<Usuario> veterinariosEncontrados = new ArrayList<>();
+		 
+		for(Usuario veterinario : veterinarios) {
+			
+			if(veterinario.getDireccion().getZona().getDescripcion().equals(zona)
+			  && veterinario.getEspecialdad().getDescripcion().equals(especialidad)) {
+				
+				veterinariosEncontrados.add(veterinario);
+				
+			}
+			
+		}
+		return veterinariosEncontrados;
+	}
+
+
 
 
 
