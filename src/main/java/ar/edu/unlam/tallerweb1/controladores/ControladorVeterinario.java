@@ -47,16 +47,7 @@ public class ControladorVeterinario {
 		
 		ModelMap modelo = new ModelMap();
 		
-		List<Mascota> pacientes = new ArrayList<>();
-		Usuario veterinario = servicioUsuario.getUsuario(idVeterinario);
-		
-		modelo.put("veterianario",veterinario);
-		
-		for(Mascota  m : servicioTurno.obtenerMascotasPorTurno(idVeterinario)) {
-			
-				pacientes.add(m);
-						
-		}
+		List<Mascota> pacientes =servicioTurno.obtenerMascotasPorTurno(idVeterinario);
 		
 		modelo.put("pacientes", pacientes);
 		
