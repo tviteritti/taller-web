@@ -15,9 +15,11 @@ public interface RepositorioTurno {
 	List<Usuario> obtenerVeterinariosPorZona(String zona);
 	List<Turno> obtenerTurnosPorVeterinario(Usuario veterinario);
 	List<Turno> obtenerTurnosPorEspecialidad(String servicio);
+	List<Turno> obtenerTurnosPorEspecialidadZonaYVeterinario(String servicio, String zona, Usuario veterinario);
 	
 	List<Turno> listarTurnos();
-	void asignarTurno(Long idTurno, Mascota mascota);
+	void asignarTurno(Long idTurno, Mascota mascota , Usuario duenio);
+	void cargarTurno(Turno turno);
 	void cancelarTurno(Long idTurno);
 	
 	

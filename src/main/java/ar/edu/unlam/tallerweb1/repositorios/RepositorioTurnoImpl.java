@@ -89,6 +89,23 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		
 		return turnosSolicitados;
 	}
+	
+	@Override
+	public List<Turno> obtenerTurnosPorEspecialidadZonaYVeterinario(String servicio, String zona, Usuario veterinario) {
+		
+		List<Turno> turnosSolicitados = (List<Turno>) sessionFactory.getCurrentSession()
+				 .createCriteria(Turno.class)
+				 .createAlias("veterinario", "vBuscado")
+				 .createAlias("vBuscado.direccion", "direccion")
+				 .createAlias("direccion.zona", "zonaBuscada")
+				 .add(Restrictions.eq("zonaBuscada.descripcion", zona))
+				 .add(Restrictions.eq("servicio", servicio))
+				 .add(Restrictions.eq("vBuscado.id", veterinario.getId()))
+				 .add(Restrictions.eq("vBuscado.rol", "veterinario"))
+				 .list();
+		
+		return turnosSolicitados;
+	}
 
 	@Override
 	public List<Turno> listarTurnos() {
@@ -101,7 +118,7 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 	}
 
 	@Override
-	public void asignarTurno(Long idTurno, Mascota mascota) {
+	public void asignarTurno(Long idTurno, Mascota mascota , Usuario duenio) {
 		
 		    	 Turno turnoBuscado = (Turno) sessionFactory.getCurrentSession()
 				 .createCriteria(Turno.class)
@@ -109,7 +126,12 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 				 .uniqueResult();
 		    	 
 		    	 turnoBuscado.setMascota(mascota);
+		    	 turnoBuscado.setDuenio(duenio);
+		    	 
+		    	
+		    	 ((Session) sessionFactory).saveOrUpdate(turnoBuscado);
 		    	 //turnoBuscado.setEstado("no disponible");
+		    	
 		    	
 	}
 	
@@ -268,6 +290,15 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		
 		return dia.getDomingo();
 	}
+
+	@Override
+	public void cargarTurno(Turno turno) {
+		final Session session = sessionFactory.getCurrentSession();
+		 session.save(turno);
+		
+	}
+
+
 
 
 
