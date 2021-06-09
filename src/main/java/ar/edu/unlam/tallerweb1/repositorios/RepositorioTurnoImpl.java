@@ -39,10 +39,8 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 	public List<Usuario> obtenerVeterinariosPorZona(String zona) {
 	String buscarPorZona = zona; 
 		
-		List<Usuario> veterinarios = null;
-		
-	
-		veterinarios = (List<Usuario>) sessionFactory.getCurrentSession()
+
+		List<Usuario> veterinarios = (List<Usuario>) sessionFactory.getCurrentSession()
 						 .createCriteria(Usuario.class)
 						 .createAlias("direccion", "dBuscada")
 						 .createAlias("dBuscada.zona", "zonaBuscada")
@@ -129,12 +127,19 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		    	 turnoBuscado.setDuenio(duenio);
 		    	 
 		    	
-		    	 ((Session) sessionFactory).saveOrUpdate(turnoBuscado);
+		    	sessionFactory.getCurrentSession().save(turnoBuscado);
 		    	 //turnoBuscado.setEstado("no disponible");
 		    	
 		    	
 	}
 	
+	@Override
+	public void cargarTurno(Turno turno) {
+		final Session session = sessionFactory.getCurrentSession();
+		 //session.save(turno);
+		 session.saveOrUpdate(turno);
+		
+	}
 
 	@Override
 	public List<Turno> listarTurnosSinTomar() {
@@ -291,12 +296,7 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		return dia.getDomingo();
 	}
 
-	@Override
-	public void cargarTurno(Turno turno) {
-		final Session session = sessionFactory.getCurrentSession();
-		 session.save(turno);
-		
-	}
+
 
 
 
