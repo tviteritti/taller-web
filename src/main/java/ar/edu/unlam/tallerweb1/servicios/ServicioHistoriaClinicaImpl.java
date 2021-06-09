@@ -54,8 +54,8 @@ public class ServicioHistoriaClinicaImpl implements ServicioHistoriaClinica{
 	}
 
 	@Override
-	public void cargarHC(Usuario veterinario, Mascota mascota, String fecha, String diagnostico, String tratamiento) {
-		repositorioHistoriaClinica.cargarHC(veterinario, mascota, fecha, diagnostico, tratamiento);
+	public void cargarHC(HistoriaClinica hc) {
+		repositorioHistoriaClinica.cargarHC(hc);
 		
 	}
 	

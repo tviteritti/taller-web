@@ -15,6 +15,6 @@ public interface ServicioHistoriaClinica {
 	List<HistoriaClinica> listarHistoriaClinicaPorMascotaYVeterinario(Mascota mascota, Usuario veterinario);
 	List<HistoriaClinica> buscarHCPorMascota(Long idMascota);
 	List<HistoriaClinica> buscarHCPorMascotaYDuenio(Mascota mascota, Usuario duenio);
-	void cargarHC(Usuario veterinario, Mascota mascota, String fecha, String diagnostico, String tratamiento);
+	void cargarHC(HistoriaClinica hc);
 
 }

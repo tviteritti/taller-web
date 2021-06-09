@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.HistoriaClinica;
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
+import ar.edu.unlam.tallerweb1.modelo.TipoAnimal;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioHistoriaClinica;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMascotas;
@@ -78,7 +80,7 @@ public class ControladorVeterinario {
 	
 		@RequestMapping("/cargarHistoriaClinica")
 		public ModelAndView cargarHistoriaClinica(
-				
+
 		@RequestParam(value="mascota",required=false) Long idMascota,
 		@RequestParam(value="duenio",required=false) Long idDuenio,
 		@RequestParam(value="veterinario",required=false) Long idVeterinario		
@@ -92,8 +94,33 @@ public class ControladorVeterinario {
 		modelo.put("duenio", duenio);
 		modelo.put("mascota", mascota);
 		modelo.put("veterinario", veterinario);
+		List<TipoAnimal> tipos = servicioMascotas.listarTipoAnimal();
+		modelo.put("tipos",tipos);
+		
 		
 		return new ModelAndView("cargarHC",modelo);
+	}
+		
+		@RequestMapping("/actualizarHistoriaClinica")
+		public ModelAndView actualizarHistoriaClinica(
+				
+		@RequestParam(value="mascota",required=false) Long idMascota,
+		@RequestParam(value="duenio",required=false) Long idDuenio,
+		@RequestParam(value="veterinario",required=false) Long idVeterinario		
+				) {
+		
+			
+		ModelMap modelo = new ModelMap();
+		Usuario duenio = servicioUsuario.getUsuario(idDuenio);
+		Mascota mascota = servicioMascotas.obtenerMascota(idMascota);
+		Usuario veterinario = servicioUsuario.getUsuario(idVeterinario);
+		List<TipoAnimal> tipos = servicioMascotas.listarTipoAnimal();
+		modelo.put("duenio", duenio);
+		modelo.put("mascota", mascota);
+		modelo.put("veterinario", veterinario);
+		modelo.put("tipos",tipos);
+		
+		return new ModelAndView("actualizarHC",modelo);
 	}
 		
 		@RequestMapping("/guardarHistoriaClinica")
@@ -101,8 +128,19 @@ public class ControladorVeterinario {
 		@RequestParam(value="idDuenio",required=false) Long idDuenio,	
 		@RequestParam(value="idMascota",required=false) Long idMascota,
 		@RequestParam(value="idVeterinario",required=false) Long idVeterinario,
-		@RequestParam(value="fecha",required=false) String fecha,
-		@RequestParam(value="diagnostico",required=false) String diagnostico,	
+		@RequestParam(value="nombreMascota",required=false) String nombreMascota,
+		@RequestParam(value="fechaNacimiento",required=false) String fechaNacimientoMascota,
+		@RequestParam(value="tipoMascota",required=false) String tipoMascota,
+		@RequestParam(value="dNombre",required=false) String duenioNombre,
+		@RequestParam(value="dApellido",required=false) String duenioApellido,
+		@RequestParam(value="telefonoDuenio",required=false) String telefonoDuenio,
+		@RequestParam(value="emailDuenio",required=false) String emailDuenio,
+		@RequestParam(value="direccionDuenio",required=false) String direccionDuenio,
+		@RequestParam(value="localidadDuenio",required=false) String localidadDuenio,
+		@RequestParam(value="vNombre",required=false) String veterinarioNombre,
+		@RequestParam(value="vApellido",required=false) String veterinarioApellido,
+		@RequestParam(value="fechaHC",required=false) String fechaHC,
+		@RequestParam(value="diagnostico",required=false) String diagnostico,
 		@RequestParam(value="tratamiento",required=false) String tratamiento	
 				) {
 			
@@ -111,13 +149,23 @@ public class ControladorVeterinario {
 			Usuario veterinario = servicioUsuario.getUsuario(idVeterinario);
 			Usuario duenio = servicioUsuario.getUsuario(idDuenio);
 			
-			servicioHistoriaClinica.cargarHC(veterinario, mascota, fecha, diagnostico, tratamiento);
+			HistoriaClinica hc = new HistoriaClinica();
+			hc.setMascota(mascota);
+			hc.setFecha(fechaHC);
+			hc.setDiagnostico(diagnostico);
+			hc.setMascota(mascota);
+			hc.setTratamiento(tratamiento);
+			hc.setVeterinario(veterinario);
+		
+			servicioHistoriaClinica.cargarHC(hc);
 			
 			modelo.put("duenio", duenio);
 			modelo.put("mascota", mascota);
 			modelo.put("veterinario", veterinario);	
-			List<HistoriaClinica> hc = servicioHistoriaClinica.buscarHCPorMascota(idMascota);
 			modelo.put("hc", hc);
+			
+			List<HistoriaClinica> hcMascota = servicioHistoriaClinica.buscarHCPorMascota(idMascota);
+			modelo.put("hc", hcMascota);
 			
 			return new ModelAndView("historiaClinica", modelo);
 	}	

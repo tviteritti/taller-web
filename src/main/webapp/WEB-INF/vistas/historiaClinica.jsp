@@ -12,7 +12,7 @@
    
 
   <c:if test="${not empty hc}">		  
-	<form action="cargarHistoriaClinica" method="post">
+	<form action="actualizarHistoriaClinica" method="post">
 		 <p>Nombre Responsable: <p>${duenio.nombre}</p> </p>
 		 <p>Paciente: </p><p name="fechaNacimiento">${mascota.nombre}" <p/>	</p>
 		 <p>Fecha Nacimiento: </p>${mascota.fecha_nacimiento}</p> </p>
