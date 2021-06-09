@@ -22,7 +22,7 @@
       <br>
        Fecha de Nacimiento:
        <br>
-       <input type="date" name="fechaNacimiento">
+       <input type="date" name="fechaNacimiento" value="${mascota.fecha_nacimiento}">
        <br>
        Tipo de Animal:
        <br>
@@ -61,8 +61,8 @@
        <br>
        Localidad:
        <br>
-       <input type="text" name="localidadDuenio">
-       <input type="hidden" value="${duenio.id}" name="idDuenio" value="${duenio.direccion.localidad.descripcion}">
+       <input type="text" name="localidadDuenio" value="${duenio.direccion.localidad.descripcion}">
+       <input type="hidden" value="${duenio.id}" name="idDuenio" >
        <br>
       <label>Veterinario: </label>
        <br>
@@ -73,7 +73,7 @@
        Apellido:
        <br>
       <input type="text" name="vApellido" value="${veterinario.apellido}">
-      <input type="hidden" value="${veterinario.id}" name="idVeterinario">
+      <input type="hidden" name="idVeterinario" value="${veterinario.id}">
       <br>
       <label>Fecha: </label>
       <br>

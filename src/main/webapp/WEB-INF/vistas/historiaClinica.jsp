@@ -19,6 +19,7 @@
 		 <br>
 			<c:forEach items="${hc}" var="hc">
 			     <p>Cod: ${hc.id} </p>
+			     <p>Veterinario:  ${hc.veterinario.nombre} ${hc.veterinario.apellido}</p>
 				 <p>Fecha: <p> ${hc.fecha}</p></p>
 				 <br>
 				 <p>Diagnostico: <p>${hc.diagnostico}</p> </p>
