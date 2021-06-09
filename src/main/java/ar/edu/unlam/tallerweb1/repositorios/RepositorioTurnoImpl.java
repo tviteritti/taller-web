@@ -140,6 +140,30 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		 session.saveOrUpdate(turno);
 		
 	}
+	
+	
+	@Override
+	public List<Turno> buscarTurnoPorDuenio(Long id) {
+		List<Turno> turnos = sessionFactory.getCurrentSession()
+				 .createCriteria(Turno.class)
+				 .createAlias("duenio", "dBuscado")
+				 .add(Restrictions.eq("dBuscado.id", id))
+				 .add(Restrictions.eq("dBuscado.rol", "duenio"))
+				 .list();
+		return turnos;
+	}
+	
+	@Override
+	public List<Turno> buscarTurnoPorVeterinario(Long id) {
+		List<Turno> turnos = sessionFactory.getCurrentSession()
+				 .createCriteria(Turno.class)
+				 .createAlias("veterinario", "vBuscado")
+				 .add(Restrictions.eq("vBuscado.id", id))
+				 .add(Restrictions.eq("vBuscado.rol", "veterinario"))
+				 .list();
+		return turnos;
+	}
+	
 
 	@Override
 	public List<Turno> listarTurnosSinTomar() {
@@ -295,6 +319,8 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		
 		return dia.getDomingo();
 	}
+
+	
 
 
 

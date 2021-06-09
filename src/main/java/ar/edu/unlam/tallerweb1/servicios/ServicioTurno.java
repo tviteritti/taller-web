@@ -17,6 +17,8 @@ public interface ServicioTurno {
 	List<Usuario> obtenerVeterinariosPorZona(String zona);
 	
 	Turno obtenerTurno(Long id);
+	List<Turno> buscarTurnoPorDuenio(Long id);
+	List<Turno> buscarTurnoPorVeterinario(Long id);
 	List<Turno> obtenerTurnosPorVeterinario(Usuario veterinario);
 	List<Turno> obtenerTurnosPorEspecialidad(String servicio);
 	List<Turno> obtenerTurnosPorEspecialidadZonaYVeterinario(String servicio, String zona, Usuario veterinario);
