@@ -10,6 +10,6 @@ public interface RepositorioHistoriaClinica {
 	
 	List<HistoriaClinica> listarHistoriaClinicaPorMascotaYVeterinario(Mascota mascota, Usuario veterinario);
 	List<HistoriaClinica> obtenerHistoriaClinica();
-	void cargarHC(Usuario veterinario, Mascota mascota, String fecha, String diagnostico, String tratamiento);
+	void cargarHC(HistoriaClinica hc);
 
 }

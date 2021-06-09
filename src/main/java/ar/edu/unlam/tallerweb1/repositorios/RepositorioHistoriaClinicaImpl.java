@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.repositorios;
 
 import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Projections;
@@ -50,16 +51,10 @@ public class RepositorioHistoriaClinicaImpl implements RepositorioHistoriaClinic
 
 
 	@Override
-	public void cargarHC(Usuario veterinario, Mascota mascota, String fecha, String diagnostico, String tratamiento) {
+	public void cargarHC(HistoriaClinica hc) {
 		
-		HistoriaClinica hc = new HistoriaClinica();
-		hc.setMascota(mascota);
-		hc.setVeterinario(veterinario);
-		hc.setFecha(fecha);
-		hc.setDiagnostico(diagnostico);
-		hc.setTratamiento(tratamiento);
-		
-		sessionFactory.getCurrentSession().save(hc);
+		final Session session = sessionFactory.getCurrentSession();
+		 session.save(hc);
 		
 	}
 	
