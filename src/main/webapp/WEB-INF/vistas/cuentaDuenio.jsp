@@ -20,12 +20,12 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
   <h4>Hola ${usuario.user} esta es tu cuenta</h4>
   <h4>Turno</h4>
   
-    <form action="misTurnos" method="get">
+    <form action="misTurnos" method="post">
 	   <input type="hidden" name="duenioId" value="${usuario.id}"/>
 	    <button type="submit">mis turnos</button>
    </form>
    
-   <form action="buscarTurno" method="get">
+   <form action="buscarTurno" method="post">
    <input type="hidden" name="duenioId" value="${usuario.id}"/>
     <button type="submit">solicitar turno</button>
    </form>
