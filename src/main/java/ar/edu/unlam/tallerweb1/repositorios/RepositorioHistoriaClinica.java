@@ -11,5 +11,6 @@ public interface RepositorioHistoriaClinica {
 	List<HistoriaClinica> listarHistoriaClinicaPorMascotaYVeterinario(Mascota mascota, Usuario veterinario);
 	List<HistoriaClinica> obtenerHistoriaClinica();
 	void cargarHC(HistoriaClinica hc);
+	void eliminarHC(HistoriaClinica hc);
 
 }

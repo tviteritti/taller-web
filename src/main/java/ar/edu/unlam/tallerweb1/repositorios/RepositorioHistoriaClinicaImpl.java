@@ -53,8 +53,15 @@ public class RepositorioHistoriaClinicaImpl implements RepositorioHistoriaClinic
 	@Override
 	public void cargarHC(HistoriaClinica hc) {
 		
-		final Session session = sessionFactory.getCurrentSession();
+		final Session session = this.sessionFactory.getCurrentSession();
 		 session.save(hc);
+		
+	}
+	
+	@Override
+	public void eliminarHC(HistoriaClinica hc) {
+		
+		sessionFactory.getCurrentSession().delete(hc);
 		
 	}
 	
