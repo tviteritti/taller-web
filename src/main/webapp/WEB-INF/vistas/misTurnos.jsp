@@ -19,7 +19,7 @@
 					   <p>Fecha: </p><p name="fechaTurno"><c:out value="${t.fecha}" />	</p>
 					   <p>Hora: </p><p name="fechaHora"><c:out value="${t.horario}" />	</p>
 					   <p>Servicio: </p><p name="servicioTurno"><c:out value="${t.servicio}" />	</p>
-					   <p>Veterinario: </p><p name="veterinarioTurno"><c:out value="${t.veterinario}" /></p>
+					   <p>Veterinario: </p><p name="veterinarioTurno"><c:out value="${t.veterinario.nombre} ${t.veterinario.apellido}" /></p>
 					   <br>
 					   <input type="hidden" name="id_turno" value="${t.id}"/>
 					   <button type="submit">cancelar turno</button>
@@ -32,7 +32,7 @@
 	   <h3>Aun no posee turnos</h3>
 	   ¿Desea solicitar turno?
 	   <form action="buscarTurno" method="get">
-	      <input type="hidden" name="duenioId" value="${idUsuario}"/>
+	      <input type="hidden" name="duenioId" value="${duenio.id}"/>
 	     <button>solcitar turno</button>
 	   </form>
 	</c:if> 
