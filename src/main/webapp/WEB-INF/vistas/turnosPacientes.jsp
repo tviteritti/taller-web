@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,9 +17,9 @@
 					   <p>Fecha: </p><p name="fechaTurno"><c:out value="${t.fecha}" />	</p>
 					   <p>Hora: </p><p name="fechaHora"><c:out value="${t.horario}" />	</p>
 					   <p>Servicio: </p><p name="servicioTurno"><c:out value="${t.servicio}" />	</p>
-					   <p>Solicitado por: </p><p name="usuarioTurno"><c:out value="${t.duenio}" /></p>
+					   <p>Solicitado por: </p><p name="usuarioTurno"><c:out value="${t.duenio.nombre} ${t.duenio.apellido}" /></p>
 					   <br>
-					   <input type="hidden" name="paciente" value="${t.duenio}"/>
+					   <input type="hidden" name="paciente" value="${t.duenio.id}"/>
 					   <button type="submit">contactar</button>
 					</form>	     
 						  
