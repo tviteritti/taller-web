@@ -149,39 +149,26 @@ public class ServicioTurnoImpl implements ServicioTurno {
 
 
 	@Override
-	public List<Turno> buscarTurnoPorUsuario(Usuario usuario) {
+	public List<Turno> buscarTurnoPorUsuario(Long id) {
 		
 		List<Turno>turnos = repositorioTurno.listarTurnos();
 		
 		List<Turno>turnosEncontrados = new ArrayList<>();
 		
-		for(Turno turno : turnos){
-			
-			
-			if(usuario.getRol().equalsIgnoreCase("duenio")) {
+			for(Turno turno : turnos){
 				
-				if(turno.getDuenio().getId().equals(usuario.getId())) {
+				Long idBuscado = turno.getDuenio().getId();
+				
+			
+			  if(idBuscado.equals(id)) {
 					
 					turnosEncontrados.add(turno);
 					
 				}
 				
-			}else {
-				
-				
-				if(turno.getVeterinario().getId().equals(usuario.getId())) {
-					
-					turnosEncontrados.add(turno);
-					
-				}
-				
-				
-			}
-				
-	
+			
 		}
-	
-		
+
 		return turnosEncontrados;
 	}
 
@@ -770,6 +757,28 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	public void cargarTurno(Turno turno) {
 		repositorioTurno.cargarTurno(turno);
 		
+	}
+
+
+	@Override
+	public Turno obtenerTurno(Long id) {
+		 
+		List<Turno> turnos = repositorioTurno.listarTurnos();
+		
+		Turno turnoEncontrado = null;
+		
+		for(Turno turno :turnos) {
+			
+			if(turno.getId().equals(id)) {
+				
+				turnoEncontrado=turno;
+				break;
+				
+			}
+			
+		}
+		
+		return turnoEncontrado ;
 	}
 
 

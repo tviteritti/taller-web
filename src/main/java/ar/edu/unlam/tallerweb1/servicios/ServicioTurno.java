@@ -15,11 +15,12 @@ public interface ServicioTurno {
 	
 	List<Localidad> obtenerLocalidadesPorZona(String zona);
 	List<Usuario> obtenerVeterinariosPorZona(String zona);
-
+	
+	Turno obtenerTurno(Long id);
 	List<Turno> obtenerTurnosPorVeterinario(Usuario veterinario);
 	List<Turno> obtenerTurnosPorEspecialidad(String servicio);
 	List<Turno> obtenerTurnosPorEspecialidadZonaYVeterinario(String servicio, String zona, Usuario veterinario);
-	List<Turno> buscarTurnoPorUsuario(Usuario usuario);
+	List<Turno> buscarTurnoPorUsuario(Long id);
 	
 	
 	List<Mascota> obtenerMascotasPorTurno(Long idVeterinario);
