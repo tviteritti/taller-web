@@ -14,7 +14,7 @@
   <c:if test="${not empty hc}">		  
 	<form action="actualizarHistoriaClinica" method="post">
 		 <p>Nombre Responsable: <p>${duenio.nombre}</p> </p>
-		 <p>Paciente: </p><p name="fechaNacimiento">${mascota.nombre}" <p/>	</p>
+		 <p>Paciente: </p><p>${mascota.nombre}<p/>	</p>
 		 <p>Fecha Nacimiento: </p>${mascota.fecha_nacimiento}</p> </p>
 		 <br>
 			<c:forEach items="${hc}" var="hc">
