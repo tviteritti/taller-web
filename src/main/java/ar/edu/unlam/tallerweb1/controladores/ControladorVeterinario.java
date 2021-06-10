@@ -65,9 +65,9 @@ public class ControladorVeterinario {
 		ModelMap modelo = new ModelMap();
 		
 		List<HistoriaClinica> hc = servicioHistoriaClinica.buscarHCPorMascota(idMascota);
-		Usuario duenio = servicioUsuario.getUsuario(idDuenio);
+		Usuario duenio = servicioUsuario.getDuenio(idDuenio);
 		Mascota mascota = servicioMascotas.obtenerMascota(idMascota);
-		Usuario veterinario = servicioUsuario.getUsuario(idVeterinario);
+		Usuario veterinario = servicioUsuario.getVeterinario(idVeterinario);
 		
 		modelo.put("duenio", duenio);
 		modelo.put("mascota", mascota);
@@ -88,9 +88,9 @@ public class ControladorVeterinario {
 		
 			
 		ModelMap modelo = new ModelMap();
-		Usuario duenio = servicioUsuario.getUsuario(idDuenio);
+		Usuario duenio = servicioUsuario.getDuenio(idDuenio);
 		Mascota mascota = servicioMascotas.obtenerMascota(idMascota);
-		Usuario veterinario = servicioUsuario.getUsuario(idVeterinario);
+		Usuario veterinario = servicioUsuario.getVeterinario(idVeterinario);
 		modelo.put("duenio", duenio);
 		modelo.put("mascota", mascota);
 		modelo.put("veterinario", veterinario);
@@ -111,9 +111,9 @@ public class ControladorVeterinario {
 		
 			
 		ModelMap modelo = new ModelMap();
-		Usuario duenio = servicioUsuario.getUsuario(idDuenio);
+		Usuario duenio = servicioUsuario.getDuenio(idDuenio);
 		Mascota mascota = servicioMascotas.obtenerMascota(idMascota);
-		Usuario veterinario = servicioUsuario.getUsuario(idVeterinario);
+		Usuario veterinario = servicioUsuario.getVeterinario(idVeterinario);
 		List<TipoAnimal> tipos = servicioMascotas.listarTipoAnimal();
 		modelo.put("duenio", duenio);
 		modelo.put("mascota", mascota);
@@ -146,8 +146,8 @@ public class ControladorVeterinario {
 			
 			ModelMap modelo = new ModelMap();
 			Mascota mascota = servicioMascotas.obtenerMascota(idMascota);
-			Usuario veterinario = servicioUsuario.getUsuario(idVeterinario);
-			Usuario duenio = servicioUsuario.getUsuario(idDuenio);
+			Usuario veterinario = servicioUsuario.getVeterinario(idVeterinario);
+			Usuario duenio = servicioUsuario.getDuenio(idDuenio);
 			
 			HistoriaClinica hc = new HistoriaClinica();
 			hc.setMascota(mascota);
