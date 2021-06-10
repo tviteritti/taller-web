@@ -54,6 +54,7 @@ private ServicioUsuario servicioUsuario;
 		
 		modelo.put("zona", zona);
 		modelo.put("duenio", duenio);
+		modelo.put("duenioId", duenioId);
 		
 		return new ModelAndView("buscarTurno", modelo);
 	}
@@ -68,7 +69,7 @@ private ServicioUsuario servicioUsuario;
 		modelo.put("servicio", servicioSolicitado);
 		modelo.put("zona", zona);
 		
-		Usuario duenio = servicioUsuario.getUsuario(duenioId);
+		Usuario duenio = servicioUsuario.getDuenio(duenioId);
 		modelo.put("duenio", duenio);
 		
 		List<Usuario>veterinariosEncontrados = servicioUsuario.buscarVeterinariosPorEspecialidadYZona(servicioSolicitado, zona.getDescripcion());
@@ -106,14 +107,14 @@ private ServicioUsuario servicioUsuario;
 		
 		ModelMap modelo = new ModelMap();
 		
-		Usuario veterinario = servicioUsuario.getUsuario(veterinarioId);
+		Usuario veterinario = servicioUsuario.getVeterinario(veterinarioId);
+		
 		modelo.put("veterinario", veterinario);
 		
 		Usuario duenio = servicioUsuario.getUsuario(duenioId);
-		modelo.put("duenio", duenio);
 		
 		Mascota mascota = servicioMascotas.buscarMascotaPorDuenio(duenio);
-		modelo.put("mascota", mascota);
+		
 		
 		modelo.put("especialidad", servicioSolicitado);
 		modelo.put("localidad", localidad);
@@ -121,15 +122,17 @@ private ServicioUsuario servicioUsuario;
 		modelo.put("fecha", dia);
 		modelo.put("hora", hora);
 		
-		//Turno turno = new Turno();
-		Turno turno = servicioTurno.obtenerTurno(idTurno);
-		turno.setVeterinario(veterinario);
+		Turno turno = new Turno();
+		
+	
 		turno.setMascota(mascota);
 		turno.setDuenio(duenio);
-		turno.setServicio(servicioSolicitado);
-		//servicioTurno.asignarTurno(idTurno, servicioMascotas.buscarMascotaPorDuenio(duenio) , servicioUsuario.getUsuario(duenioId));
 		
-		//servicioTurno.cargarTurno(turno);
+		modelo.put("duenio", duenio);
+		modelo.put("mascota", mascota);
+		
+		
+		servicioTurno.cargarTurno(turno);
 		return new ModelAndView("turnoSolicitado", modelo);
 	}
 	
@@ -158,6 +161,23 @@ private ServicioUsuario servicioUsuario;
 		List<Turno> turnos = servicioTurno.buscarTurnoPorVeterinario(veterinarioId);
 		modelo.put("turnos", turnos);
 		return new ModelAndView("turnosPacientes", modelo);
+	}
+	
+	@RequestMapping(path = "contactarPaciente")
+	public ModelAndView contactarPaciente(
+	  @RequestParam(value="duenio",required=false) Long duenio
+			) {
+		
+		ModelMap modelo = new ModelMap();
+		Usuario duenioMascota = servicioUsuario.getDuenio(duenio);
+		
+		modelo.put("nombre", duenioMascota.getNombre());
+		modelo.put("apellido", duenioMascota.getApellido());
+		modelo.put("telefono", duenioMascota.getTelefono());
+		modelo.put("email", duenioMascota.getEmail());
+		modelo.put("direccion", duenioMascota.getDireccion());
+		
+		return new ModelAndView("datosContactoDuenio", modelo);
 	}
 	
 	
