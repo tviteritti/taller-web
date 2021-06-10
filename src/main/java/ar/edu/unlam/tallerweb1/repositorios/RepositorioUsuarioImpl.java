@@ -143,6 +143,29 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		
 	}
 
+	@Override
+	public Usuario getDuenio(Long id) {
+		Usuario duenio = (Usuario)sessionFactory.getCurrentSession()
+				 .createCriteria(Usuario.class)
+				 .add(Restrictions.eq("id", id))
+				 .add(Restrictions.eq("rol", "duenio"))
+				 .uniqueResult();
+		
+		return duenio;
+		
+	}
+
+	@Override
+	public Usuario getVeterinario(Long id) {
+		Usuario veterinario = (Usuario)sessionFactory.getCurrentSession()
+				 .createCriteria(Usuario.class)
+				 .add(Restrictions.eq("id", id))
+				 .add(Restrictions.eq("rol", "veterinario"))
+				 .uniqueResult();
+		
+		return veterinario;
+	}
+
 	
 
 }

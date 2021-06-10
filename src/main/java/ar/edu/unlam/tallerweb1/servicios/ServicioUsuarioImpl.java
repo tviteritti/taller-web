@@ -118,6 +118,18 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 		return veterinariosEncontrados;
 	}
 
+	@Override
+	public Usuario getDuenio(Long id) {
+		
+		return ServicioUsuarioDao.getDuenio(id);
+	}
+
+	@Override
+	public Usuario getVeterinario(Long id) {
+		
+		return ServicioUsuarioDao.getVeterinario(id);
+	}
+
 
 
 
