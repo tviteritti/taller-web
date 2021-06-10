@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -118,19 +119,14 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 	@Override
 	public void asignarTurno(Long idTurno, Mascota mascota , Usuario duenio) {
 		
-		    	 Turno turnoBuscado = (Turno) sessionFactory.getCurrentSession()
+		Turno turno = (Turno)sessionFactory.getCurrentSession()
 				 .createCriteria(Turno.class)
-				 .add(Restrictions.eq("id", idTurno))
+				 .add(Restrictions.eq( "id", idTurno))
 				 .uniqueResult();
-		    	 
-		    	 turnoBuscado.setMascota(mascota);
-		    	 turnoBuscado.setDuenio(duenio);
-		    	 
-		    	
-		    	sessionFactory.getCurrentSession().save(turnoBuscado);
-		    	 //turnoBuscado.setEstado("no disponible");
-		    	
-		    	
+		
+		    	 turno.setMascota(mascota);
+		    	 turno.setDuenio(duenio);
+	    	
 	}
 	
 	@Override
