@@ -13,13 +13,13 @@
 			<br>
 			 <c:forEach items="${turnos}" var="t">
 			  
-					<form action="cancelarTurno" method="post">
+					<form action="contactarPaciente" method="post">
 					   <p>Fecha: </p><p name="fechaTurno"><c:out value="${t.fecha}" />	</p>
 					   <p>Hora: </p><p name="fechaHora"><c:out value="${t.horario}" />	</p>
 					   <p>Servicio: </p><p name="servicioTurno"><c:out value="${t.servicio}" />	</p>
 					   <p>Solicitado por: </p><p name="usuarioTurno"><c:out value="${t.duenio.nombre} ${t.duenio.apellido}" /></p>
 					   <br>
-					   <input type="hidden" name="paciente" value="${t.duenio.id}"/>
+					   <input type="hidden" name="duenio" value="${t.duenio.id}"/>
 					   <button type="submit">contactar</button>
 					</form>	     
 						  
