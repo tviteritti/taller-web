@@ -48,8 +48,8 @@
 				  		</c:url>
 				  		
 					  	<tr>
-					  		<td>${usuario.email}</td>
-					  		<td>${turno.veterinario}</td>
+					  		<td>${turno.veterinario.user}</td>
+					  		<td>${turno.veterinario.email}</td>
 					  		<td>${turno.fecha}</td>
 					  		<td>${turno.horario}</td>
 					  		<td>${turno.servicio}</td>

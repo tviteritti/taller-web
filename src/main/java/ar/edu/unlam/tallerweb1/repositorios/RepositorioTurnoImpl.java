@@ -167,8 +167,6 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		List<Turno> turnos = null;
 		turnos = (List<Turno>) sessionFactory.getCurrentSession()
 				 .createCriteria(Turno.class)
-				 .createAlias("veterinario", "vet")
-				 .add(Restrictions.eq( "vet.id", 1L))
 				 .add(Restrictions.eq( "estado", estado))
 				 .list();
 		
