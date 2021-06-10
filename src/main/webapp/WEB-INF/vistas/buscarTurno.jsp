@@ -32,7 +32,7 @@
 			 </form:select>
 			      
 			      <br><br>
-			  <input type="hidden" value="${duenio.id}" name="idDuenio">
+			  <input type="hidden" value="${duenioId}" name="idDuenio">
 		      <button type="submit">Buscar turno</button>
 		      
      </form:form>
