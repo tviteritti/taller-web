@@ -36,7 +36,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
    <h4>Consultas</h4>
    <a href="consultar">realizar consulta</a>
    <br><br>
-  <a href="loginVeterinaria">cerrar sesion</a>
+  <a href="cerrarSesion">cerrar sesion</a>
   
  
  	<!-- Optional JavaScript -->

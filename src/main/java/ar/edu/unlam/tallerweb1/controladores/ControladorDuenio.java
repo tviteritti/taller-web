@@ -56,7 +56,7 @@ public class ControladorDuenio {
 			@RequestParam(value="nombre",required=false) String nombre) throws ParseException {
 		
 		
-		servicioMascota.cargarMascota(id_tipo, 1L, fecha_nac, nombre);
+		servicioMascota.cargarMascota(id_tipo, id_duenio, fecha_nac, nombre);
 		
 		ModelMap modelo = new ModelMap();
 		

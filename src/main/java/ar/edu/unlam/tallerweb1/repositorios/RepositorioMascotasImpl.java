@@ -68,4 +68,12 @@ public class RepositorioMascotasImpl implements RepositorioMascotas{
 		session.save(mascota);
 		
 	}
+
+	@Override
+	public List<Mascota> listarMascotasPorDuenio(Usuario id_duenio) {
+		
+		return (List<Mascota>) sessionFactory.getCurrentSession()
+				 .createCriteria(Mascota.class)
+				 .add(Restrictions.eq("duenio", id_duenio)).list();
+	}
 }

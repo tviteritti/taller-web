@@ -275,8 +275,8 @@ public class ServicioTurnoImpl implements ServicioTurno {
 
 
 	@Override
-	public void tomarTurno(Long id, Usuario duenio) {
-		repositorioTurno.tomarTurno(id, duenio);
+	public void tomarTurno(Long id_turno, Long id_mascota) {
+		repositorioTurno.tomarTurno(id_turno, id_mascota);
 		
 	}
 

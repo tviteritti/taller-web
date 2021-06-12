@@ -207,16 +207,22 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 	}
 
 	@Override
-	public void tomarTurno(Long id, Usuario duenio) {
+	public void tomarTurno(Long id_turno, Long id_mascota) {
 		final Session session = sessionFactory.getCurrentSession();
 		
 		Turno turno = new Turno();
 		turno = (Turno)sessionFactory.getCurrentSession()
 				 .createCriteria(Turno.class)
-				 .add(Restrictions.eq( "id", id))
+				 .add(Restrictions.eq( "id", id_turno))
 				 .uniqueResult();
 		
-		turno.setDuenio(duenio);
+		Mascota mascota = new Mascota();
+		mascota = (Mascota)sessionFactory.getCurrentSession()
+				 .createCriteria(Mascota.class)
+				 .add(Restrictions.eq( "id", id_mascota))
+				 .uniqueResult();
+		
+		turno.setMascota(mascota);
 		turno.setEstado(true);
 		session.saveOrUpdate(turno);
 		

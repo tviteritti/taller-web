@@ -42,7 +42,7 @@ public interface ServicioTurno {
 	List<Turno> listarTurnosSinTomar();
 	Usuario devolverVeterinarioDeunDia(Long id_dia);
 	Horarios devolverDialunes(Long id_dia);
-	void tomarTurno(Long id, Usuario duenio);
+	void tomarTurno(Long id_turno, Long id_mascota);
 	
 	void generarTurnoPorIdDiaLunes(Long id);
 	void generarTurnoPorIdDiaMartes(Long id);

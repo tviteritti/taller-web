@@ -26,7 +26,7 @@
    </form>
    
    <br><br>
-  <a href="loginVeterinaria">cerrar sesion</a>
+  <a href="cerrarSesion">cerrar sesion</a>
   
 
 </body>

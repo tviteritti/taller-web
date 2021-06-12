@@ -19,11 +19,12 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.modelo.Dias;
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Horarios;
+import ar.edu.unlam.tallerweb1.modelo.Mascota;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDias;
 import ar.edu.unlam.tallerweb1.servicios.ServicioHorarios;
-
+import ar.edu.unlam.tallerweb1.servicios.ServicioMascotas;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTurno;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
@@ -34,15 +35,17 @@ public class ControladorLoginVeterinaria {
 	private ServicioHorarios servicioHorarios;
 	private ServicioDias servicioDias;
 	private ServicioTurno servicioTurno;
+	private ServicioMascotas servicioMascota;
 
 	
 	@Autowired
-	public ControladorLoginVeterinaria(ServicioUsuario servicioVeterinario, ServicioHorarios servicioHorarios, ServicioDias servicioDias, ServicioTurno servicioTurno) {
+	public ControladorLoginVeterinaria(ServicioUsuario servicioVeterinario, ServicioHorarios servicioHorarios, ServicioDias servicioDias, ServicioTurno servicioTurno, ServicioMascotas servicioMascota) {
 		
 		this.servicioUsuario = servicioVeterinario;	
 		this.servicioHorarios = servicioHorarios;
 		this.servicioDias = servicioDias;
 		this.servicioTurno = servicioTurno;
+		this.servicioMascota = servicioMascota;
 	}
 	
 	
@@ -103,6 +106,12 @@ public class ControladorLoginVeterinaria {
 	@RequestMapping("/cuentaVeterinario")
 	public ModelAndView mostrarCuentaVeterinario() {
 		return new ModelAndView("cuentaVeterinario");
+	}
+	
+	@RequestMapping("/cerrarSesion")
+	public ModelAndView cerrarSesion(HttpServletRequest request) {
+		request.getSession().invalidate();
+		return new ModelAndView("redirect:/loginVeterinaria");
 	}
 
 	/*---------------------------------------- REGISTRAR USUARIO ---------------------------------------------*/
@@ -345,17 +354,37 @@ public class ControladorLoginVeterinaria {
 	public ModelAndView procesarDatosSesion(
 			@RequestParam(value="id_turno",required=false) Long id,
 			@RequestParam(value="user",required=false) String user,
-			@RequestParam(value="password",required=false) String password){
+			@RequestParam(value="password",required=false) String password,
+			HttpServletRequest request){
 			ModelMap modelo = new ModelMap();
 		
 			if(servicioUsuario.buscarUsuario(user, password)) {
 				Usuario duenio = servicioUsuario.devolverUsuario(user, password);
-				servicioTurno.tomarTurno(id, duenio);
-				return new ModelAndView("redirect:/loginVeterinaria");
+				request.getSession().setAttribute("idUsuarioTurno", duenio);
+				
+				return new ModelAndView("redirect:/mascotaAEligir");
 			}else {
 				modelo.put("error", "usuario no encontrado");
 			}
 		return new ModelAndView("formVerificarSesion",modelo);
 	}
 	
+	@RequestMapping("/mascotaAEligir")
+	public ModelAndView mascotaAEligir(HttpServletRequest request) {
+		ModelMap modelo = new ModelMap();
+		List<Mascota> listaDeMascotas = servicioMascota.listarMascotasPorDuenio((Usuario)request.getSession().getAttribute("idUsuarioTurno"));
+		System.out.println(listaDeMascotas);
+		modelo.put("listaDeMascotas", listaDeMascotas);
+	return new ModelAndView("listarMascotas", modelo);
+	}
+	
+	@RequestMapping("/procesarMascota")
+	public ModelAndView procesarMascota(
+			@RequestParam("id_mascotas") Long id_mascota,
+			@RequestParam(value="id_turno",required=false) Long id_turno) {
+		
+		servicioTurno.tomarTurno(id_turno, id_mascota);
+		
+	return new ModelAndView("redirect:/loginVeterinaria");
+	}
 }
