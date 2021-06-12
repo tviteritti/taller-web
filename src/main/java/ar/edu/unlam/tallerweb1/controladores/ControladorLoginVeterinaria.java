@@ -360,7 +360,7 @@ public class ControladorLoginVeterinaria {
 		
 			if(servicioUsuario.buscarUsuario(user, password)) {
 				Usuario duenio = servicioUsuario.devolverUsuario(user, password);
-				request.getSession().setAttribute("idUsuarioTurno", duenio);
+				request.getSession().setAttribute("UsuarioTurno", duenio);
 				
 				return new ModelAndView("redirect:/mascotaAEligir");
 			}else {
@@ -373,7 +373,7 @@ public class ControladorLoginVeterinaria {
 	public ModelAndView mascotaAEligir(HttpServletRequest request) {
 		ModelMap modelo = new ModelMap();
 		List<Mascota> listaDeMascotas = servicioMascota.listarMascotasPorDuenio((Usuario)request.getSession().getAttribute("idUsuarioTurno"));
-		System.out.println(listaDeMascotas);
+		
 		modelo.put("listaDeMascotas", listaDeMascotas);
 	return new ModelAndView("listarMascotas", modelo);
 	}

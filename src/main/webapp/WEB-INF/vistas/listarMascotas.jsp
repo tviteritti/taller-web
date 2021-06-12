@@ -27,7 +27,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
                     </div><br>
                     <div class="input-group p-2">
                     	 <select class="form-control" name="id_mascotas">
-					       <option >Seleccione la especie</option> 
+					       <option >Seleccione su mascota</option> 
 					       <c:forEach items="${listaDeMascotas}" var="mascota">
 					          <option value="${mascota.id}">${mascota.nombre}</option>
 					       </c:forEach>
