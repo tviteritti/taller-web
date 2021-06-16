@@ -360,7 +360,7 @@ public class ControladorLoginVeterinaria {
 		
 			if(servicioUsuario.buscarUsuario(user, password)) {
 				Usuario duenio = servicioUsuario.devolverUsuario(user, password);
-				request.getSession().setAttribute("UsuarioTurno", duenio);
+				request.getSession().setAttribute("idUsuarioTurno", duenio);
 				
 				return new ModelAndView("redirect:/mascotaAEligir");
 			}else {

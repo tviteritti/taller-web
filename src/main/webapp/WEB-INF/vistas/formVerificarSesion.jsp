@@ -34,7 +34,8 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
                     </div>
                     <div class="input-group p-2">
                         <input type="password" class="form-control" name="password" placeholder="contraseña"/>
-                    </div><br>                   
+                    </div><br>  
+                    <a href="registrarUsuario">¿no tines cuenta? registrarse</a>                 
                     <br>
                     <br>
                     <input type="submit" class="btn btn-success w-100" value="registrar">

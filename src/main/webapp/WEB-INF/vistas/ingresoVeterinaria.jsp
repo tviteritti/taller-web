@@ -31,7 +31,9 @@
 	  				<thead class="thead-inverse">
 	  					<tr>
 	  						<th>nombre</th>
-					  		<th>veterinario</th>
+	  						<th>apellido</th>
+	  						<th>telefono</th>
+					  		<th>email</th>
 					  		<th>fecha</th>
 					  		<th>horario</th>
 					  		<th>servicio</th>
@@ -48,7 +50,9 @@
 				  		</c:url>
 				  		
 					  	<tr>
-					  		<td>${turno.veterinario.user}</td>
+					  		<td>${turno.veterinario.nombre}</td>
+					  		<td>${turno.veterinario.apellido}</td>
+					  		<td>${turno.veterinario.telefono}</td>
 					  		<td>${turno.veterinario.email}</td>
 					  		<td>${turno.fecha}</td>
 					  		<td>${turno.horario}</td>

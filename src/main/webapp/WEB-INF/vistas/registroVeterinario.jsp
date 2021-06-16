@@ -34,6 +34,15 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
                         <form:input class="form-control" placeholder="email" path="email"/>
                     </div>
                     <div class="input-group p-2">
+                        <form:input class="form-control" path="nombre" placeholder="nombre"/>
+                    </div>
+                    <div class="input-group p-2">
+                        <form:input class="form-control" path="apellido" placeholder="apellido"/>
+                    </div>
+                    <div class="input-group p-2">
+                        <form:input class="form-control" path="telefono" placeholder="telefono"/>
+                    </div>
+                    <div class="input-group p-2">
                         <form:input class="form-control" placeholder="user" path="user"/>
                     </div>
                     <div class="input-group p-2">
