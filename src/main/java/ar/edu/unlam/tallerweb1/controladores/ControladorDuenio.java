@@ -33,14 +33,24 @@ public class ControladorDuenio {
 
 	
 	@Autowired
-	public ControladorDuenio( ServicioUsuario servuicioDuenio, ServicioMascotas servicioMascota) {
+	public ControladorDuenio( ServicioUsuario servicioDuenio, ServicioMascotas servicioMascota) {
 		
 		this.servicioDuenio = servicioDuenio;	
 		this.servicioMascota = servicioMascota;
 	}
 	
+	@RequestMapping("/verPerfil")
+	public ModelAndView verPerfil(
+			@RequestParam(value="duenioId",required=false) Long idDuenio) {
+			ModelMap modelo = new ModelMap();
+			Usuario duenio = servicioDuenio.getDuenio(idDuenio);
+			modelo.put("duenio", duenio);
+
+		return new ModelAndView("perfil", modelo);
+	}
+	
 	@RequestMapping("/cargarMascota")
-	public ModelAndView registrarVeterinario() {
+	public ModelAndView cargarMascota() {
 			ModelMap modelo = new ModelMap();
 			List<TipoAnimal> listadoTipos=servicioMascota.listarTipoAnimal();
 			modelo.put("listadoTipos", listadoTipos);

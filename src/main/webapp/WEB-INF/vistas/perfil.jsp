@@ -1,49 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Hola!</title>
-
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
   <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
 integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<title>Insert title here</title>
 </head>
 <body>
- <h4>Hola ${usuario.user} esta es tu cuenta</h4>
- <br>
-    <form action="verPerfil" method="post">
-	   <input type="hidden" name="duenioId" value="${usuario.id}"/>
-	    <button type="submit">ver Perfil</button>
-   </form>
-   <br><br>
- 
-  <h4>Turno</h4>
-  
-    <form action="misTurnos" method="post">
-	   <input type="hidden" name="duenioId" value="${usuario.id}"/>
-	    <button type="submit">mis turnos</button>
-   </form>
-   
-   <form action="buscarTurno" method="post">
-   <input type="hidden" name="duenioId" value="${usuario.id}"/>
-    <button type="submit">solicitar turno</button>
-   </form>
-  
-   <a href="cargarMascota">cargar mascota</a>
-  
-   <br><br>
-   <h4>Consultas</h4>
-   <a href="consultar">realizar consulta</a>
-   <br><br>
-  <a href="cerrarSesion">cerrar sesion</a>
-  
- 
- 	<!-- Optional JavaScript -->
+    <h4>Mi perfil</h4>
+    <br>
+    <form action="modificarPerfil" method="post">
+     nombre:<br>
+     <input type="text" value="${duenio.nombre}" name ="nombre">
+     <br>
+     apellido:<br>
+     <input type="text" value="${duenio.apellido}" name ="apellido">
+     <br>
+     email:<br>
+     <input type="text" value="${duenio.email}" name ="email">
+     <br>
+     telefono:<br>
+     <input type="text" value="${duenio.telefono}" name ="telefono">
+     <br>
+      Direccion:
+      <br>
+      calle:
+     <input type="text" value="${duenio.direccion.calle}" name ="calle">
+     <br>
+      nro:
+     <input type="text" value="${duenio.direccion.numero}" name ="numero">
+     <br>
+      Localidad:
+     <input type="text" value="${duenio.direccion.localidad.descripcion}" name ="localidad">
+     <br>
+     <button type="submit">modificar</button>
+    </form>
+    
+    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
