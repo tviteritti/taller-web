@@ -116,6 +116,47 @@ public class RepositorioPlanesImpl implements RepositorioPlanes{
 		
 	}
 
+	@Override
+	public Planes devolverPlanDeDuenio(Usuario duenio) {
+
+		ContratacionPlanes contratacion = (ContratacionPlanes) sessionFactory.getCurrentSession()
+				 .createCriteria(ContratacionPlanes.class)
+				 .add(Restrictions.eq("duenio", duenio)).uniqueResult();
+		Planes plan = contratacion.getPlan();
+		
+		return plan;
+	}
+
+	@Override
+	public ContratacionPlanes devolverContratacionDeDuenio(Usuario duenio) {
+		ContratacionPlanes contratacion = (ContratacionPlanes) sessionFactory.getCurrentSession()
+				 .createCriteria(ContratacionPlanes.class)
+				 .add(Restrictions.eq("duenio", duenio)).uniqueResult();
+		return contratacion;
+	}
+
+	@Override
+	public ContratacionPlanes devolverContratacionPorId(Long id) {
+		
+		ContratacionPlanes contratacion = (ContratacionPlanes) sessionFactory.getCurrentSession()
+				 .createCriteria(ContratacionPlanes.class)
+				 .add(Restrictions.eq("id", id)).uniqueResult();
+		return contratacion;
+	}
+
+	@Override
+	public void aumentarTurnosTomados(Long idContratacion) {
+		final Session session = sessionFactory.getCurrentSession();
+		ContratacionPlanes contratacion = (ContratacionPlanes) sessionFactory.getCurrentSession()
+				 .createCriteria(ContratacionPlanes.class)
+				 .add(Restrictions.eq("id", idContratacion)).uniqueResult();
+		Integer turnosTomados = contratacion.getCantidadTurnosTomados();
+		turnosTomados++;
+		
+		contratacion.setCantidadTurnosTomados(turnosTomados);
+		session.saveOrUpdate(contratacion);
+	}
+
 
 
 

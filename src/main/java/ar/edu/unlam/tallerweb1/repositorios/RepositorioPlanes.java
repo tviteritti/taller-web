@@ -12,5 +12,9 @@ public interface RepositorioPlanes {
 	List<ContratacionPlanes> listarContrataciones();
 	void accederPlan(Long planId, Long duenioId);
 	void pagarPlan(Long contratacionId);
-
+	Planes devolverPlanDeDuenio(Usuario duenio);
+	ContratacionPlanes devolverContratacionDeDuenio(Usuario duenio);
+	ContratacionPlanes devolverContratacionPorId(Long id);
+	void aumentarTurnosTomados(Long idContratacion);
+	
 }

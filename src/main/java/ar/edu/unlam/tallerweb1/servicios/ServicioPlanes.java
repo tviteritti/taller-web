@@ -13,4 +13,7 @@ public interface ServicioPlanes {
 	Boolean mostrarPlanesOContrataciones(Usuario duenio);
 	void accederPlan(Long planId, Long duenioId);
 	void pagarPlan(Long contratacionId);
+	Planes devolverPlanDeDuenio(Usuario duenio);
+	ContratacionPlanes devolverContratacionDeDuenio(Usuario duenio);
+	void aumentarTurnosTomados(Long idContratacion);
 }

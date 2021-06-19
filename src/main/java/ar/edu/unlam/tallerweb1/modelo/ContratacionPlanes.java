@@ -22,6 +22,8 @@ public class ContratacionPlanes {
 	@ManyToOne
 	private Planes plan;
 	
+	private Integer cantidadTurnosTomados=0;
+	
 	@Temporal(TemporalType.DATE)
 	private Date desde;
 	@Temporal(TemporalType.DATE)
@@ -103,6 +105,12 @@ public class ContratacionPlanes {
 	}
 	public void setFechaPagoExtra(Date fechaPagoExtra) {
 		this.fechaPagoExtra = fechaPagoExtra;
+	}
+	public Integer getCantidadTurnosTomados() {
+		return cantidadTurnosTomados;
+	}
+	public void setCantidadTurnosTomados(Integer cantidadTurnosTomados) {
+		this.cantidadTurnosTomados = cantidadTurnosTomados;
 	}
 	
 	

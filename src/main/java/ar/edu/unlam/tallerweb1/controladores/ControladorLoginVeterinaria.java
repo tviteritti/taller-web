@@ -376,9 +376,16 @@ public class ControladorLoginVeterinaria {
 		
 			if(servicioUsuario.buscarUsuario(user, password)) {
 				Usuario duenio = servicioUsuario.devolverUsuario(user, password);
+				Planes plan = servicioPlanes.devolverPlanDeDuenio(duenio);
+				ContratacionPlanes cotratacion = servicioPlanes.devolverContratacionDeDuenio(duenio);
 				request.getSession().setAttribute("idUsuarioTurno", duenio);
+				request.getSession().setAttribute("idcotratacion", cotratacion.getId());
+				if(cotratacion.getCantidadTurnosTomados()<plan.getCantidadTurnos()) {
+					return new ModelAndView("redirect:/mascotaAEligir");
+				}else {
+					modelo.put("error", "excede el limite de turnos");
+				}
 				
-				return new ModelAndView("redirect:/mascotaAEligir");
 			}else {
 				modelo.put("error", "usuario no encontrado");
 			}
@@ -397,9 +404,10 @@ public class ControladorLoginVeterinaria {
 	@RequestMapping("/procesarMascota")
 	public ModelAndView procesarMascota(
 			@RequestParam("id_mascotas") Long id_mascota,
-			@RequestParam(value="id_turno",required=false) Long id_turno) {
+			@RequestParam(value="id_turno",required=false) Long id_turno, HttpServletRequest request){
 		
 		servicioTurno.tomarTurno(id_turno, id_mascota);
+		servicioPlanes.aumentarTurnosTomados((Long)request.getSession().getAttribute("idcotratacion"));
 		
 	return new ModelAndView("redirect:/loginVeterinaria");
 	}

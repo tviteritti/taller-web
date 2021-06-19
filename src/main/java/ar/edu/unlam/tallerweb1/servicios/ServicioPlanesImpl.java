@@ -58,6 +58,22 @@ public class ServicioPlanesImpl implements ServicioPlanes{
 		
 	}
 
+	@Override
+	public Planes devolverPlanDeDuenio(Usuario duenio) {
+		return servicioPlanesDao.devolverPlanDeDuenio(duenio);
+	}
+
+	@Override
+	public ContratacionPlanes devolverContratacionDeDuenio(Usuario duenio) {
+		return servicioPlanesDao.devolverContratacionDeDuenio(duenio);
+	}
+
+	@Override
+	public void aumentarTurnosTomados(Long idContratacion) {
+		servicioPlanesDao.aumentarTurnosTomados(idContratacion);
+		
+	}
+
 
 
 }
