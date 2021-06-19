@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,6 +36,25 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
    </form>
   
    <a href="cargarMascota">cargar mascota</a>
+   
+   <div>
+   		<c:forEach var="plan" items="${listaPlanes}">
+   		
+   			<c:url var="linkTomarUnPlan" value="/tomarUnPlan">
+				 <c:param name="planId" value="${plan.id }"/>	
+				 <c:param name="duenioId" value="${usuario.id}"/>
+			</c:url>
+			
+   			<div>
+   				<p>${plan.descripcion}</p>
+   				<p>Duracion: ${plan.duracion} meses</p>
+   				<p>cantidad de turnos: ${plan.cantidadTurnos} turnos</p>
+   				<p>Precio: ${plan.precio} $</p>
+   				<a href="${linkTomarUnPlan }"><input type="button" value="tomar plan" 
+   				onClick="if(!(confirm('¿Estas seguro que quieres tomar este plan?'))) return false"/></a>
+   			</div>	
+   		</c:forEach>
+   </div>
   
    <br><br>
    <h4>Consultas</h4>

@@ -20,11 +20,13 @@ import ar.edu.unlam.tallerweb1.modelo.Dias;
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Horarios;
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
+import ar.edu.unlam.tallerweb1.modelo.Planes;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDias;
 import ar.edu.unlam.tallerweb1.servicios.ServicioHorarios;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMascotas;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPlanes;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTurno;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
@@ -36,16 +38,18 @@ public class ControladorLoginVeterinaria {
 	private ServicioDias servicioDias;
 	private ServicioTurno servicioTurno;
 	private ServicioMascotas servicioMascota;
+	private ServicioPlanes servicioPlanes;
 
 	
 	@Autowired
-	public ControladorLoginVeterinaria(ServicioUsuario servicioVeterinario, ServicioHorarios servicioHorarios, ServicioDias servicioDias, ServicioTurno servicioTurno, ServicioMascotas servicioMascota) {
+	public ControladorLoginVeterinaria(ServicioUsuario servicioVeterinario, ServicioHorarios servicioHorarios, ServicioDias servicioDias, ServicioTurno servicioTurno, ServicioMascotas servicioMascota, ServicioPlanes servicioPlanes) {
 		
 		this.servicioUsuario = servicioVeterinario;	
 		this.servicioHorarios = servicioHorarios;
 		this.servicioDias = servicioDias;
 		this.servicioTurno = servicioTurno;
 		this.servicioMascota = servicioMascota;
+		this.servicioPlanes = servicioPlanes;
 	}
 	
 	
@@ -86,6 +90,7 @@ public class ControladorLoginVeterinaria {
 			
 			
 			if(usuario.getRol().equals("duenio")) {
+				
 				return new ModelAndView("redirect:/cuentaDuenio");    /*no funciona*/
 			}else{
 				return new ModelAndView("redirect:/cuentaVeterinario");
@@ -100,7 +105,10 @@ public class ControladorLoginVeterinaria {
 	
 	@RequestMapping("/cuentaDuenio")
 	public ModelAndView mostrarCuentaUsuario() {
-		return new ModelAndView("cuentaDuenio");
+		List<Planes> listaPlanes=servicioPlanes.listarPlanes();
+		ModelMap modelo = new ModelMap();
+		modelo.put("listaPlanes", listaPlanes);
+		return new ModelAndView("cuentaDuenio", modelo);
 	}
 	
 	@RequestMapping("/cuentaVeterinario")
