@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.modelo.ContratacionPlanes;
 import ar.edu.unlam.tallerweb1.modelo.Dias;
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Horarios;
@@ -104,10 +105,17 @@ public class ControladorLoginVeterinaria {
 	}
 	
 	@RequestMapping("/cuentaDuenio")
-	public ModelAndView mostrarCuentaUsuario() {
-		List<Planes> listaPlanes=servicioPlanes.listarPlanes();
+	public ModelAndView mostrarCuentaUsuario(HttpServletRequest request) {
 		ModelMap modelo = new ModelMap();
-		modelo.put("listaPlanes", listaPlanes);
+		Usuario duenio = (Usuario) request.getSession().getAttribute("usuario");
+		if(servicioPlanes.mostrarPlanesOContrataciones(duenio)) {
+			List<ContratacionPlanes> listaContrataciones=servicioPlanes.listarContrataciones();
+			modelo.put("listaContrataciones", listaContrataciones);
+		}else {
+			List<Planes> listaPlanes=servicioPlanes.listarPlanes();			
+			modelo.put("listaPlanes", listaPlanes);
+		}
+		
 		return new ModelAndView("cuentaDuenio", modelo);
 	}
 	

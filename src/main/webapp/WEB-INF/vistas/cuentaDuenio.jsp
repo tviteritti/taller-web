@@ -38,22 +38,61 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
    <a href="cargarMascota">cargar mascota</a>
    
    <div>
-   		<c:forEach var="plan" items="${listaPlanes}">
+   		<c:if test = "${listaContrataciones eq null}">
+   			<c:forEach var="plan" items="${listaPlanes}">
    		
-   			<c:url var="linkTomarUnPlan" value="/tomarUnPlan">
-				 <c:param name="planId" value="${plan.id }"/>	
-				 <c:param name="duenioId" value="${usuario.id}"/>
-			</c:url>
-			
-   			<div>
-   				<p>${plan.descripcion}</p>
-   				<p>Duracion: ${plan.duracion} meses</p>
-   				<p>cantidad de turnos: ${plan.cantidadTurnos} turnos</p>
-   				<p>Precio: ${plan.precio} $</p>
-   				<a href="${linkTomarUnPlan }"><input type="button" value="tomar plan" 
-   				onClick="if(!(confirm('¿Estas seguro que quieres tomar este plan?'))) return false"/></a>
-   			</div>	
-   		</c:forEach>
+			   	<c:url var="linkTomarUnPlan" value="/tomarUnPlan">
+					<c:param name="planId" value="${plan.id }"/>	
+					<c:param name="duenioId" value="${usuario.id}"/>
+				</c:url>
+						
+			   	<div>
+			   		<p>${plan.descripcion}</p>
+			   		<p>Duracion: ${plan.duracion} meses</p>
+			   		<p>cantidad de turnos: ${plan.cantidadTurnos} turnos</p>
+			   		<p>Precio: ${plan.precio} $</p>
+			   		<a href="${linkTomarUnPlan }"><input type="button" value="tomar plan" 
+			   		onClick="if(!(confirm('¿Estas seguro que quieres tomar este plan?'))) return false"/></a>
+			   	</div>	
+   			</c:forEach>
+   		</c:if>
+   		<c:forEach var="contrataciones" items="${listaContrataciones}">
+		 	<c:choose>
+				  <c:when test="${contrataciones.duenio.id == usuario.id}">
+				  	<c:if test = "${contrataciones.valor != contrataciones.pago}">
+				  		<c:url var="linkPagarPlan" value="/pagarPlan">
+							 <c:param name="contratacionId" value="${contrataciones.id }"/>	
+						</c:url>
+				   		<p>valor a pagar = ${contrataciones.valor} $</p>
+				   		<a href="${linkPagarPlan }"><input type="button" value="pagar plan" 
+			   			onClick="if(!(confirm('¿Estas seguro que quieres pagar?'))) return false"/></a>
+			   		</c:if>
+			   		<c:if test = "${contrataciones.valor == contrataciones.pago}">
+			   			<p>${usuario.user} se encuentra al dia con respecto al pago del ${contrataciones.plan.descripcion}, recuerde el plan vence el dia ${contrataciones.hasta}</p>			   			
+			   		</c:if>
+				  </c:when>
+				  <c:when test="${contrataciones.duenio.id != usuario.id}">
+				    <c:forEach var="plan" items="${listaPlanes}">
+   		
+			   			<c:url var="linkTomarUnPlan" value="/tomarUnPlan">
+							 <c:param name="planId" value="${plan.id }"/>	
+							 <c:param name="duenioId" value="${usuario.id}"/>
+						</c:url>
+						
+			   			<div>
+			   				<p>${plan.descripcion}</p>
+			   				<p>Duracion: ${plan.duracion} meses</p>
+			   				<p>cantidad de turnos: ${plan.cantidadTurnos} turnos</p>
+			   				<p>Precio: ${plan.precio} $</p>
+			   				<a href="${linkTomarUnPlan }"><input type="button" value="tomar plan" 
+			   				onClick="if(!(confirm('¿Estas seguro que quieres tomar este plan?'))) return false"/></a>
+			   			</div>	
+   					</c:forEach>
+				 </c:when>
+			</c:choose>
+		</c:forEach>
+		
+   		
    </div>
   
    <br><br>

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPlanes;
 
 @Controller
@@ -25,6 +26,14 @@ public class ControladorPlanes {
 	public ModelAndView tomarUnPlan(@RequestParam("planId") Long planId, @RequestParam("duenioId") Long duenioId, HttpServletRequest request) {
 		//request.getSession().setAttribute("id_turno", planId);
 		servicioPlanes.accederPlan(planId, duenioId);
+		
+	return new ModelAndView("redirect:/cuentaDuenio");
+	}
+	
+	@RequestMapping("/pagarPlan")
+	public ModelAndView pagarPlan(@RequestParam("contratacionId") Long contratacionId) {
+		
+		servicioPlanes.pagarPlan(contratacionId);
 		
 	return new ModelAndView("redirect:/cuentaDuenio");
 	}

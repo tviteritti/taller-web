@@ -1,5 +1,8 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -31,6 +34,15 @@ public class RepositorioPlanesImpl implements RepositorioPlanes{
 				 .list();
 		return planes;
 	}
+	
+	@Override
+	public List<ContratacionPlanes> listarContrataciones() {
+		
+		List<ContratacionPlanes> contrataciones = (List<ContratacionPlanes>) sessionFactory.getCurrentSession()
+				 .createCriteria(ContratacionPlanes.class)
+				 .list();
+		return contrataciones;
+	}
 
 	@Override
 	public void accederPlan(Long planId, Long duenioId) {
@@ -51,12 +63,62 @@ public class RepositorioPlanesImpl implements RepositorioPlanes{
 		
 		ContratacionPlanes contratacion = new ContratacionPlanes();
 		
+		LocalDate fechaActual =  LocalDate.now();
+		ZoneId defaultZoneId = ZoneId.systemDefault();		/*PASO LOCALDATE DATE*/
+		Date dateDesde = Date.from(fechaActual.atStartOfDay(defaultZoneId).toInstant());
+		
+		
+		LocalDate fechaHasta =  LocalDate.now();
+		
+		switch (plan.getDuracion()) {
+		case 1:
+		fechaHasta =  LocalDate.now().plusMonths(1);
+			break;
+		case 2:
+		fechaHasta =  LocalDate.now().plusMonths(2);
+			break;
+		case 3:
+		fechaHasta =  LocalDate.now().plusMonths(3);
+			break;
+
+		default:
+			break;
+		}
+		
+		Date dateHasta = Date.from(fechaHasta.atStartOfDay(defaultZoneId).toInstant());
+		
+		
 		contratacion.setDuenio(duenio);
 		contratacion.setPlan(plan);
+		contratacion.setDesde(dateDesde);
+		contratacion.setHasta(dateHasta);
+		contratacion.setValor(plan.getPrecio());
 		
 		session.saveOrUpdate(contratacion);
 		
 	}
+
+	@Override
+	public void pagarPlan(Long contratacionId) {
+		final Session session = sessionFactory.getCurrentSession();
+		
+		ContratacionPlanes contratacion = (ContratacionPlanes) sessionFactory.getCurrentSession()
+			 .createCriteria(ContratacionPlanes.class)
+			 .add(Restrictions.eq("id", contratacionId)).uniqueResult();
+		
+		LocalDate fechaActual =  LocalDate.now();
+		ZoneId defaultZoneId = ZoneId.systemDefault();		/*PASO LOCALDATE DATE*/
+		Date date = Date.from(fechaActual.atStartOfDay(defaultZoneId).toInstant());
+		
+		contratacion.setPago(contratacion.getValor());
+		contratacion.setFechaPago(date);
+		session.saveOrUpdate(contratacion);
+		
+	}
+
+
+
+
 	
 	
 	

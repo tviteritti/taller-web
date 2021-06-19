@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ar.edu.unlam.tallerweb1.modelo.ContratacionPlanes;
 import ar.edu.unlam.tallerweb1.modelo.Planes;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioMascotas;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPlanes;
 
@@ -26,11 +28,36 @@ public class ServicioPlanesImpl implements ServicioPlanes{
 	public List<Planes> listarPlanes() {
 		return servicioPlanesDao.listarPlanes();
 	}
+	
+	@Override
+	public List<ContratacionPlanes> listarContrataciones() {
+		return servicioPlanesDao.listarContrataciones();
+	}
 
 	@Override
 	public void accederPlan(Long planId, Long duenioId) {
 		servicioPlanesDao.accederPlan(planId, duenioId);
 		
 	}
+
+	@Override
+	public Boolean mostrarPlanesOContrataciones(Usuario duenio) {
+		List<ContratacionPlanes> contrataciones = servicioPlanesDao.listarContrataciones();
+		
+		for (ContratacionPlanes contratacionPlanes : contrataciones) {
+			if(contratacionPlanes.getDuenio().getId() == duenio.getId()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public void pagarPlan(Long contratacionId) {
+		servicioPlanesDao.pagarPlan(contratacionId);
+		
+	}
+
+
 
 }
