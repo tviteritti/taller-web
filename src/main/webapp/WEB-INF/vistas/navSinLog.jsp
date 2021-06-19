@@ -4,7 +4,10 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>VETERINARIA</title>
+<script src="https://kit.fontawesome.com/b883f5a3c0.js" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -12,7 +15,12 @@
 	    <span class="navbar-toggler-icon"></span>
 	  </button>
 	  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-	    <a class="navbar-brand" href="#">Logo</a>
+	 	<h3 style="font-family: 'Ubuntu', sans-serif">VETERINARIA</h3> 
+	    <a class="navbar-brand" href="loginVeterinaria"> 
+	    <i class="fas fa-heartbeat display-5 text-info" style="font-size:30px"></i>
+	   
+	    </a>
+	   
 	    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 	      <li class="nav-item active">
 	        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>

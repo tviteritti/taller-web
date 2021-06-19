@@ -13,95 +13,79 @@
   <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
 integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/b883f5a3c0.js" crossorigin="anonymous"></script>
 </head>
 <body>
- <h4>Hola ${usuario.user} esta es tu cuenta</h4>
- <br>
-    <form action="verPerfil" method="post">
-	   <input type="hidden" name="duenioId" value="${usuario.id}"/>
-	    <button type="submit">ver Perfil</button>
-   </form>
-   <br><br>
- 
-  <h4>Turno</h4>
-  
-    <form action="misTurnos" method="post">
-	   <input type="hidden" name="duenioId" value="${usuario.id}"/>
-	    <button type="submit">mis turnos</button>
-   </form>
+
+	<div class="card text-center">
+	<div class="row card-header">
+	    	<div class="col-3"> <i class="fas fa-home display-6"></i></div>
+	    	<div class="col-3">  <i class="fas fa-bell display-6"></i></div>
+	    	<div class="col-3"><i class="fas fa-moon"></i></div>
+	    	<div class="col-3">
+		    	<a href="cerrarSesion" class="text-decoration-none">cerrar sesion
+		    		<i class="fas fa-sign-out-alt display-5"></i>
+		    	</a>
+	    	</div>
+	    	<div class="border-bottom"></div>
+	    </div>
+	    <nav class="navbar navbar-dark bg-dark">
+	
+		<ul class="navbar-nav mr-auto d-flex flex-row">
+	      <li class="nav-item d-inline mr-5">
+	       
+	        <form action="mascota" method="post">
+	          <input type="hidden" name="duenioId" value="${usuario.id}"/>
+	          <button type="submit" class="btn btn-link text-decoration-none text-white-50">Mi mascota</button>
+	        </form>
+	      </li>
+	      <li class="nav-item d-inline mr-5">
+	        
+	        <form action="turnos" method="post">
+	          <input type="hidden" name="duenioId" value="${usuario.id}"/>
+	          <button type="submit" class="btn btn-link text-decoration-none text-white-50">Turnos</button>
+	        </form>
+	      </li>
+	      <br>
+	      <li class="nav-item d-inline mr-5">
+	      <form action="planes" method="post">
+	          <input type="hidden" name="duenioId" value="${usuario.id}"/>
+	          <button type="submit" class="btn btn-link text-decoration-none text-white-50">Planes</button>
+	        </form>
+	       
+	      </li>
+	      <br>
+	      <li class="nav-item d-inline mr-5">
+	        <form action="consultas" method="post">
+	          <input type="hidden" name="duenioId" value="${usuario.id}"/>
+	          <button type="submit" class="btn btn-link text-decoration-none text-white-50">Consultas</button>
+	        </form>
+	      </li>
+       </ul>
+	   
+	</nav>
+	  <div class="card-header">
+	    
+	    
+	    <h3 class="card-title">Hola ${usuario.user} esta es tu cuenta</h3>
+	  
+	  
+	    
+	  </div>
+	  <div class="card-body">
+	    <p class="card-text">Aca podes agregar una descripcion</p>
+	    <form action="verPerfil" method="post">
+		   <input type="hidden" name="duenioId" value="${usuario.id}"/>
+		   <div class="text-center display-4" >
+		   <i class="fas fa-user"></i>
+		   </div>
+		    <button type="submit" class="btn btn-success">Ver perfil</button>
+	   </form>
+	  </div>
+	</div>
+
+ 	
    
-   <form action="buscarTurno" method="post">
-   <input type="hidden" name="duenioId" value="${usuario.id}"/>
-    <button type="submit">solicitar turno</button>
-   </form>
-  
-   <a href="cargarMascota">cargar mascota</a>
-   
-   <div>
-   		<c:if test = "${listaContrataciones eq null}">
-   			<c:forEach var="plan" items="${listaPlanes}">
-   		
-			   	<c:url var="linkTomarUnPlan" value="/tomarUnPlan">
-					<c:param name="planId" value="${plan.id }"/>	
-					<c:param name="duenioId" value="${usuario.id}"/>
-				</c:url>
-						
-			   	<div>
-			   		<p>${plan.descripcion}</p>
-			   		<p>Duracion: ${plan.duracion} meses</p>
-			   		<p>cantidad de turnos: ${plan.cantidadTurnos} turnos</p>
-			   		<p>Precio: ${plan.precio} $</p>
-			   		<a href="${linkTomarUnPlan }"><input type="button" value="tomar plan" 
-			   		onClick="if(!(confirm('¿Estas seguro que quieres tomar este plan?'))) return false"/></a>
-			   	</div>	
-   			</c:forEach>
-   		</c:if>
-   		<c:forEach var="contrataciones" items="${listaContrataciones}">
-		 	<c:choose>
-				  <c:when test="${contrataciones.duenio.id == usuario.id}">
-				  	<c:if test = "${contrataciones.valor != contrataciones.pago}">
-				  		<c:url var="linkPagarPlan" value="/pagarPlan">
-							 <c:param name="contratacionId" value="${contrataciones.id }"/>	
-						</c:url>
-				   		<p>valor a pagar = ${contrataciones.valor} $</p>
-				   		<a href="${linkPagarPlan }"><input type="button" value="pagar plan" 
-			   			onClick="if(!(confirm('¿Estas seguro que quieres pagar?'))) return false"/></a>
-			   		</c:if>
-			   		<c:if test = "${contrataciones.valor == contrataciones.pago}">
-			   			<p>${usuario.user} se encuentra al dia con respecto al pago del ${contrataciones.plan.descripcion}, recuerde el plan vence el dia ${contrataciones.hasta}</p>			   			
-			   		</c:if>
-				  </c:when>
-				  <c:when test="${contrataciones.duenio.id != usuario.id}">
-				    <c:forEach var="plan" items="${listaPlanes}">
-   		
-			   			<c:url var="linkTomarUnPlan" value="/tomarUnPlan">
-							 <c:param name="planId" value="${plan.id }"/>	
-							 <c:param name="duenioId" value="${usuario.id}"/>
-						</c:url>
-						
-			   			<div>
-			   				<p>${plan.descripcion}</p>
-			   				<p>Duracion: ${plan.duracion} meses</p>
-			   				<p>cantidad de turnos: ${plan.cantidadTurnos} turnos</p>
-			   				<p>Precio: ${plan.precio} $</p>
-			   				<a href="${linkTomarUnPlan }"><input type="button" value="tomar plan" 
-			   				onClick="if(!(confirm('¿Estas seguro que quieres tomar este plan?'))) return false"/></a>
-			   			</div>	
-   					</c:forEach>
-				 </c:when>
-			</c:choose>
-		</c:forEach>
-		
-   		
-   </div>
-  
-   <br><br>
-   <h4>Consultas</h4>
-   <a href="consultar">realizar consulta</a>
-   <br><br>
-  <a href="cerrarSesion">cerrar sesion</a>
-  
- 
  	<!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 

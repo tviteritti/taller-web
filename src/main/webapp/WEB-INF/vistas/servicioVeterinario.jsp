@@ -7,71 +7,76 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Encontra el especialista y solicita un turno</title>
+ <!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/b883f5a3c0.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <h2>Encontra el especialista y solicita un turno</h2>
+  <h4 class="text-center container p-5">Encontra el especialista y solicita un turno</h4>
   
 
 			     <c:forEach items="${veterinarios}" var="v">
 			     
 				     <form action="generarTurno" method="post">
-					    <p> 
-					   	 <c:out value="${v.nombre} ${v.apellido}" />
+			
+					   	
 					   	 <input type="hidden" name="veterinarioId" value="${v.id}"/>
-					    </p>
-					    <p>Calificacion</p>
-					    <p>Descripcion: </p>
-					    <p>
-					    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat.
-					    </p>
-	
-					    <p>Ubicacion:</p> <p >
-					    <c:out value="${v.direccion.calle} ${v.direccion.numero}"/>
-					   
-					     <input type="hidden" name="direccion" value="${v.direccion.calle} ${v.direccion.numero}" >
-					    </p>
-					    <p >
-					     ${v.direccion.localidad.descripcion}
-					     <input type="hidden" name="localidad" value=" ${v.direccion.localidad.descripcion}">
-					    </p>
+					  
 					    
-					    <input type="hidden" value="${servicio}" name="servicio">
-					    <input type="hidden" value="${zona}" name="zona">
+					    <div class="jumbotron container p-3" style="width:50%">
+							  <h5 class="text-center"> <c:out value="${v.nombre} ${v.apellido}" /></h5>
+							  <a class="btn btn-info container" href="#" >ver perfil</a>
+							  <p class="lead">
+							   <p><p>Calificacion</p>
+							  <hr class="my-4">
+							  <p>Ubicacion: <c:out value="${v.direccion.calle} ${v.direccion.numero}"/> , ${v.direccion.localidad.descripcion} </p>
+							  
+						     <input type="hidden" name="direccion" value="${v.direccion.calle} ${v.direccion.numero}" >
+						     <input type="hidden" name="localidad" value=" ${v.direccion.localidad.descripcion}">
+						    <input type="hidden" value="${servicio}" name="servicio">
+						    <input type="hidden" value="${zona}" name="zona">
+						     <hr class="my-4">
 					    <p>Turnos</p>
-					    <br>
 					     <c:forEach items="${turnosPorVT}" var="t">
 					     
 						     <c:if test="${t.veterinario.id eq v.id}">
-						         
-						         
+						     
 						        <input type="radio" name="turno" id="turno"/>
 							    <input type="hidden" name="idTurno" value="${t.id}">
 							    
 							    <label for="turno">
 							      <p>Fecha: 
-							        <p >
+							       
 							         <c:out value="${t.fecha}" />
 							         <input type="hidden" value="${t.fecha}" name="fecha">
-							         </p> 
-							       </p>
-							      <p>Hora: 
-							        <p > 
+							  
+							      Hora: 
+							       
 							           <c:out value="${t.horario}" />
 							           <input type="hidden" value="${t.horario}" name="hora"> 
-							         </p> 
+							         
 							     </p>
 							    </label><br>
 							 
 							</c:if>      
 					    </c:forEach>
 					    <input type="hidden" value="${duenio.id}" name="idDuenio">
-					    <button type="submit">solicitar turno</button>
+					    <button type="submit" class="btn btn-primary">solicitar turno</button>
+					    </div>
   					</form>
   					<br>
   					
 				</c:forEach>
+				
+	<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" 
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>			
+				
 </body>
 </html>

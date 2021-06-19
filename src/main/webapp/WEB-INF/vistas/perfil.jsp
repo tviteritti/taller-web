@@ -7,36 +7,47 @@
   <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
 integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<title>Insert title here</title>
+<title>Mi perfil</title>
 </head>
 <body>
-    <h4>Mi perfil</h4>
+    <h4 class="text-center container p-2">Mi perfil</h4>
     <br>
-    <form action="modificarPerfil" method="post">
-     nombre:<br>
-     <input type="text" value="${duenio.nombre}" name ="nombre">
-     <br>
-     apellido:<br>
-     <input type="text" value="${duenio.apellido}" name ="apellido">
-     <br>
-     email:<br>
-     <input type="text" value="${duenio.email}" name ="email">
-     <br>
-     telefono:<br>
-     <input type="text" value="${duenio.telefono}" name ="telefono">
-     <br>
-      Direccion:
-      <br>
-      calle:
-     <input type="text" value="${duenio.direccion.calle}" name ="calle">
-     <br>
-      nro:
-     <input type="text" value="${duenio.direccion.numero}" name ="numero">
-     <br>
-      Localidad:
-     <input type="text" value="${duenio.direccion.localidad.descripcion}" name ="localidad">
-     <br>
-     <button type="submit">modificar</button>
+    
+    <form action="modificarPerfil" method="post" class="container">
+    	<div class="row  container">
+    	
+    		<div class="col">
+    		
+    		Nombre:<br>
+	    	<input type="text" value="${duenio.nombre}" class="form-control" name ="nombre">
+    		
+    		
+    			Apellido:<br>
+	     	  <input type="text" value="${duenio.apellido}" class="form-control" name ="apellido">
+    		 </div>
+    		 <div class="col">
+    			Email:<br>
+	     		<input type="text" value="${duenio.email}" class="form-control" name ="email">
+    		
+    			Telefono:<br>
+	     		<input type="text" value="${duenio.telefono}" class="form-control" name ="telefono">
+    		 </div>
+    		 <div class="col">
+		      Calle:
+		     <input type="text" value="${duenio.direccion.calle}" class="form-control" name ="calle">
+		      Nro:
+		     <input type="text" value="${duenio.direccion.numero}" class="form-control" name ="numero">
+    		</div>
+    		<div class="col">	
+    		 Localidad:
+	    	 <input type="text" value="${duenio.direccion.localidad.descripcion}" class="form-control" name ="localidad">
+    		</div>
+	   
+    	</div>
+       <br>
+       <div class="container">
+     <button type="submit" class="btn btn-success btn-lg">MODIFICAR</button>
+     </div>
     </form>
     
     <!-- Optional JavaScript -->
