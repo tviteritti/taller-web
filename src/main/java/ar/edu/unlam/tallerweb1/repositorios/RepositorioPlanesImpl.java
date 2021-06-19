@@ -157,6 +157,25 @@ public class RepositorioPlanesImpl implements RepositorioPlanes{
 		session.saveOrUpdate(contratacion);
 	}
 
+	@Override
+	public void aumentarValorExtra(Long idContratacion, Double costo) {
+		final Session session = sessionFactory.getCurrentSession();
+		ContratacionPlanes contratacion = (ContratacionPlanes) sessionFactory.getCurrentSession()
+				 .createCriteria(ContratacionPlanes.class)
+				 .add(Restrictions.eq("id", idContratacion)).uniqueResult();
+		
+		Double sumaCosto = costo;
+		Double CostoBd = 0.0;
+		if(contratacion.getValorExtra() == null) {
+			CostoBd = 0.0;
+		}else {
+			CostoBd = contratacion.getValorExtra();
+		}
+		sumaCosto += CostoBd;
+		contratacion.setValorExtra(sumaCosto);
+		session.saveOrUpdate(contratacion);
+	}
+
 
 
 

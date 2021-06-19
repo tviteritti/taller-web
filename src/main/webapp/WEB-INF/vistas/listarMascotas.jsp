@@ -16,11 +16,21 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 </head>
 <body>
   
+
+  
+
+  
   <div class="container">
         <div class="row vh-100 justify-content-center align-items-center">
             <div class="col-auto bg-light p-5">
                 <form action="procesarMascota" method="POST" >
-                	<div class="input-group p-2">
+                <div class="input-group p-2">
+                  	<c:if test = "${errorExede != null}">	
+				  		<p>${error}</p>
+				  		<p>si continua se le acreditaran a la cuota $$$</p>
+				  		<a href="loginVeterinaria">volver al inicio</a>
+  					 </c:if>
+                	 </div><br>
                         <h3>Elija su mascota</h3>
                    	<div class="input-group p-2">
                         <input type="hidden" name="id_turno" value="${id_turno }"/>
@@ -36,7 +46,6 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
                     <br>
                     <br>
                     <input type="submit" class="btn btn-success w-100" value="registrar">
-            		<h4><span>${error}</span></h4>
      			</form>             
 			</div>
 		</div>

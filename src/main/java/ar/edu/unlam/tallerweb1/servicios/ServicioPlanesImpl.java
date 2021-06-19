@@ -74,6 +74,12 @@ public class ServicioPlanesImpl implements ServicioPlanes{
 		
 	}
 
+	@Override
+	public void aumentarValorExtra(Long idContratacion, Double costo) {
+		servicioPlanesDao.aumentarValorExtra(idContratacion, costo);
+		
+	}
+
 
 
 }

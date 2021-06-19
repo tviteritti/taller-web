@@ -16,4 +16,5 @@ public interface ServicioPlanes {
 	Planes devolverPlanDeDuenio(Usuario duenio);
 	ContratacionPlanes devolverContratacionDeDuenio(Usuario duenio);
 	void aumentarTurnosTomados(Long idContratacion);
+	void aumentarValorExtra(Long idContratacion, Double costo);
 }

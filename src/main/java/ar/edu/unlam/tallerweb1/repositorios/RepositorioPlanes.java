@@ -16,5 +16,6 @@ public interface RepositorioPlanes {
 	ContratacionPlanes devolverContratacionDeDuenio(Usuario duenio);
 	ContratacionPlanes devolverContratacionPorId(Long id);
 	void aumentarTurnosTomados(Long idContratacion);
+	void aumentarValorExtra(Long idContratacion, Double costo);
 	
 }
