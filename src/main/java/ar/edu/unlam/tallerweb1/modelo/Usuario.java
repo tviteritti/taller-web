@@ -25,6 +25,7 @@ public class Usuario {
 	private String nombre;
 	private String apellido;
 	private String telefono;
+	private Double precioSesion;
 	private byte[] foto;
 	
 	@ManyToOne
@@ -98,5 +99,11 @@ public class Usuario {
 	}
 	public void setFoto(byte[] foto) {
 		this.foto = foto;
+	}
+	public Double getPrecioSesion() {
+		return precioSesion;
+	}
+	public void setPrecioSesion(Double precioSesion) {
+		this.precioSesion = precioSesion;
 	}
 }

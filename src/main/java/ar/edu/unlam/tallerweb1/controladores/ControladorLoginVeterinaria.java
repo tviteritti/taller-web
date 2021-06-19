@@ -380,6 +380,7 @@ public class ControladorLoginVeterinaria {
 				ContratacionPlanes cotratacion = servicioPlanes.devolverContratacionDeDuenio(duenio);
 				request.getSession().setAttribute("idUsuarioTurno", duenio);
 				request.getSession().setAttribute("idcotratacion", cotratacion.getId());
+				request.getSession().setAttribute("veterinarioTurno", servicioTurno.devolverVeterinarioDeunTurno(id));
 				if(cotratacion.getCantidadTurnosTomados()<plan.getCantidadTurnos()) {
 					return new ModelAndView("redirect:/mascotaAEligir");
 				}else {
@@ -408,9 +409,11 @@ public class ControladorLoginVeterinaria {
 			@RequestParam("id_mascotas") Long id_mascota,
 			@RequestParam(value="id_turno",required=false) Long id_turno, HttpServletRequest request){
 		
+		Usuario vet = (Usuario) request.getSession().getAttribute("veterinarioTurno");
+		
 		servicioTurno.tomarTurno(id_turno, id_mascota);
 		if(request.getSession().getAttribute("errorExede") != null) {
-			servicioPlanes.aumentarValorExtra((Long)request.getSession().getAttribute("idcotratacion"),1500.0);
+			servicioPlanes.aumentarValorExtra((Long)request.getSession().getAttribute("idcotratacion"),vet.getPrecioSesion());
 		}else {
 			servicioPlanes.aumentarTurnosTomados((Long)request.getSession().getAttribute("idcotratacion"));
 		}

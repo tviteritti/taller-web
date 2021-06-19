@@ -27,7 +27,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
                 <div class="input-group p-2">
                   	<c:if test = "${errorExede != null}">	
 				  		<p>${error}</p>
-				  		<p>si continua se le acreditaran a la cuota $$$</p>
+				  		<p>si continua se le acreditaran a la cuota $$$</p><br>
 				  		<a href="loginVeterinaria">volver al inicio</a>
   					 </c:if>
                 	 </div><br>

@@ -320,6 +320,18 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		return dia.getDomingo();
 	}
 
+	@Override
+	public Usuario devolverVeterinarioDeunTurno(Long id_turno) {
+		Turno turno = new Turno();
+		
+		turno = (Turno)sessionFactory.getCurrentSession()
+				 .createCriteria(Turno.class)
+				 .add(Restrictions.eq( "id", id_turno))
+				 .uniqueResult();
+		return turno.getVeterinario();
+		 
+	}
+
 	
 
 

@@ -46,6 +46,9 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
                         <form:input class="form-control" placeholder="user" path="user"/>
                     </div>
                     <div class="input-group p-2">
+                        <form:input type="number" class="form-control" placeholder="precio de una Sesion" path="precioSesion"/>
+                    </div>
+                    <div class="input-group p-2">
                         <form:input class="form-control" placeholder="password" path="password"/>
                     </div>
                      <div class="input-group p-2">

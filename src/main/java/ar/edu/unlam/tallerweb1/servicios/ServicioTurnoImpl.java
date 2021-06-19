@@ -794,6 +794,12 @@ public class ServicioTurnoImpl implements ServicioTurno {
 		return repositorioTurno.buscarTurnoPorVeterinario(id);
 	}
 
+
+	@Override
+	public Usuario devolverVeterinarioDeunTurno(Long id_turno) {
+		return repositorioTurno.devolverVeterinarioDeunTurno(id_turno);
+	}
+
 	
 
 

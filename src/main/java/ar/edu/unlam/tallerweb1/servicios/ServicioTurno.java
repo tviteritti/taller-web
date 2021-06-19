@@ -26,7 +26,7 @@ public interface ServicioTurno {
 	
 	
 	List<Mascota> obtenerMascotasPorTurno(Long idVeterinario);
-	
+	Usuario devolverVeterinarioDeunTurno(Long id_turno);
 
 	
 	Boolean comprobarTurnoExistente(Usuario duenio,Mascota mascota, Usuario veterinario);
