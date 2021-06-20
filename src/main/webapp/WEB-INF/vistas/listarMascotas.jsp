@@ -25,8 +25,13 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
             <div class="col-auto bg-light p-5">
                 <form action="procesarMascota" method="POST" >
                 <div class="input-group p-2">
+                	<c:if test = "${errorSinPlan != null}">
+                		<div class="input-group p-1"><p>${errorSinPlan}. </p></div>
+                		<div class="input-group p-1"><p> Si continua se le acreditaran a la cuota ${veterinarioTurno.precioSesion} $. </p></div>
+				  		<div class="input-group p-1"><p><a href="loginVeterinaria">volver al inicio</a></p></div>
+                	</c:if>
                   	<c:if test = "${errorExede != null}">
-                  		<div class="input-group p-1"><p>${errorExede}. </p>	</div>
+                  		<div class="input-group p-1"><p>${errorExede}. </p></div>
 				  		<div class="input-group p-1"><p> Si continua se le acreditaran a la cuota ${veterinarioTurno.precioSesion} $. </p></div>
 				  		<div class="input-group p-1"><p><a href="loginVeterinaria">volver al inicio</a></p></div>				  		
   					 </c:if>

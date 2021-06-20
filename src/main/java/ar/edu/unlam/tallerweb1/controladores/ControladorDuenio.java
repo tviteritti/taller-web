@@ -87,10 +87,12 @@ public class ControladorDuenio {
 		ModelMap modelo = new ModelMap();
 		
 		Usuario duenio1 = (Usuario) request.getSession().getAttribute("usuario");
-		if(servicioPlanes.mostrarPlanesOContrataciones(duenio1)) {
+		if(!servicioPlanes.mostrarPlanesOContrataciones(duenio1)) {
 			List<ContratacionPlanes> listaContrataciones=servicioPlanes.listarContrataciones();
 			modelo.put("listaContrataciones", listaContrataciones);
 		}else {
+			List<ContratacionPlanes> listaContrataciones=servicioPlanes.listarContrataciones();
+			modelo.put("listaContrataciones", listaContrataciones);
 			List<Planes> listaPlanes=servicioPlanes.listarPlanes();			
 			modelo.put("listaPlanes", listaPlanes);
 		}

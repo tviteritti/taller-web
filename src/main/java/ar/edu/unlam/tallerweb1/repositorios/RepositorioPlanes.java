@@ -14,9 +14,11 @@ public interface RepositorioPlanes {
 	void pagarPlan(Long contratacionId);
 	void pagarPlanExtra(Long contratacionId);
 	Planes devolverPlanDeDuenio(Usuario duenio);
+	Boolean verificarSiTienePlanVigente(Usuario duenio);
 	ContratacionPlanes devolverContratacionDeDuenio(Usuario duenio);
 	ContratacionPlanes devolverContratacionPorId(Long id);
 	void aumentarTurnosTomados(Long idContratacion);
 	void aumentarValorExtra(Long idContratacion, Double costo);
+	void aumentarValorExtraSinPLan(Usuario duenio, Double costo);
 	
 }

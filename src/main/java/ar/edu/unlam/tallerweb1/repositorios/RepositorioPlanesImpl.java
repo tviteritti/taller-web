@@ -139,17 +139,36 @@ public class RepositorioPlanesImpl implements RepositorioPlanes{
 
 		ContratacionPlanes contratacion = (ContratacionPlanes) sessionFactory.getCurrentSession()
 				 .createCriteria(ContratacionPlanes.class)
-				 .add(Restrictions.eq("duenio", duenio)).uniqueResult();
+				 .add(Restrictions.eq("duenio", duenio))
+				 .add(Restrictions.isNotNull("valor"))
+				 .uniqueResult();
 		Planes plan = contratacion.getPlan();
 		
 		return plan;
+	}
+	
+	@Override
+	public Boolean verificarSiTienePlanVigente(Usuario duenio) {
+
+		ContratacionPlanes contratacion = (ContratacionPlanes) sessionFactory.getCurrentSession()
+				 .createCriteria(ContratacionPlanes.class)
+				 .add(Restrictions.eq("duenio", duenio))
+				 .add(Restrictions.isNotNull("valor"))
+				.uniqueResult();
+		
+		if(contratacion == null) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public ContratacionPlanes devolverContratacionDeDuenio(Usuario duenio) {
 		ContratacionPlanes contratacion = (ContratacionPlanes) sessionFactory.getCurrentSession()
 				 .createCriteria(ContratacionPlanes.class)
-				 .add(Restrictions.eq("duenio", duenio)).uniqueResult();
+				 .add(Restrictions.eq("duenio", duenio))
+				 .add(Restrictions.isNotNull("valor"))
+				 .uniqueResult();
 		return contratacion;
 	}
 
@@ -193,6 +212,36 @@ public class RepositorioPlanesImpl implements RepositorioPlanes{
 		contratacion.setValorExtra(sumaCosto);
 		session.saveOrUpdate(contratacion);
 	}
+
+	@Override
+	public void aumentarValorExtraSinPLan(Usuario duenio, Double costo) {
+		final Session session = sessionFactory.getCurrentSession();
+		ContratacionPlanes contratacion = (ContratacionPlanes) sessionFactory.getCurrentSession()
+				 .createCriteria(ContratacionPlanes.class)
+				 .add(Restrictions.eq("duenio", duenio)).uniqueResult();
+		
+		if(contratacion == null) {
+			ContratacionPlanes contratacionNueva = new ContratacionPlanes();
+			contratacionNueva.setValorExtra(costo);
+			contratacionNueva.setDuenio(duenio);
+			session.saveOrUpdate(contratacionNueva);
+		}else {
+			
+			Double sumaCosto = costo;
+			Double CostoBd = 0.0;
+			if(contratacion.getValorExtra() == null) {
+				CostoBd = 0.0;
+			}else {
+				CostoBd = contratacion.getValorExtra();
+			}
+			sumaCosto += CostoBd;
+			contratacion.setValorExtra(sumaCosto);
+			session.saveOrUpdate(contratacion);
+		}
+		
+	}
+
+
 
 
 

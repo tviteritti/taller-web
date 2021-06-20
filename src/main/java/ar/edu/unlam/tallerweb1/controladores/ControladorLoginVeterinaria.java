@@ -375,12 +375,17 @@ public class ControladorLoginVeterinaria {
 			ModelMap modelo = new ModelMap();
 		
 			if(servicioUsuario.buscarUsuario(user, password)) {
-				Usuario duenio = servicioUsuario.devolverUsuario(user, password);
+				Usuario duenio = servicioUsuario.devolverUsuario(user, password);		
+				request.getSession().setAttribute("idUsuarioTurno", duenio);
+				request.getSession().setAttribute("veterinarioTurno", servicioTurno.devolverVeterinarioDeunTurno(id));
+				if(!servicioPlanes.verificarSiTienePlanVigente(duenio)) {
+					String errorSinTurno = "No tiene plan vigente";
+					request.getSession().setAttribute("errorSinPlan", errorSinTurno);
+					return new ModelAndView("redirect:/mascotaAEligir");
+				}
 				Planes plan = servicioPlanes.devolverPlanDeDuenio(duenio);
 				ContratacionPlanes cotratacion = servicioPlanes.devolverContratacionDeDuenio(duenio);
-				request.getSession().setAttribute("idUsuarioTurno", duenio);
 				request.getSession().setAttribute("idcotratacion", cotratacion.getId());
-				request.getSession().setAttribute("veterinarioTurno", servicioTurno.devolverVeterinarioDeunTurno(id));
 				if(cotratacion.getCantidadTurnosTomados()<plan.getCantidadTurnos()) {
 					return new ModelAndView("redirect:/mascotaAEligir");
 				}else {
@@ -415,7 +420,11 @@ public class ControladorLoginVeterinaria {
 		if(request.getSession().getAttribute("errorExede") != null) {
 			servicioPlanes.aumentarValorExtra((Long)request.getSession().getAttribute("idcotratacion"),vet.getPrecioSesion());
 		}else {
-			servicioPlanes.aumentarTurnosTomados((Long)request.getSession().getAttribute("idcotratacion"));
+			if(request.getSession().getAttribute("errorSinPlan") != null) {
+				servicioPlanes.aumentarValorExtraSinPLan((Usuario) request.getSession().getAttribute("idUsuarioTurno"),vet.getPrecioSesion());
+			}else {
+				servicioPlanes.aumentarTurnosTomados((Long)request.getSession().getAttribute("idcotratacion"));
+			}
 		}
 		
 	return new ModelAndView("redirect:/loginVeterinaria");

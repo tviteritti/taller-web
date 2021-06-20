@@ -42,10 +42,11 @@ public class ServicioPlanesImpl implements ServicioPlanes{
 
 	@Override
 	public Boolean mostrarPlanesOContrataciones(Usuario duenio) {
-		List<ContratacionPlanes> contrataciones = servicioPlanesDao.listarContrataciones();
-		
-		for (ContratacionPlanes contratacionPlanes : contrataciones) {
-			if(contratacionPlanes.getDuenio().getId() == duenio.getId()) {
+		ContratacionPlanes contrataciones = servicioPlanesDao.devolverContratacionDeDuenio(duenio);
+		if(contrataciones == null) {
+			return true;
+		}else {
+			if(contrataciones.getValor() == null) {
 				return true;
 			}
 		}
@@ -83,6 +84,17 @@ public class ServicioPlanesImpl implements ServicioPlanes{
 	@Override
 	public void pagarPlanExtra(Long contratacionId) {
 		servicioPlanesDao.pagarPlanExtra(contratacionId);
+		
+	}
+
+	@Override
+	public Boolean verificarSiTienePlanVigente(Usuario duenio) {
+		return servicioPlanesDao.verificarSiTienePlanVigente(duenio);
+	}
+
+	@Override
+	public void aumentarValorExtraSinPLan(Usuario duenio, Double costo) {
+		servicioPlanesDao.aumentarValorExtraSinPLan(duenio, costo);
 		
 	}
 
