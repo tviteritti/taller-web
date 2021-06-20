@@ -39,6 +39,15 @@
 				   		<a href="${linkPagarPlan }"><input type="button" value="pagar plan" 
 			   			onClick="if(!(confirm('¿Estas seguro que quieres pagar?'))) return false"/></a>
 			   		</c:if>
+			   		<c:if test = "${contrataciones.valorExtra != contrataciones.pagoExtra}">
+				  		<c:url var="linkPagarPlanExtra" value="/pagarPlanExtra">
+							 <c:param name="contratacionId" value="${contrataciones.id }"/>	
+						</c:url>
+						<p>A tomado turnos extra:</p>
+				   		<p>valor a pagar = ${contrataciones.valorExtra} $</p>
+				   		<a href="${linkPagarPlanExtra }"><input type="button" value="pagar sesion Extra" 
+			   			onClick="if(!(confirm('¿Estas seguro que quieres pagar?'))) return false"/></a>
+			   		</c:if>
 			   		<c:if test = "${contrataciones.valor == contrataciones.pago}">
 			   			<p>${duenio.user} se encuentra al dia con respecto al pago del ${contrataciones.plan.descripcion}, recuerde el plan vence el dia ${contrataciones.hasta}</p>			   			
 			   		</c:if>

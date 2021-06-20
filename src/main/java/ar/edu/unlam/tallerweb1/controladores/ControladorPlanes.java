@@ -37,4 +37,12 @@ public class ControladorPlanes {
 		
 	return new ModelAndView("redirect:/cuentaDuenio");
 	}
+	
+	@RequestMapping("/pagarPlanExtra")
+	public ModelAndView pagarPlanExtra(@RequestParam("contratacionId") Long contratacionId) {
+		
+		servicioPlanes.pagarPlanExtra(contratacionId);
+		
+	return new ModelAndView("redirect:/cuentaDuenio");
+	}
 }

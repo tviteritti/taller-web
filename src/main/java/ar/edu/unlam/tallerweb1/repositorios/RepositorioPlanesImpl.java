@@ -115,6 +115,24 @@ public class RepositorioPlanesImpl implements RepositorioPlanes{
 		session.saveOrUpdate(contratacion);
 		
 	}
+	
+	@Override
+	public void pagarPlanExtra(Long contratacionId) {
+		final Session session = sessionFactory.getCurrentSession();
+		
+		ContratacionPlanes contratacion = (ContratacionPlanes) sessionFactory.getCurrentSession()
+			 .createCriteria(ContratacionPlanes.class)
+			 .add(Restrictions.eq("id", contratacionId)).uniqueResult();
+		
+		LocalDate fechaActual =  LocalDate.now();
+		ZoneId defaultZoneId = ZoneId.systemDefault();		/*PASO LOCALDATE DATE*/
+		Date date = Date.from(fechaActual.atStartOfDay(defaultZoneId).toInstant());
+		
+		contratacion.setPagoExtra(contratacion.getValorExtra());
+		contratacion.setFechaPagoExtra(date);
+		session.saveOrUpdate(contratacion);
+		
+	}
 
 	@Override
 	public Planes devolverPlanDeDuenio(Usuario duenio) {
@@ -175,6 +193,8 @@ public class RepositorioPlanesImpl implements RepositorioPlanes{
 		contratacion.setValorExtra(sumaCosto);
 		session.saveOrUpdate(contratacion);
 	}
+
+
 
 
 

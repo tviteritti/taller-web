@@ -384,7 +384,7 @@ public class ControladorLoginVeterinaria {
 				if(cotratacion.getCantidadTurnosTomados()<plan.getCantidadTurnos()) {
 					return new ModelAndView("redirect:/mascotaAEligir");
 				}else {
-					String error = "excede el limite de turnos permitidos por el plan";
+					String error = "Excede el limite de turnos permitidos por el plan";
 					request.getSession().setAttribute("errorExede", error);
 					return new ModelAndView("redirect:/mascotaAEligir");
 				}

@@ -80,6 +80,12 @@ public class ServicioPlanesImpl implements ServicioPlanes{
 		
 	}
 
+	@Override
+	public void pagarPlanExtra(Long contratacionId) {
+		servicioPlanesDao.pagarPlanExtra(contratacionId);
+		
+	}
+
 
 
 }
