@@ -14,14 +14,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.modelo.ContratacionPlanes;
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
+import ar.edu.unlam.tallerweb1.modelo.Planes;
 import ar.edu.unlam.tallerweb1.modelo.TipoAnimal;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDias;
 import ar.edu.unlam.tallerweb1.servicios.ServicioHorarios;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMascotas;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPlanes;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTurno;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
@@ -30,13 +33,15 @@ public class ControladorDuenio {
 	
 	private ServicioUsuario servicioDuenio;
 	private ServicioMascotas servicioMascota;
+	private ServicioPlanes servicioPlanes;
 
 	
 	@Autowired
-	public ControladorDuenio( ServicioUsuario servicioDuenio, ServicioMascotas servicioMascota) {
+	public ControladorDuenio( ServicioUsuario servicioDuenio, ServicioMascotas servicioMascota,ServicioPlanes servicioPlanes) {
 		
 		this.servicioDuenio = servicioDuenio;	
 		this.servicioMascota = servicioMascota;
+		this.servicioPlanes = servicioPlanes;
 	}
 	
 	@RequestMapping("/verPerfil")
@@ -78,8 +83,17 @@ public class ControladorDuenio {
 	
 	@RequestMapping("/planes")
 	public ModelAndView irAPlanes(
-	@RequestParam(value="duenioId",required=false) Long idDuenio) {
+	@RequestParam(value="duenioId",required=false) Long idDuenio,HttpServletRequest request) {
 		ModelMap modelo = new ModelMap();
+		
+		Usuario duenio1 = (Usuario) request.getSession().getAttribute("usuario");
+		if(servicioPlanes.mostrarPlanesOContrataciones(duenio1)) {
+			List<ContratacionPlanes> listaContrataciones=servicioPlanes.listarContrataciones();
+			modelo.put("listaContrataciones", listaContrataciones);
+		}else {
+			List<Planes> listaPlanes=servicioPlanes.listarPlanes();			
+			modelo.put("listaPlanes", listaPlanes);
+		}
 		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
 		modelo.put("duenio", duenio);
 	 return new ModelAndView("planes",modelo);

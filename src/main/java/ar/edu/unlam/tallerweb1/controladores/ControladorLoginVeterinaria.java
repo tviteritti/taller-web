@@ -92,7 +92,7 @@ public class ControladorLoginVeterinaria {
 			
 			if(usuario.getRol().equals("duenio")) {
 				
-				return new ModelAndView("redirect:/cuentaDuenio");    /*no funciona*/
+				return new ModelAndView("redirect:/cuentaDuenio");   
 			}else{
 				return new ModelAndView("redirect:/cuentaVeterinario");
 			}
