@@ -11,22 +11,22 @@
 <body>
  	<div>	 	
  	
- 	<c:forEach var="plan" items="${listaPlanes}">
-							<c:url var="linkTomarUnPlan" value="/tomarUnPlan">
-								<c:param name="planId" value="${plan.id }"/>	
-								<c:param name="duenioId" value="${duenio.id}"/>
-							</c:url>
+ 		<c:forEach var="plan" items="${listaPlanes}">
+				<c:url var="linkTomarUnPlan" value="/tomarUnPlan">
+					<c:param name="planId" value="${plan.id }"/>	
+					<c:param name="duenioId" value="${duenio.id}"/>
+				</c:url>
 										
-							<div>
-								<p>${plan.descripcion}</p>
-								<p>Duracion: ${plan.duracion} meses</p>
-								<p>cantidad de turnos: ${plan.cantidadTurnos} turnos</p>
-								<p>Precio: ${plan.precio} $</p>
-								<a href="${linkTomarUnPlan }"><input type="button" value="tomar plan" 
-								onClick="if(!(confirm('¿Estas seguro que quieres tomar este plan?'))) return false"/></a>
-							</div>	
-				   	</c:forEach>
-   	  <c:forEach var="contrataciones" items="${listaContrataciones}">
+				<div>
+					<p>${plan.descripcion}</p>
+					<p>Duracion: ${plan.duracion} meses</p>
+					<p>cantidad de turnos: ${plan.cantidadTurnos} turnos</p>
+					<p>Precio: ${plan.precio} $</p>
+					<a href="${linkTomarUnPlan }"><input type="button" value="tomar plan" 
+					onClick="if(!(confirm('¿Estas seguro que quieres tomar este plan?'))) return false"/></a>
+				</div>	
+		</c:forEach>
+   	  	<c:forEach var="contrataciones" items="${listaContrataciones}">
    		<c:choose>
 		 	<c:when test = "${contrataciones.duenio.id == duenio.id}">
 			 	<c:if test = "${contrataciones.valor == null}">

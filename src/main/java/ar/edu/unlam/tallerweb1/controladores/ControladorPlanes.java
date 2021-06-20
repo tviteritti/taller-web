@@ -23,8 +23,7 @@ public class ControladorPlanes {
 	}
 	
 	@RequestMapping("/tomarUnPlan")
-	public ModelAndView tomarUnPlan(@RequestParam("planId") Long planId, @RequestParam("duenioId") Long duenioId, HttpServletRequest request) {
-		//request.getSession().setAttribute("id_turno", planId);
+	public ModelAndView tomarUnPlan(@RequestParam("planId") Long planId, @RequestParam("duenioId") Long duenioId) {
 		servicioPlanes.accederPlan(planId, duenioId);
 		
 	return new ModelAndView("redirect:/cuentaDuenio");

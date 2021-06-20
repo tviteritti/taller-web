@@ -60,7 +60,16 @@ public class ControladorLoginVeterinaria {
 	}
 	
 	@RequestMapping("/loginVeterinaria")
-	public ModelAndView mostrarLoginVeterinaria() {
+	public ModelAndView mostrarLoginVeterinaria(HttpServletRequest request) {
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		if(usuario != null) {
+			if(usuario.getRol().equals("duenio")) {
+				return new ModelAndView("redirect:/cuentaDuenio");
+			}
+			if(usuario.getRol().equals("veterinario")) {
+				return new ModelAndView("redirect:/cuentaVeterinario");
+			}
+		}
 		List<Turno> listaTurnos=servicioTurno.listarTurnosSinTomar();
 		ModelMap modelo = new ModelMap();
 		modelo.put("listaTurnos", listaTurnos);
@@ -108,19 +117,34 @@ public class ControladorLoginVeterinaria {
 	public ModelAndView mostrarCuentaUsuario(HttpServletRequest request) {
 		ModelMap modelo = new ModelMap();
 		Usuario duenio = (Usuario) request.getSession().getAttribute("usuario");
-		if(servicioPlanes.mostrarPlanesOContrataciones(duenio)) {
-			List<ContratacionPlanes> listaContrataciones=servicioPlanes.listarContrataciones();
-			modelo.put("listaContrataciones", listaContrataciones);
-		}else {
-			List<Planes> listaPlanes=servicioPlanes.listarPlanes();			
-			modelo.put("listaPlanes", listaPlanes);
+		if(duenio==null) {
+			return new ModelAndView("redirect:/loginVeterinaria");
 		}
-		
+		if(duenio.getRol().equals("duenio")) {
+			if(servicioPlanes.mostrarPlanesOContrataciones(duenio)) {
+				List<ContratacionPlanes> listaContrataciones=servicioPlanes.listarContrataciones();
+				modelo.put("listaContrataciones", listaContrataciones);
+			}else {
+				List<Planes> listaPlanes=servicioPlanes.listarPlanes();			
+				modelo.put("listaPlanes", listaPlanes);
+			}
+		}else if(duenio.getRol().equals("veterinario")) {
+			return new ModelAndView("redirect:/cuentaVeterinario");
+		}
+			
 		return new ModelAndView("cuentaDuenio", modelo);
 	}
 	
 	@RequestMapping("/cuentaVeterinario")
-	public ModelAndView mostrarCuentaVeterinario() {
+	public ModelAndView mostrarCuentaVeterinario(HttpServletRequest request) {
+		Usuario veterinario =(Usuario)request.getSession().getAttribute("usuario");
+		if(veterinario==null) {
+			return new ModelAndView("redirect:/loginVeterinaria");
+		}
+		
+		if(veterinario.getRol().equals("duenio")) {
+			return new ModelAndView("redirect:/cuentaDuenio");
+		}
 		return new ModelAndView("cuentaVeterinario");
 	}
 	
