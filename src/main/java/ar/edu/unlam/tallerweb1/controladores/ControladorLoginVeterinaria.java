@@ -98,7 +98,6 @@ public class ControladorLoginVeterinaria {
 		if(servicioUsuario.buscarUsuario(user, password)) {
 			request.getSession().setAttribute("usuario", usuario);
 			
-			
 			if(usuario.getRol().equals("duenio")) {
 				
 				return new ModelAndView("redirect:/cuentaDuenio");   
@@ -108,9 +107,7 @@ public class ControladorLoginVeterinaria {
 		}else {
 			modelo.put("error", "Usuario o clave incorrecta");
 		}
-		
 		return new ModelAndView("formUser", modelo);
-	
 	}
 	
 	@RequestMapping("/cuentaDuenio")
@@ -203,8 +200,7 @@ public class ControladorLoginVeterinaria {
 			modelo.put("usuario", usuario);
 
 		return new ModelAndView("registroVeterinario", modelo);
-	}
-	
+	}	
 	
 	@RequestMapping(path="procesarDatosVeterinario", method= RequestMethod.POST)
 	public ModelAndView validarDatosVeterinario(
