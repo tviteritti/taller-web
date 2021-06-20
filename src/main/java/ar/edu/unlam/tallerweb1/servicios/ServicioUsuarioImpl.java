@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,6 +129,20 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 	public Usuario getVeterinario(Long id) {
 		
 		return ServicioUsuarioDao.getVeterinario(id);
+	}
+
+	@Override
+	public ModelAndView verificarSesion(Usuario usuario) {
+		if(usuario != null) {
+			if(usuario.getRol().equals("duenio")) {
+				return new ModelAndView("redirect:/cuentaDuenio");
+			}
+			if(usuario.getRol().equals("veterinario")) {
+				return new ModelAndView("redirect:/cuentaVeterinario");
+			}
+		}
+		return null;
+		
 	}
 
 

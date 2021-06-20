@@ -23,23 +23,42 @@ public class ControladorPlanes {
 	}
 	
 	@RequestMapping("/tomarUnPlan")
-	public ModelAndView tomarUnPlan(@RequestParam("planId") Long planId, @RequestParam("duenioId") Long duenioId) {
+	public ModelAndView tomarUnPlan(@RequestParam("planId") Long planId, @RequestParam("duenioId") Long duenioId, HttpServletRequest request) {
+		Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+		if(usuarioa == null) {
+			return new ModelAndView("redirect:/loginVeterinaria");
+		}
+		if(usuarioa.getRol().equals("veterinario")) {
+			return new ModelAndView("redirect:/cuentaVeterinario");
+		}
 		servicioPlanes.accederPlan(planId, duenioId);
 		
 	return new ModelAndView("redirect:/cuentaDuenio");
 	}
 	
 	@RequestMapping("/pagarPlan")
-	public ModelAndView pagarPlan(@RequestParam("contratacionId") Long contratacionId) {
-		
+	public ModelAndView pagarPlan(@RequestParam("contratacionId") Long contratacionId, HttpServletRequest request) {
+		Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+		if(usuarioa == null) {
+			return new ModelAndView("redirect:/loginVeterinaria");
+		}
+		if(usuarioa.getRol().equals("veterinario")) {
+			return new ModelAndView("redirect:/cuentaVeterinario");
+		}
 		servicioPlanes.pagarPlan(contratacionId);
 		
 	return new ModelAndView("redirect:/cuentaDuenio");
 	}
 	
 	@RequestMapping("/pagarPlanExtra")
-	public ModelAndView pagarPlanExtra(@RequestParam("contratacionId") Long contratacionId) {
-		
+	public ModelAndView pagarPlanExtra(@RequestParam("contratacionId") Long contratacionId, HttpServletRequest request) {
+		Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+		if(usuarioa == null) {
+			return new ModelAndView("redirect:/loginVeterinaria");
+		}
+		if(usuarioa.getRol().equals("veterinario")) {
+			return new ModelAndView("redirect:/cuentaVeterinario");
+		}
 		servicioPlanes.pagarPlanExtra(contratacionId);
 		
 	return new ModelAndView("redirect:/cuentaDuenio");

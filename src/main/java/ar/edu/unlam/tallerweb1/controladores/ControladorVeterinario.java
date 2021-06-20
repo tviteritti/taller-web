@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -45,8 +47,14 @@ public class ControladorVeterinario {
 	
 		@RequestMapping(path="verPacientes", method= RequestMethod.POST)
 		public ModelAndView mostrarListadoPacientes(
-		@RequestParam(value="veterinarioId",required=false) Long idVeterinario) {
-		
+		@RequestParam(value="veterinarioId",required=false) Long idVeterinario, HttpServletRequest request) {
+			Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+			if(usuarioa == null) {
+				return new ModelAndView("redirect:/loginVeterinaria");
+			}
+			if(usuarioa.getRol().equals("duenio")) {
+				return new ModelAndView("redirect:/cuentaDuenio");
+			}
 		ModelMap modelo = new ModelMap();
 		
 		List<Mascota> pacientes =servicioTurno.obtenerMascotasPorTurno(idVeterinario);
@@ -60,8 +68,14 @@ public class ControladorVeterinario {
 		public ModelAndView mostrarHistoriaClinica(
 		@RequestParam(value="mascotaId",required=false) Long idMascota,
 		@RequestParam(value="duenioId",required=false) Long idDuenio,
-		@RequestParam(value="veterinarioId",required=false) Long idVeterinario) {
-		
+		@RequestParam(value="veterinarioId",required=false) Long idVeterinario, HttpServletRequest request) {
+			Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+			if(usuarioa == null) {
+				return new ModelAndView("redirect:/loginVeterinaria");
+			}
+			if(usuarioa.getRol().equals("duenio")) {
+				return new ModelAndView("redirect:/cuentaDuenio");
+			}
 		ModelMap modelo = new ModelMap();
 		
 		List<HistoriaClinica> hc = servicioHistoriaClinica.buscarHCPorMascota(idMascota);
@@ -83,9 +97,15 @@ public class ControladorVeterinario {
 
 		@RequestParam(value="mascota",required=false) Long idMascota,
 		@RequestParam(value="duenio",required=false) Long idDuenio,
-		@RequestParam(value="veterinario",required=false) Long idVeterinario		
+		@RequestParam(value="veterinario",required=false) Long idVeterinario, HttpServletRequest request		
 				) {
-		
+			Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+			if(usuarioa == null) {
+				return new ModelAndView("redirect:/loginVeterinaria");
+			}
+			if(usuarioa.getRol().equals("duenio")) {
+				return new ModelAndView("redirect:/cuentaDuenio");
+			}
 			
 		ModelMap modelo = new ModelMap();
 		Usuario duenio = servicioUsuario.getDuenio(idDuenio);
@@ -106,9 +126,15 @@ public class ControladorVeterinario {
 				
 		@RequestParam(value="mascota",required=false) Long idMascota,
 		@RequestParam(value="duenio",required=false) Long idDuenio,
-		@RequestParam(value="veterinario",required=false) Long idVeterinario		
+		@RequestParam(value="veterinario",required=false) Long idVeterinario, HttpServletRequest request		
 				) {
-		
+			Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+			if(usuarioa == null) {
+				return new ModelAndView("redirect:/loginVeterinaria");
+			}
+			if(usuarioa.getRol().equals("duenio")) {
+				return new ModelAndView("redirect:/cuentaDuenio");
+			}
 			
 		ModelMap modelo = new ModelMap();
 		Usuario duenio = servicioUsuario.getDuenio(idDuenio);
@@ -141,8 +167,15 @@ public class ControladorVeterinario {
 		@RequestParam(value="vApellido",required=false) String veterinarioApellido,
 		@RequestParam(value="fechaHC",required=false) String fechaHC,
 		@RequestParam(value="diagnostico",required=false) String diagnostico,
-		@RequestParam(value="tratamiento",required=false) String tratamiento	
+		@RequestParam(value="tratamiento",required=false) String tratamiento, HttpServletRequest request	
 				) {
+			Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+			if(usuarioa == null) {
+				return new ModelAndView("redirect:/loginVeterinaria");
+			}
+			if(usuarioa.getRol().equals("duenio")) {
+				return new ModelAndView("redirect:/cuentaDuenio");
+			}
 			
 			ModelMap modelo = new ModelMap();
 			Mascota mascota = servicioMascotas.obtenerMascota(idMascota);

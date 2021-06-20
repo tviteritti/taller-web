@@ -79,7 +79,16 @@ public class ControladorLoginVeterinaria {
 	/*----------------------------- INICIO DE SESION -----------------------------------------------*/
 	
 	@RequestMapping("/iniciarSesion")
-	public ModelAndView iniciarSesion() {
+	public ModelAndView iniciarSesion(HttpServletRequest request) {
+		Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+		if(usuarioa != null) {
+			if(usuarioa.getRol().equals("duenio")) {
+				return new ModelAndView("redirect:/cuentaDuenio");
+			}
+			if(usuarioa.getRol().equals("veterinario")) {
+				return new ModelAndView("redirect:/cuentaVeterinario");
+			}
+		}
 		ModelMap modelo = new ModelMap();
 		Usuario usuario = new Usuario();
 		modelo.put("usuario", usuario);
@@ -154,16 +163,34 @@ public class ControladorLoginVeterinaria {
 	/*---------------------------------------- REGISTRAR USUARIO ---------------------------------------------*/
 	
 	@RequestMapping("/registrarUsuario")
-	public ModelAndView mostrarFormRegistroUsuario() {
+	public ModelAndView mostrarFormRegistroUsuario(HttpServletRequest request) {
+		Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+		if(usuarioa != null) {
+			if(usuarioa.getRol().equals("duenio")) {
+				return new ModelAndView("redirect:/cuentaDuenio");
+			}
+			if(usuarioa.getRol().equals("veterinario")) {
+				return new ModelAndView("redirect:/cuentaVeterinario");
+			}
+		}
 		return new ModelAndView("registroUsuario");
 	}
 	
 	/*---------------------------------------- REGISTRAR DUENIO ---------------------------------------------*/
 	@RequestMapping("/registrarDuenio")
-	public ModelAndView registrarDueño() {
-			ModelMap modelo = new ModelMap();
-			Usuario usuario = new Usuario();
-			modelo.put("usuario", usuario);
+	public ModelAndView registrarDueño(HttpServletRequest request) {
+		Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+		if(usuarioa != null) {
+			if(usuarioa.getRol().equals("duenio")) {
+				return new ModelAndView("redirect:/cuentaDuenio");
+			}
+			if(usuarioa.getRol().equals("veterinario")) {
+				return new ModelAndView("redirect:/cuentaVeterinario");
+			}
+		}
+		ModelMap modelo = new ModelMap();
+		Usuario usuario = new Usuario();
+		modelo.put("usuario", usuario);
 		return new ModelAndView("registroDuenio", modelo);
 	}
 	
@@ -192,7 +219,16 @@ public class ControladorLoginVeterinaria {
 	/*-------------------------------------- REGISTRO VETERINARIO -----------------------------------------------------------*/
 	
 	@RequestMapping("/registrarVeterinario")
-	public ModelAndView registrarVeterinario() {
+	public ModelAndView registrarVeterinario(HttpServletRequest request) {
+		Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+		if(usuarioa != null) {
+			if(usuarioa.getRol().equals("duenio")) {
+				return new ModelAndView("redirect:/cuentaDuenio");
+			}
+			if(usuarioa.getRol().equals("veterinario")) {
+				return new ModelAndView("redirect:/cuentaVeterinario");
+			}
+		}
 			ModelMap modelo = new ModelMap();
 			Usuario usuario = new Usuario();
 			List<Especialidad> listadoEspecialidad=servicioUsuario.getEspecialidades();
@@ -228,7 +264,16 @@ public class ControladorLoginVeterinaria {
 	}
 	
 	@RequestMapping("/horariosLunes")
-	public ModelAndView registrarHorariosLunes() {
+	public ModelAndView registrarHorariosLunes(HttpServletRequest request) {
+		Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+		if(usuarioa != null) {
+			if(usuarioa.getRol().equals("duenio")) {
+				return new ModelAndView("redirect:/cuentaDuenio");
+			}
+			if(usuarioa.getRol().equals("veterinario")) {
+				return new ModelAndView("redirect:/cuentaVeterinario");
+			}
+		}
 		return new ModelAndView("horariosLunes");
 	}
 	
@@ -247,7 +292,16 @@ public class ControladorLoginVeterinaria {
 	}
 	
 	@RequestMapping("/horariosMartes")
-	public ModelAndView registrarHorariosMartes() {
+	public ModelAndView registrarHorariosMartes(HttpServletRequest request) {
+		Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+		if(usuarioa != null) {
+			if(usuarioa.getRol().equals("duenio")) {
+				return new ModelAndView("redirect:/cuentaDuenio");
+			}
+			if(usuarioa.getRol().equals("veterinario")) {
+				return new ModelAndView("redirect:/cuentaVeterinario");
+			}
+		}
 		return new ModelAndView("horariosMartes");
 	}
 	
@@ -265,7 +319,16 @@ public class ControladorLoginVeterinaria {
 	}
 	
 	@RequestMapping("/horariosMiercoles")
-	public ModelAndView registrarHorariosMiercoles() {
+	public ModelAndView registrarHorariosMiercoles(HttpServletRequest request) {
+		Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+		if(usuarioa != null) {
+			if(usuarioa.getRol().equals("duenio")) {
+				return new ModelAndView("redirect:/cuentaDuenio");
+			}
+			if(usuarioa.getRol().equals("veterinario")) {
+				return new ModelAndView("redirect:/cuentaVeterinario");
+			}
+		}
 		return new ModelAndView("horariosMiercoles");
 	}
 	
@@ -283,7 +346,16 @@ public class ControladorLoginVeterinaria {
 	}
 	
 	@RequestMapping("/horariosJueves")
-	public ModelAndView registrarHorariosJueves() {
+	public ModelAndView registrarHorariosJueves(HttpServletRequest request) {
+		Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+		if(usuarioa != null) {
+			if(usuarioa.getRol().equals("duenio")) {
+				return new ModelAndView("redirect:/cuentaDuenio");
+			}
+			if(usuarioa.getRol().equals("veterinario")) {
+				return new ModelAndView("redirect:/cuentaVeterinario");
+			}
+		}
 		return new ModelAndView("horariosJueves");
 	}
 	
@@ -301,7 +373,16 @@ public class ControladorLoginVeterinaria {
 	}
 	
 	@RequestMapping("/horariosViernes")
-	public ModelAndView registrarHorariosViernes() {
+	public ModelAndView registrarHorariosViernes(HttpServletRequest request) {
+		Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+		if(usuarioa != null) {
+			if(usuarioa.getRol().equals("duenio")) {
+				return new ModelAndView("redirect:/cuentaDuenio");
+			}
+			if(usuarioa.getRol().equals("veterinario")) {
+				return new ModelAndView("redirect:/cuentaVeterinario");
+			}
+		}
 		return new ModelAndView("horariosViernes");
 	}
 	
@@ -319,7 +400,16 @@ public class ControladorLoginVeterinaria {
 	}
 	
 	@RequestMapping("/horariosSabado")
-	public ModelAndView registrarHorariosSabado() {
+	public ModelAndView registrarHorariosSabado(HttpServletRequest request) {
+		Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+		if(usuarioa != null) {
+			if(usuarioa.getRol().equals("duenio")) {
+				return new ModelAndView("redirect:/cuentaDuenio");
+			}
+			if(usuarioa.getRol().equals("veterinario")) {
+				return new ModelAndView("redirect:/cuentaVeterinario");
+			}
+		}
 		return new ModelAndView("horariosSabado");
 	}
 	
@@ -337,7 +427,16 @@ public class ControladorLoginVeterinaria {
 	}
 	
 	@RequestMapping("/horariosDomingo")
-	public ModelAndView registrarHorariosDomingo() {
+	public ModelAndView registrarHorariosDomingo(HttpServletRequest request) {
+		Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+		if(usuarioa != null) {
+			if(usuarioa.getRol().equals("duenio")) {
+				return new ModelAndView("redirect:/cuentaDuenio");
+			}
+			if(usuarioa.getRol().equals("veterinario")) {
+				return new ModelAndView("redirect:/cuentaVeterinario");
+			}
+		}
 		return new ModelAndView("horariosDomingo");
 	}
 	
@@ -357,7 +456,16 @@ public class ControladorLoginVeterinaria {
 	/*--------------------------------------------------------- TURNOS ------------------------------------------------------------------*/
 	
 	@RequestMapping("/generarTurnos")
-	public ModelAndView generarTurnos() {
+	public ModelAndView generarTurnos(HttpServletRequest request) {
+		Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+		if(usuarioa != null) {
+			if(usuarioa.getRol().equals("duenio")) {
+				return new ModelAndView("redirect:/cuentaDuenio");
+			}
+			if(usuarioa.getRol().equals("veterinario")) {
+				return new ModelAndView("redirect:/cuentaVeterinario");
+			}
+		}
 	return new ModelAndView("generarTurnos");
 	}
 
@@ -382,7 +490,15 @@ public class ControladorLoginVeterinaria {
 	@RequestMapping("/tomarUnTurno")
 	public ModelAndView tomarUnTurno(@RequestParam("turnoId") Long id,HttpServletRequest request) {
 		request.getSession().setAttribute("id_turno", id);
-		
+		Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+		if(usuarioa != null) {
+			if(usuarioa.getRol().equals("duenio")) {
+				return new ModelAndView("redirect:/cuentaDuenio");
+			}
+			if(usuarioa.getRol().equals("veterinario")) {
+				return new ModelAndView("redirect:/cuentaVeterinario");
+			}
+		}
 	return new ModelAndView("formVerificarSesion");
 	}
 	

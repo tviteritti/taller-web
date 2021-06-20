@@ -2,6 +2,8 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import java.util.List;
 
+import org.springframework.web.servlet.ModelAndView;
+
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
@@ -27,5 +29,7 @@ public interface ServicioUsuario {
 	Boolean validarPassRePass(String pass, String repass);
 	
 	List<Especialidad> getEspecialidades();
+	
+	ModelAndView verificarSesion(Usuario usuario);
 
 }
