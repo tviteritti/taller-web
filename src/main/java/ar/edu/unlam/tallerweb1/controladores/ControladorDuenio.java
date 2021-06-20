@@ -49,6 +49,43 @@ public class ControladorDuenio {
 		return new ModelAndView("perfil", modelo);
 	}
 	
+	@RequestMapping("/mascota")
+	public ModelAndView irAMiMascota(
+	@RequestParam(value="duenioId",required=false) Long idDuenio) {
+		ModelMap modelo = new ModelMap();
+		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
+		modelo.put("duenio", duenio);
+	 return new ModelAndView("mascota",modelo);
+	}
+	
+	@RequestMapping("/turnos")
+	public ModelAndView irAMiTurnos(
+	@RequestParam(value="duenioId",required=false) Long idDuenio) {
+		ModelMap modelo = new ModelMap();
+		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
+		modelo.put("duenio", duenio);
+	 return new ModelAndView("turnos",modelo);
+	}
+	
+	@RequestMapping("/consultas")
+	public ModelAndView irAConsultas(
+	@RequestParam(value="duenioId",required=false) Long idDuenio) {
+		ModelMap modelo = new ModelMap();
+		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
+		modelo.put("duenio", duenio);
+	 return new ModelAndView("consultas",modelo);
+	}
+	
+	@RequestMapping("/planes")
+	public ModelAndView irAPlanes(
+	@RequestParam(value="duenioId",required=false) Long idDuenio) {
+		ModelMap modelo = new ModelMap();
+		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
+		modelo.put("duenio", duenio);
+	 return new ModelAndView("planes",modelo);
+	}
+	
+	
 	@RequestMapping("/cargarMascota")
 	public ModelAndView cargarMascota() {
 			ModelMap modelo = new ModelMap();
