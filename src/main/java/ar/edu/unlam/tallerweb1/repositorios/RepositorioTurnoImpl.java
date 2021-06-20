@@ -61,7 +61,7 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 				 .uniqueResult();
 		
 		turnoACancelar.setMascota(null);
-		//turnoACancelar.setEstado("disponible");
+		turnoACancelar.setEstado(false);
 		
 	}
 
@@ -142,9 +142,8 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 	public List<Turno> buscarTurnoPorDuenio(Long id) {
 		List<Turno> turnos = sessionFactory.getCurrentSession()
 				 .createCriteria(Turno.class)
-				 .createAlias("duenio", "dBuscado")
-				 .add(Restrictions.eq("dBuscado.id", id))
-				 .add(Restrictions.eq("dBuscado.rol", "duenio"))
+				 .createAlias("mascota", "mBuscado")
+				 .add(Restrictions.eq("mBuscado.duenio.id", id))
 				 .list();
 		return turnos;
 	}

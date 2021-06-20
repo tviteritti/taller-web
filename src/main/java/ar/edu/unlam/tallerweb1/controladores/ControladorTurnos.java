@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
@@ -51,7 +52,9 @@ private ServicioUsuario servicioUsuario;
 		
 		Zona zona = new Zona();
 		Usuario duenio = servicioUsuario.getUsuario(duenioId);
+		List<Especialidad> listadoEspecialidad=servicioUsuario.getEspecialidades();
 		
+		modelo.put("listadoEspecialidad", listadoEspecialidad);
 		modelo.put("zona", zona);
 		modelo.put("duenio", duenio);
 		modelo.put("duenioId", duenioId);
@@ -196,7 +199,7 @@ private ServicioUsuario servicioUsuario;
 	@RequestMapping("volverACuenta")
 	public ModelAndView irACuentaUsuario() {
 		
-		return new ModelAndView("cuentaUsuario");
+		return new ModelAndView("cuentaDuenio");
 	}
 	
 	
