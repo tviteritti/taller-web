@@ -331,6 +331,30 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		 
 	}
 
+	@Override
+	public Date devolverFechaDeUnTurno(Long id) {
+		Turno turno = new Turno();
+		
+		turno = (Turno)sessionFactory.getCurrentSession()
+				 .createCriteria(Turno.class)
+				 .add(Restrictions.eq( "id", id))
+				 .uniqueResult();
+		
+		return turno.getFecha();
+	}
+
+	@Override
+	public Date devolverHorarioaDeUnTurno(Long id) {
+		Turno turno = new Turno();
+		
+		turno = (Turno)sessionFactory.getCurrentSession()
+				 .createCriteria(Turno.class)
+				 .add(Restrictions.eq( "id", id))
+				 .uniqueResult();
+		
+		return turno.getHorario();
+	}
+
 	
 
 

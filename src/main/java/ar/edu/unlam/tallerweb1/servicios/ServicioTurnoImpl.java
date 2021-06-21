@@ -800,6 +800,18 @@ public class ServicioTurnoImpl implements ServicioTurno {
 		return repositorioTurno.devolverVeterinarioDeunTurno(id_turno);
 	}
 
+
+	@Override
+	public Date devolverFechaDeUnTurno(Long id) {
+		return repositorioTurno.devolverFechaDeUnTurno(id);
+	}
+
+
+	@Override
+	public Date devolverHorarioaDeUnTurno(Long id) {
+		return repositorioTurno.devolverHorarioaDeUnTurno(id);
+	}
+
 	
 
 

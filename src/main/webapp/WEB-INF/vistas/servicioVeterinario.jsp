@@ -53,10 +53,10 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 					<c:if test="${t.veterinario.id eq v.id}">
 						<c:if test="${t.estado == false}">
 								     
-							<input type="radio" name="turno" id="turno"/>
-							<input type="hidden" name="idTurno" value="${t.id}">
+							
+							<input type="radio" name="idTurno" value="${t.id}" id="turno${t.id}">
 									    
-							<label for="turno">
+							<label for="turno${t.id}">
 								<p>Fecha: 
 									       
 									<c:out value="${t.fecha}" />

@@ -155,8 +155,8 @@ private ServicioPlanes servicioPlanes;
 		modelo.put("especialidad", servicioSolicitado);
 		modelo.put("localidad", localidad);
 		modelo.put("direccion", direccion);
-		modelo.put("fecha", dia);
-		modelo.put("hora", hora);
+		modelo.put("fecha", servicioTurno.devolverFechaDeUnTurno(idTurno));
+		modelo.put("hora", servicioTurno.devolverHorarioaDeUnTurno(idTurno));
 		
 		Turno turno = new Turno();
 		

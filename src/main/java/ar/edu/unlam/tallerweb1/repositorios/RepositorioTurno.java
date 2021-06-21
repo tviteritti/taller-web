@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import java.util.Date;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Direccion;
@@ -40,6 +41,7 @@ public interface RepositorioTurno {
 	Horarios devolverDiaSabado(Long id_dia);
 	Horarios devolverDiaDomingo(Long id_dia);
 	
-
-
+	Date devolverFechaDeUnTurno(Long id);
+	Date devolverHorarioaDeUnTurno(Long id);
+	
 }
