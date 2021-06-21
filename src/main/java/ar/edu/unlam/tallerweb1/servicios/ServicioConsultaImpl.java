@@ -26,9 +26,17 @@ public class ServicioConsultaImpl implements ServicioConsulta {
 	}
 
 	@Override
-	public List<Consulta> listasConsultas(Long idDuenio) {
+	public List<Consulta> listarConsultaPorDuenio(Long idDuenio) {
 		
-		return repositorioConsulta.listasConsultas(idDuenio);
+		return repositorioConsulta.listarConsultaPorDuenio(idDuenio);
 	}
+
+	@Override
+	public List<Consulta> listarConsultas() {
+		
+		return repositorioConsulta.listarConsultas();
+	}
+	
+	
 
 }

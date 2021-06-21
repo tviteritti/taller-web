@@ -22,7 +22,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 			     <h5 class="card-title">${c.asunto}</h5>
 			      <p>${c.descripcion}</p>
 			      <footer class="blockquote-footer ">
-			        <small class="texxt-dark">
+			        <small class="text-dark">
 			          Realizado por <cite title="Source Title">${c.duenio.user}</cite>
 			        </small>
 			      </footer>

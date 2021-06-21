@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,6 +40,30 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 			</div>
 			
 			<a href="consultas" class="btn btn-success btn-lg">volver</a>
+			<br>
+			
+			<hr class="my-4">
+			
+			<h4 class="text-center container p-4">Otras consultas que te pueden interesar</h4>
+			
+		<c:if test="${not empty todasLasConsultas}">
+			
+			<c:forEach items="${todasLasConsultas}" var="tc">
+      	
+		      	<div class="card text-center p-3 container">
+					    <blockquote class="blockquote mb-0">
+					     <h5 class="card-title">${tc.asunto}</h5>
+					      <p>${tc.descripcion}</p>
+					      <footer class="blockquote-footer ">
+					        <small class="text-dark">
+					          Realizado por <cite title="Source Title">${tc.duenio.user}</cite>
+					        </small>
+					      </footer>
+					    </blockquote>
+		  		</div>
+		  		<br>
+       		</c:forEach>
+		</c:if>
 			
 	 <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

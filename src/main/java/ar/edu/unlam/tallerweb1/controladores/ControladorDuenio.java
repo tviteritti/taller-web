@@ -109,7 +109,7 @@ public class ControladorDuenio {
 		}
 		ModelMap modelo = new ModelMap();
 		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
-		List <Consulta> consultas = servicioConsulta.listasConsultas(idDuenio);
+		List <Consulta> consultas = servicioConsulta.listarConsultaPorDuenio(idDuenio);
 		
 		modelo.put("duenio", duenio);
 		modelo.put("consultas", consultas);
@@ -134,11 +134,12 @@ public class ControladorDuenio {
 		miConsulta.setDuenio(duenio);
 		
 		servicioConsulta.cargarConsulta(miConsulta);
-		List <Consulta> consultas = servicioConsulta.listasConsultas(idDuenio);
+		List <Consulta> consultas = servicioConsulta.listarConsultaPorDuenio(idDuenio);
+		List <Consulta> consultasDeTodosLosUsuarios = servicioConsulta.listarConsultas();
 		
 		modelo.put("duenio", duenio);
 		modelo.put("consultas", consultas);
-		
+		modelo.put("todasLasConsultas", consultasDeTodosLosUsuarios);
 	 return new ModelAndView("miConsulta",modelo);
 	 
 	}
@@ -151,7 +152,7 @@ public class ControladorDuenio {
 		
 		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
 		
-		List <Consulta> consultas = servicioConsulta.listasConsultas(idDuenio);
+		List <Consulta> consultas = servicioConsulta.listarConsultaPorDuenio(idDuenio);
 		
 		modelo.put("duenio", duenio);
 		modelo.put("consultas", consultas);
