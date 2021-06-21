@@ -13,6 +13,7 @@ public interface RepositorioMascotas {
 	List<Mascota> listarMascotas();
 	List<Mascota> listarMascotasPorDuenio(Usuario id_duenio);
 	List<TipoAnimal> listarTipoAnimal();
+	TipoAnimal obtenerTipoAnimal(Long id);
 	
 	void cargarMascota(Long id_tipo, Long id_duenio, String fecha_nac, String nombre)throws ParseException;
 	

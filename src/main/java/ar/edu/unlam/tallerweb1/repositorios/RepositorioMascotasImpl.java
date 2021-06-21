@@ -37,6 +37,8 @@ public class RepositorioMascotasImpl implements RepositorioMascotas{
 		return mascotas;
 	
 	}
+	
+	
 
 	@Override
 	public List<TipoAnimal> listarTipoAnimal() {
@@ -75,5 +77,15 @@ public class RepositorioMascotasImpl implements RepositorioMascotas{
 		return (List<Mascota>) sessionFactory.getCurrentSession()
 				 .createCriteria(Mascota.class)
 				 .add(Restrictions.eq("duenio", id_duenio)).list();
+	}
+
+	@Override
+	public TipoAnimal obtenerTipoAnimal(Long id) {
+		TipoAnimal tipo = (TipoAnimal) sessionFactory.getCurrentSession()
+				 .createCriteria(TipoAnimal.class)
+				 .add(Restrictions.eq("id", id))
+				 .uniqueResult();
+		return tipo;
+
 	}
 }

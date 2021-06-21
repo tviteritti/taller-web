@@ -90,6 +90,12 @@ public class ServicioMascotasImpl implements ServicioMascotas{
 	public List<Mascota> listarMascotasPorDuenio(Usuario id_duenio) {
 		return servicioMascotasDao.listarMascotasPorDuenio(id_duenio);
 	}
+
+	@Override
+	public TipoAnimal obtenerTipoAnimal(Long id) {
+		
+		return servicioMascotasDao.obtenerTipoAnimal(id);
+	}
 	
 	
 	
