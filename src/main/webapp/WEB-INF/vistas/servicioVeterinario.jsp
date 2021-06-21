@@ -25,16 +25,16 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 					  
 					    
 			<div class="jumbotron container p-3" style="width:50%">
-				<h5 class="text-center"> <c:out value="${v.nombre} ${v.apellido}" /></h5>
+				<h4 class="text-center"> <c:out value="${v.nombre} ${v.apellido}" /></h4>
 				<a class="btn btn-info container" href="#" >ver perfil</a>
 				 <p class="lead">
 				<c:if test = "${errorSinPlan != null}">
-					<div class="input-group p-1"><p>${errorSinPlan}. </p></div>
+					<div class="input-group p-1"><h6>${errorSinPlan}. </h6></div>
 					<div class="input-group p-1"><p> Si continua se le acreditaran a la cuota ${v.precioSesion} $. </p></div>
 					<div class="input-group p-1"><p><a href="loginVeterinaria">volver al inicio</a></p></div>
 				</c:if>
 				<c:if test = "${errorExede != null}">
-					<div class="input-group p-1"><p>${errorExede}. </p></div>
+					<div class="input-group p-1"><h6>${errorExede}. </h6></div>
 					<div class="input-group p-1"><p> Si continua se le acreditaran a la cuota ${v.precioSesion} $. </p></div>
 					<div class="input-group p-1"><p><a href="loginVeterinaria">volver al inicio</a></p></div>				  		
 				</c:if>

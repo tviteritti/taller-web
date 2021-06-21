@@ -92,7 +92,7 @@ private ServicioPlanes servicioPlanes;
 		List<Turno>turnosVeterinario=new ArrayList<>();
 		
 		for(Usuario v : veterinariosEncontrados) {
-			request.getSession().setAttribute("veterinarioTurno", v);
+			
 			for(Turno turno :servicioTurno.obtenerTurnosPorVeterinario(v) ) {
 				
 				turnosVeterinario.add(turno);
