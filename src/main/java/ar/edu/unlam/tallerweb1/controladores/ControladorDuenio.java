@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.modelo.Consulta;
 import ar.edu.unlam.tallerweb1.modelo.ContratacionPlanes;
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
@@ -21,6 +22,7 @@ import ar.edu.unlam.tallerweb1.modelo.Planes;
 import ar.edu.unlam.tallerweb1.modelo.TipoAnimal;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.servicios.ServicioConsulta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDias;
 import ar.edu.unlam.tallerweb1.servicios.ServicioHorarios;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMascotas;
@@ -34,14 +36,16 @@ public class ControladorDuenio {
 	private ServicioUsuario servicioDuenio;
 	private ServicioMascotas servicioMascota;
 	private ServicioPlanes servicioPlanes;
+	private ServicioConsulta servicioConsulta;
 
 	
 	@Autowired
-	public ControladorDuenio( ServicioUsuario servicioDuenio, ServicioMascotas servicioMascota,ServicioPlanes servicioPlanes) {
+	public ControladorDuenio( ServicioUsuario servicioDuenio, ServicioMascotas servicioMascota,ServicioPlanes servicioPlanes,  ServicioConsulta servicioConsulta) {
 		
 		this.servicioDuenio = servicioDuenio;	
 		this.servicioMascota = servicioMascota;
 		this.servicioPlanes = servicioPlanes;
+		this.servicioConsulta = servicioConsulta;
 	}
 	
 	@RequestMapping("/verPerfil")
@@ -105,8 +109,55 @@ public class ControladorDuenio {
 		}
 		ModelMap modelo = new ModelMap();
 		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
+		List <Consulta> consultas = servicioConsulta.listasConsultas(idDuenio);
+		
 		modelo.put("duenio", duenio);
+		modelo.put("consultas", consultas);
+		
 	 return new ModelAndView("consultas",modelo);
+	}
+	
+	@RequestMapping("/miConsulta")
+	public ModelAndView realizarConsulta(
+	@RequestParam(value="duenioId",required=false) Long idDuenio,
+	@RequestParam(value="asunto",required=false) String asunto,
+	@RequestParam(value="consulta",required=false) String consulta
+	) {
+		
+		ModelMap modelo = new ModelMap();
+		
+		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
+		
+		Consulta miConsulta = new Consulta();
+		miConsulta.setAsunto(asunto);
+		miConsulta.setDescripcion(consulta);
+		miConsulta.setDuenio(duenio);
+		
+		servicioConsulta.cargarConsulta(miConsulta);
+		List <Consulta> consultas = servicioConsulta.listasConsultas(idDuenio);
+		
+		modelo.put("duenio", duenio);
+		modelo.put("consultas", consultas);
+		
+	 return new ModelAndView("miConsulta",modelo);
+	 
+	}
+	
+	@RequestMapping("/verMisConsultas")
+	public ModelAndView verMisConsultas(
+	@RequestParam(value="duenioId",required=false) Long idDuenio) {
+		
+		ModelMap modelo = new ModelMap();
+		
+		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
+		
+		List <Consulta> consultas = servicioConsulta.listasConsultas(idDuenio);
+		
+		modelo.put("duenio", duenio);
+		modelo.put("consultas", consultas);
+		
+	 return new ModelAndView("consultasDuenio",modelo);
+	 
 	}
 	
 	@RequestMapping("/planes")
