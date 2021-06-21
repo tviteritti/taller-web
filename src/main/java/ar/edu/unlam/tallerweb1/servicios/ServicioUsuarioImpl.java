@@ -172,6 +172,16 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 		ServicioUsuarioDao.ingresarDireccion(id, calle, piso, departamento, numero, id_zona);
 	}
 
+	@Override
+	public Especialidad getEspecialidad(Long id) {
+		return ServicioUsuarioDao.getEspecialidad(id);
+	}
+
+	@Override
+	public Zona getZona(Long id) {
+		return ServicioUsuarioDao.getZona(id);
+	}
+
 
 
 

@@ -3,6 +3,8 @@ package ar.edu.unlam.tallerweb1.controladores;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,14 +15,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.modelo.ContratacionPlanes;
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
+import ar.edu.unlam.tallerweb1.modelo.Planes;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 
 import ar.edu.unlam.tallerweb1.servicios.ServicioMascotas;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPlanes;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTurno;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
@@ -30,17 +35,19 @@ public class ControladorTurnos {
 private ServicioTurno servicioTurno;
 private ServicioMascotas servicioMascotas;
 private ServicioUsuario servicioUsuario;
+private ServicioPlanes servicioPlanes;
 
 
 	
 	@Autowired
 	public ControladorTurnos(ServicioTurno servicioTurno, 
 							 ServicioMascotas servicioMascotas, 
-							 ServicioUsuario servicioUsuario) {
+							 ServicioUsuario servicioUsuario, ServicioPlanes servicioPlanes) {
 		
 		this.servicioTurno = servicioTurno;	
 		this.servicioMascotas=servicioMascotas;
 		this.servicioUsuario =servicioUsuario;
+		this.servicioPlanes =servicioPlanes;
 		
 		
 	}
@@ -68,11 +75,12 @@ private ServicioUsuario servicioUsuario;
 	public ModelAndView mostrarServicioVeterinario(
 			@RequestParam(value="id_zona",required=false) Long id_zona,
 			@RequestParam(value="id_especialidad",required=false) Long id_especialidad,
-			@RequestParam(value="duenioId",required=false) Long duenioId) {
+			@RequestParam(value="idDuenio",required=false) Long duenioId, HttpServletRequest request) {
 		
 		ModelMap modelo = new ModelMap();
-		modelo.put("servicio", id_especialidad);
-		modelo.put("zona", id_zona);
+		
+		modelo.put("servicio", servicioUsuario.getEspecialidad(id_especialidad).getDescripcion());
+		modelo.put("zona",servicioUsuario.getZona(id_zona).getDescripcion());
 		
 		Usuario duenio = servicioUsuario.getDuenio(duenioId);
 		modelo.put("duenio", duenio);
@@ -84,7 +92,7 @@ private ServicioUsuario servicioUsuario;
 		List<Turno>turnosVeterinario=new ArrayList<>();
 		
 		for(Usuario v : veterinariosEncontrados) {
-			
+			request.getSession().setAttribute("veterinarioTurno", v);
 			for(Turno turno :servicioTurno.obtenerTurnosPorVeterinario(v) ) {
 				
 				turnosVeterinario.add(turno);
@@ -92,8 +100,30 @@ private ServicioUsuario servicioUsuario;
 			}
 			
 		}
-		
 		modelo.put("turnosPorVT", turnosVeterinario);
+		
+		
+		List<Mascota> listaDeMascotas = servicioMascotas.listarMascotasPorDuenio(duenio);
+		
+		modelo.put("listaDeMascotas", listaDeMascotas);
+		
+		if(!servicioPlanes.verificarSiTienePlanVigente(duenio)) {
+			String errorSinTurno = "No tiene plan vigente";
+			request.getSession().setAttribute("errorSinPlan", errorSinTurno);
+			return new ModelAndView("servicioVeterinario", modelo);
+		}
+		Planes plan = servicioPlanes.devolverPlanDeDuenio(duenio);
+		ContratacionPlanes cotratacion = servicioPlanes.devolverContratacionDeDuenio(duenio);
+		request.getSession().setAttribute("idcotratacion", cotratacion.getId());
+		if(cotratacion.getCantidadTurnosTomados()<plan.getCantidadTurnos()) {
+			return new ModelAndView("servicioVeterinario", modelo);
+		}else {
+			String error = "Excede el limite de turnos permitidos por el plan";
+			request.getSession().setAttribute("errorExede", error);
+			
+		}
+		
+		
 		
 		return new ModelAndView("servicioVeterinario", modelo);
 	}
@@ -107,7 +137,8 @@ private ServicioUsuario servicioUsuario;
 	@RequestParam(value="fecha",required=false) String dia,
 	@RequestParam(value="hora",required=false) String hora,
 	@RequestParam(value="idTurno",required=false) Long idTurno,
-	@RequestParam(value="idDuenio",required=false) Long duenioId
+	@RequestParam(value="id_mascotas",required=false) Long id_mascotas,
+	@RequestParam(value="idDuenio",required=false) Long duenioId, HttpServletRequest request
 	) {
 		
 		ModelMap modelo = new ModelMap();
@@ -129,7 +160,7 @@ private ServicioUsuario servicioUsuario;
 		
 		Turno turno = new Turno();
 		
-	
+		
 		turno.setMascota(mascota);
 		turno.setDuenio(duenio);
 		
@@ -137,7 +168,18 @@ private ServicioUsuario servicioUsuario;
 		modelo.put("mascota", mascota);
 		
 		
-		servicioTurno.cargarTurno(turno);
+		
+		servicioTurno.tomarTurno(idTurno, id_mascotas);
+		if(request.getSession().getAttribute("errorExede") != null) {
+			servicioPlanes.aumentarValorExtra((Long)request.getSession().getAttribute("idcotratacion"),veterinario.getPrecioSesion());
+		}else {
+			if(request.getSession().getAttribute("errorSinPlan") != null) {
+				servicioPlanes.aumentarValorExtraSinPLan(duenio,veterinario.getPrecioSesion());
+			}else {
+				servicioPlanes.aumentarTurnosTomados((Long)request.getSession().getAttribute("idcotratacion"));
+			}
+		}
+		//servicioTurno.cargarTurno(turno);
 		return new ModelAndView("turnoSolicitado", modelo);
 	}
 	

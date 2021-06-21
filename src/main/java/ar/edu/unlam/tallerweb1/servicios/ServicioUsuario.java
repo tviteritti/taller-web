@@ -32,6 +32,9 @@ public interface ServicioUsuario {
 	List<Especialidad> getEspecialidades();
 	List<Zona> getZonas();
 	
+	Especialidad getEspecialidad(Long id);
+	Zona getZona(Long id);
+	
 	ModelAndView verificarSesion(Usuario usuario);
 	void ingresarDireccion(Long id, String calle, String piso, String departamento, String numero, Long id_zona);
 

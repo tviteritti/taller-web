@@ -218,7 +218,8 @@ public class RepositorioPlanesImpl implements RepositorioPlanes{
 		final Session session = sessionFactory.getCurrentSession();
 		ContratacionPlanes contratacion = (ContratacionPlanes) sessionFactory.getCurrentSession()
 				 .createCriteria(ContratacionPlanes.class)
-				 .add(Restrictions.eq("duenio", duenio)).uniqueResult();
+				 .add(Restrictions.eq("duenio", duenio))
+				 .add(Restrictions.isNull("valor")).uniqueResult();
 		
 		if(contratacion == null) {
 			ContratacionPlanes contratacionNueva = new ContratacionPlanes();

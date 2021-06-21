@@ -13,61 +13,89 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 <script src="https://kit.fontawesome.com/b883f5a3c0.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <h4 class="text-center container p-5">Encontra el especialista y solicita un turno</h4>
+  <h4 class="text-center container p-5">Encontra el especialista y solicita un turnoa</h4>
   
 
-			     <c:forEach items="${veterinarios}" var="v">
+	<c:forEach items="${veterinarios}" var="v">
 			     
-				     <form action="generarTurno" method="post">
+		<form action="generarTurno" method="post">
 			
 					   	
-					   	 <input type="hidden" name="veterinarioId" value="${v.id}"/>
+			<input type="hidden" name="veterinarioId" value="${v.id}"/>
 					  
 					    
-					    <div class="jumbotron container p-3" style="width:50%">
-							  <h5 class="text-center"> <c:out value="${v.nombre} ${v.apellido}" /></h5>
-							  <a class="btn btn-info container" href="#" >ver perfil</a>
-							  <p class="lead">
-							   <p><p>Calificacion</p>
-							  <hr class="my-4">
-							  <p>Ubicacion: <c:out value="${v.direccion.calle} ${v.direccion.numero}"/> , ${v.direccion.localidad.descripcion} </p>
+			<div class="jumbotron container p-3" style="width:50%">
+				<h5 class="text-center"> <c:out value="${v.nombre} ${v.apellido}" /></h5>
+				<a class="btn btn-info container" href="#" >ver perfil</a>
+				 <p class="lead">
+				<c:if test = "${errorSinPlan != null}">
+					<div class="input-group p-1"><p>${errorSinPlan}. </p></div>
+					<div class="input-group p-1"><p> Si continua se le acreditaran a la cuota ${v.precioSesion} $. </p></div>
+					<div class="input-group p-1"><p><a href="loginVeterinaria">volver al inicio</a></p></div>
+				</c:if>
+				<c:if test = "${errorExede != null}">
+					<div class="input-group p-1"><p>${errorExede}. </p></div>
+					<div class="input-group p-1"><p> Si continua se le acreditaran a la cuota ${v.precioSesion} $. </p></div>
+					<div class="input-group p-1"><p><a href="loginVeterinaria">volver al inicio</a></p></div>				  		
+				</c:if>
+				<p><p>Calificacion</p>
+				<hr class="my-4">
+				<p>Ubicacion: <c:out value="${v.direccion.calle} ${v.direccion.numero}"/> , ${v.direccion.localidad.descripcion} </p>
 							  
-						     <input type="hidden" name="direccion" value="${v.direccion.calle} ${v.direccion.numero}" >
-						     <input type="hidden" name="localidad" value=" ${v.direccion.localidad.descripcion}">
-						    <input type="hidden" value="${servicio}" name="servicio">
-						    <input type="hidden" value="${zona}" name="zona">
-						     <hr class="my-4">
-					    <p>Turnos</p>
-					     <c:forEach items="${turnosPorVT}" var="t">
+				<input type="hidden" name="direccion" value="${v.direccion.calle} ${v.direccion.numero}" >
+				<input type="hidden" name="localidad" value=" ${v.direccion.localidad.descripcion}">
+				<input type="hidden" value="${servicio}" name="servicio">
+				<input type="hidden" value="${zona}" name="zona">
+				<hr class="my-4">
+				<p>Turnos</p>
+				<c:forEach items="${turnosPorVT}" var="t">
 					     
-						     <c:if test="${t.veterinario.id eq v.id}">
-						     
-						        <input type="radio" name="turno" id="turno"/>
-							    <input type="hidden" name="idTurno" value="${t.id}">
-							    
-							    <label for="turno">
-							      <p>Fecha: 
-							       
-							         <c:out value="${t.fecha}" />
-							         <input type="hidden" value="${t.fecha}" name="fecha">
-							  
-							      Hora: 
-							       
-							           <c:out value="${t.horario}" />
-							           <input type="hidden" value="${t.horario}" name="hora"> 
-							         
-							     </p>
-							    </label><br>
-							 
-							</c:if>      
-					    </c:forEach>
-					    <input type="hidden" value="${duenio.id}" name="idDuenio">
-					    <button type="submit" class="btn btn-primary">solicitar turno</button>
-					    </div>
-  					</form>
-  					<br>
-  					
+					<c:if test="${t.veterinario.id eq v.id}">
+						<c:if test="${t.estado == false}">
+								     
+							<input type="radio" name="turno" id="turno"/>
+							<input type="hidden" name="idTurno" value="${t.id}">
+									    
+							<label for="turno">
+								<p>Fecha: 
+									       
+									<c:out value="${t.fecha}" />
+									<input type="hidden" value="${t.fecha}" name="fecha">
+									  
+									  Hora: 
+									       
+									 <c:out value="${t.horario}" />
+									 <input type="hidden" value="${t.horario}" name="hora"> 
+									         
+								 </p>
+							</label><br>
+						</c:if> 
+					</c:if>      
 				</c:forEach>
+					    
+					    
+
+
+				<br>
+				<h3>Elija su mascota</h3><br>
+				<div class="input-group p-2">
+					<select class="form-control" name="id_mascotas">
+						<option >Seleccione su mascota</option> 
+						<c:forEach items="${listaDeMascotas}" var="mascota">
+							<option value="${mascota.id}">${mascota.nombre}</option>
+						 </c:forEach>
+					</select>
+				</div><br>                    
+
+
+					    
+				<input type="hidden" value="${duenio.id}" name="idDuenio">
+				<button type="submit" class="btn btn-primary">solicitar turno</button>
+			</div>
+  		</form>
+  		<br>
+  					
+	</c:forEach>
 				
 	<!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
