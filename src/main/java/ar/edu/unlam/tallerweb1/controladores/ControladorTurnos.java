@@ -53,7 +53,9 @@ private ServicioUsuario servicioUsuario;
 		Zona zona = new Zona();
 		Usuario duenio = servicioUsuario.getUsuario(duenioId);
 		List<Especialidad> listadoEspecialidad=servicioUsuario.getEspecialidades();
+		List<Zona> listadoZona=servicioUsuario.getZonas();
 		
+		modelo.put("listadoZonas", listadoZona);
 		modelo.put("listadoEspecialidad", listadoEspecialidad);
 		modelo.put("zona", zona);
 		modelo.put("duenio", duenio);
@@ -64,18 +66,18 @@ private ServicioUsuario servicioUsuario;
 	
 	@RequestMapping(path="buscarServicioVeterinario", method= RequestMethod.POST)
 	public ModelAndView mostrarServicioVeterinario(
-			@RequestParam(value="servicio",required=false) String servicioSolicitado,
-			@RequestParam(value="duenioId",required=false) Long duenioId,
-			@ModelAttribute("zona") Zona zona) {
+			@RequestParam(value="id_zona",required=false) Long id_zona,
+			@RequestParam(value="id_especialidad",required=false) Long id_especialidad,
+			@RequestParam(value="duenioId",required=false) Long duenioId) {
 		
 		ModelMap modelo = new ModelMap();
-		modelo.put("servicio", servicioSolicitado);
-		modelo.put("zona", zona);
+		modelo.put("servicio", id_especialidad);
+		modelo.put("zona", id_zona);
 		
 		Usuario duenio = servicioUsuario.getDuenio(duenioId);
 		modelo.put("duenio", duenio);
 		
-		List<Usuario>veterinariosEncontrados = servicioUsuario.buscarVeterinariosPorEspecialidadYZona(servicioSolicitado, zona.getDescripcion());
+		List<Usuario>veterinariosEncontrados = servicioUsuario.buscarVeterinariosPorEspecialidadYZona(id_especialidad, id_zona);
 		
 		modelo.put("veterinarios", veterinariosEncontrados);
 		

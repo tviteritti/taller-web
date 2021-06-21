@@ -1,9 +1,12 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Dias;
+import ar.edu.unlam.tallerweb1.modelo.Direccion;
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.Zona;
+
 import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -120,6 +123,15 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		return especialidad;
 		
 	}
+	
+	@Override
+	public List<Zona> getZonas() {
+		final Session session = sessionFactory.getCurrentSession();
+		Query<Zona> miQuery=session.createQuery("from Zona", Zona.class);
+		List<Zona> zona=miQuery.getResultList();
+		return zona;
+		
+	}
 
 	@Override
 	public void ingresarEspecialidad(Long id, Long id_especialidad) {
@@ -164,6 +176,57 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 				 .uniqueResult();
 		
 		return veterinario;
+	}
+
+	@Override
+	public void ingresarDireccion(Long id, String calle, String piso, String departamento, String numero, Long id_zona) {
+		final Session session = sessionFactory.getCurrentSession();
+		Usuario veterinario = (Usuario)sessionFactory.getCurrentSession()
+				 .createCriteria(Usuario.class)
+				 .add(Restrictions.eq("id", id))
+				 .uniqueResult();
+		
+		Zona zona = (Zona)sessionFactory.getCurrentSession()
+				 .createCriteria(Zona.class)
+				 .add(Restrictions.eq("id", id_zona))
+				 .uniqueResult();
+		
+		Direccion dire = new Direccion();
+		
+		dire.setZona(zona);
+		dire.setCalle(calle);
+		dire.setDepartamento(departamento);
+		dire.setNumero(numero);
+		dire.setPiso(piso);
+		
+		session.saveOrUpdate(dire);
+		
+		veterinario.setDireccion(dire);
+	
+		session.saveOrUpdate(veterinario);
+	}
+
+	@Override
+	public Especialidad getEspecialidad(Long id) {
+		
+		Especialidad especialidad = (Especialidad)sessionFactory.getCurrentSession()
+				 .createCriteria(Especialidad.class)
+				 .add(Restrictions.eq("id", id))
+				 .uniqueResult();
+		
+		return especialidad;
+	}
+
+	@Override
+	public Zona getZona(Long id) {
+		
+		Zona zona = (Zona)sessionFactory.getCurrentSession()
+				 .createCriteria(Zona.class)
+				 .add(Restrictions.eq("id", id))
+				 .uniqueResult();
+		
+		
+		return zona;
 	}
 
 	

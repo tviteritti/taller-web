@@ -7,6 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.Zona;
 
 
 public interface ServicioUsuario {
@@ -14,7 +15,7 @@ public interface ServicioUsuario {
 	
 	List<Usuario> getUsuarios();
 	List<Usuario> getVeterinarios();
-	List<Usuario> buscarVeterinariosPorEspecialidadYZona(String especialidad, String zona);
+	List<Usuario> buscarVeterinariosPorEspecialidadYZona(Long especialidad, Long zona);
 	Usuario getUsuario(Long id);
 	Usuario getDuenio(Long id);
 	Usuario getVeterinario(Long id);
@@ -29,7 +30,9 @@ public interface ServicioUsuario {
 	Boolean validarPassRePass(String pass, String repass);
 	
 	List<Especialidad> getEspecialidades();
+	List<Zona> getZonas();
 	
 	ModelAndView verificarSesion(Usuario usuario);
+	void ingresarDireccion(Long id, String calle, String piso, String departamento, String numero, Long id_zona);
 
 }

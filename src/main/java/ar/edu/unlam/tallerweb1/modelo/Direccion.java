@@ -14,7 +14,7 @@ public class Direccion {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private Integer numero;
+	private String numero;
 	private String calle;
 	private String piso;
 	private String departamento;
@@ -33,11 +33,11 @@ public class Direccion {
 		this.id = id;
 	}
 
-	public Integer getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(Integer numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 

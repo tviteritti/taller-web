@@ -17,26 +17,26 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
       <h4 class="text-center container p-2">Busque un turno mas cercano</h4>
       <form:form action="buscarServicioVeterinario" method="post" name="formTurno" modelAttribute="zona" class="container">
         <div class="form-group">
-		      <label for="exampleFormControlSelect1">Servicio</label>
-		      <select name="servicio" class="form-control" id="exampleFormControlSelect1">
-		       	<option>Rayos X</option>
-		       	<option>Laboratorio</option>
-		       	<option>Ecografias</option>
-		       	<option>Castraciones</option>
-		       	<option>Cirugia</option>
-		       	<option>Cardiologia</option>
-		       	<option>Planes Nutricionales</option>
-		      </select>
-		    </div>
-		      <br>
-		      
+		    <label for="exampleFormControlSelect1">Servicio</label>
+			<select class="form-control" name="id_especialidad">
+				  <option >Seleccione Especialidad</option> 
+				  <c:forEach items="${listadoEspecialidad}" var="especialidad">
+				       <option value="${especialidad.id}">${especialidad.descripcion}</option>
+				 </c:forEach>
+			</select>
+		 </div>
+		 <br>
+
+					
+
 		   <div class="form-group">
-			 <label for="exampleFormControlSelect1">Zona</label>
-			 <form:select name="zona" path="descripcion" class="form-control" id="exampleFormControlSelect1">
-			   <option value="oeste">Oeste</option>
-			   <option values="norte">Norte</option>
-			   <option values="sur">Sur</option>
-			 </form:select>
+			<label for="exampleFormControlSelect1">Zona</label>
+			<select class="form-control" name="id_zona">
+				 <option >Seleccione Zona</option> 
+				  <c:forEach items="${listadoZonas}" var="zona">
+				      <option value="${zona.id}">${zona.descripcion}</option>
+				  </c:forEach>
+			</select>
             </div>
 			      
 			      <br><br>

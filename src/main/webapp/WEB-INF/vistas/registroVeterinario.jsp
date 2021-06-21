@@ -21,41 +21,53 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
         <div class="row vh-100 justify-content-center align-items-center">
             <div class="col-auto bg-light p-5">
                 <form:form action="procesarDatosVeterinario" method="POST" modelAttribute="usuario">
+                
                 	<div class="input-group p-2">
                         <h3>Registrar Veterinario</h3>
-                    </div>
-                    <div class="input-group p-2">
                         <form:hidden path="id"/>
-                    </div>
-                    <div class="input-group p-2">
                         <form:hidden path="rol" value="veterinario"/>
                     </div>
-                    <div class="input-group p-2">
-                        <form:input class="form-control" placeholder="email" path="email"/>
-                    </div>
-                    <div class="input-group p-2">
-                        <form:input class="form-control" path="nombre" placeholder="nombre"/>
-                    </div>
-                    <div class="input-group p-2">
-                        <form:input class="form-control" path="apellido" placeholder="apellido"/>
-                    </div>
-                    <div class="input-group p-2">
-                        <form:input class="form-control" path="telefono" placeholder="telefono"/>
-                    </div>
-                    <div class="input-group p-2">
-                        <form:input class="form-control" placeholder="user" path="user"/>
-                    </div>
-                    <div class="input-group p-2">
-                        <form:input type="number" class="form-control" placeholder="precio de una Sesion" path="precioSesion"/>
-                    </div>
-                    <div class="input-group p-2">
-                        <form:input class="form-control" placeholder="password" path="password"/>
-                    </div>
-                     <div class="input-group p-2">
-                        <input type="text" class="form-control" name="re-password" placeholder="re ingresar contraseña">
-                    </div>
-                    <br>
-                    <div class="input-group p-2">
+
+
+					<div class="form-row">
+					   <div class="form-group col-md-6">
+							<form:input class="form-control" placeholder="email" path="email"/>
+					   </div>
+					   <div class="form-group col-md-6">
+							<form:input class="form-control" placeholder="user" path="user"/>
+					   </div>
+					</div>
+					                    
+					<div class="form-row">
+					   <div class="form-group col-md-6">
+							<form:input class="form-control" placeholder="password" path="password"/>
+					   </div>
+					   <div class="form-group col-md-6">
+							<input type="text" class="form-control" name="re-password" placeholder="re ingresar contraseña">
+					   </div>
+					</div>
+                    
+					<hr/><br>
+                    
+                   <div class="form-row">
+					   <div class="form-group col-md-6">
+							<form:input class="form-control" path="nombre" placeholder="nombre"/>
+					   </div>
+					   <div class="form-group col-md-6">
+							<form:input class="form-control" path="apellido" placeholder="apellido"/>
+					   </div>
+					</div>
+					<div class="form-row">
+					   <div class="form-group col-md-6">
+							<form:input class="form-control" path="telefono" placeholder="telefono"/>
+					   </div>
+					   <div class="form-group col-md-6">
+							<form:input type="number" class="form-control" placeholder="precio de una Sesion" path="precioSesion"/>
+					   </div>
+					</div>
+                                               
+
+                    <div class="form-group col-md-12">
                     <select class="form-control" name="id_especialidad">
 				       <option >Seleccione Especialidad</option> 
 				       <c:forEach items="${listadoEspecialidad}" var="especialidad">
@@ -63,7 +75,40 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 				       </c:forEach>
 					</select>
 					</div>
-					<br><br>
+
+
+					<hr/><br>
+
+                    
+                   <div class="form-row">
+					   <div class="form-group col-md-6">
+							<input type="text" class="form-control" placeholder="calle" name="calle"/>
+					   </div>
+					   <div class="form-group col-md-6">
+							<input type="text" class="form-control" placeholder="nro calle" name="numero"/>
+					   </div>
+					</div>
+					<div class="form-row">
+					   <div class="form-group col-md-6">
+							<input type="text" class="form-control" placeholder="piso" name="piso"/>
+					   </div>
+					   <div class="form-group col-md-6">
+							<input type="text" class="form-control" placeholder="departamento" name="departamento"/>
+					   </div>
+					</div>                             
+					
+					<div class="form-group col-md-12">
+					<select class="form-control" name="id_zona">
+				       <option >Seleccione Zona</option> 
+				       <c:forEach items="${listadoZonas}" var="zona">
+				          <option value="${zona.id}">${zona.descripcion}</option>
+				       </c:forEach>
+					</select>
+					</div>
+					
+					<br><br>													
+										
+					
 					<input type="submit" class="btn btn-success w-100" value="registrar">
 					<br><br>
 					<h4><span>${error}</span></h4>

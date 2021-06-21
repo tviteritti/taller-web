@@ -14,6 +14,7 @@ import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.Zona;
 
 
 
@@ -101,15 +102,17 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 	}
 
 	@Override
-	public List<Usuario> buscarVeterinariosPorEspecialidadYZona(String especialidad, String zona) {
+	public List<Usuario> buscarVeterinariosPorEspecialidadYZona(Long especialidad, Long zona) {
 		
 		List<Usuario> veterinarios = ServicioUsuarioDao.listarVeterinarios();
 		List<Usuario> veterinariosEncontrados = new ArrayList<>();
+		Zona z = ServicioUsuarioDao.getZona(zona);
+		Especialidad e = ServicioUsuarioDao.getEspecialidad(especialidad);
 		 
 		for(Usuario veterinario : veterinarios) {
 			
-			if(veterinario.getDireccion().getZona().getDescripcion().equals(zona)
-			  && veterinario.getEspecialdad().getDescripcion().equals(especialidad)) {
+			if(veterinario.getDireccion().getZona().getDescripcion().equals(z.getDescripcion())
+			  && veterinario.getEspecialdad().getDescripcion().equals(e.getDescripcion())) {
 				
 				veterinariosEncontrados.add(veterinario);
 				
@@ -143,6 +146,30 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 		}
 		return null;
 		
+	}
+
+	@Override
+	public List<Zona> getZonas() {
+		return ServicioUsuarioDao.getZonas();
+	}
+
+	@Override
+	public void ingresarDireccion(Long id, String calle, String piso, String departamento, String numero,
+			Long id_zona) {
+		if(calle==null) {
+			calle="";
+		}
+		if(piso==null) {
+			piso="";
+		}
+		if(departamento==null) {
+			departamento="";
+		}
+		if(numero==null) {
+			numero="";
+		}
+		
+		ServicioUsuarioDao.ingresarDireccion(id, calle, piso, departamento, numero, id_zona);
 	}
 
 

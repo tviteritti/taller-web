@@ -24,6 +24,7 @@ import ar.edu.unlam.tallerweb1.modelo.Mascota;
 import ar.edu.unlam.tallerweb1.modelo.Planes;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.Zona;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDias;
 import ar.edu.unlam.tallerweb1.servicios.ServicioHorarios;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMascotas;
@@ -232,6 +233,8 @@ public class ControladorLoginVeterinaria {
 			ModelMap modelo = new ModelMap();
 			Usuario usuario = new Usuario();
 			List<Especialidad> listadoEspecialidad=servicioUsuario.getEspecialidades();
+			List<Zona> listadoZonas=servicioUsuario.getZonas();
+			modelo.put("listadoZonas", listadoZonas);
 			modelo.put("listadoEspecialidad", listadoEspecialidad);
 			modelo.put("usuario", usuario);
 
@@ -242,7 +245,12 @@ public class ControladorLoginVeterinaria {
 	public ModelAndView validarDatosVeterinario(
 			@ModelAttribute("usuario") Usuario user,HttpServletRequest request,
 			@RequestParam(value="id_especialidad",required=false) Long id_especialidad,
-			@RequestParam(value="re-password",required=false) String repass) {
+			@RequestParam(value="re-password",required=false) String repass,
+			@RequestParam(value="calle",required=false) String calle,
+			@RequestParam(value="piso",required=false) String piso,
+			@RequestParam(value="departamento",required=false) String departamento,
+			@RequestParam(value="numero",required=false) String numero,
+			@RequestParam(value="id_zona",required=false) Long id_zona) {
 		
 			ModelMap modelo = new ModelMap();
 			Dias dias = new Dias();
@@ -251,6 +259,7 @@ public class ControladorLoginVeterinaria {
 		if(servicioUsuario.validarPassRePass(user.getPassword(), repass)) { 
 			servicioUsuario.registrarOMOdificarUsuario(user);
 			servicioUsuario.ingresarEspecialidad(user.getId(), id_especialidad);
+			servicioUsuario.ingresarDireccion(user.getId(), calle, piso, departamento, numero, id_zona);
 			servicioDias.registrarOModificarDiasVeterinario(user, dias.getId());
 			modelo.put("usuario", user);
 			modelo.put("mensaje", "registro exitoso");
