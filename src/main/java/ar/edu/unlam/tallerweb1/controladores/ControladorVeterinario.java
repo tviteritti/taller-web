@@ -141,9 +141,11 @@ public class ControladorVeterinario {
 		Mascota mascota = servicioMascotas.obtenerMascota(idMascota);
 		Usuario veterinario = servicioUsuario.getVeterinario(idVeterinario);
 		List<TipoAnimal> tipos = servicioMascotas.listarTipoAnimal();
+		List<HistoriaClinica> hc = servicioHistoriaClinica.buscarHCPorMascota(idMascota);
 		modelo.put("duenio", duenio);
 		modelo.put("mascota", mascota);
 		modelo.put("veterinario", veterinario);
+		modelo.put("historiaClinica", hc);
 		modelo.put("tipos",tipos);
 		
 		return new ModelAndView("actualizarHC",modelo);
