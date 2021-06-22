@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.modelo.Consulta;
 import ar.edu.unlam.tallerweb1.modelo.HistoriaClinica;
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
 import ar.edu.unlam.tallerweb1.modelo.TipoAnimal;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.servicios.ServicioConsulta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioHistoriaClinica;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMascotas;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTurno;
@@ -30,18 +32,21 @@ public class ControladorVeterinario {
 	private ServicioHistoriaClinica servicioHistoriaClinica;
 	private ServicioTurno servicioTurno;
 	private ServicioUsuario servicioUsuario;
+	private ServicioConsulta servicioConsulta;
 
 		@Autowired
 		public ControladorVeterinario(
 				ServicioMascotas servicioMascotas, 
 				ServicioHistoriaClinica servicioHistoriaClinica,
 				ServicioTurno servicioTurno,
-				ServicioUsuario servicioUsuario) {
+				ServicioUsuario servicioUsuario,
+				ServicioConsulta servicioConsulta) {
 			
 			this.servicioMascotas=servicioMascotas;	
 			this.servicioHistoriaClinica=servicioHistoriaClinica;
 			this.servicioTurno=servicioTurno;
 			this.servicioUsuario = servicioUsuario;
+			this.servicioConsulta = servicioConsulta;
 		}
 		
 	
@@ -204,6 +209,36 @@ public class ControladorVeterinario {
 			
 			return new ModelAndView("historiaClinica", modelo);
 	}	
+		
+		
+		@RequestMapping("/consultasDeUsuarios")
+		public ModelAndView verConsultas(
+		@RequestParam(value="veterinarioId",required=false) Long idVeterinario) {
+			
+			ModelMap modelo = new ModelMap();
+			
+			Usuario vt = servicioUsuario.getVeterinario(idVeterinario);
+			List <Consulta> consultas = servicioConsulta.listarConsultas();
+			
+			modelo.put("veterinario", vt);
+			modelo.put("consultas", consultas);
+			
+		 return new ModelAndView("consultasUsuarios",modelo);
+		 
+		}	
+		
+		
+		@RequestMapping("/verMiPerfil")
+		public ModelAndView verPerfil(
+				@RequestParam(value="veterinarioId",required=false) Long idVeterinario) {
+			
+				ModelMap modelo = new ModelMap();
+				Usuario usuario = servicioUsuario.getVeterinario(idVeterinario);
+				
+				modelo.put("usuario", usuario);
+				
+			return new ModelAndView("perfil", modelo);
+		}
 		
 
 }

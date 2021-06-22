@@ -19,28 +19,28 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
     		<div class="col">
     		
     		Nombre:<br>
-	    	<input type="text" value="${duenio.nombre}" class="form-control" name ="nombre">
+	    	<input type="text" value="${usuario.nombre}" class="form-control" name ="nombre">
     		
     		
     			Apellido:<br>
-	     	  <input type="text" value="${duenio.apellido}" class="form-control" name ="apellido">
+	     	  <input type="text" value="${usuario.apellido}" class="form-control" name ="apellido">
     		 </div>
     		 <div class="col">
     			Email:<br>
-	     		<input type="text" value="${duenio.email}" class="form-control" name ="email">
+	     		<input type="text" value="${usuario.email}" class="form-control" name ="email">
     		
     			Telefono:<br>
-	     		<input type="text" value="${duenio.telefono}" class="form-control" name ="telefono">
+	     		<input type="text" value="${usuario.telefono}" class="form-control" name ="telefono">
     		 </div>
     		 <div class="col">
 		      Calle:
-		     <input type="text" value="${duenio.direccion.calle}" class="form-control" name ="calle">
+		     <input type="text" value="${usuario.direccion.calle}" class="form-control" name ="calle">
 		      Nro:
-		     <input type="text" value="${duenio.direccion.numero}" class="form-control" name ="numero">
+		     <input type="text" value="${usuario.direccion.numero}" class="form-control" name ="numero">
     		</div>
     		<div class="col">	
     		 Localidad:
-	    	 <input type="text" value="${duenio.direccion.localidad.descripcion}" class="form-control" name ="localidad">
+	    	 <input type="text" value="${usuario.direccion.localidad.descripcion}" class="form-control" name ="localidad">
     		</div>
 	   
     	</div>
