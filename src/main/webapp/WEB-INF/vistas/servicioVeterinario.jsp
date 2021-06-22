@@ -51,9 +51,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 				<c:forEach items="${turnosPorVT}" var="t">
 					     
 					<c:if test="${t.veterinario.id eq v.id}">
-						<c:if test="${t.estado == false}">
-								     
-							
+						 
 							<input type="radio" name="idTurno" value="${t.id}" id="turno${t.id}">
 									    
 							<label for="turno${t.id}">
@@ -69,7 +67,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 									         
 								 </p>
 							</label><br>
-						</c:if> 
+						 
 					</c:if>      
 				</c:forEach>
 					    
