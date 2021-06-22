@@ -46,7 +46,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 			      <br>
 			    
 			      <li class="nav-item d-inline mr-5">
-			        <form action="consultas" method="post">
+			        <form action="consultasDeUsuarios" method="post">
 			          <input type="hidden" name="veterinarioId" value="${usuario.id}"/>
 			          <button type="submit" class="btn btn-link text-decoration-none text-white-50">Consultas</button>
 			        </form>
