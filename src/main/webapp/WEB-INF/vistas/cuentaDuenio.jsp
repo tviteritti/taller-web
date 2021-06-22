@@ -19,7 +19,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 
 	<div class="card text-center">
 	<div class="row card-header">
-	    	<div class="col-3"> <i class="fas fa-home display-6"></i></div>
+	    	<div class="col-3"> <a href="loginVeterinaria"><i class="fas fa-home display-6"></i></a></div>
 	    	<div class="col-3">  <i class="fas fa-bell display-6"></i></div>
 	    	<div class="col-3"><i class="fas fa-moon"></i></div>
 	    	<div class="col-3">
