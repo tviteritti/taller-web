@@ -11,6 +11,7 @@ public interface ServicioConsulta {
 	
 	void cargarConsulta(Consulta consulta);
 	void eliminarConsultasNulas(Consulta consulta);
+	void agregarComentario(Long idConsulta , String comentario);
 	Consulta buscarConsulta(Long idConsulta);
 	List<Consulta> listarConsultaPorDuenio(Long idDuenio);
 	List<Consulta> listarConsultas();

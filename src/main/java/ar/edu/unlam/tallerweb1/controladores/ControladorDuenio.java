@@ -137,10 +137,9 @@ public class ControladorDuenio {
 		miConsulta.setAsunto(asunto);
 		miConsulta.setDescripcion(consulta);
 		miConsulta.setDuenio(duenio);
-		
-		Consulta consultaBuscada = servicioConsulta.buscarConsulta(idConsulta);
-		if(consultaBuscada!=null) {
-			consultaBuscada.setComentario(comentario);
+
+		if(idConsulta!=null) {
+			servicioConsulta.agregarComentario(idConsulta, comentario);
 		}
 		
 		

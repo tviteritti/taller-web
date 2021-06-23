@@ -61,13 +61,18 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 					      </footer>
 					    </blockquote>
 					    <c:if test="${not empty tc.comentario}">
-				    		<div class="border-left-info">
-				    		  <p>${tc.comentario}</p>
-				    		</div>
+				    		
+				    		<div class="progress d-flex flex-column">
+							  <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+							  <p>${tc.comentario}</p>
+							</div>
+				    		
+				    	
 		    			</c:if>
 					    <form method="post" action="miConsulta">
+					        <input type="hidden" value="${tc.id}" name="idConsulta">
 							<textarea class="form-control" rows="3" placeholder="comentar" name="comentario"></textarea>
-						    <button type="button" class="btn btn-primary btn-sm">Responder</button>
+						    <button type="submit" class="btn btn-primary btn-sm">Responder</button>
 					   </form>
 		  		</div>
 		  		<br>

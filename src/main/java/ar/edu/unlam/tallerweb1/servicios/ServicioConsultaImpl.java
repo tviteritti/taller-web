@@ -77,6 +77,13 @@ public class ServicioConsultaImpl implements ServicioConsulta {
 		
 		return repositorioConsulta.buscarConsulta(idConsulta);
 	}
+
+	@Override
+	public void agregarComentario(Long idConsulta, String comentario) {
+		
+		repositorioConsulta.agregarComentario(idConsulta, comentario);
+		
+	}
 	
 	
 
