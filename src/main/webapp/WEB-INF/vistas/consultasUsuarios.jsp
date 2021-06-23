@@ -19,14 +19,20 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 		  <div class="card-header">
 		    ${c.asunto}
 		  </div>
-		  <div class="card-body">
+		  <div class="card-body container">
 		    <blockquote class="blockquote mb-0">
-		      <p>${c.descripcion}</p>
+		      <p class="display-5">${c.descripcion}</p>
 		      <footer class="blockquote-footer">Realizada por <cite title="Source Title">${c.duenio.user} </cite></footer>
 		    </blockquote>
 		  </div>
 		    <div class="card-footer text-muted">
-    			<a href="#" class="btn btn-primary">Responder</a>
+		    	<c:if test="${not empty c.comentario}">
+		    		<div class="bd-callout bd-callout-info">
+		    		  <p>${c.comentario}</p>
+		    		</div>
+		    	</c:if>
+    			<textarea class="form-control" rows="3" placeholder="comentar"></textarea>
+				<button type="button" class="btn btn-primary btn-sm">Responder</button>
   			</div>
 		</div>
 		

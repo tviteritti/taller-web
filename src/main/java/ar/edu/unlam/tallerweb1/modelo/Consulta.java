@@ -15,6 +15,7 @@ public class Consulta {
 	
 	private String asunto;
 	private String descripcion;
+	private String comentario;
 	
 	@ManyToOne
 	private Usuario duenio;
@@ -49,6 +50,14 @@ public class Consulta {
 
 	public void setDuenio(Usuario duenio) {
 		this.duenio = duenio;
+	}
+
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
 	}
 	
 	

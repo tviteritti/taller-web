@@ -31,7 +31,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 					       <br>
 					       <div class="container">
 						     <input type="hidden" name="duenioId" value="${duenio.id}"/>
-						     <button type="submit" class="btn btn-success btn-lg">Enviar</button>
+						     <button type="submit" class="btn btn-success btn-block">Enviar</button>
 					     </div>
 			     </div>
 			    </form>
@@ -51,7 +51,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 			<c:forEach items="${todasLasConsultas}" var="tc">
       	
 		      	<div class="card text-center p-3 container">
-					    <blockquote class="blockquote mb-0">
+					    <blockquote class="blockquote mb-0 p-3">
 					     <h5 class="card-title">${tc.asunto}</h5>
 					      <p>${tc.descripcion}</p>
 					      <footer class="blockquote-footer ">
@@ -60,6 +60,15 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 					        </small>
 					      </footer>
 					    </blockquote>
+					    <c:if test="${not empty tc.comentario}">
+				    		<div class="border-left-info">
+				    		  <p>${tc.comentario}</p>
+				    		</div>
+		    			</c:if>
+					    <form method="post" action="miConsulta">
+							<textarea class="form-control" rows="3" placeholder="comentar" name="comentario"></textarea>
+						    <button type="button" class="btn btn-primary btn-sm">Responder</button>
+					   </form>
 		  		</div>
 		  		<br>
        		</c:forEach>
