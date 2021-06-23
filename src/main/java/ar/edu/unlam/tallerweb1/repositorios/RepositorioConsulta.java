@@ -7,6 +7,8 @@ import ar.edu.unlam.tallerweb1.modelo.Consulta;
 public interface RepositorioConsulta {
 	
 	void cargarConsulta(Consulta consulta);
+	void eliminarConsultasNulas(Consulta consulta);
+	Consulta buscarConsulta(Long idConsulta);
 	List<Consulta> listarConsultaPorDuenio(Long idDuenio);
 	List<Consulta> listarConsultas();
 

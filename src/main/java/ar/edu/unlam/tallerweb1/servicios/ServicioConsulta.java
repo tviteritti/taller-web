@@ -10,6 +10,8 @@ import ar.edu.unlam.tallerweb1.repositorios.RepositorioDias;
 public interface ServicioConsulta {
 	
 	void cargarConsulta(Consulta consulta);
+	void eliminarConsultasNulas(Consulta consulta);
+	Consulta buscarConsulta(Long idConsulta);
 	List<Consulta> listarConsultaPorDuenio(Long idDuenio);
 	List<Consulta> listarConsultas();
 

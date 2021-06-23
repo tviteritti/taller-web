@@ -124,7 +124,9 @@ public class ControladorDuenio {
 	public ModelAndView realizarConsulta(
 	@RequestParam(value="duenioId",required=false) Long idDuenio,
 	@RequestParam(value="asunto",required=false) String asunto,
-	@RequestParam(value="consulta",required=false) String consulta
+	@RequestParam(value="consulta",required=false) String consulta,
+	@RequestParam(value="comentario",required=false) String comentario,
+	@RequestParam(value="idConsulta",required=false) Long idConsulta
 	) {
 		
 		ModelMap modelo = new ModelMap();
@@ -136,6 +138,12 @@ public class ControladorDuenio {
 		miConsulta.setDescripcion(consulta);
 		miConsulta.setDuenio(duenio);
 		
+		Consulta consultaBuscada = servicioConsulta.buscarConsulta(idConsulta);
+		if(consultaBuscada!=null) {
+			consultaBuscada.setComentario(comentario);
+		}
+		
+		
 		servicioConsulta.cargarConsulta(miConsulta);
 		List <Consulta> consultas = servicioConsulta.listarConsultaPorDuenio(idDuenio);
 		List <Consulta> consultasDeTodosLosUsuarios = servicioConsulta.listarConsultas();
@@ -143,6 +151,8 @@ public class ControladorDuenio {
 		modelo.put("duenio", duenio);
 		modelo.put("consultas", consultas);
 		modelo.put("todasLasConsultas", consultasDeTodosLosUsuarios);
+		modelo.put("comentario", comentario);
+		
 	 return new ModelAndView("miConsulta",modelo);
 	 
 	}

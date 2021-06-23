@@ -28,13 +28,54 @@ public class ServicioConsultaImpl implements ServicioConsulta {
 	@Override
 	public List<Consulta> listarConsultaPorDuenio(Long idDuenio) {
 		
-		return repositorioConsulta.listarConsultaPorDuenio(idDuenio);
+		List<Consulta> consultas=  repositorioConsulta.listarConsultaPorDuenio(idDuenio);
+		
+		for(Consulta consulta: consultas) {
+				
+				if(consulta.getAsunto()==null && consulta.getDescripcion()==null
+					|| consulta.getAsunto()==null && consulta.getDescripcion()==null
+					&& consulta.getId()==null && consulta.getDuenio()==null) {
+					
+					repositorioConsulta.eliminarConsultasNulas(consulta);
+					
+				}
+				
+			}
+		
+		
+		return consultas;
 	}
 
 	@Override
 	public List<Consulta> listarConsultas() {
 		
+		List<Consulta> consultas=  repositorioConsulta.listarConsultas();
+		
+		for(Consulta consulta: consultas) {
+				
+				if(consulta.getAsunto()==null && consulta.getDescripcion()==null
+					|| consulta.getAsunto()==null && consulta.getDescripcion()==null
+					&& consulta.getId()==null && consulta.getDuenio()==null) {
+					
+					repositorioConsulta.eliminarConsultasNulas(consulta);
+					
+				}
+				
+			}
+		
 		return repositorioConsulta.listarConsultas();
+	}
+
+	@Override
+	public void eliminarConsultasNulas(Consulta consulta) {
+		
+		repositorioConsulta.eliminarConsultasNulas(consulta);
+	}
+
+	@Override
+	public Consulta buscarConsulta(Long idConsulta) {
+		
+		return repositorioConsulta.buscarConsulta(idConsulta);
 	}
 	
 	
