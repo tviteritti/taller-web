@@ -10,13 +10,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
-    rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
-    crossorigin="anonymous">
+       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <script src="https://kit.fontawesome.com/b883f5a3c0.js" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
+	<div class="position-fixed w-100" ><nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+	 	<h3 style="font-family: 'Ubuntu', sans-serif">VETERINARIA</h3> 
+	    <a class="navbar-brand" href="loginVeterinaria"> 
+	    <i class="fas fa-heartbeat display-5 text-info" style="font-size:30px"></i>
+	   
+	    </a>
+	   
+	    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+	      <li class="nav-item active">
+	        <a class="nav-link" href="#"> <span class="sr-only">(current)</span></a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#"></a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link disabled" href="#"></a>
+	      </li>
+	    </ul>
+	    <a class="btn btn-outline-success my-2 my-sm-0" href="loginVeterinaria">Volver inicio</a>
+	  </div>
+	</nav></div>
 	
-
 	<div class="d-flex align-items-center justify-content-center vh-100">
 		<div class="w-50 vh-100 text-center d-flex align-items-center justify-content-center" style="background-color: #289470;">			
 			<form action="registrarDuenio">
