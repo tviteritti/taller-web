@@ -27,12 +27,15 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 		  </div>
 		    <div class="card-footer text-muted">
 		    	<c:if test="${not empty c.comentario}">
-		    		<div class="bd-callout bd-callout-info">
-		    		  <p>${c.comentario}</p>
+		    		<div class="d-flex flex-column m-3" style="border-left:3px solid #17a2b8">
+		    		  <p class="text-left ml-2">${c.comentario} - <cite title="Source Title">${c.userRespuesta}</cite></p>
 		    		</div>
 		    	</c:if>
-    			<textarea class="form-control" rows="3" placeholder="comentar"></textarea>
-				<button type="button" class="btn btn-primary btn-sm">Responder</button>
+		    	 <form method="post" action="responderConsultas">
+					        <input type="hidden" value="${c.id}" name="idConsulta">
+							<textarea class="form-control" rows="3" placeholder="comentar" name="comentario"></textarea>
+						    <button type="submit" class="btn btn-primary btn-sm">Responder</button>
+				</form>
   			</div>
 		</div>
 		

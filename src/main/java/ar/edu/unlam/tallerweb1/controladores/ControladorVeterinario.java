@@ -228,6 +228,33 @@ public class ControladorVeterinario {
 		}	
 		
 		
+		@RequestMapping("/responderConsultas")
+		public ModelAndView responderConsultas(
+		@RequestParam(value="veterinarioId",required=false) Long idVeterinario,
+		@RequestParam(value="comentario",required=false) String comentario,
+		@RequestParam(value="idConsulta",required=false) Long idConsulta,
+		HttpServletRequest request) {
+			
+			ModelMap modelo = new ModelMap();
+			Usuario usuarioLogueado = (Usuario) request.getSession().getAttribute("usuario");
+			
+			if(idConsulta!=null && usuarioLogueado!=null) {
+				
+				servicioConsulta.agregarComentario(idConsulta, comentario, usuarioLogueado.getUser());
+			}
+			
+			Usuario vt = servicioUsuario.getVeterinario(idVeterinario);
+			List <Consulta> consultas = servicioConsulta.listarConsultas();
+			
+			modelo.put("veterinario", vt);
+			modelo.put("consultas", consultas);
+			modelo.put("usuario", usuarioLogueado);
+			
+		 return new ModelAndView("consultasUsuarios",modelo);
+		 
+		}
+		
+		
 		@RequestMapping("/verMiPerfil")
 		public ModelAndView verPerfil(
 				@RequestParam(value="veterinarioId",required=false) Long idVeterinario) {
