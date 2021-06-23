@@ -53,9 +53,7 @@ public class ServicioConsultaImpl implements ServicioConsulta {
 		
 		for(Consulta consulta: consultas) {
 				
-				if(consulta.getAsunto()==null && consulta.getDescripcion()==null
-					|| consulta.getAsunto()==null && consulta.getDescripcion()==null
-					&& consulta.getId()==null && consulta.getDuenio()==null) {
+				if(consulta.getAsunto()==null && consulta.getDescripcion()==null){
 					
 					repositorioConsulta.eliminarConsultasNulas(consulta);
 					
@@ -79,9 +77,9 @@ public class ServicioConsultaImpl implements ServicioConsulta {
 	}
 
 	@Override
-	public void agregarComentario(Long idConsulta, String comentario) {
+	public void agregarComentario(Long idConsulta , String comentario, String userRespuesta) {
 		
-		repositorioConsulta.agregarComentario(idConsulta, comentario);
+		repositorioConsulta.agregarComentario(idConsulta, comentario, userRespuesta);
 		
 	}
 	

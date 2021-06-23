@@ -30,7 +30,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 				    	
 					       <br>
 					       <div class="container">
-						     <input type="hidden" name="duenioId" value="${duenio.id}"/>
+						     <input type="hidden" name="duenioId" value="${usuario.id}"/>
 						     <button type="submit" class="btn btn-success btn-block">Enviar</button>
 					     </div>
 			     </div>
@@ -53,7 +53,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 		      	<div class="card text-center p-3 container">
 					    <blockquote class="blockquote mb-0 p-3">
 					     <h5 class="card-title">${tc.asunto}</h5>
-					      <p>${tc.descripcion}</p>
+					      <p class="display-5">${tc.descripcion}</p>
 					      <footer class="blockquote-footer ">
 					        <small class="text-dark">
 					          Realizado por <cite title="Source Title">${tc.duenio.user}</cite>
@@ -62,9 +62,8 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 					    </blockquote>
 					    <c:if test="${not empty tc.comentario}">
 				    		
-				    		<div class="progress d-flex flex-column">
-							  <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-							  <p>${tc.comentario}</p>
+				    		<div class="d-flex flex-column m-3" style="border-left:3px solid #17a2b8">
+							  <p class="text-left ml-2">${tc.comentario} - <cite title="Source Title">${tc.userRespuesta}</cite></p>
 							</div>
 				    		
 				    	

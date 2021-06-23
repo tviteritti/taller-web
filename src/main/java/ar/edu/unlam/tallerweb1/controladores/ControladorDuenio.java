@@ -126,10 +126,13 @@ public class ControladorDuenio {
 	@RequestParam(value="asunto",required=false) String asunto,
 	@RequestParam(value="consulta",required=false) String consulta,
 	@RequestParam(value="comentario",required=false) String comentario,
-	@RequestParam(value="idConsulta",required=false) Long idConsulta
+	@RequestParam(value="idConsulta",required=false) Long idConsulta,
+	HttpServletRequest request
 	) {
 		
 		ModelMap modelo = new ModelMap();
+		
+		Usuario usuarioLogueado = (Usuario) request.getSession().getAttribute("usuario");
 		
 		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
 		
@@ -138,11 +141,12 @@ public class ControladorDuenio {
 		miConsulta.setDescripcion(consulta);
 		miConsulta.setDuenio(duenio);
 
-		if(idConsulta!=null) {
-			servicioConsulta.agregarComentario(idConsulta, comentario);
+		if(idConsulta!=null && usuarioLogueado!=null) {
+			
+			servicioConsulta.agregarComentario(idConsulta, comentario, usuarioLogueado.getUser());
 		}
-		
-		
+
+
 		servicioConsulta.cargarConsulta(miConsulta);
 		List <Consulta> consultas = servicioConsulta.listarConsultaPorDuenio(idDuenio);
 		List <Consulta> consultasDeTodosLosUsuarios = servicioConsulta.listarConsultas();
@@ -151,10 +155,12 @@ public class ControladorDuenio {
 		modelo.put("consultas", consultas);
 		modelo.put("todasLasConsultas", consultasDeTodosLosUsuarios);
 		modelo.put("comentario", comentario);
+		modelo.put("usuario", usuarioLogueado);
 		
 	 return new ModelAndView("miConsulta",modelo);
 	 
 	}
+	
 	
 	@RequestMapping("/verMisConsultas")
 	public ModelAndView verMisConsultas(

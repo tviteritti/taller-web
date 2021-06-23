@@ -71,15 +71,15 @@ public class RepositorioConsultaImpl implements RepositorioConsulta{
 	}
 
 	@Override
-	public void agregarComentario(Long idConsulta, String comentario) {
+	public void agregarComentario(Long idConsulta , String comentario, String userRespuesta) {
 		Consulta consulta = (Consulta) sessionFactory.getCurrentSession()
 				 .createCriteria(Consulta.class)
 				 .add(Restrictions.eq("id",idConsulta))
 				 .uniqueResult();
 	   
 		consulta.setComentario(comentario);
-		
-		
+		consulta.setUserRespuesta(userRespuesta);
+	
 	}
 	
 	
