@@ -61,9 +61,6 @@ public class ControladorVeterinario {
 				return new ModelAndView("redirect:/cuentaDuenio");
 			}
 			
-			if(usuarioa.getRol().equals("veterinario")) {
-				return new ModelAndView("redirect:/cuentaVeterinario");
-			}
 			
 			ModelMap modelo = new ModelMap();
 			
