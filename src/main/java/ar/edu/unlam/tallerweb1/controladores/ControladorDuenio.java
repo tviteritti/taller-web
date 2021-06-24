@@ -122,7 +122,7 @@ public class ControladorDuenio {
 		miConsulta.setDescripcion(consulta);
 		miConsulta.setDuenio(duenio);
 
-		if(idConsulta!=null && usuarioLogueado!=null) {
+		if(idConsulta!=null && usuarioLogueado!=null) {//agregar que pasa cuando es nulo
 			
 			servicioConsulta.agregarComentario(idConsulta, comentario, usuarioLogueado.getUser());
 		}

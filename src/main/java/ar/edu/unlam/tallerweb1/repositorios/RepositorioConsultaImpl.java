@@ -35,8 +35,6 @@ public class RepositorioConsultaImpl implements RepositorioConsulta{
 				 .createCriteria(Consulta.class)
 				 .createAlias("duenio", "dBuscado")
 				 .add(Restrictions.eq("dBuscado.id", idDuenio))
-				 .add(Restrictions.isNotNull("asunto"))
-				 .add(Restrictions.isNotNull("descripcion"))
 				 .list();
 		return consultas;
 	}
@@ -46,16 +44,14 @@ public class RepositorioConsultaImpl implements RepositorioConsulta{
 		
 		List<Consulta> consultas = (List<Consulta>) sessionFactory.getCurrentSession()
 				 .createCriteria(Consulta.class)
-				 .add(Restrictions.isNotNull("asunto"))
-				 .add(Restrictions.isNotNull("descripcion"))
 				 .list();
 		return consultas;
 	}
 
 	@Override
 	public void eliminarConsultasNulas(Consulta consulta) {
-		final Session session = sessionFactory.getCurrentSession();
-		 session.delete(consulta);
+	
+		sessionFactory.getCurrentSession().delete(consulta);
 	
 	}
 
