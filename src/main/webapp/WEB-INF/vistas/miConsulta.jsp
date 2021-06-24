@@ -49,6 +49,9 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 		<c:if test="${not empty todasLasConsultas}">
 			
 			<c:forEach items="${todasLasConsultas}" var="tc">
+			
+			<c:if test="${not empty tc.asunto}">
+      		<c:if test="${not empty tc.descripcion}">
       	
 		      	<div class="card text-center p-3 container">
 					    <blockquote class="blockquote mb-0 p-3">
@@ -75,6 +78,8 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 					   </form>
 		  		</div>
 		  		<br>
+		  		</c:if>
+		  		</c:if>
        		</c:forEach>
 		</c:if>
 			

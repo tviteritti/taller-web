@@ -16,7 +16,8 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
       <br>
       
       <c:forEach items="${consultas}" var="c">
-      	
+      	<c:if test="${not empty c.asunto}">
+      	<c:if test="${not empty c.decripcion}">
       	<div class="card text-center p-3 container">
 			    <blockquote class="blockquote mb-0">
 			     <h5 class="card-title">${c.asunto}</h5>
@@ -28,6 +29,8 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 			      </footer>
 			    </blockquote>      
   		</div>
+  		</c:if>
+  		</c:if>
   		<br>
       </c:forEach>
 
