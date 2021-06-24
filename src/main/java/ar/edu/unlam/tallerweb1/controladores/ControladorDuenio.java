@@ -60,7 +60,7 @@ public class ControladorDuenio {
 			return new ModelAndView("redirect:/cuentaVeterinario");
 		}
 		ModelMap modelo = new ModelMap();
-		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
+		Usuario duenio = servicioDuenio.getDuenio(usuarioa.getId());
 		modelo.put("duenio", duenio);
 	 return new ModelAndView("mascota",modelo);
 	}

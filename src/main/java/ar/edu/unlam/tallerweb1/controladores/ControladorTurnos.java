@@ -143,13 +143,15 @@ private ServicioPlanes servicioPlanes;
 		
 		ModelMap modelo = new ModelMap();
 		
+		Usuario usuarioLogueado = (Usuario) request.getSession().getAttribute("usuario");
+		
 		Usuario veterinario = servicioUsuario.getVeterinario(veterinarioId);
 		
 		modelo.put("veterinario", veterinario);
 		
 		Usuario duenio = servicioUsuario.getUsuario(duenioId);
 		
-		Mascota mascota = servicioMascotas.buscarMascotaPorDuenio(duenio);
+		Mascota mascota = servicioMascotas.buscarMascotaPorDuenio(usuarioLogueado.getId());
 		
 		
 		modelo.put("especialidad", servicioSolicitado);

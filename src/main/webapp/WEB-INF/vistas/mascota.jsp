@@ -38,7 +38,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 			    <div class="card">
 			      <div class="card-body">
 			        <h5 class="card-title">Ver perfil de mi mascota</h5>
-			        <p class="card-text">Podes ver el perfil de tu mascota</p>
+			        <p class="card-text">Podes ver el perfil de tu mascota y modificarlo</p>
 			        
 			        <form action="perfilMascota" method="post">
 				   <input type="hidden" name="duenioId" value="${duenio.id}"/>
@@ -49,24 +49,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 			    </div>
 			  </div>
 			  </div>
-			   
-			    <div class="row">
-			  <div class="col">
-			    <div class="card">
-			      <div class="card-body">
-			        <h5 class="card-title">Editar datos</h5>
-			        <p class="card-text">Modifica cualquier dato de tu mascota que se necesario</p>
-			        
-			       <form action="modificarDatosMascota" method="post">
-			   <input type="hidden" name="duenioId" value="${duenio.id}"/>
-			    <button type="submit" class="btn btn-success">modificar datos</button>
-			   </form>
-			  	 
-			      </div>
-			    </div>
-			  </div>
-			  </div> 
-	   
+
 	   </div>
  
  <input type="hidden" name="duenioId" value="${duenio.id}"/>

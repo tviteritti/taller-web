@@ -34,38 +34,44 @@ public class ControladorMascota {
 	public ModelAndView verPerfilMascota(
 			@RequestParam(value="duenioId",required=false) Long idDuenio,
 			HttpServletRequest request) {
+		
 			ModelMap modelo = new ModelMap();
-			Long id = (Long) request.getSession().getAttribute("id");
-			Usuario duenio = servicioDuenio.getDuenio(id);
-			Mascota  mascota = servicioMascota.buscarMascotaPorDuenio(duenio);
+			
+			Usuario usuarioLogueado = (Usuario) request.getSession().getAttribute("usuario");
+			
+			Usuario duenio = servicioDuenio.getDuenio(usuarioLogueado.getId());
+			
+			Mascota  mascota = servicioMascota.buscarMascotaPorDuenio(usuarioLogueado.getId());
+			
 			modelo.put("duenio", duenio);
 			modelo.put("duenioId", idDuenio);
 			modelo.put("mascota", mascota);
+			
 		return new ModelAndView("perfilMascota", modelo);
 	}
 	
 	@RequestMapping("/modificarPerfilMascota")
 	public ModelAndView modificarPerfilMascota(
 			@RequestParam(value="duenioId",required=false) Long idDuenio,
+			@RequestParam(value="mascotaId",required=false) Long mascotaId,
 			@RequestParam(value="mascotaNombre",required=false)String mascotaNombre,
 			@RequestParam(value="mascotaFN",required=false) Date fechaNacimiento,
-			@RequestParam(value="tipo",required=false) Long idTipo) {
+			@RequestParam(value="tipo",required=false) Long idTipo,
+			HttpServletRequest request) {
 		
 			ModelMap modelo = new ModelMap();
 			
-			Usuario duenio = servicioDuenio.getDuenio(idDuenio);
-			Mascota  mascota = servicioMascota.buscarMascotaPorDuenio(duenio);
+			Usuario usuarioLogueado = (Usuario) request.getSession().getAttribute("usuario");
+			
+			Mascota  mascota = servicioMascota.buscarMascotaPorDuenio(usuarioLogueado.getId());
+			
 			TipoAnimal tipo = servicioMascota.obtenerTipoAnimal(idTipo);
 			
-			mascota.setFecha_nacimiento(fechaNacimiento);
-			mascota.setNombre(mascotaNombre);
-			mascota.setFecha_nacimiento(fechaNacimiento);
-			mascota.setTipo(tipo);
-			
-			modelo.put("duenio", duenio);
+			modelo.put("duenio", usuarioLogueado);
 			modelo.put("mascota", mascota);
+			servicioMascota.modificarPerfilMascota(mascotaId, mascotaNombre, fechaNacimiento, tipo);
 			
-		return new ModelAndView("perfilMascota", modelo);
+		return new ModelAndView("redirect:/perfilMascota", modelo);
 	}
 	
 	

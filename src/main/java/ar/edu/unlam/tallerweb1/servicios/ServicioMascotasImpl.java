@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class ServicioMascotasImpl implements ServicioMascotas{
 		
 	}
 
+	
 	@Override
 	public List<Mascota> listarMascotas() {
 		
@@ -64,27 +66,6 @@ public class ServicioMascotasImpl implements ServicioMascotas{
 		return mascotaEncontrada;
 	}
 
-	@Override
-	public Mascota buscarMascotaPorDuenio(Usuario duenio) {
-		List <Mascota> mascotas = servicioMascotasDao.listarMascotas();
-		
-		Mascota mascotaEncontrada = null;
-		
-		for(Mascota mascota:mascotas) {
-			
-			if(mascota.getDuenio().equals(duenio)) {
-				
-				mascotaEncontrada=mascota;
-				break;
-				
-			}
-			
-		}
-		
-		return mascotaEncontrada;
-		
-		
-	}
 
 	@Override
 	public List<Mascota> listarMascotasPorDuenio(Usuario id_duenio) {
@@ -95,6 +76,21 @@ public class ServicioMascotasImpl implements ServicioMascotas{
 	public TipoAnimal obtenerTipoAnimal(Long id) {
 		
 		return servicioMascotasDao.obtenerTipoAnimal(id);
+	}
+
+
+	@Override
+	public void modificarPerfilMascota(Long idMascota, String nombre, Date fechaNacimineto, TipoAnimal tipoAnimal) {
+		
+		servicioMascotasDao.modificarPerfilMascota(idMascota, nombre, fechaNacimineto, tipoAnimal);
+		
+	}
+
+
+	@Override
+	public Mascota buscarMascotaPorDuenio(Long idDuenio) {
+		
+		return servicioMascotasDao.buscarMascotaPorDuenio(idDuenio);
 	}
 	
 	

@@ -15,7 +15,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 <h4 class="text-center container p-2">Perfil Mascota</h4>
     <br>
     
-    <form action="modificarPerfil" method="post" class="container">
+    <form action="modificarPerfilMascota" method="post" class="container">
     	<div class="row  container">
     	
     		<div class="col">
@@ -27,6 +27,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
     		<div class="col">	
     		 Fecha Nacimiento:
 	    	 <input type="date" value="${mascota.fecha_nacimiento}" class="form-control" name ="mascotaFN">
+	    	 <input type="hidden" name="mascotaId" value="${mascota.id}"/>
     		</div>
     		
     		<div class="col">	
@@ -43,8 +44,8 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
     	</div>
        <br>
        <div class="container">
-        <input type="hidden" name="duenioId" value="${duenioId}"/>
-     <button type="submit" class="btn btn-success btn-lg" name="modificar">MODIFICAR</button>
+        <input type="hidden" name="duenioId" value="${duenio.id}"/>
+     <button type="submit" class="btn btn-success btn-lg" name="modificar">Modificar</button>
      </div>
     </form>
     

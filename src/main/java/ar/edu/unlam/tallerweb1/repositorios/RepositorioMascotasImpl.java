@@ -27,6 +27,7 @@ public class RepositorioMascotasImpl implements RepositorioMascotas{
 		this.sessionFactory = sessionFactory;
 	}
 
+	
 	@Override
 	public List<Mascota> listarMascotas() {
 		
@@ -88,4 +89,33 @@ public class RepositorioMascotasImpl implements RepositorioMascotas{
 		return tipo;
 
 	}
+
+	@Override
+	public void modificarPerfilMascota(Long idMascota, String nombre, Date fechaNacimineto, TipoAnimal tipoAnimal) {
+		
+		Mascota mascota = (Mascota) sessionFactory.getCurrentSession()
+				 .createCriteria(Mascota.class)
+				 .add(Restrictions.eq("id", idMascota))
+				 .uniqueResult();
+		
+		mascota.setNombre(nombre);
+		mascota.setFecha_nacimiento(fechaNacimineto);
+		mascota.setTipo(tipoAnimal);
+		
+	}
+
+
+	@Override
+	public Mascota buscarMascotaPorDuenio(Long idDuenio) {
+		
+		Mascota mascota = (Mascota) sessionFactory.getCurrentSession()
+				 .createCriteria(Mascota.class)
+				 .createAlias("duenio", "dBuscado")
+				 .add(Restrictions.eq("dBuscado.id", idDuenio))
+				 .uniqueResult();
+		
+		return mascota;
+	}
+	
+	
 }
