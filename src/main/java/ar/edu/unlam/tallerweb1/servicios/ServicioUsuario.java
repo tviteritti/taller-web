@@ -26,6 +26,8 @@ public interface ServicioUsuario {
 	void registrarOMOdificarUsuario (Usuario usuario);
 	void eliminarUsuario(Long id);
 	void ingresarEspecialidad(Long id, Long id_especialidad);
+	void modificarPerfil(Long idUsuario, String nombre, String apellido, Long idDireccion, String calle, String nro,Long idLocalidad,
+			Integer codPostal,String localidad, String telefono, String email,  String descripcion);
 	
 	Boolean validarPassRePass(String pass, String repass);
 	

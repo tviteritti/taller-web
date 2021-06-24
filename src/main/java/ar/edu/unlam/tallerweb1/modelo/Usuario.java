@@ -26,6 +26,7 @@ public class Usuario {
 	private String apellido;
 	private String telefono;
 	private Double precioSesion;
+	private String descripcion;
 	private byte[] foto;
 	
 	@ManyToOne
@@ -106,4 +107,12 @@ public class Usuario {
 	public void setPrecioSesion(Double precioSesion) {
 		this.precioSesion = precioSesion;
 	}
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	
+	
 }

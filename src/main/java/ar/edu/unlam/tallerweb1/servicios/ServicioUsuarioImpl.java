@@ -29,6 +29,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 		this.ServicioUsuarioDao = ServicioUsuarioDao;
 	}
 
+	
 	@Override
 	public List<Usuario> getUsuarios() {
 		
@@ -181,6 +182,20 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 	public Zona getZona(Long id) {
 		return ServicioUsuarioDao.getZona(id);
 	}
+
+
+	@Override
+	public void modificarPerfil(Long idUsuario, String nombre, String apellido, Long idDireccion, String calle, String nro,Long idLocalidad,
+			Integer codPostal,String localidad, String telefono, String email,  String descripcion) {
+		
+		ServicioUsuarioDao.modificarPerfil(idUsuario, nombre, apellido, idDireccion, calle, nro, idLocalidad, codPostal, localidad, telefono, email, descripcion);
+		
+	}
+
+
+	
+			
+			
 
 
 

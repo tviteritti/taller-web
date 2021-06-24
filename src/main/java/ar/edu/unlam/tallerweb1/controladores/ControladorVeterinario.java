@@ -60,11 +60,22 @@ public class ControladorVeterinario {
 			if(usuarioa.getRol().equals("duenio")) {
 				return new ModelAndView("redirect:/cuentaDuenio");
 			}
-		ModelMap modelo = new ModelMap();
-		
-		List<Mascota> pacientes =servicioTurno.obtenerMascotasPorTurno(idVeterinario);
-	
-		modelo.put("mascotas", pacientes);
+			
+			if(usuarioa.getRol().equals("veterinario")) {
+				return new ModelAndView("redirect:/cuentaVeterinario");
+			}
+			
+			ModelMap modelo = new ModelMap();
+			
+			if(usuarioa!=null) {
+				
+				List<Mascota> pacientes =servicioTurno.obtenerMascotasPorTurno(usuarioa.getId());
+				
+				modelo.put("mascotas", pacientes);
+				
+			}
+			
+			modelo.put("veterinario", usuarioa);
 		
 		return new ModelAndView("pacientes",modelo);
 	}
@@ -81,18 +92,19 @@ public class ControladorVeterinario {
 			if(usuarioa.getRol().equals("duenio")) {
 				return new ModelAndView("redirect:/cuentaDuenio");
 			}
-		ModelMap modelo = new ModelMap();
-		
-		List<HistoriaClinica> hc = servicioHistoriaClinica.buscarHCPorMascota(idMascota);
-		Usuario duenio = servicioUsuario.getDuenio(idDuenio);
-		Mascota mascota = servicioMascotas.obtenerMascota(idMascota);
-		Usuario veterinario = servicioUsuario.getVeterinario(idVeterinario);
-		
-		modelo.put("duenio", duenio);
-		modelo.put("mascota", mascota);
-		modelo.put("veterinario", veterinario);
-		modelo.put("hc", hc);
-		
+			
+			ModelMap modelo = new ModelMap();
+			
+			List<HistoriaClinica> hc = servicioHistoriaClinica.buscarHCPorMascota(idMascota);
+			Usuario duenio = servicioUsuario.getDuenio(idDuenio);
+			Mascota mascota = servicioMascotas.obtenerMascota(idMascota);
+			Usuario veterinario = servicioUsuario.getVeterinario(idVeterinario);
+			
+			modelo.put("duenio", duenio);
+			modelo.put("mascota", mascota);
+			modelo.put("veterinario", veterinario);
+			modelo.put("hc", hc);
+			
 		return new ModelAndView("historiaClinica",modelo);
 	}
 		
@@ -254,18 +266,4 @@ public class ControladorVeterinario {
 		 
 		}
 		
-		
-		@RequestMapping("/verMiPerfil")
-		public ModelAndView verPerfil(
-				@RequestParam(value="veterinarioId",required=false) Long idVeterinario) {
-			
-				ModelMap modelo = new ModelMap();
-				Usuario usuario = servicioUsuario.getVeterinario(idVeterinario);
-				
-				modelo.put("usuario", usuario);
-				
-			return new ModelAndView("perfil", modelo);
-		}
-		
-
 }

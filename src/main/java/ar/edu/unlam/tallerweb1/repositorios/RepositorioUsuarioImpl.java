@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.repositorios;
 import ar.edu.unlam.tallerweb1.modelo.Dias;
 import ar.edu.unlam.tallerweb1.modelo.Direccion;
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
+import ar.edu.unlam.tallerweb1.modelo.Localidad;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
@@ -227,6 +228,41 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		
 		
 		return zona;
+	}
+
+
+	@Override
+	public void modificarPerfil(Long idUsuario, String nombre, String apellido, Long idDireccion, String calle, String nro,
+			Long idLocalidad, Integer codPostal, String localidad, String telefono, String email, String descripcion) {
+		
+		Usuario usuario = (Usuario)sessionFactory.getCurrentSession()
+				 .createCriteria(Usuario.class)
+				 .add(Restrictions.eq("id", idUsuario))
+				 .uniqueResult();
+		
+		usuario.setNombre(nombre);
+		usuario.setApellido(apellido);
+		usuario.setTelefono(telefono);
+		usuario.setEmail(email);
+		usuario.setDescripcion(descripcion);
+		
+		Localidad modificarLocalidad = (Localidad)sessionFactory.getCurrentSession()
+				 .createCriteria(Localidad.class)
+				 .add(Restrictions.eq("id", idLocalidad))
+				 .uniqueResult();
+		
+		modificarLocalidad.setCp(codPostal);
+		modificarLocalidad.setDescripcion(localidad);
+		
+		Direccion modificarDireccion = (Direccion)sessionFactory.getCurrentSession()
+				 .createCriteria(Direccion.class)
+				 .add(Restrictions.eq("id", idDireccion))
+				 .uniqueResult();
+		
+	
+		modificarDireccion.setCalle(calle);
+		modificarDireccion.setNumero(nro);
+		
 	}
 
 	

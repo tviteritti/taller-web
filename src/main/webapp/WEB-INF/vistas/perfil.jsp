@@ -18,13 +18,13 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
     	
     		<div class="col">
     		
-    		Nombre:<br>
-	    	<input type="text" value="${usuario.nombre}" class="form-control" name ="nombre">
-    		
-    		
+	    		Nombre:<br>
+		    	<input type="text" value="${usuario.nombre}" class="form-control" name ="nombre">
+		    	
     			Apellido:<br>
 	     	  <input type="text" value="${usuario.apellido}" class="form-control" name ="apellido">
     		 </div>
+    		 
     		 <div class="col">
     			Email:<br>
 	     		<input type="text" value="${usuario.email}" class="form-control" name ="email">
@@ -32,21 +32,35 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
     			Telefono:<br>
 	     		<input type="text" value="${usuario.telefono}" class="form-control" name ="telefono">
     		 </div>
+    		 
     		 <div class="col">
 		      Calle:
 		     <input type="text" value="${usuario.direccion.calle}" class="form-control" name ="calle">
 		      Nro:
 		     <input type="text" value="${usuario.direccion.numero}" class="form-control" name ="numero">
+		     <input type="hidden" value="${usuario.direccion.id}" name="idDireccion"/>
     		</div>
+    		
     		<div class="col">	
+    		 Cod. Postal:
+	    	 <input type="text" value="${usuario.direccion.localidad.cp}" class="form-control" name ="codPostal">
+    		
     		 Localidad:
 	    	 <input type="text" value="${usuario.direccion.localidad.descripcion}" class="form-control" name ="localidad">
+	    	 <input type="hidden" value="${usuario.direccion.localidad.id}" name="idLocalidad"/>
     		</div>
+    		
+    		<div class="col">	
+    		 Descripcion:
+	    	 <textarea value="${usuario.descripcion}" class="form-control" name ="descripcion"></textarea>
+    		</div>
+    		
 	   
     	</div>
        <br>
        <div class="container">
-     <button type="submit" class="btn btn-success btn-lg">MODIFICAR</button>
+       <input type="hidden" value="${usuario.id}" name="idUsuario"/>
+     <button type="submit" class="btn btn-success btn-lg">Modificar</button>
      </div>
     </form>
     

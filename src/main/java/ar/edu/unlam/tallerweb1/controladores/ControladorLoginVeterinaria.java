@@ -574,4 +574,75 @@ public class ControladorLoginVeterinaria {
 		
 	return new ModelAndView("redirect:/loginVeterinaria");
 	}
+	
+	/*--------------------------------------------------------- PERFIL DEL USUARIO --------------------------------------------*/
+	
+	
+	@RequestMapping("/verPerfil")
+	public ModelAndView verPerfil(
+			@RequestParam(value="idUsuario",required=false) Long idUsuario,
+			HttpServletRequest request) {
+		
+			Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+			
+			ModelMap modelo = new ModelMap();
+			
+			if(usuarioa == null) {
+				
+				return new ModelAndView("redirect:/loginVeterinaria");
+			}
+			if(usuarioa.getRol().equals("veterinario")) {
+				
+				Usuario veterinario = servicioUsuario.getVeterinario(usuarioa.getId());
+				modelo.put("usuario", veterinario);
+				
+			}
+			
+			if(usuarioa.getRol().equals("duenio")) {
+			
+				Usuario duenio = servicioUsuario.getDuenio(usuarioa.getId());
+				modelo.put("usuario", duenio);
+				
+			}
+
+			
+		return new ModelAndView("perfil", modelo);
+	}
+	
+	@RequestMapping("/modificarPerfil")
+	public ModelAndView modificarPerfil(
+			@RequestParam(value="idUsuario",required=false) Long idUsuario,
+			@RequestParam(value="nombre",required=false) String nombre,
+			@RequestParam(value="apellido",required=false) String apellido,
+			@RequestParam(value="telefono",required=false) String telefono,
+			@RequestParam(value="idDireccion",required=false) Long idDireccion,
+			@RequestParam(value="calle",required=false) String calle,
+			@RequestParam(value="numero",required=false) String numero,
+			@RequestParam(value="idLocalidad",required=false) Long idLocalidad,
+			@RequestParam(value="localidad",required=false) String localidad,
+			@RequestParam(value="codPostal",required=false)Integer codPostal,
+			@RequestParam(value="email",required=false) String email,
+			@RequestParam(value="descripcion",required=false) String descripcion,
+			HttpServletRequest request) {
+		
+			Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+			
+			ModelMap modelo = new ModelMap();
+			
+			if(usuarioa == null) {
+				
+				return new ModelAndView("redirect:/loginVeterinaria");
+				
+			}
+			
+	
+				
+				Usuario usuario = servicioUsuario.getVeterinario(usuarioa.getId());
+				modelo.put("usuario", usuario);
+				servicioUsuario.modificarPerfil(idUsuario, nombre, apellido, idDireccion,calle, numero, 
+												idLocalidad,codPostal,localidad, telefono, email, descripcion);
+	
+		return new ModelAndView("redirect:/verPerfil", modelo);
+	}
+	
 }

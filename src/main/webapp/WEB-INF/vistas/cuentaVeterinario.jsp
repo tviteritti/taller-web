@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,9 +64,16 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 			    
 			  </div>
 			  <div class="card-body">
-			    <p class="card-text">Aca podes agregar una descripcion</p>
+			    <p class="card-text" name="descripcion">
+			     <c:if test="${empty usuario.descripcion}">
+			    	Aca podes agregar una descripcion
+			     </c:if>
+			      <c:if test="${not empty usuario.descripcion}">
+			    	${usuario.descripcion}
+			     </c:if>
+			    </p>
 			    <form action="verPerfil" method="post">
-				   <input type="hidden" name="veterinarioId" value="${usuario.id}"/>
+				   <input type="hidden" name="idUsuario" value="${usuario.id}"/>
 				   <div class="text-center display-4" >
 				   <i class="fas fa-user"></i>
 				   </div>

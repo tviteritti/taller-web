@@ -48,25 +48,6 @@ public class ControladorDuenio {
 		this.servicioConsulta = servicioConsulta;
 	}
 	
-	@RequestMapping("/verPerfil")
-	public ModelAndView verPerfil(
-			@RequestParam(value="duenioId",required=false) Long idUsuario,
-			HttpServletRequest request) {
-			Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
-			if(usuarioa == null) {
-				return new ModelAndView("redirect:/loginVeterinaria");
-			}
-			if(usuarioa.getRol().equals("veterinario")) {
-				return new ModelAndView("redirect:/cuentaVeterinario");
-			}
-			
-			ModelMap modelo = new ModelMap();
-			Usuario usuario = servicioDuenio.getUsuario(idUsuario);
-			
-			modelo.put("usuario", usuario);
-			
-		return new ModelAndView("perfil", modelo);
-	}
 	
 	@RequestMapping("/mascota")
 	public ModelAndView irAMiMascota(
