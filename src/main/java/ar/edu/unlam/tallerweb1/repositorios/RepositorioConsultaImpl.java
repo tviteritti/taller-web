@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Consulta;
+import ar.edu.unlam.tallerweb1.modelo.Notificacion;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 @Repository
@@ -77,6 +78,16 @@ public class RepositorioConsultaImpl implements RepositorioConsulta{
 		consulta.setUserRespuesta(userRespuesta);
 	
 	}
+
+	@Override
+	public void cargarNotificacion(Notificacion notificacion) {
+		
+		sessionFactory.getCurrentSession().save(notificacion);
+		
+	}
+
+	
+	
 	
 	
 

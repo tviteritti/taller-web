@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.modelo.Consulta;
+import ar.edu.unlam.tallerweb1.modelo.Notificacion;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioConsulta;
 
 @Service
@@ -81,6 +82,13 @@ public class ServicioConsultaImpl implements ServicioConsulta {
 	public void eliminarConsultasNulas(Consulta consulta) {
 		
 		repositorioConsulta.eliminarConsultasNulas(consulta);
+		
+	}
+
+	@Override
+	public void cargarNotificacion(Notificacion notificacion) {
+		
+		repositorioConsulta.cargarNotificacion(notificacion);
 		
 	}
 	

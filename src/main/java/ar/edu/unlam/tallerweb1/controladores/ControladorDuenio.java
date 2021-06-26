@@ -18,6 +18,7 @@ import ar.edu.unlam.tallerweb1.modelo.Consulta;
 import ar.edu.unlam.tallerweb1.modelo.ContratacionPlanes;
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
+import ar.edu.unlam.tallerweb1.modelo.Notificacion;
 import ar.edu.unlam.tallerweb1.modelo.Planes;
 import ar.edu.unlam.tallerweb1.modelo.TipoAnimal;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
@@ -107,6 +108,7 @@ public class ControladorDuenio {
 	@RequestParam(value="asunto",required=false) String asunto,
 	@RequestParam(value="consulta",required=false) String consulta,
 	@RequestParam(value="comentario",required=false) String comentario,
+	@RequestParam(value="notificacion",required=false) String notificacion,
 	@RequestParam(value="idConsulta",required=false) Long idConsulta,
 	HttpServletRequest request
 	) {
@@ -138,6 +140,27 @@ public class ControladorDuenio {
 		modelo.put("comentario", comentario);
 		modelo.put("usuario", usuarioLogueado);
 		
+		if(notificacion!=null) {
+			
+			Consulta consultaBuscada = servicioConsulta.buscarConsulta(idConsulta);
+			String usuarioRespuesta = consultaBuscada.getUserRespuesta();
+			String mensaje = usuarioRespuesta + " respondio tu consulta: "+consultaBuscada.getAsunto();
+			
+			Notificacion notificacionUsuario = new Notificacion();
+			
+			notificacionUsuario.setDuenio(consultaBuscada.getDuenio());
+			notificacionUsuario.setEstado(true);
+			notificacionUsuario.setMensaje(mensaje);
+			notificacionUsuario.setUsuarioRespuesta(usuarioLogueado.getUser());
+			
+			servicioConsulta.cargarNotificacion(notificacionUsuario);
+			modelo.put("notificaciones",mensaje);
+			modelo.put("notificacion",notificacionUsuario);
+			
+		}else {
+			 return new ModelAndView("miConsulta",modelo);
+		}
+
 	 return new ModelAndView("miConsulta",modelo);
 	 
 	}
