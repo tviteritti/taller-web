@@ -18,17 +18,33 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 <body>
 	<div class="card text-center">
 	<div class="row card-header">
-	    	<div class="col-3"> <a href="loginVeterinaria"><i class="fas fa-home display-6"></i></a></div>
-	    	<div class="col-3">  <i class="fas fa-bell display-6"></i></div>
-	    	<div class="col-3"><i class="fas fa-moon"></i></div>
+	    	<div class="col-3"> <a href="loginVeterinaria"><i class="fas fa-home display-6 text-body"></i></a></div>
+	    	<div class="col-2">  <i class="fas fa-bell display-6"> <input type="hidden" name="notificaciones"/> </i></div>
+	    	
+	    		<c:if test="${notificacion.estado}">
+	    				<div class="dropdown">
+							  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    1
+							  </a>
+							
+							  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							    <a class="dropdown-item" href="#">Action</a>
+							    <a class="dropdown-item" href="#">Another action</a>
+							    <a class="dropdown-item" href="#">Something else here</a>
+							  </div>
+						</div>
+	    		</c:if>
+	    	
+	    	<div class="col-2"><i class="fas fa-user"></i></div>
+	    	<div class="col-2"><i class="fas fa-moon"></i></div>
 	    	<div class="col-3">
-		    	<a href="cerrarSesion" class="text-decoration-none">cerrar sesion
-		    		<i class="fas fa-sign-out-alt display-5"></i>
+		    	<a href="cerrarSesion" class="text-decoration-none text-body">cerrar sesion
+		    		<i class="fas fa-sign-out-alt display-5 text-body"></i>
 		    	</a>
 	    	</div>
 	    	<div class="border-bottom"></div>
-	</div>
-	<nav class="navbar navbar-dark bg-dark">
+	    </div>
+	    <nav class="navbar navbar-dark bg-dark">
 	
 		<ul class="navbar-nav mr-auto d-flex flex-row">
 	      <li class="nav-item d-inline mr-5">
@@ -63,8 +79,9 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
        </ul>
 	   
 	</nav>
+	
 	</div>
- 	<div>	 	
+		 	
  		
    	  	<c:forEach var="contrataciones" items="${listaContrataciones}">
    		<c:choose>

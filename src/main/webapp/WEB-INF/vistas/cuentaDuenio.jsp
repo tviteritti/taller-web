@@ -19,12 +19,13 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 
 	<div class="card text-center">
 	<div class="row card-header">
-	    	<div class="col-3"> <a href="loginVeterinaria"><i class="fas fa-home display-6"></i></a></div>
-	    	<div class="col-3">  <i class="fas fa-bell display-6"></i></div>
-	    	<div class="col-3"><i class="fas fa-moon"></i></div>
+	    	<div class="col-3"> <a href="loginVeterinaria"><i class="fas fa-home display-6 text-body"></i></a></div>
+	    	<div class="col-2">  <i class="fas fa-bell display-6"></i></div>
+	    	<div class="col-2"><i class="fas fa-user"></i></div>
+	    	<div class="col-2"><i class="fas fa-moon"></i></div>
 	    	<div class="col-3">
-		    	<a href="cerrarSesion" class="text-decoration-none">cerrar sesion
-		    		<i class="fas fa-sign-out-alt display-5"></i>
+		    	<a href="cerrarSesion" class="text-decoration-none text-body">cerrar sesion
+		    		<i class="fas fa-sign-out-alt display-5 text-body"></i>
 		    	</a>
 	    	</div>
 	    	<div class="border-bottom"></div>
