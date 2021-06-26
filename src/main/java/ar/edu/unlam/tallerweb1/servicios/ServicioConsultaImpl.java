@@ -91,6 +91,14 @@ public class ServicioConsultaImpl implements ServicioConsulta {
 		repositorioConsulta.cargarNotificacion(notificacion);
 		
 	}
+
+	@Override
+	public List<Notificacion> listarNotificacionesPorDuenio(Long idDuenio) {
+		
+		return repositorioConsulta.listarNotificacionesPorDuenio(idDuenio);
+	}
+	
+	
 	
 	
 

@@ -17,5 +17,6 @@ public interface ServicioConsulta {
 	Consulta buscarConsulta(Long idConsulta);
 	List<Consulta> listarConsultaPorDuenio(Long idDuenio);
 	List<Consulta> listarConsultas();
+	List<Notificacion> listarNotificacionesPorDuenio(Long idDuenio);
 
 }

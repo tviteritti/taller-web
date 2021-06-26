@@ -78,6 +78,8 @@ public class RepositorioConsultaImpl implements RepositorioConsulta{
 		consulta.setUserRespuesta(userRespuesta);
 	
 	}
+	
+	
 
 	@Override
 	public void cargarNotificacion(Notificacion notificacion) {
@@ -85,6 +87,20 @@ public class RepositorioConsultaImpl implements RepositorioConsulta{
 		sessionFactory.getCurrentSession().save(notificacion);
 		
 	}
+
+	@Override
+	public List<Notificacion> listarNotificacionesPorDuenio(Long idDuenio) {
+		
+		List<Notificacion> notificaciones = (List<Notificacion>) sessionFactory.getCurrentSession()
+				 .createCriteria(Notificacion.class)
+				 .createAlias("duenio", "dBuscado")
+				 .add(Restrictions.eq("dBuscado.id", idDuenio))
+				 .list();
+		
+		return notificaciones;
+	}
+	
+	
 
 	
 	

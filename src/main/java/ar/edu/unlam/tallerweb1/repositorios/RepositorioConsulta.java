@@ -15,5 +15,6 @@ public interface RepositorioConsulta {
 	Consulta buscarConsulta(Long idConsulta);
 	List<Consulta> listarConsultaPorDuenio(Long idDuenio);
 	List<Consulta> listarConsultas();
+	List<Notificacion> listarNotificacionesPorDuenio(Long idDuenio);
 
 }

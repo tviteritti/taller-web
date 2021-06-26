@@ -129,7 +129,7 @@ public class ControladorDuenio {
 			servicioConsulta.agregarComentario(idConsulta, comentario, usuarioLogueado.getUser());
 		}
 
-
+		
 		servicioConsulta.cargarConsulta(miConsulta);
 		List <Consulta> consultas = servicioConsulta.listarConsultaPorDuenio(idDuenio);
 		List <Consulta> consultasDeTodosLosUsuarios = servicioConsulta.listarConsultas();
@@ -139,6 +139,8 @@ public class ControladorDuenio {
 		modelo.put("todasLasConsultas", consultasDeTodosLosUsuarios);
 		modelo.put("comentario", comentario);
 		modelo.put("usuario", usuarioLogueado);
+		
+		List <Notificacion> misNotificaciones = servicioConsulta.listarNotificacionesPorDuenio(usuarioLogueado.getId());
 		
 		if(notificacion!=null) {
 			
@@ -154,10 +156,13 @@ public class ControladorDuenio {
 			notificacionUsuario.setUsuarioRespuesta(usuarioLogueado.getUser());
 			
 			servicioConsulta.cargarNotificacion(notificacionUsuario);
-			modelo.put("notificaciones",mensaje);
-			modelo.put("notificacion",notificacionUsuario);
+			
+			//modelo.put("notificacion",misNotificaciones);
 			
 		}else {
+			
+			
+			 modelo.put("notificacion",misNotificaciones);
 			 return new ModelAndView("miConsulta",modelo);
 		}
 
