@@ -12,11 +12,10 @@ public interface ServicioConsulta {
 	
 	void cargarConsulta(Consulta consulta);
 	void eliminarConsultasNulas(Consulta consulta);
-	void cargarNotificacion(Notificacion notificacion);
 	void agregarComentario(Long idConsulta, String comentario, String userRespuesta);
 	Consulta buscarConsulta(Long idConsulta);
 	List<Consulta> listarConsultaPorDuenio(Long idDuenio);
 	List<Consulta> listarConsultas();
-	List<Notificacion> listarNotificacionesPorDuenio(Long idDuenio);
+
 
 }

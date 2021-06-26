@@ -20,7 +20,6 @@ public class Notificacion {
 	private String usuarioRespuesta;
 	private Boolean estado;
 	
-	
 	public Long getId() {
 		return id;
 	}
@@ -51,8 +50,6 @@ public class Notificacion {
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
-	
-	
-	
+
 
 }

@@ -27,6 +27,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioConsulta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDias;
 import ar.edu.unlam.tallerweb1.servicios.ServicioHorarios;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMascotas;
+import ar.edu.unlam.tallerweb1.servicios.ServicioNotificaciones;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPlanes;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTurno;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
@@ -38,15 +39,21 @@ public class ControladorDuenio {
 	private ServicioMascotas servicioMascota;
 	private ServicioPlanes servicioPlanes;
 	private ServicioConsulta servicioConsulta;
+	private ServicioNotificaciones servicioNotificaciones;
 
 	
 	@Autowired
-	public ControladorDuenio( ServicioUsuario servicioDuenio, ServicioMascotas servicioMascota,ServicioPlanes servicioPlanes,  ServicioConsulta servicioConsulta) {
+	public ControladorDuenio( ServicioUsuario servicioDuenio, 
+							  ServicioMascotas servicioMascota,
+							  ServicioPlanes servicioPlanes,  
+							  ServicioConsulta servicioConsulta,
+							  ServicioNotificaciones servicioNotificaciones) {
 		
 		this.servicioDuenio = servicioDuenio;	
 		this.servicioMascota = servicioMascota;
 		this.servicioPlanes = servicioPlanes;
 		this.servicioConsulta = servicioConsulta;
+		this.servicioNotificaciones = servicioNotificaciones;
 	}
 	
 	
@@ -62,7 +69,7 @@ public class ControladorDuenio {
 		}
 		ModelMap modelo = new ModelMap();
 		Usuario duenio = servicioDuenio.getDuenio(usuarioa.getId());
-		List <Notificacion> misNotificaciones = servicioConsulta.listarNotificacionesPorDuenio(usuarioa.getId());
+		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorDuenio(usuarioa.getId());
 		
 		modelo.put("notificacion",misNotificaciones);
 		modelo.put("duenio", duenio);
@@ -82,7 +89,7 @@ public class ControladorDuenio {
 		}
 		ModelMap modelo = new ModelMap();
 		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
-		List <Notificacion> misNotificaciones = servicioConsulta.listarNotificacionesPorDuenio(usuarioa.getId());
+		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorDuenio(usuarioa.getId());
 		
 		modelo.put("notificacion",misNotificaciones);
 		modelo.put("duenio", duenio);
@@ -103,7 +110,7 @@ public class ControladorDuenio {
 		ModelMap modelo = new ModelMap();
 		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
 		List <Consulta> consultas = servicioConsulta.listarConsultaPorDuenio(idDuenio);
-		List <Notificacion> misNotificaciones = servicioConsulta.listarNotificacionesPorDuenio(usuarioa.getId());
+		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorDuenio(usuarioa.getId());
 		
 		modelo.put("notificacion",misNotificaciones);
 		modelo.put("duenio", duenio);
@@ -150,7 +157,7 @@ public class ControladorDuenio {
 		modelo.put("comentario", comentario);
 		modelo.put("usuario", usuarioLogueado);
 		
-		List <Notificacion> misNotificaciones = servicioConsulta.listarNotificacionesPorDuenio(usuarioLogueado.getId());
+		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorDuenio(usuarioLogueado.getId());
 		
 		if(notificacion!=null) {
 			
@@ -165,7 +172,7 @@ public class ControladorDuenio {
 			notificacionUsuario.setMensaje(mensaje);
 			notificacionUsuario.setUsuarioRespuesta(usuarioLogueado.getUser());
 			
-			servicioConsulta.cargarNotificacion(notificacionUsuario);
+			servicioNotificaciones.cargarNotificacion(notificacionUsuario);
 			
 			modelo.put("notificacion",misNotificaciones);
 			
@@ -223,7 +230,7 @@ public class ControladorDuenio {
 		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
 		modelo.put("duenio", duenio);
 		
-		List <Notificacion> misNotificaciones = servicioConsulta.listarNotificacionesPorDuenio(usuarioa.getId());
+		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorDuenio(usuarioa.getId());
 		modelo.put("notificacion",misNotificaciones);
 		
 	 return new ModelAndView("planes",modelo);

@@ -30,6 +30,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioConsulta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDias;
 import ar.edu.unlam.tallerweb1.servicios.ServicioHorarios;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMascotas;
+import ar.edu.unlam.tallerweb1.servicios.ServicioNotificaciones;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPlanes;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTurno;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
@@ -43,7 +44,7 @@ public class ControladorLoginVeterinaria {
 	private ServicioTurno servicioTurno;
 	private ServicioMascotas servicioMascota;
 	private ServicioPlanes servicioPlanes;
-	private ServicioConsulta servicioConsulta;
+	private ServicioNotificaciones servicioNotificaciones;
 
 	
 	@Autowired
@@ -53,7 +54,7 @@ public class ControladorLoginVeterinaria {
 										ServicioTurno servicioTurno, 
 										ServicioMascotas servicioMascota,
 										ServicioPlanes servicioPlanes,
-										ServicioConsulta servicioConsulta) {
+										ServicioNotificaciones servicioNotificaciones) {
 		
 		this.servicioUsuario = servicioVeterinario;	
 		this.servicioHorarios = servicioHorarios;
@@ -61,7 +62,7 @@ public class ControladorLoginVeterinaria {
 		this.servicioTurno = servicioTurno;
 		this.servicioMascota = servicioMascota;
 		this.servicioPlanes = servicioPlanes;
-		this.servicioConsulta = servicioConsulta;
+		this.servicioNotificaciones = servicioNotificaciones;
 	}
 	
 	
@@ -142,7 +143,7 @@ public class ControladorLoginVeterinaria {
 				List<ContratacionPlanes> listaContrataciones=servicioPlanes.listarContrataciones();
 				modelo.put("listaContrataciones", listaContrataciones);
 				
-				List <Notificacion> misNotificaciones = servicioConsulta.listarNotificacionesPorDuenio(duenio.getId());
+				List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorDuenio(duenio.getId());
 				modelo.put("notificacion",misNotificaciones);
 				
 			}else {
