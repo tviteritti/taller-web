@@ -20,7 +20,32 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 	<div class="card text-center">
 	<div class="row card-header">
 	    	<div class="col-3"> <a href="loginVeterinaria"><i class="fas fa-home display-6 text-body"></i></a></div>
-	    	<div class="col-2">  <i class="fas fa-bell display-6"></i></div>
+	    	<div class="col-2">  <i class="fas fa-bell display-6"></i>
+	    	
+		    				<div class="dropdown">
+								  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    1
+								  </a>
+								
+								  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+								  
+								  		<c:forEach items="${notificacion}" var="n">
+								    	<c:if test="${not empty n.duenio.id }">
+								    	  <c:if test="${n.duenio.id eq usuario.id}">
+								  
+									    <a class="dropdown-item" href="#"> ${n.mensaje} </a>
+									    <script>
+								          document.getElementsByClassName("fas fa-bell")[0].classList.add('text-danger');
+								        </script>
+									    </c:if>	
+								    	</c:if>
+							    	</c:forEach>
+								    
+								  </div>
+							</div>
+							
+
+	    	</div>
 	    	<div class="col-2"><i class="fas fa-user"></i></div>
 	    	<div class="col-2"><i class="fas fa-moon"></i></div>
 	    	<div class="col-3">

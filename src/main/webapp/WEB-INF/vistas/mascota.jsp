@@ -17,22 +17,31 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 <div class="card text-center">
 	<div class="row card-header">
 	    	<div class="col-3"> <a href="loginVeterinaria"><i class="fas fa-home display-6 text-body"></i></a></div>
-	    	<div class="col-2">  <i class="fas fa-bell display-6"> <input type="hidden" name="notificaciones"/> </i></div>
+	    	<div class="col-2">  <i class="fas fa-bell display-6"> </i>
 	    	
-	    		<c:if test="${notificacion.estado}">
-	    				<div class="dropdown">
-							  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							    1
-							  </a>
-							
-							  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-							    <a class="dropdown-item" href="#">Action</a>
-							    <a class="dropdown-item" href="#">Another action</a>
-							    <a class="dropdown-item" href="#">Something else here</a>
-							  </div>
-						</div>
-	    		</c:if>
+	    		<div class="dropdown">
+								  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    1
+								  </a>
+								
+								  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+								  
+								  		<c:forEach items="${notificacion}" var="n">
+								    	<c:if test="${not empty n.duenio.id }">
+								    	  <c:if test="${n.duenio.id eq usuario.id}">
+								  
+									    <a class="dropdown-item" href="#"> ${n.mensaje} </a>
+									    <script>
+								          document.getElementsByClassName("fas fa-bell")[0].classList.add('text-danger');
+								        </script>
+									    </c:if>	
+								    	</c:if>
+							    	</c:forEach>
+								    
+								  </div>
+							</div>
 	    	
+	    	</div>
 	    	<div class="col-2"><i class="fas fa-user"></i></div>
 	    	<div class="col-2"><i class="fas fa-moon"></i></div>
 	    	<div class="col-3">

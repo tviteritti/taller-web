@@ -62,7 +62,11 @@ public class ControladorDuenio {
 		}
 		ModelMap modelo = new ModelMap();
 		Usuario duenio = servicioDuenio.getDuenio(usuarioa.getId());
+		List <Notificacion> misNotificaciones = servicioConsulta.listarNotificacionesPorDuenio(usuarioa.getId());
+		
+		modelo.put("notificacion",misNotificaciones);
 		modelo.put("duenio", duenio);
+		
 	 return new ModelAndView("mascota",modelo);
 	}
 	
@@ -78,7 +82,11 @@ public class ControladorDuenio {
 		}
 		ModelMap modelo = new ModelMap();
 		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
+		List <Notificacion> misNotificaciones = servicioConsulta.listarNotificacionesPorDuenio(usuarioa.getId());
+		
+		modelo.put("notificacion",misNotificaciones);
 		modelo.put("duenio", duenio);
+		
 	 return new ModelAndView("turnos",modelo);
 	}
 	
@@ -95,7 +103,9 @@ public class ControladorDuenio {
 		ModelMap modelo = new ModelMap();
 		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
 		List <Consulta> consultas = servicioConsulta.listarConsultaPorDuenio(idDuenio);
+		List <Notificacion> misNotificaciones = servicioConsulta.listarNotificacionesPorDuenio(usuarioa.getId());
 		
+		modelo.put("notificacion",misNotificaciones);
 		modelo.put("duenio", duenio);
 		modelo.put("consultas", consultas);
 		
@@ -157,7 +167,7 @@ public class ControladorDuenio {
 			
 			servicioConsulta.cargarNotificacion(notificacionUsuario);
 			
-			//modelo.put("notificacion",misNotificaciones);
+			modelo.put("notificacion",misNotificaciones);
 			
 		}else {
 			
@@ -212,6 +222,10 @@ public class ControladorDuenio {
 		}
 		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
 		modelo.put("duenio", duenio);
+		
+		List <Notificacion> misNotificaciones = servicioConsulta.listarNotificacionesPorDuenio(usuarioa.getId());
+		modelo.put("notificacion",misNotificaciones);
+		
 	 return new ModelAndView("planes",modelo);
 	}
 	

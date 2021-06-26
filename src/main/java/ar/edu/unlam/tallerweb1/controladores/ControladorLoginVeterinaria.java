@@ -21,10 +21,12 @@ import ar.edu.unlam.tallerweb1.modelo.Dias;
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Horarios;
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
+import ar.edu.unlam.tallerweb1.modelo.Notificacion;
 import ar.edu.unlam.tallerweb1.modelo.Planes;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
+import ar.edu.unlam.tallerweb1.servicios.ServicioConsulta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDias;
 import ar.edu.unlam.tallerweb1.servicios.ServicioHorarios;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMascotas;
@@ -41,10 +43,17 @@ public class ControladorLoginVeterinaria {
 	private ServicioTurno servicioTurno;
 	private ServicioMascotas servicioMascota;
 	private ServicioPlanes servicioPlanes;
+	private ServicioConsulta servicioConsulta;
 
 	
 	@Autowired
-	public ControladorLoginVeterinaria(ServicioUsuario servicioVeterinario, ServicioHorarios servicioHorarios, ServicioDias servicioDias, ServicioTurno servicioTurno, ServicioMascotas servicioMascota, ServicioPlanes servicioPlanes) {
+	public ControladorLoginVeterinaria(ServicioUsuario servicioVeterinario, 
+										ServicioHorarios servicioHorarios,
+										ServicioDias servicioDias, 
+										ServicioTurno servicioTurno, 
+										ServicioMascotas servicioMascota,
+										ServicioPlanes servicioPlanes,
+										ServicioConsulta servicioConsulta) {
 		
 		this.servicioUsuario = servicioVeterinario;	
 		this.servicioHorarios = servicioHorarios;
@@ -52,6 +61,7 @@ public class ControladorLoginVeterinaria {
 		this.servicioTurno = servicioTurno;
 		this.servicioMascota = servicioMascota;
 		this.servicioPlanes = servicioPlanes;
+		this.servicioConsulta = servicioConsulta;
 	}
 	
 	
@@ -131,6 +141,10 @@ public class ControladorLoginVeterinaria {
 			if(servicioPlanes.mostrarPlanesOContrataciones(duenio)) {
 				List<ContratacionPlanes> listaContrataciones=servicioPlanes.listarContrataciones();
 				modelo.put("listaContrataciones", listaContrataciones);
+				
+				List <Notificacion> misNotificaciones = servicioConsulta.listarNotificacionesPorDuenio(duenio.getId());
+				modelo.put("notificacion",misNotificaciones);
+				
 			}else {
 				List<Planes> listaPlanes=servicioPlanes.listarPlanes();			
 				modelo.put("listaPlanes", listaPlanes);
