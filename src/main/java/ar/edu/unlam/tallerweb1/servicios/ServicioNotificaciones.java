@@ -8,5 +8,7 @@ public interface ServicioNotificaciones {
 	
 	void cargarNotificacion(Notificacion notificacion);
 	List<Notificacion> listarNotificacionesPorDuenio(Long idDuenio);
+	Integer cantidadNotificaciones(Long idUsuario);
+	Notificacion buscarNotificacion(Long idNotificacion);
 
 }

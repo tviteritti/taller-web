@@ -23,7 +23,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 	    				
 	    		<div class="dropdown" style="line-height:16px">
 								  <a class="btn btn-secondary dropdown-toggle p-0" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height:20px;width:50px">
-								    <p style="font-size:14px"> 1 </p>
+								    <p style="font-size:14px"> ${cantidadNotificaciones} </p>
 								  </a>
 								
 								  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">

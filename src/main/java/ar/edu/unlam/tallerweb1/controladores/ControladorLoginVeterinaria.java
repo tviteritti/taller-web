@@ -146,6 +146,9 @@ public class ControladorLoginVeterinaria {
 				List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorDuenio(duenio.getId());
 				modelo.put("notificacion",misNotificaciones);
 				
+				Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(duenio.getId());
+				modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
+				
 			}else {
 				List<Planes> listaPlanes=servicioPlanes.listarPlanes();			
 				modelo.put("listaPlanes", listaPlanes);

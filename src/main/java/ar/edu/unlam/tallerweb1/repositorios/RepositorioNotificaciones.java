@@ -8,5 +8,6 @@ public interface RepositorioNotificaciones {
 	
 	void cargarNotificacion(Notificacion notificacion);
 	List<Notificacion> listarNotificacionesPorDuenio(Long idDuenio);
+	Notificacion buscarNotificacion(Long idNotificacion);
 
 }

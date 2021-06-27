@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.modelo.Notificacion;
-import ar.edu.unlam.tallerweb1.repositorios.RepositorioConsulta;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioNotificaciones;
 
 @Service
@@ -34,5 +33,35 @@ public class ServicioNotificacionesImpl implements ServicioNotificaciones {
 		
 		return repositorioNotificaciones.listarNotificacionesPorDuenio(idDuenio);
 	}
+
+
+	@Override
+	public Integer cantidadNotificaciones(Long idUsuario) {
+		
+		List<Notificacion> notificaciones = repositorioNotificaciones.listarNotificacionesPorDuenio(idUsuario);
+		
+		Integer totalNotificacionesUsuario = 0 ;
+		
+		for(Notificacion notificacion: notificaciones) {
+			
+			if(notificacion.getDuenio().getId().equals(idUsuario) && notificacion.getId()!=null) {
+				
+				totalNotificacionesUsuario++;
+				
+			}
+			
+		}
+		
+		return totalNotificacionesUsuario;
+	}
+
+
+	@Override
+	public Notificacion buscarNotificacion(Long idNotificacion) {
+		
+		return repositorioNotificaciones.buscarNotificacion(idNotificacion);
+	}
+	
+	
 
 }

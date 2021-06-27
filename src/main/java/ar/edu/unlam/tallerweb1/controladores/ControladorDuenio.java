@@ -71,6 +71,9 @@ public class ControladorDuenio {
 		Usuario duenio = servicioDuenio.getDuenio(usuarioa.getId());
 		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorDuenio(usuarioa.getId());
 		
+		Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(usuarioa.getId());
+		modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
+		
 		modelo.put("notificacion",misNotificaciones);
 		modelo.put("duenio", duenio);
 		
@@ -91,6 +94,9 @@ public class ControladorDuenio {
 		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
 		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorDuenio(usuarioa.getId());
 		
+		Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(usuarioa.getId());
+		modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
+	
 		modelo.put("notificacion",misNotificaciones);
 		modelo.put("duenio", duenio);
 		
@@ -111,6 +117,9 @@ public class ControladorDuenio {
 		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
 		List <Consulta> consultas = servicioConsulta.listarConsultaPorDuenio(idDuenio);
 		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorDuenio(usuarioa.getId());
+		
+		Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(usuarioa.getId());
+		modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
 		
 		modelo.put("notificacion",misNotificaciones);
 		modelo.put("duenio", duenio);
@@ -175,13 +184,19 @@ public class ControladorDuenio {
 			servicioNotificaciones.cargarNotificacion(notificacionUsuario);
 			
 			modelo.put("notificacion",misNotificaciones);
+			Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(usuarioLogueado.getId());
+			modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
+			
 			
 		}else {
 			
-			
+			 Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(usuarioLogueado.getId());
+			 modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
 			 modelo.put("notificacion",misNotificaciones);
 			 return new ModelAndView("miConsulta",modelo);
 		}
+		
+		
 
 	 return new ModelAndView("miConsulta",modelo);
 	 
@@ -232,6 +247,9 @@ public class ControladorDuenio {
 		
 		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorDuenio(usuarioa.getId());
 		modelo.put("notificacion",misNotificaciones);
+		
+		Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(usuarioa.getId());
+		modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
 		
 	 return new ModelAndView("planes",modelo);
 	}
