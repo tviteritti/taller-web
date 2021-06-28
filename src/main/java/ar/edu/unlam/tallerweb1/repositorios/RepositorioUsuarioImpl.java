@@ -1,11 +1,13 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import ar.edu.unlam.tallerweb1.modelo.Calificacion;
 import ar.edu.unlam.tallerweb1.modelo.Dias;
 import ar.edu.unlam.tallerweb1.modelo.Direccion;
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Localidad;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.Voto;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 
 import org.hibernate.query.Query;
@@ -263,6 +265,88 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		modificarDireccion.setCalle(calle);
 		modificarDireccion.setNumero(nro);
 		
+	}
+
+	@Override
+	public Calificacion devolverCalificarVeterinario(Long id_veterinario) {
+		
+		Calificacion cal = (Calificacion)sessionFactory.getCurrentSession()
+				 .createCriteria(Calificacion.class)
+				 .add(Restrictions.eq("veterinario.id", id_veterinario))
+				 .uniqueResult();
+		return cal;
+		
+	}
+
+	@Override
+	public void registrarCalificaion(Calificacion cal) {
+		final Session session = sessionFactory.getCurrentSession();
+		
+		session.saveOrUpdate(cal);
+		
+	}
+
+	@Override
+	public void voto(Long id_vetrinario, Long id_duenio) {
+		final Session session = sessionFactory.getCurrentSession();
+		
+
+		Usuario vet = (Usuario)sessionFactory.getCurrentSession()
+				 .createCriteria(Usuario.class)
+				 .add(Restrictions.eq("id", id_vetrinario))
+				 .uniqueResult();
+		
+
+		Usuario due = (Usuario)sessionFactory.getCurrentSession()
+				 .createCriteria(Usuario.class)
+				 .add(Restrictions.eq("id", id_duenio))
+				 .uniqueResult();
+		
+		Voto v = new Voto();
+		v.setDuenio(due);
+		v.setVeterinario(vet);
+		
+		session.save(v);
+		
+	}
+
+	@Override
+	public List<Voto> getVotos(Long id_duenio) {
+		List<Voto> votos = (List<Voto>)sessionFactory.getCurrentSession()
+				 .createCriteria(Voto.class)
+				 .add(Restrictions.eq( "duenio.id", id_duenio))
+				 .list();
+		
+		return  votos;
+	}
+
+	@Override
+	public Voto getVoto(Long id_veterinario) {
+		Voto voto = (Voto)sessionFactory.getCurrentSession()
+				 .createCriteria(Voto.class)
+				 .add(Restrictions.eq( "veterinario.id", id_veterinario))
+				 .uniqueResult();
+		
+		return  voto;
+	}
+
+	@Override
+	public List<Voto> getVotos() {
+		
+		List<Voto> votos = (List<Voto>)sessionFactory.getCurrentSession()			
+				 .createCriteria(Voto.class)
+				 .list();
+		
+		return  votos;
+	}
+
+	@Override
+	public List<Calificacion> getCalificaciones() {
+		List<Calificacion> calificacion = (List<Calificacion>)sessionFactory.getCurrentSession()			
+				 .createCriteria(Calificacion.class)
+				 .list();
+		
+		return  calificacion;
 	}
 
 	

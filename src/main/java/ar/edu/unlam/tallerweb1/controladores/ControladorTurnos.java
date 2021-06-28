@@ -15,13 +15,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.modelo.Calificacion;
 import ar.edu.unlam.tallerweb1.modelo.ContratacionPlanes;
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
 import ar.edu.unlam.tallerweb1.modelo.Planes;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
-
+import ar.edu.unlam.tallerweb1.modelo.Voto;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 
 import ar.edu.unlam.tallerweb1.servicios.ServicioMascotas;
@@ -79,6 +80,8 @@ private ServicioPlanes servicioPlanes;
 		
 		ModelMap modelo = new ModelMap();
 		
+		
+		
 		modelo.put("servicio", servicioUsuario.getEspecialidad(id_especialidad).getDescripcion());
 		modelo.put("zona",servicioUsuario.getZona(id_zona).getDescripcion());
 		
@@ -88,6 +91,9 @@ private ServicioPlanes servicioPlanes;
 		List<Usuario>veterinariosEncontrados = servicioUsuario.buscarVeterinariosPorEspecialidadYZona(id_especialidad, id_zona);
 		
 		modelo.put("veterinarios", veterinariosEncontrados);
+		
+		List<Calificacion> calificacion = servicioUsuario.getCalificaciones();
+		modelo.put("calificacion", calificacion);
 		
 		List<Turno>turnosVeterinario=new ArrayList<>();
 		
@@ -194,7 +200,14 @@ private ServicioPlanes servicioPlanes;
 		
 		Usuario duenio = servicioUsuario.getUsuario(duenioId);
 		List<Turno> turnos = servicioTurno.buscarTurnoPorDuenio(duenioId);
+		List<Voto> votos = servicioUsuario.getVotos(duenioId);
 		
+		List<Turno> conVoto = servicioTurno.getTurnosConVotosDuenio(duenioId);
+		List<Turno> sinVoto = servicioTurno.getTurnosSinVotosDuenio(duenioId);
+		
+		modelo.put("conVoto", conVoto);
+		modelo.put("sinVoto", sinVoto);
+		modelo.put("votos", votos);
 		modelo.put("turnos", turnos);
 		modelo.put("duenio", duenio);
 		return new ModelAndView("misTurnos", modelo);

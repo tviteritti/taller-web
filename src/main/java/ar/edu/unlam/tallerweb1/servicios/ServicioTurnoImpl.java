@@ -20,10 +20,11 @@ import ar.edu.unlam.tallerweb1.modelo.Localidad;
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
-
+import ar.edu.unlam.tallerweb1.modelo.Voto;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioLocalidad;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioTurno;
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 
 
 @Service
@@ -33,12 +34,14 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	
 	private RepositorioLocalidad repositorioLocalidad;
 	private RepositorioTurno repositorioTurno;
+	private RepositorioUsuario repositorioUsuario;
 
 
 	@Autowired
-	public ServicioTurnoImpl(RepositorioLocalidad repositorioLocalidad, RepositorioTurno repositorioTurno){
+	public ServicioTurnoImpl(RepositorioLocalidad repositorioLocalidad, RepositorioTurno repositorioTurno, RepositorioUsuario repositorioUsuario){
 		this.repositorioLocalidad = repositorioLocalidad;
 		this.repositorioTurno = repositorioTurno;
+		this.repositorioUsuario = repositorioUsuario;
 	}
 
 
@@ -810,6 +813,50 @@ public class ServicioTurnoImpl implements ServicioTurno {
 	@Override
 	public Date devolverHorarioaDeUnTurno(Long id) {
 		return repositorioTurno.devolverHorarioaDeUnTurno(id);
+	}
+
+
+	@Override
+	public List<Turno> getTurnosSinVotosDuenio(Long id_duenio) {
+		List<Turno>  turnos = repositorioTurno.buscarTurnoPorDuenio(id_duenio);
+		List<Voto> votos = repositorioUsuario.getVotos(id_duenio);
+		List<Turno> turnosSinVoto = new ArrayList<Turno>();
+		Integer cont=0;
+		
+		if(votos!=null && turnos!=null) {
+			for (Turno turno : turnos) {
+				for (Voto voto : votos) {
+					if(turno.getVeterinario().getId() == voto.getVeterinario().getId()) {
+						cont=1;
+					}
+				}
+				if(cont==0) {
+					turnosSinVoto.add(turno);
+				}
+				cont=0;
+			}
+		}
+		return turnosSinVoto;
+	}
+
+
+	@Override
+	public List<Turno> getTurnosConVotosDuenio(Long id_duenio) {
+		List<Turno>  turnos = repositorioTurno.buscarTurnoPorDuenio(id_duenio);
+		List<Voto> votos = repositorioUsuario.getVotos(id_duenio);
+		List<Turno> turnosConVoto = new ArrayList<Turno>();
+		
+		if(votos!=null && turnos!=null) {
+			for (Turno turno : turnos) {
+				for (Voto voto : votos) {
+					if(turno.getVeterinario().getId() == voto.getVeterinario().getId()) {
+						turnosConVoto.add(turno);
+					}
+				}
+				
+			}
+		}
+		return turnosConVoto;
 	}
 
 	

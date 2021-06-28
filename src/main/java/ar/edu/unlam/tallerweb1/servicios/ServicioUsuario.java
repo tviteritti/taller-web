@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.modelo.Calificacion;
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.Voto;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 
 
@@ -39,5 +41,16 @@ public interface ServicioUsuario {
 	
 	ModelAndView verificarSesion(Usuario usuario);
 	void ingresarDireccion(Long id, String calle, String piso, String departamento, String numero, Long id_zona);
+	
+	void calificarVeterinario(Long id_veterinario, Double calificacion);
+	Calificacion devolverCalificarVeterinario(Long id_veterinario);
+	List<Calificacion> getCalificaciones();
+	
+	void voto(Long id_vetrinario, Long id_duenio);
+	List<Voto> getVotos(Long id_duenio);
+	List<Voto> getVotos();
+	Voto getVoto(Long id_veterinario);
+	
+
 
 }

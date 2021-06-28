@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
- <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +38,12 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 					<div class="input-group p-1"><p> Si continua se le acreditaran a la cuota ${v.precioSesion} $. </p></div>
 					<div class="input-group p-1"><p><a href="loginVeterinaria">volver al inicio</a></p></div>				  		
 				</c:if>
-				<p><p>Calificacion</p>
+				
+				<c:forEach items="${calificacion}" var="cal">
+					<c:if test = "${v.id == cal.veterinario.id}">				
+						<p><p>Calificacion: ${cal.calificacion} / 10</p>
+					</c:if>
+				</c:forEach>
 				<hr class="my-4">
 				<p>Ubicacion: <c:out value="${v.direccion.calle} ${v.direccion.numero}"/> , ${v.direccion.localidad.descripcion} </p>
 							  

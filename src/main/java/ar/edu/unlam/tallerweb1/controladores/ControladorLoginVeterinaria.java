@@ -240,6 +240,7 @@ public class ControladorLoginVeterinaria {
 	@RequestMapping("/registrarVeterinario")
 	public ModelAndView registrarVeterinario(HttpServletRequest request) {
 		Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+		
 		if(usuarioa != null) {
 			if(usuarioa.getRol().equals("duenio")) {
 				return new ModelAndView("redirect:/cuentaDuenio");

@@ -2,9 +2,11 @@ package ar.edu.unlam.tallerweb1.repositorios;
 
 import java.util.List;
 
+import ar.edu.unlam.tallerweb1.modelo.Calificacion;
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.Voto;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 
 // Interface que define los metodos del Repositorio de Usuarios.
@@ -33,4 +35,13 @@ public interface RepositorioUsuario {
 	Zona getZona(Long id);
 	
 	void ingresarDireccion(Long id, String calle, String piso, String departamento, String numero, Long id_zona);
+	
+	Calificacion devolverCalificarVeterinario(Long id_veterinario);
+	void registrarCalificaion(Calificacion cal);
+	List<Calificacion> getCalificaciones();
+	
+	void voto(Long id_vetrinario, Long id_duenio);
+	List<Voto> getVotos(Long id_duenio);
+	List<Voto> getVotos();
+	Voto getVoto(Long id_veterinario);
 }

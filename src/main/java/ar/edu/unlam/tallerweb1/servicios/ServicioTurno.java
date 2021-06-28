@@ -9,6 +9,7 @@ import ar.edu.unlam.tallerweb1.modelo.Localidad;
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.Voto;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 
 public interface ServicioTurno {
@@ -56,5 +57,7 @@ public interface ServicioTurno {
 	Date devolverFechaDeUnTurno(Long id);
 	Date devolverHorarioaDeUnTurno(Long id);
 	
+	List<Turno> getTurnosSinVotosDuenio(Long id_duenio);
+	List<Turno> getTurnosConVotosDuenio(Long id_duenio);
 
 }

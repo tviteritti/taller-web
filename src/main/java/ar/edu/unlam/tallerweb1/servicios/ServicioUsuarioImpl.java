@@ -11,9 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
+import ar.edu.unlam.tallerweb1.modelo.Calificacion;
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.Voto;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 
 
@@ -190,6 +192,79 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 		
 		ServicioUsuarioDao.modificarPerfil(idUsuario, nombre, apellido, idDireccion, calle, nro, idLocalidad, codPostal, localidad, telefono, email, descripcion);
 		
+	}
+
+
+	@Override
+	public void calificarVeterinario(Long id_veterinario, Double calificacion) {
+		
+		Calificacion cal = ServicioUsuarioDao.devolverCalificarVeterinario(id_veterinario);
+		Usuario vet = ServicioUsuarioDao.getVeterinario(id_veterinario);
+		
+		
+		if(cal == null) {
+			Calificacion nueva = new Calificacion();
+			nueva.setCalificacion(calificacion);
+			nueva.setCantidadDeVotos(1L);
+			nueva.setVeterinario(vet);
+			
+			
+			
+			ServicioUsuarioDao.registrarCalificaion(nueva);
+		}else {
+			Double calificaionBD = cal.getCalificacion();
+			Long cantidadBD = cal.getCantidadDeVotos();
+			
+			Double calificacionNueva = (calificaionBD * cantidadBD + calificacion) / (cantidadBD+1);
+			cantidadBD ++;
+			Long cantidadNueva = cantidadBD; 
+			
+			cal.setCalificacion(calificacionNueva);
+			cal.setCantidadDeVotos(cantidadNueva);
+			cal.setVeterinario(vet);
+			
+			
+			
+			ServicioUsuarioDao.registrarCalificaion(cal);
+		}
+		
+	}
+
+
+	@Override
+	public Calificacion devolverCalificarVeterinario(Long id_veterinario) {
+		return ServicioUsuarioDao.devolverCalificarVeterinario(id_veterinario);
+	}
+
+
+	@Override
+	public void voto(Long id_vetrinario, Long id_duenio) {
+		ServicioUsuarioDao.voto(id_vetrinario, id_duenio);
+		
+	}
+
+
+	@Override
+	public List<Voto> getVotos(Long id_duenio) {
+		return ServicioUsuarioDao.getVotos(id_duenio);
+	}
+
+
+	@Override
+	public Voto getVoto(Long id_veterinario) {
+		return ServicioUsuarioDao.getVoto(id_veterinario);
+	}
+
+
+	@Override
+	public List<Voto> getVotos() {
+		return ServicioUsuarioDao.getVotos();
+	}
+
+
+	@Override
+	public List<Calificacion> getCalificaciones() {
+		return ServicioUsuarioDao.getCalificaciones();
 	}
 
 

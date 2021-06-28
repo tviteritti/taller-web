@@ -9,6 +9,7 @@ import ar.edu.unlam.tallerweb1.modelo.Horarios;
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.Voto;
 
 
 public interface RepositorioTurno {
@@ -43,5 +44,7 @@ public interface RepositorioTurno {
 	
 	Date devolverFechaDeUnTurno(Long id);
 	Date devolverHorarioaDeUnTurno(Long id);
+	
+
 	
 }

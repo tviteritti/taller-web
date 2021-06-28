@@ -24,6 +24,7 @@ import ar.edu.unlam.tallerweb1.modelo.Horarios;
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.Voto;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 
 @Repository
@@ -354,6 +355,7 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		
 		return turno.getHorario();
 	}
+
 
 	
 

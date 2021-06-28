@@ -285,4 +285,18 @@ public class ControladorDuenio {
 	
 		return new ModelAndView("cuentaDuenio", modelo);
 	}
+	
+	@RequestMapping("/calificar")
+	public ModelAndView calificarVeterivario(
+	@RequestParam(value="id_veterinario",required=false) Long id_veterinario, 
+	@RequestParam(value="calificacion",required=false) Double calificacion, HttpServletRequest request) {
+		Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+		
+		servicioDuenio.calificarVeterinario(id_veterinario,calificacion);
+		
+		servicioDuenio.voto(id_veterinario, usuarioa.getId());
+		
+		return new ModelAndView("redirect:/cuentaDuenio");
+		
+	}
 }
