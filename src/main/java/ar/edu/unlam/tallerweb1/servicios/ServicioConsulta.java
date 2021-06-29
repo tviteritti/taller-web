@@ -14,7 +14,7 @@ public interface ServicioConsulta {
 	void eliminarConsultasNulas(Consulta consulta);
 	void agregarComentario(Long idConsulta, String comentario, String userRespuesta);
 	Consulta buscarConsulta(Long idConsulta);
-	List<Consulta> listarConsultaPorDuenio(Long idDuenio);
+	List<Consulta> listarConsultaPorUsuario(Long idUsuario);
 	List<Consulta> listarConsultas();
 
 

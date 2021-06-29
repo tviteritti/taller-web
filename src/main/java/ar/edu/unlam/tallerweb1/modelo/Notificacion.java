@@ -14,7 +14,7 @@ public class Notificacion {
 	private Long id;
 	
 	@ManyToOne
-	private Usuario duenio;
+	private Usuario usuario;
 	
 	private String mensaje;
 	private String usuarioRespuesta;
@@ -26,11 +26,12 @@ public class Notificacion {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Usuario getDuenio() {
-		return duenio;
+	
+	public Usuario getUsuario() {
+		return usuario;
 	}
-	public void setDuenio(Usuario duenio) {
-		this.duenio = duenio;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	public String getMensaje() {
 		return mensaje;

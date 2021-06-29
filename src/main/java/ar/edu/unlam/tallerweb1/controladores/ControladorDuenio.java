@@ -69,7 +69,7 @@ public class ControladorDuenio {
 		}
 		ModelMap modelo = new ModelMap();
 		Usuario duenio = servicioDuenio.getDuenio(usuarioa.getId());
-		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorDuenio(usuarioa.getId());
+		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorUsuario(usuarioa.getId());
 		
 		Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(usuarioa.getId());
 		modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
@@ -92,7 +92,7 @@ public class ControladorDuenio {
 		}
 		ModelMap modelo = new ModelMap();
 		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
-		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorDuenio(usuarioa.getId());
+		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorUsuario(usuarioa.getId());
 		
 		Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(usuarioa.getId());
 		modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
@@ -115,8 +115,8 @@ public class ControladorDuenio {
 		}
 		ModelMap modelo = new ModelMap();
 		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
-		List <Consulta> consultas = servicioConsulta.listarConsultaPorDuenio(idDuenio);
-		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorDuenio(usuarioa.getId());
+		List <Consulta> consultas = servicioConsulta.listarConsultaPorUsuario(idDuenio);
+		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorUsuario(usuarioa.getId());
 		
 		Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(usuarioa.getId());
 		modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
@@ -148,7 +148,7 @@ public class ControladorDuenio {
 		Consulta miConsulta = new Consulta();
 		miConsulta.setAsunto(asunto);
 		miConsulta.setDescripcion(consulta);
-		miConsulta.setDuenio(duenio);
+		miConsulta.setUsuario(duenio);
 
 		if(idConsulta!=null && usuarioLogueado!=null) {//agregar que pasa cuando es nulo
 			
@@ -157,7 +157,7 @@ public class ControladorDuenio {
 
 		
 		servicioConsulta.cargarConsulta(miConsulta);
-		List <Consulta> consultas = servicioConsulta.listarConsultaPorDuenio(idDuenio);
+		List <Consulta> consultas = servicioConsulta.listarConsultaPorUsuario(idDuenio);
 		List <Consulta> consultasDeTodosLosUsuarios = servicioConsulta.listarConsultas();
 		
 		modelo.put("duenio", duenio);
@@ -166,7 +166,7 @@ public class ControladorDuenio {
 		modelo.put("comentario", comentario);
 		modelo.put("usuario", usuarioLogueado);
 		
-		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorDuenio(usuarioLogueado.getId());
+		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorUsuario(usuarioLogueado.getId());
 		
 		if(notificacion!=null) {
 			
@@ -176,7 +176,7 @@ public class ControladorDuenio {
 			
 			Notificacion notificacionUsuario = new Notificacion();
 			
-			notificacionUsuario.setDuenio(consultaBuscada.getDuenio());
+			notificacionUsuario.setUsuario(consultaBuscada.getUsuario());
 			notificacionUsuario.setEstado(true);
 			notificacionUsuario.setMensaje(mensaje);
 			notificacionUsuario.setUsuarioRespuesta(usuarioLogueado.getUser());
@@ -211,7 +211,7 @@ public class ControladorDuenio {
 		
 		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
 		
-		List <Consulta> consultas = servicioConsulta.listarConsultaPorDuenio(idDuenio);
+		List <Consulta> consultas = servicioConsulta.listarConsultaPorUsuario(idDuenio);
 		
 		modelo.put("duenio", duenio);
 		modelo.put("consultas", consultas);
@@ -245,7 +245,7 @@ public class ControladorDuenio {
 		Usuario duenio = servicioDuenio.getDuenio(idDuenio);
 		modelo.put("duenio", duenio);
 		
-		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorDuenio(usuarioa.getId());
+		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorUsuario(usuarioa.getId());
 		modelo.put("notificacion",misNotificaciones);
 		
 		Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(usuarioa.getId());

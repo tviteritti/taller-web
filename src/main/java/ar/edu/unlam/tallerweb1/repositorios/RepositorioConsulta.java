@@ -13,7 +13,7 @@ public interface RepositorioConsulta {
 	void agregarComentario(Long idConsulta , String comentario, String userRespuesta);
 	
 	Consulta buscarConsulta(Long idConsulta);
-	List<Consulta> listarConsultaPorDuenio(Long idDuenio);
+	List<Consulta> listarConsultaPorUsuario(Long idUsuario);
 	List<Consulta> listarConsultas();
 	
 

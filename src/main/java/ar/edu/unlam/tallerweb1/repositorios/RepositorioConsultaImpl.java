@@ -30,12 +30,12 @@ public class RepositorioConsultaImpl implements RepositorioConsulta{
 	}
 
 	@Override
-	public List<Consulta> listarConsultaPorDuenio(Long idDuenio) {
+	public List<Consulta> listarConsultaPorUsuario(Long idUsuario) {
 		
 		List<Consulta> consultas = (List<Consulta>) sessionFactory.getCurrentSession()
 				 .createCriteria(Consulta.class)
-				 .createAlias("duenio", "dBuscado")
-				 .add(Restrictions.eq("dBuscado.id", idDuenio))
+				 .createAlias("usuario", "uBuscado")
+				 .add(Restrictions.eq("uBuscado.id", idUsuario))
 				 .list();
 		return consultas;
 	}

@@ -28,12 +28,12 @@ public class RepositorioNotificacionesImpl  implements RepositorioNotificaciones
 	}
 
 	@Override
-	public List<Notificacion> listarNotificacionesPorDuenio(Long idDuenio) {
+	public List<Notificacion> listarNotificacionesPorUsuario(Long idUsuario) {
 		
 		List<Notificacion> notificaciones = (List<Notificacion>) sessionFactory.getCurrentSession()
 				 .createCriteria(Notificacion.class)
-				 .createAlias("duenio", "dBuscado")
-				 .add(Restrictions.eq("dBuscado.id", idDuenio))
+				 .createAlias("usuario", "uBuscado")
+				 .add(Restrictions.eq("uBuscado.id", idUsuario))
 				 .list();
 		
 		return notificaciones;

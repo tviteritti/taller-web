@@ -27,9 +27,9 @@ public class ServicioConsultaImpl implements ServicioConsulta {
 	}
 
 	@Override
-	public List<Consulta> listarConsultaPorDuenio(Long idDuenio) {
+	public List<Consulta> listarConsultaPorUsuario(Long idUsuario) {
 		
-		List<Consulta> consultas=  repositorioConsulta.listarConsultaPorDuenio(idDuenio);
+		List<Consulta> consultas=  repositorioConsulta.listarConsultaPorUsuario(idUsuario);
 		
 		for(Consulta consulta: consultas) {
 				

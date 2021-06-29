@@ -19,7 +19,7 @@ public class Consulta {
 	private String userRespuesta;
 	
 	@ManyToOne
-	private Usuario duenio;
+	private Usuario usuario;
 
 	public Long getId() {
 		return id;
@@ -45,12 +45,12 @@ public class Consulta {
 		this.descripcion = descripcion;
 	}
 
-	public Usuario getDuenio() {
-		return duenio;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setDuenio(Usuario duenio) {
-		this.duenio = duenio;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getComentario() {

@@ -143,7 +143,7 @@ public class ControladorLoginVeterinaria {
 				List<ContratacionPlanes> listaContrataciones=servicioPlanes.listarContrataciones();
 				modelo.put("listaContrataciones", listaContrataciones);
 				
-				List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorDuenio(duenio.getId());
+				List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorUsuario(duenio.getId());
 				modelo.put("notificacion",misNotificaciones);
 				
 				Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(duenio.getId());

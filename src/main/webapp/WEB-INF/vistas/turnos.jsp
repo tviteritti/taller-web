@@ -26,8 +26,8 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 								  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 								  
 								  		<c:forEach items="${notificacion}" var="n">
-								    	<c:if test="${not empty n.duenio.id }">
-								    	  <c:if test="${n.duenio.id eq usuario.id}">
+								    	<c:if test="${not empty n.usuario.id }">
+								    	  <c:if test="${n.usuario.id eq usuario.id}">
 								  
 									    <a class="dropdown-item" href="#"> ${n.mensaje} </a>
 									    <script>

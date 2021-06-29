@@ -29,22 +29,22 @@ public class ServicioNotificacionesImpl implements ServicioNotificaciones {
 	}
 
 	@Override
-	public List<Notificacion> listarNotificacionesPorDuenio(Long idDuenio) {
+	public List<Notificacion> listarNotificacionesPorUsuario(Long idUsuario) {
 		
-		return repositorioNotificaciones.listarNotificacionesPorDuenio(idDuenio);
+		return repositorioNotificaciones.listarNotificacionesPorUsuario(idUsuario);
 	}
 
 
 	@Override
 	public Integer cantidadNotificaciones(Long idUsuario) {
 		
-		List<Notificacion> notificaciones = repositorioNotificaciones.listarNotificacionesPorDuenio(idUsuario);
+		List<Notificacion> notificaciones = repositorioNotificaciones.listarNotificacionesPorUsuario(idUsuario);
 		
 		Integer totalNotificacionesUsuario = 0 ;
 		
 		for(Notificacion notificacion: notificaciones) {
 			
-			if(notificacion.getDuenio().getId().equals(idUsuario) && notificacion.getId()!=null) {
+			if(notificacion.getUsuario().getId().equals(idUsuario) && notificacion.getId()!=null) {
 				
 				totalNotificacionesUsuario++;
 				
