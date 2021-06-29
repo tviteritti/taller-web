@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Consulta {
@@ -20,6 +21,12 @@ public class Consulta {
 	
 	@ManyToOne
 	private Usuario usuario;
+	
+	@OneToOne
+	private Consulta respuesta;
+	
+	private String tipoConsulta; //si es una consulta o una respuesta
+	
 
 	public Long getId() {
 		return id;
@@ -67,6 +74,22 @@ public class Consulta {
 
 	public void setUserRespuesta(String userRespuesta) {
 		this.userRespuesta = userRespuesta;
+	}
+
+	public Consulta getRespuesta() {
+		return respuesta;
+	}
+
+	public void setRespuesta(Consulta respuesta) {
+		this.respuesta = respuesta;
+	}
+
+	public String getTipoConsulta() {
+		return tipoConsulta;
+	}
+
+	public void setTipoConsulta(String tipoConsulta) {
+		this.tipoConsulta = tipoConsulta;
 	}
 
 	

@@ -145,7 +145,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 					    <c:if test="${not empty tc.comentario}">
 				    		
 				    		<div class="d-flex flex-column m-3" style="border-left:3px solid #17a2b8">
-							  <p class="text-left ml-2">${tc.comentario} - <cite title="Source Title">${tc.userRespuesta}</cite></p>
+							  <p class="text-left ml-2">${tc.comentario} - <cite title="Source Title"><strong>${tc.userRespuesta}</strong></cite></p>
 							</div>
 				    		
 				    	
