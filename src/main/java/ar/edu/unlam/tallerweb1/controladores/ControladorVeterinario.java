@@ -247,9 +247,14 @@ public class ControladorVeterinario {
 			ModelMap modelo = new ModelMap();
 			Usuario usuarioLogueado = (Usuario) request.getSession().getAttribute("usuario");
 			
+			Consulta respuesta = new Consulta();
+			respuesta.setDescripcion(comentario);
+			
 			if(idConsulta!=null && usuarioLogueado!=null) {
 				
-				servicioConsulta.agregarComentario(idConsulta, comentario, usuarioLogueado.getUser());
+				servicioConsulta.guardarRespuesta(idConsulta, respuesta, usuarioLogueado.getUser());
+			}else {
+				return new ModelAndView("loginVeterinaria");
 			}
 			
 			Usuario vt = servicioUsuario.getVeterinario(idVeterinario);

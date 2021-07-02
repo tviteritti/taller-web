@@ -72,9 +72,9 @@ public class ServicioConsultaImpl implements ServicioConsulta {
 	}
 
 	@Override
-	public void agregarComentario(Long idConsulta , String comentario, String userRespuesta) {
+	public void guardarRespuesta(Long idConsulta , Consulta respuesta, String userRespuesta) {
 		
-		repositorioConsulta.agregarComentario(idConsulta, comentario, userRespuesta);
+		repositorioConsulta.guardarRespuesta(idConsulta, respuesta, userRespuesta);
 		
 	}
 

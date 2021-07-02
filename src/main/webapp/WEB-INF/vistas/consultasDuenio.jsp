@@ -17,14 +17,14 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
       
       <c:forEach items="${consultas}" var="c">
       	<c:if test="${not empty c.asunto}">
-      	<c:if test="${not empty c.decripcion}">
+      	<c:if test="${not empty c.descripcion}">
       	<div class="card text-center p-3 container">
 			    <blockquote class="blockquote mb-0">
 			     <h5 class="card-title">${c.asunto}</h5>
 			      <p>${c.descripcion}</p>
 			      <footer class="blockquote-footer ">
 			        <small class="text-dark">
-			          Realizado por <cite title="Source Title">${c.duenio.user}</cite>
+			          Realizado por <cite title="Source Title">${c.usuario.user}</cite>
 			        </small>
 			      </footer>
 			    </blockquote>      

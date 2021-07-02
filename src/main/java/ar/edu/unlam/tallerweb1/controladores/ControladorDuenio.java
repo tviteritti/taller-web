@@ -136,6 +136,7 @@ public class ControladorDuenio {
 	@RequestParam(value="comentario",required=false) String comentario,
 	@RequestParam(value="notificacion",required=false) String notificacion,
 	@RequestParam(value="idConsulta",required=false) Long idConsulta,
+	@RequestParam(value="usuarioRespuesta",required=false) Long usuarioRespuestaConsulta,
 	HttpServletRequest request
 	) {
 		
@@ -149,14 +150,21 @@ public class ControladorDuenio {
 		miConsulta.setAsunto(asunto);
 		miConsulta.setDescripcion(consulta);
 		miConsulta.setUsuario(duenio);
+		
+		Consulta respuesta = new Consulta();
+		respuesta.setDescripcion(comentario);
+		respuesta.setUsuario(usuarioLogueado);
+		respuesta.setAsunto(asunto);
+		respuesta.setTipoConsulta("respuesta");
 
-		if(idConsulta!=null && usuarioLogueado!=null) {//agregar que pasa cuando es nulo
+		if(idConsulta!=null && usuarioLogueado!=null) {
 			
-			servicioConsulta.agregarComentario(idConsulta, comentario, usuarioLogueado.getUser());
+			servicioConsulta.cargarConsulta(miConsulta);
+			servicioConsulta.cargarConsulta(respuesta);
+			servicioConsulta.guardarRespuesta(idConsulta, respuesta, usuarioLogueado.getUser());
 		}
 
 		
-		servicioConsulta.cargarConsulta(miConsulta);
 		List <Consulta> consultas = servicioConsulta.listarConsultaPorUsuario(idDuenio);
 		List <Consulta> consultasDeTodosLosUsuarios = servicioConsulta.listarConsultas();
 		

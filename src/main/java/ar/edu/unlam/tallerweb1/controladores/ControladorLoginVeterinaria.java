@@ -663,5 +663,77 @@ public class ControladorLoginVeterinaria {
 	
 		return new ModelAndView("redirect:/verPerfil", modelo);
 	}
+
+
+	public ServicioUsuario getServicioUsuario() {
+		return servicioUsuario;
+	}
+
+
+	public void setServicioUsuario(ServicioUsuario servicioUsuario) {
+		this.servicioUsuario = servicioUsuario;
+	}
+
+
+	public ServicioHorarios getServicioHorarios() {
+		return servicioHorarios;
+	}
+
+
+	public void setServicioHorarios(ServicioHorarios servicioHorarios) {
+		this.servicioHorarios = servicioHorarios;
+	}
+
+
+	public ServicioDias getServicioDias() {
+		return servicioDias;
+	}
+
+
+	public void setServicioDias(ServicioDias servicioDias) {
+		this.servicioDias = servicioDias;
+	}
+
+
+	public ServicioTurno getServicioTurno() {
+		return servicioTurno;
+	}
+
+
+	public void setServicioTurno(ServicioTurno servicioTurno) {
+		this.servicioTurno = servicioTurno;
+	}
+
+
+	public ServicioMascotas getServicioMascota() {
+		return servicioMascota;
+	}
+
+
+	public void setServicioMascota(ServicioMascotas servicioMascota) {
+		this.servicioMascota = servicioMascota;
+	}
+
+
+	public ServicioPlanes getServicioPlanes() {
+		return servicioPlanes;
+	}
+
+
+	public void setServicioPlanes(ServicioPlanes servicioPlanes) {
+		this.servicioPlanes = servicioPlanes;
+	}
+
+
+	public ServicioNotificaciones getServicioNotificaciones() {
+		return servicioNotificaciones;
+	}
+
+
+	public void setServicioNotificaciones(ServicioNotificaciones servicioNotificaciones) {
+		this.servicioNotificaciones = servicioNotificaciones;
+	}
+	
+	
 	
 }

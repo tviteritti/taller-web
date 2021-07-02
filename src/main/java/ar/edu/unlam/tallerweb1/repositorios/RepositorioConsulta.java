@@ -10,7 +10,7 @@ public interface RepositorioConsulta {
 	
 	void cargarConsulta(Consulta consulta);
 	void eliminarConsultasNulas(Consulta consulta);
-	void agregarComentario(Long idConsulta , String comentario, String userRespuesta);
+	void guardarRespuesta(Long idConsulta , Consulta respuesta, String userRespuesta);
 	
 	Consulta buscarConsulta(Long idConsulta);
 	List<Consulta> listarConsultaPorUsuario(Long idUsuario);

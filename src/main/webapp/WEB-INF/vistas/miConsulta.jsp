@@ -125,13 +125,14 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 			
 			<h4 class="text-center container p-4">Otras consultas que te pueden interesar</h4>
 			
+			
 		<c:if test="${not empty todasLasConsultas}">
 			
 			<c:forEach items="${todasLasConsultas}" var="tc">
 			
 			<c:if test="${not empty tc.asunto}">
       		<c:if test="${not empty tc.descripcion}">
-      	
+      		
 		      	<div class="card text-center p-3 container">
 					    <blockquote class="blockquote mb-0 p-3">
 					     <h5 class="card-title">${tc.asunto}</h5>
@@ -143,12 +144,15 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 					      </footer>
 					    </blockquote>
 					    <c:if test="${not empty tc.comentario}">
-				    		
-				    		<div class="d-flex flex-column m-3" style="border-left:3px solid #17a2b8">
-							  <p class="text-left ml-2">${tc.comentario} - <cite title="Source Title"><strong>${tc.userRespuesta}</strong></cite></p>
-							</div>
-				    		
-				    	
+					  
+						  <form method="post" action="miConsulta" class="d-flex flex-column m-3" style="border-left:3px solid #17a2b8">
+								<p class="text-left ml-2">${tc.respuesta.descripcion} - <cite title="Source Title"><strong>${tc.userRespuesta}</strong></cite></p>
+								<input type="hidden" value="${tc.usuario.id}" name="usuarioRespuesta">
+								<textarea name="comentario" placeholder="comentar" class="mr-3"></textarea>
+								<input type="hidden" value="${tc.respuesta.id}" name="idRespuesta">
+								<button type="submit" class="btn btn-link text-decoration-none" id="responder">Responder</button>
+						</form>
+	
 		    			</c:if>
 					    <form method="post" action="miConsulta">
 					        <input type="hidden" value="${tc.id}" name="idConsulta">
@@ -158,6 +162,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 					   </form>
 		  		</div>
 		  		<br>
+		  		
 		  		</c:if>
 		  		</c:if>
        		</c:forEach>
