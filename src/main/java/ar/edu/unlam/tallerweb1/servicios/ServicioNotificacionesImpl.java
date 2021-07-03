@@ -57,10 +57,19 @@ public class ServicioNotificacionesImpl implements ServicioNotificaciones {
 
 
 	@Override
-	public Notificacion buscarNotificacion(Long idNotificacion) {
+	public List<Notificacion> buscarNotificacion(Long idNotificacion) {
 		
 		return repositorioNotificaciones.buscarNotificacion(idNotificacion);
 	}
+
+
+	@Override
+	public Notificacion obtenerNotificacion(Long idNotificacion) {
+		
+		return repositorioNotificaciones.obtenerNotificacion(idNotificacion);
+	}
+	
+	
 	
 	
 

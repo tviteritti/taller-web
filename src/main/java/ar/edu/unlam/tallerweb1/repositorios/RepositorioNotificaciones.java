@@ -8,6 +8,7 @@ public interface RepositorioNotificaciones {
 	
 	void cargarNotificacion(Notificacion notificacion);
 	List<Notificacion> listarNotificacionesPorUsuario(Long idUsuario);
-	Notificacion buscarNotificacion(Long idNotificacion);
+	List<Notificacion> buscarNotificacion(Long idNotificacion);
+	Notificacion obtenerNotificacion(Long idNotificacion);
 
 }

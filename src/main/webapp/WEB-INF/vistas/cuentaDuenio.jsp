@@ -33,7 +33,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 								    	<c:if test="${not empty n.usuario.id }">
 								    	  <c:if test="${n.usuario.id eq usuario.id}">
 								  
-									    <a class="dropdown-item" href="#"> ${n.mensaje} </a>
+									    <a class="dropdown-item" href="notificaciones?id=${n.id}"> ${n.mensaje} </a>
 									    <script>
 								          document.getElementsByClassName("fas fa-bell")[0].classList.add('text-danger');
 								        </script>

@@ -40,12 +40,23 @@ public class RepositorioNotificacionesImpl  implements RepositorioNotificaciones
 	}
 	
 	@Override
-	public Notificacion buscarNotificacion(Long idNotificacion) {
+	public List<Notificacion> buscarNotificacion(Long idNotificacion) {
+		
+		List<Notificacion> notificacion = (List<Notificacion>) sessionFactory.getCurrentSession()
+				 .createCriteria(Notificacion.class)
+				 .add(Restrictions.eq("id", idNotificacion))
+				 .list();
+		return notificacion;
+	}
+
+	@Override
+	public Notificacion obtenerNotificacion(Long idNotificacion) {
 		
 		Notificacion notificacion = (Notificacion) sessionFactory.getCurrentSession()
 				 .createCriteria(Notificacion.class)
 				 .add(Restrictions.eq("id", idNotificacion))
-				 .list();
+				 .uniqueResult();
+		
 		return notificacion;
 	}
 	

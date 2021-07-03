@@ -103,6 +103,7 @@ public class ControladorDuenio {
 	 return new ModelAndView("turnos",modelo);
 	}
 	
+
 	@RequestMapping("/consultas")
 	public ModelAndView irAConsultas(
 	@RequestParam(value="duenioId",required=false) Long idDuenio, HttpServletRequest request) {
@@ -154,9 +155,8 @@ public class ControladorDuenio {
 		Consulta respuesta = new Consulta();
 		respuesta.setDescripcion(comentario);
 		respuesta.setUsuario(usuarioLogueado);
-		respuesta.setAsunto(asunto);
 		respuesta.setTipoConsulta("respuesta");
-
+		
 		if(idConsulta!=null && usuarioLogueado!=null) {
 			
 			servicioConsulta.cargarConsulta(miConsulta);
@@ -188,6 +188,7 @@ public class ControladorDuenio {
 			notificacionUsuario.setEstado(true);
 			notificacionUsuario.setMensaje(mensaje);
 			notificacionUsuario.setUsuarioRespuesta(usuarioLogueado.getUser());
+			notificacionUsuario.setConsulta(consultaBuscada);
 			
 			servicioNotificaciones.cargarNotificacion(notificacionUsuario);
 			
@@ -292,6 +293,21 @@ public class ControladorDuenio {
 		ModelMap modelo = new ModelMap();
 	
 		return new ModelAndView("cuentaDuenio", modelo);
+	}
+	
+	@RequestMapping("/notificaciones")
+	public ModelAndView irANotificaciones(
+	  @RequestParam(value="id", required=true) Long id){
+		
+		ModelMap modelo = new ModelMap();
+		Notificacion notificacion =servicioNotificaciones.obtenerNotificacion(id);
+		List<Consulta> consultas = servicioConsulta.listarConsultas();
+		
+		modelo.put("notificacion", notificacion);
+		modelo.put("consultas", consultas);
+		
+		return new ModelAndView("notificaciones", modelo);
+		
 	}
 	
 	@RequestMapping("/calificar")

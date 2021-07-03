@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Notificacion {
@@ -19,6 +20,9 @@ public class Notificacion {
 	private String mensaje;
 	private String usuarioRespuesta;
 	private Boolean estado;
+	
+	@OneToOne
+	private Consulta consulta;
 	
 	public Long getId() {
 		return id;
@@ -51,6 +55,13 @@ public class Notificacion {
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
+	public Consulta getConsulta() {
+		return consulta;
+	}
+	public void setConsulta(Consulta consulta) {
+		this.consulta = consulta;
+	}
 
+	
 
 }

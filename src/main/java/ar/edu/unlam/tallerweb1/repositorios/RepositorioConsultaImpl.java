@@ -71,11 +71,12 @@ public class RepositorioConsultaImpl implements RepositorioConsulta{
 	public void guardarRespuesta(Long idConsulta , Consulta respuesta, String userRespuesta) {
 		
 		Consulta consulta = buscarConsulta(idConsulta);
-	   
+		
 		consulta.setRespuesta(respuesta);
 		consulta.setUserRespuesta(userRespuesta);
-		consulta.setTipoConsulta("respuesta");
+		consulta.setTipoConsulta("consulta");
 		consulta.setComentario(respuesta.getDescripcion());
+		respuesta.setAsunto(consulta.getAsunto());
 		
 	
 	}
