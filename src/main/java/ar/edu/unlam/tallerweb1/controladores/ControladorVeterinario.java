@@ -249,10 +249,15 @@ public class ControladorVeterinario {
 			
 			Consulta respuesta = new Consulta();
 			respuesta.setDescripcion(comentario);
+			respuesta.setTipoConsulta("respuesta");
+			respuesta.setUsuario(usuarioLogueado);
+			
+			servicioConsulta.cargarConsulta(respuesta);
 			
 			if(idConsulta!=null && usuarioLogueado!=null) {
 				
 				servicioConsulta.guardarRespuesta(idConsulta, respuesta, usuarioLogueado.getUser());
+
 			}else {
 				return new ModelAndView("loginVeterinaria");
 			}

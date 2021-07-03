@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.modelo.Consulta;
 import ar.edu.unlam.tallerweb1.modelo.ContratacionPlanes;
 import ar.edu.unlam.tallerweb1.modelo.Dias;
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
@@ -45,6 +46,7 @@ public class ControladorLoginVeterinaria {
 	private ServicioMascotas servicioMascota;
 	private ServicioPlanes servicioPlanes;
 	private ServicioNotificaciones servicioNotificaciones;
+	private ServicioConsulta servicioConsulta;
 
 	
 	@Autowired
@@ -54,7 +56,8 @@ public class ControladorLoginVeterinaria {
 										ServicioTurno servicioTurno, 
 										ServicioMascotas servicioMascota,
 										ServicioPlanes servicioPlanes,
-										ServicioNotificaciones servicioNotificaciones) {
+										ServicioNotificaciones servicioNotificaciones,
+										ServicioConsulta servicioConsulta) {
 		
 		this.servicioUsuario = servicioVeterinario;	
 		this.servicioHorarios = servicioHorarios;
@@ -63,6 +66,7 @@ public class ControladorLoginVeterinaria {
 		this.servicioMascota = servicioMascota;
 		this.servicioPlanes = servicioPlanes;
 		this.servicioNotificaciones = servicioNotificaciones;
+		this.servicioConsulta = servicioConsulta;
 	}
 	
 	
@@ -662,6 +666,24 @@ public class ControladorLoginVeterinaria {
 												idLocalidad,codPostal,localidad, telefono, email, descripcion);
 	
 		return new ModelAndView("redirect:/verPerfil", modelo);
+	}
+	
+	
+	/*-------------------------------------NOTIFICACIONES------------------------------------------*/
+	
+	@RequestMapping("/notificaciones")
+	public ModelAndView irANotificaciones(
+	  @RequestParam(value="id", required=true) Long id){
+		
+		ModelMap modelo = new ModelMap();
+		Notificacion notificacion =servicioNotificaciones.obtenerNotificacion(id);
+		List<Consulta> consultas = servicioConsulta.listarConsultas();
+		
+		modelo.put("notificacion", notificacion);
+		modelo.put("consultas", consultas);
+		
+		return new ModelAndView("notificaciones", modelo);
+		
 	}
 
 

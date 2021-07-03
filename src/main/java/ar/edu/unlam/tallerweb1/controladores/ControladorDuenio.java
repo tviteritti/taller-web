@@ -295,20 +295,7 @@ public class ControladorDuenio {
 		return new ModelAndView("cuentaDuenio", modelo);
 	}
 	
-	@RequestMapping("/notificaciones")
-	public ModelAndView irANotificaciones(
-	  @RequestParam(value="id", required=true) Long id){
-		
-		ModelMap modelo = new ModelMap();
-		Notificacion notificacion =servicioNotificaciones.obtenerNotificacion(id);
-		List<Consulta> consultas = servicioConsulta.listarConsultas();
-		
-		modelo.put("notificacion", notificacion);
-		modelo.put("consultas", consultas);
-		
-		return new ModelAndView("notificaciones", modelo);
-		
-	}
+
 	
 	@RequestMapping("/calificar")
 	public ModelAndView calificarVeterivario(

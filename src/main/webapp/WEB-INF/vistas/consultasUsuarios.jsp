@@ -18,6 +18,8 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 	</div>
 <h4 class="text-center container p-3">Responde las dudas de nuestros usuarios</h4>
    <c:forEach items="${consultas}" var="c">
+	   <c:if test="${not empty c.asunto}">
+	   <c:if test="${not empty c.descripcion}">
 		<div class="card p-3">
 		  <div class="card-header">
 		    ${c.asunto}
@@ -30,18 +32,27 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 		  </div>
 		    <div class="card-footer text-muted">
 		    	<c:if test="${not empty c.comentario}">
-		    		<div class="d-flex flex-column m-3" style="border-left:3px solid #17a2b8">
-		    		  <p class="text-left ml-2">${c.comentario} - <cite title="Source Title">${c.userRespuesta}</cite></p>
-		    		</div>
+		    	
+		    		  <form method="post" action="responderConsultas" class="d-flex flex-column m-3" style="border-left:3px solid #17a2b8">
+								<p class="text-left ml-2">${c.respuesta.descripcion} - <cite title="Source Title"><strong>${c.userRespuesta}</strong></cite></p>
+								<input type="hidden" value="${c.usuario.id}" name="usuarioRespuesta">
+								<textarea name="comentario" placeholder="comentar" class="mr-3"></textarea>
+								<input type="hidden" value="${c.respuesta.id}" name="idRespuesta">
+								<button type="submit" class="btn btn-link text-decoration-none" id="responder">Responder</button>
+						</form>
+			
 		    	</c:if>
 		    	 <form method="post" action="responderConsultas">
 					        <input type="hidden" value="${c.id}" name="idConsulta">
 							<textarea class="form-control" rows="3" placeholder="comentar" name="comentario"></textarea>
+							<input type="hidden" value="true" name="notificacion">
 						    <button type="submit" class="btn btn-primary btn-sm">Responder</button>
 				</form>
+				
   			</div>
 		</div>
-		
+		</c:if>
+		</c:if>
 	</c:forEach>
 		
 		
