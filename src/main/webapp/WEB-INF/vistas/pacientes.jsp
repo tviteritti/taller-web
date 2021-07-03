@@ -12,6 +12,11 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 <script src="https://kit.fontawesome.com/b883f5a3c0.js" crossorigin="anonymous"></script>
 </head>
 <body>
+		
+		<%@ include file="menuCuentaVeterinario.jsp"%>
+		</div>
+
+
 		<h4 class="text-center container p-4">Mis pacientes</h4>
 		
 		 <c:if test="${not empty mascotas}">

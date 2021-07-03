@@ -15,47 +15,9 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 </head>
 <body>
 
-		<div class="card text-center">
-			<div class="row card-header">
-			    	<div class="col-3"> <a href="loginVeterinaria"><i class="fas fa-home display-6"></i></a></div>
-			    	<div class="col-2">  <i class="fas fa-bell display-6"></i></div>
-			    	<div class="col-2"><i class="fas fa-user"></i></div>
-			    	<div class="col-2"><i class="fas fa-moon"></i></div>
-			    	<div class="col-3">
-				    	<a href="cerrarSesion" class="text-decoration-none">cerrar sesion
-				    		<i class="fas fa-sign-out-alt display-5"></i>
-				    	</a>
-			    	</div>
-			    	<div class="border-bottom"></div>
-			    </div>
-			    <nav class="navbar navbar-dark bg-dark">
-			
-				<ul class="navbar-nav mr-auto d-flex flex-row">
-			      <li class="nav-item d-inline mr-5">
-			       
-			        <form action="verTurnosPacientes" method="post">
-			          <input type="hidden" name="veterinarioId" value="${usuario.id}"/>
-			          <button type="submit" class="btn btn-link text-decoration-none text-white-50">Mi agenda</button>
-			        </form>
-			      </li>
-			      <li class="nav-item d-inline mr-5">
-			        
-			        <form action="verPacientes" method="post">
-			          <input type="hidden" name="veterinarioId" value="${usuario.id}"/>
-			          <button type="submit" class="btn btn-link text-decoration-none text-white-50">Mis pacientes</button>
-			        </form>
-			      </li>
-			      <br>
-			    
-			      <li class="nav-item d-inline mr-5">
-			        <form action="consultasDeUsuarios" method="post">
-			          <input type="hidden" name="veterinarioId" value="${usuario.id}"/>
-			          <button type="submit" class="btn btn-link text-decoration-none text-white-50">Consultas</button>
-			        </form>
-			      </li>
-		       </ul>
-			   
-			</nav>
+	<%@ include file="menuCuentaVeterinario.jsp"%>
+
+		
 			  <div class="card-header">
 			    
 			    

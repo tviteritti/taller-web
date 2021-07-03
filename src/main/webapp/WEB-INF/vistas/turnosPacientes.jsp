@@ -14,8 +14,10 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 
 </head>
 <body>
-	    <h4 class="text-center container p-3">Listado de Turnos</h4>
-		<br>
+
+		<%@ include file="menuCuentaVeterinario.jsp"%>
+		</div>
+	    <h4 class="text-center container mt-4">Listado de Turnos</h4>
 		<div class="container">
 			<table class="table">
 			  <thead>

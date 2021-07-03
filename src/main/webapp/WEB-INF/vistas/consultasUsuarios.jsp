@@ -13,6 +13,9 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 <script src="https://kit.fontawesome.com/b883f5a3c0.js" crossorigin="anonymous"></script>
 </head>
 <body>
+
+	<%@ include file="menuCuentaVeterinario.jsp"%>
+	</div>
 <h4 class="text-center container p-3">Responde las dudas de nuestros usuarios</h4>
    <c:forEach items="${consultas}" var="c">
 		<div class="card p-3">
@@ -22,7 +25,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 		  <div class="card-body container">
 		    <blockquote class="blockquote mb-0">
 		      <p class="display-5">${c.descripcion}</p>
-		      <footer class="blockquote-footer">Realizada por <cite title="Source Title">${c.duenio.user} </cite></footer>
+		      <footer class="blockquote-footer">Realizada por <cite title="Source Title">${c.usuario.user} </cite></footer>
 		    </blockquote>
 		  </div>
 		    <div class="card-footer text-muted">
