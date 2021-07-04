@@ -266,6 +266,7 @@ public class ControladorVeterinario {
 		@RequestParam(value="veterinarioId",required=false) Long idVeterinario,
 		@RequestParam(value="comentario",required=false) String comentario,
 		@RequestParam(value="idConsulta",required=false) Long idConsulta,
+		@RequestParam(value="notificacion",required=false) String notificacion,
 		HttpServletRequest request) {
 			
 			ModelMap modelo = new ModelMap();
@@ -283,7 +284,30 @@ public class ControladorVeterinario {
 				servicioConsulta.guardarRespuesta(idConsulta, respuesta, usuarioLogueado.getUser());
 
 			}else {
-				return new ModelAndView("loginVeterinaria");
+				return new ModelAndView("redirect:/loginVeterinaria");
+			}
+			
+			List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorUsuario(usuarioLogueado.getId());
+			
+			if(notificacion!=null) {
+				
+				Consulta consultaBuscada = servicioConsulta.buscarConsulta(idConsulta);
+				String usuarioRespuesta = consultaBuscada.getUserRespuesta();
+				String mensaje = usuarioRespuesta + " respondio tu consulta: "+consultaBuscada.getAsunto();
+				
+				Notificacion notificacionUsuario = new Notificacion();
+				
+				notificacionUsuario.setUsuario(consultaBuscada.getUsuario());
+				notificacionUsuario.setEstado(true);
+				notificacionUsuario.setMensaje(mensaje);
+				notificacionUsuario.setUsuarioRespuesta(usuarioLogueado.getUser());
+				notificacionUsuario.setConsulta(consultaBuscada);
+				
+				servicioNotificaciones.cargarNotificacion(notificacionUsuario);
+				
+				modelo.put("notificacion",misNotificaciones);
+				Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(usuarioLogueado.getId());
+				modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
 			}
 			
 			Usuario vt = servicioUsuario.getVeterinario(idVeterinario);
