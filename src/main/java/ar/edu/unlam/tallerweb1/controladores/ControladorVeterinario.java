@@ -17,11 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.modelo.Consulta;
 import ar.edu.unlam.tallerweb1.modelo.HistoriaClinica;
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
+import ar.edu.unlam.tallerweb1.modelo.Notificacion;
 import ar.edu.unlam.tallerweb1.modelo.TipoAnimal;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioConsulta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioHistoriaClinica;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMascotas;
+import ar.edu.unlam.tallerweb1.servicios.ServicioNotificaciones;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTurno;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
@@ -33,6 +35,7 @@ public class ControladorVeterinario {
 	private ServicioTurno servicioTurno;
 	private ServicioUsuario servicioUsuario;
 	private ServicioConsulta servicioConsulta;
+	private ServicioNotificaciones servicioNotificaciones;
 
 		@Autowired
 		public ControladorVeterinario(
@@ -40,13 +43,15 @@ public class ControladorVeterinario {
 				ServicioHistoriaClinica servicioHistoriaClinica,
 				ServicioTurno servicioTurno,
 				ServicioUsuario servicioUsuario,
-				ServicioConsulta servicioConsulta) {
+				ServicioConsulta servicioConsulta,
+				ServicioNotificaciones servicioNotificaciones) {
 			
 			this.servicioMascotas=servicioMascotas;	
 			this.servicioHistoriaClinica=servicioHistoriaClinica;
 			this.servicioTurno=servicioTurno;
 			this.servicioUsuario = servicioUsuario;
 			this.servicioConsulta = servicioConsulta;
+			this.servicioNotificaciones = servicioNotificaciones;
 		}
 		
 	
@@ -72,6 +77,12 @@ public class ControladorVeterinario {
 				
 			}
 			
+			List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorUsuario(usuarioa.getId());
+			
+			Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(usuarioa.getId());
+			
+			modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
+			modelo.put("notificacion",misNotificaciones);
 			modelo.put("veterinario", usuarioa);
 		
 		return new ModelAndView("pacientes",modelo);
@@ -222,15 +233,28 @@ public class ControladorVeterinario {
 		
 		@RequestMapping("/consultasDeUsuarios")
 		public ModelAndView verConsultas(
-		@RequestParam(value="veterinarioId",required=false) Long idVeterinario) {
+		@RequestParam(value="veterinarioId",required=false) Long idVeterinario,
+		HttpServletRequest request) {
+			
+			Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
 			
 			ModelMap modelo = new ModelMap();
 			
 			Usuario vt = servicioUsuario.getVeterinario(idVeterinario);
 			List <Consulta> consultas = servicioConsulta.listarConsultas();
 			
+			List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorUsuario(usuarioa.getId());
+			
+			Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(usuarioa.getId());
+			
+			modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
+		
+			modelo.put("notificacion",misNotificaciones);
+			
 			modelo.put("veterinario", vt);
 			modelo.put("consultas", consultas);
+			
+			
 			
 		 return new ModelAndView("consultasUsuarios",modelo);
 		 
@@ -268,6 +292,7 @@ public class ControladorVeterinario {
 			modelo.put("veterinario", vt);
 			modelo.put("consultas", consultas);
 			modelo.put("usuario", usuarioLogueado);
+			
 			
 		 return new ModelAndView("consultasUsuarios",modelo);
 		 

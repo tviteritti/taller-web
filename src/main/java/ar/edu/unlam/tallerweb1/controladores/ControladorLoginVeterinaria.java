@@ -138,26 +138,27 @@ public class ControladorLoginVeterinaria {
 	@RequestMapping("/cuentaDuenio")
 	public ModelAndView mostrarCuentaUsuario(HttpServletRequest request) {
 		ModelMap modelo = new ModelMap();
-		Usuario duenio = (Usuario) request.getSession().getAttribute("usuario");
-		if(duenio==null) {
+		Usuario usuarioLogueado = (Usuario) request.getSession().getAttribute("usuario");
+		if(usuarioLogueado==null) {
 			return new ModelAndView("redirect:/loginVeterinaria");
 		}
-		if(duenio.getRol().equals("duenio")) {
-			if(servicioPlanes.mostrarPlanesOContrataciones(duenio)) {
+		if(usuarioLogueado.getRol().equals("duenio")) {
+			if(servicioPlanes.mostrarPlanesOContrataciones(usuarioLogueado)) {
 				List<ContratacionPlanes> listaContrataciones=servicioPlanes.listarContrataciones();
 				modelo.put("listaContrataciones", listaContrataciones);
 				
-				List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorUsuario(duenio.getId());
+				List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorUsuario(usuarioLogueado.getId());
 				modelo.put("notificacion",misNotificaciones);
 				
-				Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(duenio.getId());
+				Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(usuarioLogueado.getId());
 				modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
 				
 			}else {
 				List<Planes> listaPlanes=servicioPlanes.listarPlanes();			
 				modelo.put("listaPlanes", listaPlanes);
 			}
-		}else if(duenio.getRol().equals("veterinario")) {
+		}else if(usuarioLogueado.getRol().equals("veterinario")) {
+			
 			return new ModelAndView("redirect:/cuentaVeterinario");
 		}
 			
@@ -166,7 +167,11 @@ public class ControladorLoginVeterinaria {
 	
 	@RequestMapping("/cuentaVeterinario")
 	public ModelAndView mostrarCuentaVeterinario(HttpServletRequest request) {
+		
 		Usuario veterinario =(Usuario)request.getSession().getAttribute("usuario");
+		
+		ModelMap modelo = new ModelMap();
+		
 		if(veterinario==null) {
 			return new ModelAndView("redirect:/loginVeterinaria");
 		}
@@ -174,7 +179,15 @@ public class ControladorLoginVeterinaria {
 		if(veterinario.getRol().equals("duenio")) {
 			return new ModelAndView("redirect:/cuentaDuenio");
 		}
-		return new ModelAndView("cuentaVeterinario");
+		
+			List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorUsuario(veterinario.getId());
+			modelo.put("notificacion",misNotificaciones);
+			
+			Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(veterinario.getId());
+			modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
+		
+
+		return new ModelAndView("cuentaVeterinario",modelo);
 	}
 	
 	@RequestMapping("/cerrarSesion")

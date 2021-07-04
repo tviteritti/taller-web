@@ -19,6 +19,7 @@ import ar.edu.unlam.tallerweb1.modelo.Calificacion;
 import ar.edu.unlam.tallerweb1.modelo.ContratacionPlanes;
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
+import ar.edu.unlam.tallerweb1.modelo.Notificacion;
 import ar.edu.unlam.tallerweb1.modelo.Planes;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
@@ -26,6 +27,7 @@ import ar.edu.unlam.tallerweb1.modelo.Voto;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 
 import ar.edu.unlam.tallerweb1.servicios.ServicioMascotas;
+import ar.edu.unlam.tallerweb1.servicios.ServicioNotificaciones;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPlanes;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTurno;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
@@ -37,20 +39,22 @@ private ServicioTurno servicioTurno;
 private ServicioMascotas servicioMascotas;
 private ServicioUsuario servicioUsuario;
 private ServicioPlanes servicioPlanes;
+private ServicioNotificaciones servicioNotificaciones;
 
 
 	
 	@Autowired
 	public ControladorTurnos(ServicioTurno servicioTurno, 
 							 ServicioMascotas servicioMascotas, 
-							 ServicioUsuario servicioUsuario, ServicioPlanes servicioPlanes) {
+							 ServicioUsuario servicioUsuario, 
+							 ServicioPlanes servicioPlanes,
+							 ServicioNotificaciones servicioNotificaciones) {
 		
 		this.servicioTurno = servicioTurno;	
 		this.servicioMascotas=servicioMascotas;
 		this.servicioUsuario =servicioUsuario;
 		this.servicioPlanes =servicioPlanes;
-		
-		
+		this.servicioNotificaciones = servicioNotificaciones;
 	}
 	
 	@RequestMapping("buscarTurno")
@@ -217,10 +221,20 @@ private ServicioPlanes servicioPlanes;
 	
 	@RequestMapping(path = "verTurnosPacientes")
 	public ModelAndView mostrarTurnosPacientes(
-	  @RequestParam(value="veterinarioId",required=false) Long veterinarioId
+	  @RequestParam(value="veterinarioId",required=false) Long veterinarioId,
+	  HttpServletRequest request
 			) {
+		
+		Usuario usuarioa = (Usuario) request.getSession().getAttribute("usuario");
+		
 		ModelMap modelo = new ModelMap();
+		
 		List<Turno> turnos = servicioTurno.buscarTurnoPorVeterinario(veterinarioId);
+		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorUsuario(usuarioa.getId());
+		Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(usuarioa.getId());
+		
+		modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
+		modelo.put("notificacion",misNotificaciones);
 		modelo.put("turnos", turnos);
 		return new ModelAndView("turnosPacientes", modelo);
 	}
