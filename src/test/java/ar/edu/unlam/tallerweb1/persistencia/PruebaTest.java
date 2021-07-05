@@ -256,7 +256,7 @@ public class PruebaTest extends SpringTest{
 	
 		ModelAndView modelAndView2 = controladorLoginVeterinaria.validarDatosVeterinario(usuarioMock, requestMock, 1L, anyString(), "asd", "asd", "asd", "asd",1L);
 	
-	assertThat(modelAndView2.getViewName()).isEqualTo("redirect:/horariosLunes");	
+		assertThat(modelAndView2.getViewName()).isEqualTo("redirect:/horariosLunes");	
 	}
 	
 	@Test
@@ -268,7 +268,7 @@ public class PruebaTest extends SpringTest{
 	
 		ModelAndView modelAndView2 = controladorLoginVeterinaria.registrarHorariosLunes(requestMock);
 	
-	assertThat(modelAndView2.getViewName()).isEqualTo("horariosLunes");	
+		assertThat(modelAndView2.getViewName()).isEqualTo("horariosLunes");	
 	}
 	
 	@Test
@@ -280,7 +280,7 @@ public class PruebaTest extends SpringTest{
 	
 		ModelAndView modelAndView2 = controladorLoginVeterinaria.procesarHorariosLunes(1L, 1L, "asd", "as", "asd");
 	
-	assertThat(modelAndView2.getViewName()).isEqualTo("redirect:/horariosMartes");	
+		assertThat(modelAndView2.getViewName()).isEqualTo("redirect:/horariosMartes");	
 	}
 	
 	@Test
@@ -292,7 +292,7 @@ public class PruebaTest extends SpringTest{
 	
 		ModelAndView modelAndView2 = controladorLoginVeterinaria.generarTurnos(requestMock);
 	
-	assertThat(modelAndView2.getViewName()).isEqualTo("generarTurnos");	
+		assertThat(modelAndView2.getViewName()).isEqualTo("generarTurnos");	
 	}
 	
 	@Test
@@ -303,7 +303,7 @@ public class PruebaTest extends SpringTest{
 	
 		ModelAndView modelAndView2 = controladorLoginVeterinaria.procesarDatosGenerarTurno(1L,1L);
 	
-	assertThat(modelAndView2.getViewName()).isEqualTo("redirect:/loginVeterinaria");	
+		assertThat(modelAndView2.getViewName()).isEqualTo("redirect:/loginVeterinaria");	
 	}
 	
 	@Test
@@ -315,7 +315,7 @@ public class PruebaTest extends SpringTest{
 	
 		ModelAndView modelAndView2 = controladorLoginVeterinaria.tomarUnTurno(1L,requestMock);
 	
-	assertThat(modelAndView2.getViewName()).isEqualTo("formVerificarSesion");	
+		assertThat(modelAndView2.getViewName()).isEqualTo("formVerificarSesion");	
 	}
 	
 	@Test
@@ -329,7 +329,7 @@ public class PruebaTest extends SpringTest{
 		
 		ModelAndView modelAndView2 = controladorLoginVeterinaria.procesarDatosSesion(1L,"asd","asd", requestMock);
 	
-	assertThat(modelAndView2.getViewName()).isEqualTo("redirect:/mascotaAEligir");	
+		assertThat(modelAndView2.getViewName()).isEqualTo("redirect:/mascotaAEligir");	
 	}
 	
 	@Test
@@ -341,8 +341,10 @@ public class PruebaTest extends SpringTest{
 		
 		ModelAndView modelAndView2 = controladorLoginVeterinaria.mascotaAEligir(requestMock);
 	
-	assertThat(modelAndView2.getViewName()).isEqualTo("listarMascotas");	
+		assertThat(modelAndView2.getViewName()).isEqualTo("listarMascotas");	
 	}
+	
+	
 	
 	@Test
 	@Rollback(true)
@@ -353,7 +355,7 @@ public class PruebaTest extends SpringTest{
 		
 		ModelAndView modelAndView2 = controladorLoginVeterinaria.procesarMascota(1L,1L,requestMock);
 	
-	assertThat(modelAndView2.getViewName()).isEqualTo("redirect:/loginVeterinaria");	
+		assertThat(modelAndView2.getViewName()).isEqualTo("redirect:/loginVeterinaria");	
 	}
 	
 
