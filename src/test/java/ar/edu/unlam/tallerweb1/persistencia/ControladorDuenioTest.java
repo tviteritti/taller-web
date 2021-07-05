@@ -1,11 +1,18 @@
 package ar.edu.unlam.tallerweb1.persistencia;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.junit.Before;
+import org.junit.Test;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.SpringTest;
 import ar.edu.unlam.tallerweb1.controladores.ControladorDuenio;
@@ -58,6 +65,20 @@ public class ControladorDuenioTest extends SpringTest{
 		servicioMascotasMock = mock(ServicioMascotas.class);
 		controladorDuenio.setServicioMascota(servicioMascotasMock);
 		
+	}
+	
+	@Test
+	@Rollback(true)
+	@Transactional
+	public void validarIrAMiMascotaSinSesion(){
+		
+		
+		when(requestMock.getSession()).thenReturn(sessionMock);
+		when(requestMock.getSession().getAttribute("usuario")).thenReturn(null);
+		
+		ModelAndView modelAndView = controladorDuenio.irAMiMascota(1L, requestMock);
+		
+		assertThat(modelAndView.getViewName()).isEqualTo("redirect:/loginVeterinaria");
 	}
 
 
