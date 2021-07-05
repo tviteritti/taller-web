@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.persistencia;
 
 import  static org.mockito.Mockito.*;
 
+import java.text.ParseException;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.Assert.assertNull;
@@ -20,6 +21,8 @@ import ar.edu.unlam.tallerweb1.SpringTest;
 import ar.edu.unlam.tallerweb1.controladores.ControladorLogin;
 import ar.edu.unlam.tallerweb1.controladores.ControladorLoginVeterinaria;
 import ar.edu.unlam.tallerweb1.modelo.Dias;
+import ar.edu.unlam.tallerweb1.modelo.Horarios;
+import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioConsulta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDias;
@@ -43,17 +46,25 @@ public class PruebaTest extends SpringTest{
 	private ServicioConsulta servicioConsulta;
 	private ControladorLoginVeterinaria controladorLoginVeterinaria = new ControladorLoginVeterinaria(servicioUsuario, servicioHorarios, servicioDias, servicioTurno, servicioMascota, servicioPlanes, servicioNotificaciones, servicioConsulta);
 	private Usuario usuarioMock;
+	private Dias diaMock;
+	private Horarios horariosMock;
+	private Turno turnoMock;
 	private HttpServletRequest requestMock;
 	private HttpSession sessionMock;
 	private ServicioUsuario servicioUsuarioMock;
 	private ServicioTurno servicioTurnoMock;
 	private ServicioDias servicioDiasMock;
+	private ServicioHorarios servicioHorariosMock;
+	
 
 	
 	
 	@Before
 	public void init(){
 		usuarioMock = mock(Usuario.class);
+		diaMock = mock(Dias.class);
+		horariosMock = mock(Horarios.class);
+		turnoMock = mock(Turno.class);
 		requestMock = mock(HttpServletRequest.class);
 		sessionMock = mock(HttpSession.class);
 		servicioUsuarioMock = mock(ServicioUsuario.class);
@@ -62,6 +73,8 @@ public class PruebaTest extends SpringTest{
 		controladorLoginVeterinaria.setServicioTurno(servicioTurnoMock);
 		servicioDiasMock = mock(ServicioDias.class);
 		controladorLoginVeterinaria.setServicioDias(servicioDiasMock);
+		servicioHorariosMock = mock(ServicioHorarios.class);
+		controladorLoginVeterinaria.setServicioHorarios(servicioHorariosMock);
 		
 	}
 	
@@ -224,7 +237,67 @@ public class PruebaTest extends SpringTest{
 	}
 	
 	
-
+	@Test
+	@Rollback(true)
+	@Transactional
+	public void validarDatosVeterinarioRepassword(){
+		when(requestMock.getSession()).thenReturn(sessionMock);
+		when(servicioUsuarioMock.validarPassRePass(anyString(), anyString())).thenReturn(true);
+	
+		ModelAndView modelAndView2 = controladorLoginVeterinaria.validarDatosVeterinario(usuarioMock, requestMock, 1L, anyString(), "asd", "asd", "asd", "asd",1L);
+	
+	assertThat(modelAndView2.getViewName()).isEqualTo("redirect:/horariosLunes");	
+	}
+	
+	@Test
+	@Rollback(true)
+	@Transactional
+	public void validarVistaRegistrarHorariosLunes(){
+		when(requestMock.getSession()).thenReturn(sessionMock);
+		when(requestMock.getSession().getAttribute("usuario")).thenReturn(null);
+	
+		ModelAndView modelAndView2 = controladorLoginVeterinaria.registrarHorariosLunes(requestMock);
+	
+	assertThat(modelAndView2.getViewName()).isEqualTo("horariosLunes");	
+	}
+	
+	@Test
+	@Rollback(true)
+	@Transactional
+	public void validarProcesarHorariosLunes() throws ParseException{
+		when(requestMock.getSession()).thenReturn(sessionMock);
+		when(requestMock.getSession().getAttribute("usuario")).thenReturn(null);
+	
+		ModelAndView modelAndView2 = controladorLoginVeterinaria.procesarHorariosLunes(1L, 1L, "asd", "as", "asd");
+	
+	assertThat(modelAndView2.getViewName()).isEqualTo("redirect:/horariosMartes");	
+	}
+	
+	@Test
+	@Rollback(true)
+	@Transactional
+	public void validarVistaGenerarTurnos() {
+		when(requestMock.getSession()).thenReturn(sessionMock);
+		when(requestMock.getSession().getAttribute("usuario")).thenReturn(null);
+	
+		ModelAndView modelAndView2 = controladorLoginVeterinaria.generarTurnos(requestMock);
+	
+	assertThat(modelAndView2.getViewName()).isEqualTo("generarTurnos");	
+	}
+	
+	@Test
+	@Rollback(true)
+	@Transactional
+	public void validarprocesarDatosGenerarTurno(){
+		
+	
+		ModelAndView modelAndView2 = controladorLoginVeterinaria.procesarDatosGenerarTurno(1L,1L);
+	
+	assertThat(modelAndView2.getViewName()).isEqualTo("redirect:/loginVeterinaria");	
+	}
+	
+	
+	
 	
 	
 	
