@@ -310,4 +310,31 @@ public class ControladorDuenio {
 		return new ModelAndView("redirect:/cuentaDuenio");
 		
 	}
+
+
+	public void setServicioDuenio(ServicioUsuario servicioDuenio) {
+		this.servicioDuenio = servicioDuenio;
+	}
+
+
+	public void setServicioMascota(ServicioMascotas servicioMascota) {
+		this.servicioMascota = servicioMascota;
+	}
+
+
+	public void setServicioPlanes(ServicioPlanes servicioPlanes) {
+		this.servicioPlanes = servicioPlanes;
+	}
+
+
+	public void setServicioConsulta(ServicioConsulta servicioConsulta) {
+		this.servicioConsulta = servicioConsulta;
+	}
+
+
+	public void setServicioNotificaciones(ServicioNotificaciones servicioNotificaciones) {
+		this.servicioNotificaciones = servicioNotificaciones;
+	}
+	
+	
 }

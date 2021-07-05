@@ -36,7 +36,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioPlanes;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTurno;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
-public class PruebaTest extends SpringTest{
+public class ControladorLoginTest extends SpringTest{
 	
 	private ServicioUsuario servicioUsuario;
 	private ServicioHorarios servicioHorarios;
