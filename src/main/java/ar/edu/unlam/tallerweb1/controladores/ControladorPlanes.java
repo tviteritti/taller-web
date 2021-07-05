@@ -10,16 +10,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPlanes;
+import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
 @Controller
 public class ControladorPlanes {
 
 	private ServicioPlanes servicioPlanes;
+	private ServicioUsuario servicioUsuario;
 	
 	@Autowired
-	public ControladorPlanes(ServicioPlanes servicioPlanes) {
+	public ControladorPlanes(ServicioPlanes servicioPlanes,ServicioUsuario servicioUsuario) {
 		
 		this.servicioPlanes = servicioPlanes;
+		this.servicioUsuario = servicioUsuario;
 	}
 	
 	@RequestMapping("/tomarUnPlan")
@@ -63,4 +66,15 @@ public class ControladorPlanes {
 		
 	return new ModelAndView("redirect:/cuentaDuenio");
 	}
+
+	public void setServicioPlanes(ServicioPlanes servicioPlanes) {
+		this.servicioPlanes = servicioPlanes;
+	}
+
+	public void setServicioDuenio(ServicioUsuario servicioUsuario) {
+		this.servicioUsuario = servicioUsuario;
+		
+	}
+	
+	
 }
