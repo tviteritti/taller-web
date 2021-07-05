@@ -17,6 +17,7 @@ import ar.edu.unlam.tallerweb1.SpringTest;
 import ar.edu.unlam.tallerweb1.controladores.ControladorDuenio;
 import ar.edu.unlam.tallerweb1.controladores.ControladorVeterinario;
 import ar.edu.unlam.tallerweb1.modelo.Consulta;
+import ar.edu.unlam.tallerweb1.modelo.HistoriaClinica;
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
 import ar.edu.unlam.tallerweb1.modelo.Notificacion;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
@@ -43,6 +44,7 @@ public class ControladorVeterinarioTest extends SpringTest{
 	private Mascota mascotaMock;
 	private Notificacion notificacionesMock;
 	private Consulta consultaMock;
+	private HistoriaClinica historiaClinicaMock;
 	private HttpServletRequest requestMock;
 	private HttpSession sessionMock;
 	private ServicioUsuario servicioUsuarioMock;
@@ -51,7 +53,9 @@ public class ControladorVeterinarioTest extends SpringTest{
 	private ServicioNotificaciones servicioNotificacionesMock;
 	private ServicioConsulta servicioConsultaMock;
 	private ServicioTurno servicioTurnoMock;
-
+	private ServicioHistoriaClinica servicioHistoriaClinicaMock;
+	
+	
 
 
 	@Before
@@ -62,6 +66,7 @@ public class ControladorVeterinarioTest extends SpringTest{
 		notificacionesMock = mock(Notificacion.class);
 		consultaMock = mock(Consulta.class);
 		turnoMock = mock(Turno.class);
+		historiaClinicaMock = mock(HistoriaClinica.class);
 		requestMock = mock(HttpServletRequest.class);
 		sessionMock = mock(HttpSession.class);
 		servicioUsuarioMock = mock(ServicioUsuario.class);
@@ -73,6 +78,10 @@ public class ControladorVeterinarioTest extends SpringTest{
 		controladorVeterinario.setServicioConsulta(servicioConsultaMock);
 		servicioTurnoMock = mock(ServicioTurno.class);
 		controladorVeterinario.setServicioTurno(servicioTurnoMock);
+		servicioHistoriaClinicaMock = mock(ServicioHistoriaClinica.class);
+		controladorVeterinario.setServicioHistoriaClinica(servicioHistoriaClinicaMock);
+		servicioMascotasMock = mock(ServicioMascotas.class);
+		controladorVeterinario.setServicioMascotas(servicioMascotasMock);
 	}
 	
 	
@@ -90,4 +99,99 @@ public class ControladorVeterinarioTest extends SpringTest{
 		
 		assertThat(modelAndView.getViewName()).isEqualTo("pacientes");
 	}
+	
+	@Test
+	@Rollback(true)
+	@Transactional
+	public void validarMostrarHistoriaClinica(){
+		
+		
+		when(requestMock.getSession()).thenReturn(sessionMock);
+		when(requestMock.getSession().getAttribute("usuario")).thenReturn(usuarioMock);
+		when(usuarioMock.getRol()).thenReturn("veterinario");
+		
+		ModelAndView modelAndView = controladorVeterinario.mostrarHistoriaClinica(1L, 1L,1L,requestMock);
+		
+		assertThat(modelAndView.getViewName()).isEqualTo("historiaClinica");
+	}
+	
+	@Test
+	@Rollback(true)
+	@Transactional
+	public void validarCargarHistoriaClinica(){
+		
+		
+		when(requestMock.getSession()).thenReturn(sessionMock);
+		when(requestMock.getSession().getAttribute("usuario")).thenReturn(usuarioMock);
+		when(usuarioMock.getRol()).thenReturn("veterinario");
+		
+		ModelAndView modelAndView = controladorVeterinario.cargarHistoriaClinica(1L, 1L,1L,requestMock);
+		
+		assertThat(modelAndView.getViewName()).isEqualTo("cargarHC");
+	}
+	
+	@Test
+	@Rollback(true)
+	@Transactional
+	public void validarActualizarHistoriaClinica(){
+		
+		
+		when(requestMock.getSession()).thenReturn(sessionMock);
+		when(requestMock.getSession().getAttribute("usuario")).thenReturn(usuarioMock);
+		when(usuarioMock.getRol()).thenReturn("veterinario");
+		
+		ModelAndView modelAndView = controladorVeterinario.actualizarHistoriaClinica(1L, 1L,1L,requestMock);
+		
+		assertThat(modelAndView.getViewName()).isEqualTo("actualizarHC");
+	}
+	
+	@Test
+	@Rollback(true)
+	@Transactional
+	public void validarGuardarHistoriaClinica(){
+		
+		
+		when(requestMock.getSession()).thenReturn(sessionMock);
+		when(requestMock.getSession().getAttribute("usuario")).thenReturn(usuarioMock);
+		when(usuarioMock.getRol()).thenReturn("veterinario");
+		
+		ModelAndView modelAndView = controladorVeterinario.guardarHistoriaClinica(1L, 1L, 1L, "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", "asd", requestMock);
+		
+		assertThat(modelAndView.getViewName()).isEqualTo("historiaClinica");
+	}
+	
+	@Test
+	@Rollback(true)
+	@Transactional
+	public void validarVerConsultas(){
+		
+		
+		when(requestMock.getSession()).thenReturn(sessionMock);
+		when(requestMock.getSession().getAttribute("usuario")).thenReturn(usuarioMock);
+		when(usuarioMock.getRol()).thenReturn("veterinario");
+		
+		ModelAndView modelAndView = controladorVeterinario.verConsultas(1L,requestMock);
+		
+		assertThat(modelAndView.getViewName()).isEqualTo("consultasUsuarios");
+	}
+	
+	@Test
+	@Rollback(true)
+	@Transactional
+	public void validarResponderConsultas(){
+		
+		
+		when(requestMock.getSession()).thenReturn(sessionMock);
+		when(requestMock.getSession().getAttribute("usuario")).thenReturn(usuarioMock);
+		when(usuarioMock.getRol()).thenReturn("veterinario");
+		when(servicioConsultaMock.buscarConsulta(1L)).thenReturn(consultaMock);
+		when(consultaMock.getUsuario()).thenReturn(usuarioMock);
+		
+		ModelAndView modelAndView = controladorVeterinario.responderConsultas(1L,"asd",1L,"asd",requestMock);
+		
+		assertThat(modelAndView.getViewName()).isEqualTo("consultasUsuarios");
+	}
+	
+	
+	
 }
