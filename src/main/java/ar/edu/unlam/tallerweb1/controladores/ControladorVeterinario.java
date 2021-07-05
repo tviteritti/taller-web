@@ -321,5 +321,37 @@ public class ControladorVeterinario {
 		 return new ModelAndView("consultasUsuarios",modelo);
 		 
 		}
+
+
+		public void setServicioMascotas(ServicioMascotas servicioMascotas) {
+			this.servicioMascotas = servicioMascotas;
+		}
+
+
+		public void setServicioHistoriaClinica(ServicioHistoriaClinica servicioHistoriaClinica) {
+			this.servicioHistoriaClinica = servicioHistoriaClinica;
+		}
+
+
+		public void setServicioTurno(ServicioTurno servicioTurno) {
+			this.servicioTurno = servicioTurno;
+		}
+
+
+		public void setServicioUsuario(ServicioUsuario servicioUsuario) {
+			this.servicioUsuario = servicioUsuario;
+		}
+
+
+		public void setServicioConsulta(ServicioConsulta servicioConsulta) {
+			this.servicioConsulta = servicioConsulta;
+		}
+
+
+		public void setServicioNotificaciones(ServicioNotificaciones servicioNotificaciones) {
+			this.servicioNotificaciones = servicioNotificaciones;
+		}
+		
+		
 		
 }
