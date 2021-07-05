@@ -105,7 +105,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 							      	</div>
 							      	<form action="calificar" method="post">
 								      <div class="modal-body">
-								        <input type="text" name="id_veterinario" id="idV"/>
+								        <input type="hidden" name="id_veterinario" id="idV"/>
 								        <h5>calificar de 0 a 10:</h5>
 								        <input type="number" name="calificacion" min="0" max="10"/>
 								      </div>
