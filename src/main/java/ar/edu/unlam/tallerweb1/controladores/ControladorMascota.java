@@ -73,6 +73,15 @@ public class ControladorMascota {
 			
 		return new ModelAndView("redirect:/perfilMascota", modelo);
 	}
+
+	public void setServicioDuenio(ServicioUsuario servicioDuenio) {
+		this.servicioDuenio = servicioDuenio;
+	}
+
+	public void setServicioMascota(ServicioMascotas servicioMascota) {
+		this.servicioMascota = servicioMascota;
+	}
+	
 	
 	
 	
