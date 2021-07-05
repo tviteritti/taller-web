@@ -22,6 +22,8 @@ import ar.edu.unlam.tallerweb1.controladores.ControladorLogin;
 import ar.edu.unlam.tallerweb1.controladores.ControladorLoginVeterinaria;
 import ar.edu.unlam.tallerweb1.modelo.Dias;
 import ar.edu.unlam.tallerweb1.modelo.Horarios;
+import ar.edu.unlam.tallerweb1.modelo.Mascota;
+import ar.edu.unlam.tallerweb1.modelo.Planes;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioConsulta;
@@ -49,14 +51,16 @@ public class PruebaTest extends SpringTest{
 	private Dias diaMock;
 	private Horarios horariosMock;
 	private Turno turnoMock;
+	private Planes planesMock;
+	private Mascota mascotaMock;
 	private HttpServletRequest requestMock;
 	private HttpSession sessionMock;
 	private ServicioUsuario servicioUsuarioMock;
 	private ServicioTurno servicioTurnoMock;
 	private ServicioDias servicioDiasMock;
 	private ServicioHorarios servicioHorariosMock;
-	
-
+	private ServicioPlanes servicioPlanesMock;
+	private ServicioMascotas servicioMascotasMock;
 	
 	
 	@Before
@@ -65,6 +69,8 @@ public class PruebaTest extends SpringTest{
 		diaMock = mock(Dias.class);
 		horariosMock = mock(Horarios.class);
 		turnoMock = mock(Turno.class);
+		planesMock = mock(Planes.class);
+		mascotaMock = mock(Mascota.class);
 		requestMock = mock(HttpServletRequest.class);
 		sessionMock = mock(HttpSession.class);
 		servicioUsuarioMock = mock(ServicioUsuario.class);
@@ -75,6 +81,10 @@ public class PruebaTest extends SpringTest{
 		controladorLoginVeterinaria.setServicioDias(servicioDiasMock);
 		servicioHorariosMock = mock(ServicioHorarios.class);
 		controladorLoginVeterinaria.setServicioHorarios(servicioHorariosMock);
+		servicioPlanesMock = mock(ServicioPlanes.class);
+		controladorLoginVeterinaria.setServicioPlanes(servicioPlanesMock);
+		servicioMascotasMock = mock(ServicioMascotas.class);
+		controladorLoginVeterinaria.setServicioMascota(servicioMascotasMock);
 		
 	}
 	
@@ -296,6 +306,57 @@ public class PruebaTest extends SpringTest{
 	assertThat(modelAndView2.getViewName()).isEqualTo("redirect:/loginVeterinaria");	
 	}
 	
+	@Test
+	@Rollback(true)
+	@Transactional
+	public void validarTomarUnTurno(){
+		when(requestMock.getSession()).thenReturn(sessionMock);
+		when(requestMock.getSession().getAttribute("usuario")).thenReturn(null);
+	
+		ModelAndView modelAndView2 = controladorLoginVeterinaria.tomarUnTurno(1L,requestMock);
+	
+	assertThat(modelAndView2.getViewName()).isEqualTo("formVerificarSesion");	
+	}
+	
+	@Test
+	@Rollback(true)
+	@Transactional
+	public void validarProcesarDatosSesion(){
+		when(requestMock.getSession()).thenReturn(sessionMock);
+		when(requestMock.getSession().getAttribute("usuario")).thenReturn(null);
+		when(servicioUsuarioMock.buscarUsuario(anyString(), anyString())).thenReturn(true);
+		when(servicioPlanesMock.verificarSiTienePlanVigente(usuarioMock)).thenReturn(true);
+		
+		ModelAndView modelAndView2 = controladorLoginVeterinaria.procesarDatosSesion(1L,"asd","asd", requestMock);
+	
+	assertThat(modelAndView2.getViewName()).isEqualTo("redirect:/mascotaAEligir");	
+	}
+	
+	@Test
+	@Rollback(true)
+	@Transactional
+	public void validarMascotaAEligir(){
+		when(requestMock.getSession()).thenReturn(sessionMock);
+		when(requestMock.getSession().getAttribute("usuario")).thenReturn(null);
+		
+		ModelAndView modelAndView2 = controladorLoginVeterinaria.mascotaAEligir(requestMock);
+	
+	assertThat(modelAndView2.getViewName()).isEqualTo("listarMascotas");	
+	}
+	
+	@Test
+	@Rollback(true)
+	@Transactional
+	public void validarProcesarMascota(){
+		when(requestMock.getSession()).thenReturn(sessionMock);
+		when(requestMock.getSession().getAttribute("usuario")).thenReturn(usuarioMock);
+		
+		ModelAndView modelAndView2 = controladorLoginVeterinaria.procesarMascota(1L,1L,requestMock);
+	
+	assertThat(modelAndView2.getViewName()).isEqualTo("redirect:/loginVeterinaria");	
+	}
+	
+
 	
 	
 	
