@@ -84,7 +84,7 @@ private ServicioNotificaciones servicioNotificaciones;
 		
 		ModelMap modelo = new ModelMap();
 		
-		
+		Usuario usuarioLogueado = (Usuario) request.getSession().getAttribute("usuario");
 		
 		modelo.put("servicio", servicioUsuario.getEspecialidad(id_especialidad).getDescripcion());
 		modelo.put("zona",servicioUsuario.getZona(id_zona).getDescripcion());
@@ -148,7 +148,8 @@ private ServicioNotificaciones servicioNotificaciones;
 	@RequestParam(value="hora",required=false) String hora,
 	@RequestParam(value="idTurno",required=false) Long idTurno,
 	@RequestParam(value="id_mascotas",required=false) Long id_mascotas,
-	@RequestParam(value="idDuenio",required=false) Long duenioId, HttpServletRequest request
+	@RequestParam(value="idDuenio",required=false) Long duenioId,
+	@RequestParam(value="notificacion",required=false) String notificacion, HttpServletRequest request
 	) {
 		
 		ModelMap modelo = new ModelMap();
@@ -170,16 +171,27 @@ private ServicioNotificaciones servicioNotificaciones;
 		modelo.put("fecha", servicioTurno.devolverFechaDeUnTurno(idTurno));
 		modelo.put("hora", servicioTurno.devolverHorarioaDeUnTurno(idTurno));
 		
-		Turno turno = new Turno();
-		
-		
+		Turno turno = servicioTurno.obtenerTurno(idTurno);
 		turno.setMascota(mascota);
-		turno.setDuenio(duenio);
+		turno.setDuenio(usuarioLogueado);
+		turno.setEstado(true);
+		servicioTurno.cargarTurno(turno);
 		
 		modelo.put("duenio", duenio);
 		modelo.put("mascota", mascota);
 		
-		
+		if(notificacion!=null){
+			
+			Notificacion notificacionTurno = new Notificacion();
+			
+			notificacionTurno.setUsuario(veterinario);
+			notificacionTurno.setEstado(true);
+			String mensajeNotificacion = usuarioLogueado.getUser()+" solicito turno";
+			notificacionTurno.setMensaje(mensajeNotificacion);
+			
+			servicioNotificaciones.cargarNotificacion(notificacionTurno);
+			
+		}
 		
 		servicioTurno.tomarTurno(idTurno, id_mascotas);
 		if(request.getSession().getAttribute("errorExede") != null) {
@@ -191,7 +203,7 @@ private ServicioNotificaciones servicioNotificaciones;
 				servicioPlanes.aumentarTurnosTomados((Long)request.getSession().getAttribute("idcotratacion"));
 			}
 		}
-		//servicioTurno.cargarTurno(turno);
+		
 		return new ModelAndView("turnoSolicitado", modelo);
 	}
 	
