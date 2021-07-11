@@ -284,7 +284,7 @@ private ServicioNotificaciones servicioNotificaciones;
 	@RequestMapping("volverACuenta")
 	public ModelAndView irACuentaUsuario() {
 		
-		return new ModelAndView("cuentaDuenio");
+		return new ModelAndView("redirect:/cuentaDuenio");
 	}
 	
 	

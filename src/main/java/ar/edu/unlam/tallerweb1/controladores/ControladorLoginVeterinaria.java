@@ -150,6 +150,9 @@ public class ControladorLoginVeterinaria {
 				List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorUsuario(usuarioLogueado.getId());
 				modelo.put("notificacion",misNotificaciones);
 				
+				List <Turno> misTurnos = servicioTurno.buscarTurnoPorDuenio(usuarioLogueado.getId());
+				modelo.put("turnos",misTurnos);
+				
 				Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(usuarioLogueado.getId());
 				modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
 				
@@ -185,6 +188,9 @@ public class ControladorLoginVeterinaria {
 			
 			Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(veterinario.getId());
 			modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
+			
+			List <Turno> misTurnos = servicioTurno.buscarTurnoPorVeterinario(veterinario.getId());
+			modelo.put("turnos",misTurnos);
 		
 
 		return new ModelAndView("cuentaVeterinario",modelo);

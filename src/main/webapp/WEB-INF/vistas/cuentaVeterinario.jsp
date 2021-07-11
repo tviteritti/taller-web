@@ -29,7 +29,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 			  <div class="card-body">
 			    <p class="card-text" name="descripcion">
 			     <c:if test="${empty usuario.descripcion}">
-			    	Aca podes agregar una descripcion
+			    	
 			     </c:if>
 			      <c:if test="${not empty usuario.descripcion}">
 			    	${usuario.descripcion}
@@ -42,6 +42,42 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 				   </div>
 				    <button type="submit" class="btn btn-success">Ver perfil</button>
 			   </form>
+			   <c:if test="${not empty turnos}">
+			    <div class="container mt-3" style="matgin-top:50px;">
+		    	<div class="row">
+		    		<div class="col-12">
+		    			<h2>Proximos turnos</h2>
+						<table class="table table-striped ">
+			  				<thead class="thead-inverse">
+			  					<tr>
+			  						<th>nombre</th>
+			  						<th>apellido</th>
+			  						<th>telefono</th>
+							  		<th>email</th>
+							  		<th>fecha</th>
+							  		<th>horario</th>
+							  		<th>servicio</th>
+			  					</tr>
+							</thead>
+			     			<c:forEach items="${turnos}" var="turno">
+			     			 <c:if test="${turno.duenio.nombre != null}">
+								<tr>
+									<td>${turno.duenio.nombre}</td>
+									<td>${turno.duenio.apellido}</td>
+									<td>${turno.duenio.telefono}</td>
+									<td>${turno.duenio.email}</td>
+									<td>${turno.fecha}</td>
+									<td>${turno.horario}</td>
+									<td>${turno.servicio}</td>
+								</tr> 
+								</c:if>
+							</c:forEach>
+			  	
+			  			</table>
+					</div>
+				</div>
+			</div>
+			</c:if>
 			  </div>
 			</div>
  

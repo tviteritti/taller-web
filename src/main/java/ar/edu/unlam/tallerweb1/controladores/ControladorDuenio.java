@@ -292,7 +292,7 @@ public class ControladorDuenio {
 		
 		ModelMap modelo = new ModelMap();
 	
-		return new ModelAndView("cuentaDuenio", modelo);
+		return new ModelAndView("redirect:/cuentaDuenio", modelo);
 	}
 	
 
