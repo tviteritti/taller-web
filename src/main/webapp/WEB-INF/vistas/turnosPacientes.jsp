@@ -17,7 +17,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 
 		<%@ include file="menuCuentaVeterinario.jsp"%>
 		</div>
-	    <h4 class="text-center container mt-4">Listado de Turnos</h4>
+	    <h4 class="text-center container mt-4" style="margin-bottom:50px;">Listado de Turnos</h4>
 		<div class="container">
 			<table class="table">
 			  <thead>
@@ -38,7 +38,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 					   <td><c:out value="${t.horario}" /></td>
 					   <td><c:out value="${t.servicio}" /></td>
 					   <td><c:out value="${t.duenio.nombre} ${t.duenio.apellido}" /></td>
-					   <br>
+					   
 					   <td>
 						   <input type="hidden" name="duenio" value="${t.duenio.id}"/>
 						   <button type="submit" class="btn btn-success">contactar</button>

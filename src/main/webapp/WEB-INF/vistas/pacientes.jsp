@@ -33,7 +33,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 		  <tbody>
 		  
 		 <c:forEach items="${mascotas}" var="m">
-			  
+			  <c:if test = "${m.nombre != null }">
 					<form action="verHistoriaClinica" method="post">
 					
 					<tr>
@@ -54,7 +54,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 				    </tr>
 					   
 					</form>	     
-						  
+					</c:if>	  
 			  					
 			 </c:forEach> <!---->
 			 
