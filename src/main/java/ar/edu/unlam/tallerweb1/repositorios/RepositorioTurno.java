@@ -45,6 +45,6 @@ public interface RepositorioTurno {
 	Date devolverFechaDeUnTurno(Long id);
 	Date devolverHorarioaDeUnTurno(Long id);
 	
-
+	List<Turno> buscarTurnoTomadoPorVeterinario(Long id);
 	
 }

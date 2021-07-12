@@ -23,13 +23,13 @@
 	   
 	    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 	      <li class="nav-item active">
-	        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+	        <a class="nav-link" href="#"> <span class="sr-only">(current)</span></a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#">Link</a>
+	        <a class="nav-link" href="#"></a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link disabled" href="#">Disabled</a>
+	        <a class="nav-link disabled" href="#"></a>
 	      </li>
 	    </ul>
 	    <a class="btn btn-outline-success my-2 my-sm-0" href="iniciarSesion">INICIAR SESION</a>

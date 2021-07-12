@@ -160,6 +160,18 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 		return turnos;
 	}
 	
+	@Override
+	public List<Turno> buscarTurnoTomadoPorVeterinario(Long id) {
+		List<Turno> turnos = sessionFactory.getCurrentSession()
+				 .createCriteria(Turno.class)
+				 .createAlias("veterinario", "vBuscado")
+				 .add(Restrictions.eq("vBuscado.id", id))
+				 .add(Restrictions.isNotNull("mascota"))
+				 .add(Restrictions.eq("vBuscado.rol", "veterinario"))
+				 .list();
+		return turnos;
+	}
+	
 
 	@Override
 	public List<Turno> listarTurnosSinTomar() {

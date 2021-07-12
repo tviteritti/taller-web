@@ -859,6 +859,12 @@ public class ServicioTurnoImpl implements ServicioTurno {
 		return turnosConVoto;
 	}
 
+
+	@Override
+	public List<Turno> buscarTurnoTomadoPorVeterinario(Long id) {
+		return repositorioTurno.buscarTurnoTomadoPorVeterinario(id);
+	}
+
 	
 
 

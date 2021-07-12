@@ -159,6 +159,9 @@ public class ControladorLoginVeterinaria {
 			}else {
 				List<Planes> listaPlanes=servicioPlanes.listarPlanes();			
 				modelo.put("listaPlanes", listaPlanes);
+				
+				List <Turno> misTurnos = servicioTurno.buscarTurnoPorDuenio(usuarioLogueado.getId());
+				modelo.put("turnos",misTurnos);
 			}
 		}else if(usuarioLogueado.getRol().equals("veterinario")) {
 			
@@ -189,7 +192,7 @@ public class ControladorLoginVeterinaria {
 			Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(veterinario.getId());
 			modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
 			
-			List <Turno> misTurnos = servicioTurno.buscarTurnoPorVeterinario(veterinario.getId());
+			List <Turno> misTurnos = servicioTurno.buscarTurnoTomadoPorVeterinario(veterinario.getId());
 			modelo.put("turnos",misTurnos);
 		
 

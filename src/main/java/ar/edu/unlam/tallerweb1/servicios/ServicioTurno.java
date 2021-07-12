@@ -59,5 +59,7 @@ public interface ServicioTurno {
 	
 	List<Turno> getTurnosSinVotosDuenio(Long id_duenio);
 	List<Turno> getTurnosConVotosDuenio(Long id_duenio);
+	
+	List<Turno> buscarTurnoTomadoPorVeterinario(Long id);
 
 }
