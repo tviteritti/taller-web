@@ -41,10 +41,10 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
                         <form:input class="form-control" placeholder="user" path="user"/>
                     </div>
                     <div class="input-group p-2">
-                        <form:input class="form-control" placeholder="password" path="password"/>
+                        <form:input class="form-control" type="password" placeholder="password" path="password"/>
                     </div>
                      <div class="input-group p-2">
-                        <input type="text" class="form-control" name="re-password" placeholder="re ingresar contraseña">
+                        <input type="password" class="form-control" name="re-password" placeholder="re ingresar contraseña">
                     </div>
 					<br><br>
 					<input type="submit" class="btn btn-success w-100" value="registrar">

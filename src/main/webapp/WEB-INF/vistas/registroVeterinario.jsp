@@ -40,10 +40,10 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 					                    
 					<div class="form-row">
 					   <div class="form-group col-md-6">
-							<form:input class="form-control" placeholder="password" path="password"/>
+							<form:input class="form-control" type="password" placeholder="password" path="password"/>
 					   </div>
 					   <div class="form-group col-md-6">
-							<input type="text" class="form-control" name="re-password" placeholder="re ingresar contraseña">
+							<input type="password" class="form-control" name="re-password" placeholder="re ingresar contraseña">
 					   </div>
 					</div>
                     
