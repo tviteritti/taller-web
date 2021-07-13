@@ -76,13 +76,16 @@ private ServicioNotificaciones servicioNotificaciones;
 		return new ModelAndView("buscarTurno", modelo);
 	}
 	
-	@RequestMapping(path="buscarServicioVeterinario", method= RequestMethod.POST)
+	@RequestMapping(path="buscarServicioVeterinario", method={ RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView mostrarServicioVeterinario(
 			@RequestParam(value="id_zona",required=false) Long id_zona,
 			@RequestParam(value="id_especialidad",required=false) Long id_especialidad,
 			@RequestParam(value="idDuenio",required=false) Long duenioId, HttpServletRequest request) {
 		
 		ModelMap modelo = new ModelMap();
+		modelo.put("id_zona",id_zona);
+		modelo.put("id_especialidad",id_especialidad);
+		modelo.put("duenioId",duenioId);
 		
 		Usuario usuarioLogueado = (Usuario) request.getSession().getAttribute("usuario");
 		
@@ -287,6 +290,30 @@ private ServicioNotificaciones servicioNotificaciones;
 		return new ModelAndView("redirect:/cuentaDuenio");
 	}
 	
+	@RequestMapping("formVerPerfilVerterinario")
+	public ModelAndView formVerPerfilVerterinario( @RequestParam(value="veterinarioId",required=false) Long veterinarioId,
+			 @RequestParam(value="id_zona",required=false) Long id_zona,
+			 @RequestParam(value="id_especialidad",required=false) Long id_especialidad,
+			 @RequestParam(value="duenioId",required=false) Long duenioId) {
+		ModelMap modelo = new ModelMap();
+		Usuario veterinario = servicioUsuario.getUsuario(veterinarioId);
+		modelo.put("veterinario", veterinario);
+		modelo.put("id_zona", id_zona);
+		modelo.put("id_especialidad", id_especialidad);
+		modelo.put("duenioId", duenioId);
+		return new ModelAndView("perfilVeterinario", modelo);
+	}
 	
+	@RequestMapping("volverCardVeterinario")
+	public ModelAndView volverCardVeterinario(
+			 @RequestParam(value="id_zona",required=false) Long id_zona,
+			 @RequestParam(value="id_especialidad",required=false) Long id_especialidad,
+			 @RequestParam(value="duenioId",required=false) Long duenioId) {
+		ModelMap modelo = new ModelMap();
+		modelo.put("id_zona", id_zona);
+		modelo.put("id_especialidad", id_especialidad);
+		modelo.put("duenioId", duenioId);
+		return new ModelAndView("redirect:/buscarServicioVeterinario",modelo);
+	}
 
 }

@@ -21,8 +21,6 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 			  <div class="card-body">
 			    <p class="card-text text-center">Nombre y Apellido: ${nombre} ${apellido}</p>
 			    <p class="card-text text-center">E-mail: ${email}</p>
-			    <p class="card-text text-center">Direccion: ${direccion.calle} ${direccion.numero}</p>
-			    <p class="card-text text-center">Localidad: ${direccion.localidad.descripcion}</p>
 			    <a href="cuentaVeterinario" class="btn btn-primary btn-block">volver</a>
 			  </div>
 			</div>

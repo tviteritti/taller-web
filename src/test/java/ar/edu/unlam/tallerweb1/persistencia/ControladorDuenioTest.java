@@ -195,7 +195,7 @@ public class ControladorDuenioTest extends SpringTest{
 		
 		ModelAndView modelAndView = controladorDuenio.validarDatosPaciente(1L,1L,"asd","asd");
 		
-		assertThat(modelAndView.getViewName()).isEqualTo("cuentaDuenio");
+		assertThat(modelAndView.getViewName()).isEqualTo("redirect:/cuentaDuenio");
 	}
 	
 	@Test

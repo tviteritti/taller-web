@@ -26,7 +26,13 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 					    
 			<div class="jumbotron container p-3" style="width:50%">
 				<h4 class="text-center"> <c:out value="${v.nombre} ${v.apellido}" /></h4>
-				<a class="btn btn-info container" href="#" >ver perfil</a>
+				<c:url var="linkVerPerfil" value="/formVerPerfilVerterinario">
+				  	<c:param name="veterinarioId" value="${v.id }"/>
+				  	<c:param name="id_zona" value="${id_zona }"/>
+				  	<c:param name="id_especialidad" value="${id_especialidad}"/>
+				  	<c:param name="duenioId" value="${duenioId}"/>
+				</c:url>
+				<a href="${linkVerPerfil }"><input type="button" class="btn btn-info container" value="ver perfil"/></a>
 				 <p class="lead">
 				<c:if test = "${errorSinPlan != null}">
 					<div class="input-group p-1"><h6>${errorSinPlan}. </h6></div>
@@ -57,7 +63,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 					     
 					<c:if test="${t.veterinario.id eq v.id}">
 						 <c:if test="${t.estado == false}">
-							<input type="radio" name="idTurno" value="${t.id}" id="turno${t.id}">
+							<input type="radio" name="idTurno" value="${t.id}" id="turno${t.id}" required="required">
 									    
 							<label for="turno${t.id}">
 								<p>Fecha: 
