@@ -25,7 +25,7 @@ public interface ServicioTurno {
 	List<Turno> obtenerTurnosPorEspecialidad(String servicio);
 	List<Turno> obtenerTurnosPorEspecialidadZonaYVeterinario(String servicio, String zona, Usuario veterinario);
 	List<Turno> buscarTurnoPorUsuario(Long id);
-	
+	List<Turno> buscarTurnoTomadoPorVeterinario(Long id);
 	
 	List<Mascota> obtenerMascotasPorTurno(Long idVeterinario);
 	Usuario devolverVeterinarioDeunTurno(Long id_turno);
@@ -60,6 +60,6 @@ public interface ServicioTurno {
 	List<Turno> getTurnosSinVotosDuenio(Long id_duenio);
 	List<Turno> getTurnosConVotosDuenio(Long id_duenio);
 	
-	List<Turno> buscarTurnoTomadoPorVeterinario(Long id);
+	
 
 }

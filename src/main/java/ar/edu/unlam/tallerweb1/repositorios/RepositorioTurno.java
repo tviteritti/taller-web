@@ -18,6 +18,7 @@ public interface RepositorioTurno {
 	List<Turno> obtenerTurnosPorVeterinario(Usuario veterinario);
 	List<Turno> obtenerTurnosPorEspecialidad(String servicio);
 	List<Turno> obtenerTurnosPorEspecialidadZonaYVeterinario(String servicio, String zona, Usuario veterinario);
+	List<Turno> buscarTurnoTomadoPorVeterinario(Long id);
 	
 	List<Turno> listarTurnos();
 	List<Turno> buscarTurnoPorDuenio(Long id);
@@ -45,6 +46,6 @@ public interface RepositorioTurno {
 	Date devolverFechaDeUnTurno(Long id);
 	Date devolverHorarioaDeUnTurno(Long id);
 	
-	List<Turno> buscarTurnoTomadoPorVeterinario(Long id);
+	
 	
 }

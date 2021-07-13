@@ -26,8 +26,6 @@ public interface RepositorioUsuario {
 	void modificarPerfil(Long idUsuario, String nombre, String apellido, Long idDireccion, String calle, String nro,Long idLocalidad,
 	Integer codPostal,String localidad, String telefono, String email,  String descripcion);
 	
-
-	
 	List<Especialidad> getEspecialidades();
 	List<Zona> getZonas();
 	
