@@ -16,7 +16,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
  	<h4 class="text-center container p-4">Mis Notificaciones</h4>
    <c:forEach items="${consultas}" var="c">
     <c:if test="${notificacion.consulta.id eq c.id}">
-    		
+    		<c:if test="${usuario eq 'duenio'}">
     		
     		<div class="card text-center p-3 container">
 					    <blockquote class="blockquote mb-0 p-3">
@@ -33,8 +33,40 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 				   <p class="text-left ml-2">${c.respuesta.descripcion} - <cite title="Source Title"><strong>${c.userRespuesta}</strong></cite></p>
 				</div>
 		   </div>
+		   
+		   
+		  </c:if> 
+		   
     </c:if>
-    </c:forEach>
+     </c:forEach>
+     
+	    <c:if test="${usuario == 'veterinario'}">
+	    <table class="table container">
+		  <thead>
+		    <tr>
+		      <th scope="col">Fecha</th>
+		      <th scope="col">Hora</th>
+		      <th scope="col">Servicio</th>
+		      <th scope="col">Solicitado por</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  		<tr>
+				      <td><c:out value="${notificacion.turno.fecha}"/></td>
+				   
+				      <td> <c:out value="${notificacion.turno.horario}" /></td>
+				      
+				      <td><c:out value="${notificacion.turno.servicio}" /></td>
+				    
+				      <td><c:out value="${notificacion.turno.duenio.nombre}"/> <c:out value="${notificacion.turno.duenio.apellido}" /></td>
+				 
+				</tr>
+	
+			 </tbody>
+		</table>
+		  
+	    </c:if>
+  
     
     <a href="cuentaDuenio" class="btn btn-success btn-lg"><i class="fas fa-caret-left"></i> volver</a>
     

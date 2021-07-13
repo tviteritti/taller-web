@@ -24,6 +24,9 @@ public class Notificacion {
 	@OneToOne
 	private Consulta consulta;
 	
+	@OneToOne
+	private Turno turno;
+	
 	public Long getId() {
 		return id;
 	}
@@ -61,7 +64,14 @@ public class Notificacion {
 	public void setConsulta(Consulta consulta) {
 		this.consulta = consulta;
 	}
+	public Turno getTurno() {
+		return turno;
+	}
+	public void setTurno(Turno turno) {
+		this.turno = turno;
+	}
 
+	
 	
 
 }

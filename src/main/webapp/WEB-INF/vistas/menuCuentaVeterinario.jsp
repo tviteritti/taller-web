@@ -16,6 +16,23 @@
 									    <a class="dropdown-item" href="notificaciones?id=${n.id}"> ${n.mensaje} </a>
 									    <script>
 								          document.getElementsByClassName("fas fa-bell")[0].classList.add('text-danger');
+								          /*let a = document.getElementsByClassName("dropdown-item");
+								         
+								          let leido ="";
+								          function notificacionLeida(e){
+								        	 
+								        	
+								        	  localStorage.setItem("leido${n.id}","true");
+								        	  leido = localStorage.getItem("leido${n.id}");
+								        	}
+								          
+								          if(leido=="true"){
+								        	  
+								        	  e.target.style.[${n.id}].classList.add('text-body');
+								          }
+								          
+								          a.addEventListener('click', notificacionLeida, false);*/
+								          
 								        </script>
 									    </c:if>	
 								    	</c:if>
@@ -25,7 +42,7 @@
 							</div>
 			    	
 			    	</div>
-			    	<div class="col-2"><i class="fas fa-user"></i></div>
+			    	<div class="col-2"><a href="cuentaVeterinario"><i class="fas fa-user text-body" style="cursor:pointer"></i></a></div>
 			    	<div class="col-2"><i class="fas fa-moon"></i></div>
 			    	<div class="col-3">
 				    	<a href="cerrarSesion" class="text-decoration-none text-body">cerrar sesion

@@ -695,7 +695,10 @@ public class ControladorLoginVeterinaria {
 	
 	@RequestMapping("/notificaciones")
 	public ModelAndView irANotificaciones(
-	  @RequestParam(value="id", required=true) Long id){
+	  @RequestParam(value="id", required=true) Long id,
+	  HttpServletRequest request){
+		
+		Usuario usuarioLogueado = (Usuario) request.getSession().getAttribute("usuario");
 		
 		ModelMap modelo = new ModelMap();
 		Notificacion notificacion =servicioNotificaciones.obtenerNotificacion(id);
@@ -703,7 +706,8 @@ public class ControladorLoginVeterinaria {
 		
 		modelo.put("notificacion", notificacion);
 		modelo.put("consultas", consultas);
-		
+		modelo.put("usuario", usuarioLogueado.getRol());
+	
 		return new ModelAndView("notificaciones", modelo);
 		
 	}
