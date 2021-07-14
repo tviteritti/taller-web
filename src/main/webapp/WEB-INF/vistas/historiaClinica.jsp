@@ -49,6 +49,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 		 <input type="hidden" name="mascota" value="${mascota.id}"/>
 		 <input type="hidden" name="veterinario" value="${veterinario.id}"/>
 		 <button type="submit" class="btn btn-success  btn-block">Actualizar</button>
+		 <a href="cuentaVeterinario" class="btn btn-primary btn-block" style="margin-top:50px;">volver inicio</a>
     </form>
     
     </div>
@@ -66,10 +67,11 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 		 <input type="hidden" name="mascota" value="${mascota.id}"/>
 		 <input type="hidden" name="veterinario" value="${veterinario.id}"/>
 		 <button class="btn btn-success">cargar historia clinica</button>
+		 <a href="cuentaVeterinario" class="btn btn-primary" style="margin-lefth:50px;">volver inicio</a>
       </form>
-   
+   		
    </c:if>
-   
+   	
    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
