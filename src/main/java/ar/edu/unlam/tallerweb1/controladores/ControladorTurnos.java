@@ -191,7 +191,7 @@ private ServicioNotificaciones servicioNotificaciones;
 			notificacionTurno.setEstado(true);
 			String mensajeNotificacion = usuarioLogueado.getUser()+" solicito turno";
 			notificacionTurno.setMensaje(mensajeNotificacion);
-			
+			notificacionTurno.setTurno(turno);
 			servicioNotificaciones.cargarNotificacion(notificacionTurno);
 			
 		}
