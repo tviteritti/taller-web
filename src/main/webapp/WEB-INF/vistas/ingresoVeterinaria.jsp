@@ -6,6 +6,7 @@
 <html>
 <head>
 	<meta charset="ISO-8859-1">
+	<link rel="shortcut icon" type="image/png" href="img/logo.png">
 	<title>Veterinaria</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">

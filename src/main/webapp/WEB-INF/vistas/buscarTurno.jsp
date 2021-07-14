@@ -9,6 +9,7 @@
 <meta charset="ISO-8859-1">
 <title>Buscar turno</title>
  <!-- Bootstrap CSS -->
+ <link rel="shortcut icon" type="image/png" href="img/logo.png">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
 integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://kit.fontawesome.com/b883f5a3c0.js" crossorigin="anonymous"></script>

@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
 integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <title>Mi perfil</title>
+<link rel="shortcut icon" type="image/png" href="img/logo.png">
 </head>
 <body>
     <h4 class="text-center container p-2">Mi perfil</h4>
