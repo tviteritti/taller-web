@@ -20,7 +20,6 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
         <div class="form-group">
 		    <label for="exampleFormControlSelect1">Servicio</label>
 			<select class="form-control" name="id_especialidad">
-				  <option >Seleccione Especialidad</option> 
 				  <c:forEach items="${listadoEspecialidad}" var="especialidad">
 				       <option value="${especialidad.id}">${especialidad.descripcion}</option>
 				 </c:forEach>
@@ -33,7 +32,6 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 		   <div class="form-group">
 			<label for="exampleFormControlSelect1">Zona</label>
 			<select class="form-control" name="id_zona">
-				 <option >Seleccione Zona</option> 
 				  <c:forEach items="${listadoZonas}" var="zona">
 				      <option value="${zona.id}">${zona.descripcion}</option>
 				  </c:forEach>

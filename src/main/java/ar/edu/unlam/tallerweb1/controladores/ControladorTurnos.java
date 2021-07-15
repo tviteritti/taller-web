@@ -165,7 +165,7 @@ private ServicioNotificaciones servicioNotificaciones;
 		
 		Usuario duenio = servicioUsuario.getUsuario(duenioId);
 		
-		Mascota mascota = servicioMascotas.buscarMascotaPorDuenio(usuarioLogueado.getId());
+		Mascota mascota = servicioMascotas.obtenerMascota(id_mascotas);
 		
 		
 		modelo.put("especialidad", servicioSolicitado);
