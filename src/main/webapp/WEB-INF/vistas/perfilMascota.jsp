@@ -13,12 +13,13 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 </head>
 <body>
 
-<h4 class="text-center container p-2">Perfil Mascota</h4>
+<h4 class="text-center container p-2">Perfil Mascotas</h4>
     <br>
     
     <form action="modificarPerfilMascota" method="post" class="container">
-    	<div class="row  container">
-    	
+    <c:forEach var="mascota" items="${mascota}">
+    	<div class="row  container" style="margin-top:50px;">
+    		
     		<div class="col">
     		
     		Nombre:<br>
@@ -43,6 +44,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
     		</div>
 	   
     	</div>
+    	</c:forEach>
        <br>
        <div class="container">
         <input type="hidden" name="duenioId" value="${duenio.id}"/>

@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -41,7 +42,7 @@ public class ControladorMascota {
 			
 			Usuario duenio = servicioDuenio.getDuenio(usuarioLogueado.getId());
 			
-			Mascota  mascota = servicioMascota.buscarMascotaPorDuenio(usuarioLogueado.getId());
+			List<Mascota>  mascota = servicioMascota.listarMascotasPorDuenio(usuarioLogueado);
 			
 			modelo.put("duenio", duenio);
 			modelo.put("duenioId", idDuenio);

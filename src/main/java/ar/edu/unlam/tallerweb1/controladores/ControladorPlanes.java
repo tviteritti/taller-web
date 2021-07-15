@@ -35,7 +35,7 @@ public class ControladorPlanes {
 			return new ModelAndView("redirect:/cuentaVeterinario");
 		}
 		servicioPlanes.accederPlan(planId, duenioId);
-		
+		request.getSession().removeAttribute("errorSinPlan");
 	return new ModelAndView("redirect:/cuentaDuenio");
 	}
 	

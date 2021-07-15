@@ -88,6 +88,19 @@ public class ControladorLoginTest extends SpringTest{
 		
 	}
 	
+	
+	@Test
+	@Rollback(true)
+	@Transactional
+	public void validarDatosVeterinarioRepassword(){
+		when(requestMock.getSession()).thenReturn(sessionMock);
+		when(servicioUsuarioMock.validarPassRePass(anyString(), anyString())).thenReturn(true);
+	
+		ModelAndView modelAndView2 = controladorLoginVeterinaria.validarDatosVeterinario(usuarioMock, requestMock, 1L, anyString(), "asd", "asd", "asd", "asd",1L);
+	
+		assertThat(modelAndView2.getViewName()).isEqualTo("redirect:/horariosLunes");	
+	}
+	
 
 	@Test
 	@Rollback(true)
@@ -244,19 +257,6 @@ public class ControladorLoginTest extends SpringTest{
 		ModelAndView modelAndView = controladorLoginVeterinaria.registrarVeterinario(requestMock);
 		
 		assertThat(modelAndView.getViewName()).isEqualTo("registroVeterinario");	
-	}
-	
-	
-	@Test
-	@Rollback(true)
-	@Transactional
-	public void validarDatosVeterinarioRepassword(){
-		when(requestMock.getSession()).thenReturn(sessionMock);
-		when(servicioUsuarioMock.validarPassRePass(anyString(), anyString())).thenReturn(true);
-	
-		ModelAndView modelAndView2 = controladorLoginVeterinaria.validarDatosVeterinario(usuarioMock, requestMock, 1L, anyString(), "asd", "asd", "asd", "asd",1L);
-	
-		assertThat(modelAndView2.getViewName()).isEqualTo("redirect:/horariosLunes");	
 	}
 	
 	@Test
