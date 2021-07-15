@@ -233,9 +233,10 @@ public class RepositorioTurnoImpl implements RepositorioTurno{
 				 .createCriteria(Mascota.class)
 				 .add(Restrictions.eq( "id", id_mascota))
 				 .uniqueResult();
-		
+		Usuario duenio =mascota.getDuenio();
 		turno.setMascota(mascota);
 		turno.setEstado(true);
+		turno.setDuenio(duenio);
 		session.saveOrUpdate(turno);
 		
 		
