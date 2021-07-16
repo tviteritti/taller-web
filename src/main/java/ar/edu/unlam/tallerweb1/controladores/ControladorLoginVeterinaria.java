@@ -605,8 +605,24 @@ public class ControladorLoginVeterinaria {
 			@RequestParam(value="id_turno",required=false) Long id_turno, HttpServletRequest request){
 		
 		Usuario vet = (Usuario) request.getSession().getAttribute("veterinarioTurno");
+		Mascota mascota = servicioMascota.obtenerMascota(id_mascota);
+		Turno turno = servicioTurno.obtenerTurno(id_turno);
 		
-		servicioTurno.tomarTurno(id_turno, id_mascota);
+		if(id_mascota!=null){
+			
+			servicioTurno.tomarTurno(id_turno, id_mascota);
+			Notificacion notificacionTurno = new Notificacion();
+			
+			notificacionTurno.setUsuario(vet);
+			notificacionTurno.setEstado(true);
+			String mensajeNotificacion = mascota.getDuenio().getUser()+" solicito turno";
+			notificacionTurno.setMensaje(mensajeNotificacion);
+			notificacionTurno.setTurno(turno);
+			servicioNotificaciones.cargarNotificacion(notificacionTurno);
+		}else {
+			return new ModelAndView("redirect:/tomarUnTurno?turnoId="+id_turno);
+		}
+		
 		if(request.getSession().getAttribute("errorExede") != null) {
 			servicioPlanes.aumentarValorExtra((Long)request.getSession().getAttribute("idcotratacion"),vet.getPrecioSesion());
 		}else {

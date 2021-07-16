@@ -179,6 +179,7 @@ private ServicioNotificaciones servicioNotificaciones;
 		turno.setDuenio(usuarioLogueado);
 		turno.setEstado(true);
 		servicioTurno.cargarTurno(turno);
+		servicioTurno.tomarTurno(turno.getId(), id_mascotas);
 		
 		modelo.put("duenio", duenio);
 		modelo.put("mascota", mascota);
@@ -196,7 +197,7 @@ private ServicioNotificaciones servicioNotificaciones;
 			
 		}
 		
-		servicioTurno.tomarTurno(idTurno, id_mascotas);
+		
 		if(request.getSession().getAttribute("errorExede") != null) {
 			servicioPlanes.aumentarValorExtra((Long)request.getSession().getAttribute("idcotratacion"),veterinario.getPrecioSesion());
 		}else {
