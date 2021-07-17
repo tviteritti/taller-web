@@ -16,7 +16,6 @@ public class Consulta {
 	
 	private String asunto;
 	private String descripcion;
-	private String comentario;
 	private String userRespuesta;
 	
 	@ManyToOne
@@ -25,8 +24,7 @@ public class Consulta {
 	@OneToOne
 	private Consulta respuesta;
 	
-	private String tipoConsulta; //si es una consulta o una respuesta
-	
+	private String tipoConsulta; 
 
 	public Long getId() {
 		return id;
@@ -60,13 +58,6 @@ public class Consulta {
 		this.usuario = usuario;
 	}
 
-	public String getComentario() {
-		return comentario;
-	}
-
-	public void setComentario(String comentario) {
-		this.comentario = comentario;
-	}
 
 	public String getUserRespuesta() {
 		return userRespuesta;
