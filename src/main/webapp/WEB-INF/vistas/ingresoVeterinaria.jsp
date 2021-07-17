@@ -31,14 +31,14 @@
 				<table class="table table-striped ">
 	  				<thead class="thead-inverse">
 	  					<tr>
-	  						<th>nombre</th>
-	  						<th>apellido</th>
-	  						<th>telefono</th>
-					  		<th>email</th>
-					  		<th>fecha</th>
-					  		<th>horario</th>
-					  		<th>servicio</th>
-					  		<th>solicitar turno</th>
+	  						<th>Nombre</th>
+	  						<th>Apellido</th>
+	  						<th>Telefono</th>
+					  		<th>Email</th>
+					  		<th>Fecha</th>
+					  		<th>Horario</th>
+					  		<th>Servicio</th>
+					  		<th>Solicitar turno</th>
 	  					</tr>
 					</thead>
 					

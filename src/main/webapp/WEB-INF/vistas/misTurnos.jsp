@@ -46,7 +46,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 				    
 				      <td>
 				       <input type="hidden" name="id_turno" value="${t.id}"/>
-					   <button type="submit" class="btn btn-danger">cancelar turno</button>
+					   <button type="submit" class="btn btn-danger">Cancelar turno</button>
 					   </td>
 					   
 					   
@@ -80,7 +80,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 				    
 				      <td>
 				       <input type="hidden" name="id_turno" value="${t.id}"/>
-					   <button type="submit" class="btn btn-danger">cancelar turno</button>
+					   <button type="submit" class="btn btn-danger">Cancelar turno</button>
 					   </td>
 					   
 	
@@ -107,7 +107,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 							      	<form action="calificar" method="post">
 								      <div class="modal-body">
 								        <input type="hidden" name="id_veterinario" id="idV"/>
-								        <h5>calificar de 0 a 10:</h5>
+								        <h5>Calificar de 0 a 10:</h5>
 								        <input type="number" name="calificacion" min="0" max="10"/>
 								      </div>
 								      <div class="modal-footer">
@@ -128,7 +128,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 		</div>
 	   <form action="buscarTurno" method="get">
 	      <input type="hidden" name="duenioId" value="${duenio.id}"/>
-	     <button class="btn btn-success mx-3">solcitar turno</button>
+	     <button class="btn btn-success mx-3">Solcitar turno</button>
 	   </form>
 	</c:if> 
 	

@@ -49,7 +49,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 				       <input type="hidden" name="duenioId" value="${m.duenio.id}"/>
 					   <input type="hidden" name="mascotaId" value="${m.id}"/>
 					   <input type="hidden" name="veterinarioId" value="${veterinario.id}">
-					   <button type="submit" class="btn btn-info">ver historia clinica</button>
+					   <button type="submit" class="btn btn-info">Ver historia clinica</button>
 					   </td>
 					 
 				    </tr>

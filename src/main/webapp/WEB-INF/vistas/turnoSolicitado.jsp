@@ -32,7 +32,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 		  <p >Para el dia ${fecha}, a las ${hora} horas.</p>
 		</div>
 		<div class="container m-auto">
-		<a href="volverACuenta" class="btn btn-info ">volver a mi cuenta</a>
+		<a href="volverACuenta" class="btn btn-info ">Volver a mi cuenta</a>
 		</div>
 		</div>
 

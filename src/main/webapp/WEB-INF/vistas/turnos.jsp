@@ -32,7 +32,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 			        
 			        <form action="misTurnos" method="post">
 				   <input type="hidden" name="duenioId" value="${duenio.id}"/>
-				    <button type="submit" class="btn btn-success">mis turnos</button>
+				    <button type="submit" class="btn btn-success">Mis turnos</button>
 			  	 </form>
 			  	 
 			      </div>
@@ -52,7 +52,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 			        
 			       <form action="buscarTurno" method="post">
 			   <input type="hidden" name="duenioId" value="${duenio.id}"/>
-			    <button type="submit" class="btn btn-success">solicitar turno</button>
+			    <button type="submit" class="btn btn-success">Solicitar turno</button>
 			   </form>
 			  	 
 			      </div>

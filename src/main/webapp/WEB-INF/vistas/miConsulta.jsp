@@ -44,7 +44,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 	    	<div class="col-2"><i class="fas fa-user"></i></div>
 	    	<div class="col-2"><i class="fas fa-moon"></i></div>
 	    	<div class="col-3">
-		    	<a href="cerrarSesion" class="text-decoration-none text-body">cerrar sesion
+		    	<a href="cerrarSesion" class="text-decoration-none text-body">Cerrar sesion
 		    		<i class="fas fa-sign-out-alt display-5 text-body"></i>
 		    	</a>
 	    	</div>
@@ -119,7 +119,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 			  </div>
 			</div>
 			
-			<a href="consultas" class="btn btn-success btn-lg"><i class="fas fa-caret-left"></i> volver</a>
+			<a href="consultas" class="btn btn-success btn-lg"><i class="fas fa-caret-left"></i> Volver</a>
 			<br>
 			
 			<hr class="my-4">

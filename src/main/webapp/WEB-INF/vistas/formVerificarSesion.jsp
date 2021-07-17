@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Iniciar sesion</title>
  <link rel="shortcut icon" type="image/png" href="img/logo.png">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -35,7 +35,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
                     <div class="input-group p-2">
                         <input type="password" class="form-control" name="password" placeholder="contraseña"/>
                     </div><br>  
-                    <a href="registrarUsuario">¿no tines cuenta? registrarse</a>                 
+                    <a href="registrarUsuario">¿no tines cuenta? Registrarse</a>                 
                     <br>
                     <br>
                     <input type="submit" class="btn btn-success w-100" value="registrar">

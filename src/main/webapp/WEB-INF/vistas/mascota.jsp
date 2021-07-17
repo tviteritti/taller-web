@@ -31,7 +31,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 			        
 			        <form action="cargarMascota" method="post">
 				   <input type="hidden" name="duenioId" value="${duenio.id}"/>
-				    <button type="submit" class="btn btn-success">cargar mascota</button>
+				    <button type="submit" class="btn btn-success">Cargar mascota</button>
 			  	 </form>
 			  	 
 			      </div>
@@ -50,7 +50,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 			        
 			        <form action="perfilMascota" method="post">
 				   <input type="hidden" name="duenioId" value="${duenio.id}"/>
-				    <button type="submit" class="btn btn-success">ver perfil</button>
+				    <button type="submit" class="btn btn-success">Ver perfil</button>
 			  	 </form>
 			  	 
 			      </div>

@@ -50,12 +50,12 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 						<table class="table table-striped ">
 			  				<thead class="thead-inverse">
 			  					<tr>
-			  						<th>nombre</th>
-			  						<th>apellido</th>
-							  		<th>email</th>
-							  		<th>fecha</th>
-							  		<th>horario</th>
-							  		<th>servicio</th>
+			  						<th>Nombre</th>
+			  						<th>Apellido</th>
+							  		<th>Email</th>
+							  		<th>Fecha</th>
+							  		<th>Horario</th>
+							  		<th>Servicio</th>
 			  					</tr>
 							</thead>
 			     			<c:forEach items="${turnos}" var="turno">

@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Insert title here</title>
+	<title>Perfil veterinario</title>
     <!-- Required meta tags -->
     <link rel="shortcut icon" type="image/png" href="img/logo.png">
     <meta charset="utf-8">

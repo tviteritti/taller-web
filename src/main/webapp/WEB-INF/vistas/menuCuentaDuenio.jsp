@@ -30,7 +30,7 @@
 	    	<div class="col-2"><a href="cuentaDuenio"><i class="fas fa-user text-body" style="cursor:pointer"></i></a></div>
 	    	<div class="col-2"><i class="fas fa-moon"></i></div>
 	    	<div class="col-3">
-		    	<a href="cerrarSesion" class="text-decoration-none text-body">cerrar sesion
+		    	<a href="cerrarSesion" class="text-decoration-none text-body">Cerrar sesion
 		    		<i class="fas fa-sign-out-alt display-5 text-body"></i>
 		    	</a>
 	    	</div>
