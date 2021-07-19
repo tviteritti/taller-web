@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.modelo.Consulta;
 import ar.edu.unlam.tallerweb1.modelo.Notificacion;
+import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioConsulta;
 
 @Service
@@ -84,6 +86,5 @@ public class ServicioConsultaImpl implements ServicioConsulta {
 		repositorioConsulta.eliminarConsultasNulas(consulta);
 		
 	}
-
 
 }

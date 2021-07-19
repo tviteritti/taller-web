@@ -16,5 +16,4 @@ public interface RepositorioConsulta {
 	List<Consulta> listarConsultaPorUsuario(Long idUsuario);
 	List<Consulta> listarConsultas();
 	
-
 }

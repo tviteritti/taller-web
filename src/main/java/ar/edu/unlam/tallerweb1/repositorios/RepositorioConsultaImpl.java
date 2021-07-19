@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Consulta;
+import ar.edu.unlam.tallerweb1.modelo.ConsultaRespuesta;
 import ar.edu.unlam.tallerweb1.modelo.Notificacion;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
@@ -71,15 +72,12 @@ public class RepositorioConsultaImpl implements RepositorioConsulta{
 	public void guardarRespuesta(Long idConsulta , Consulta respuesta, String userRespuesta) {
 		
 		Consulta consulta = buscarConsulta(idConsulta);
-		
 		consulta.setRespuesta(respuesta);
 		consulta.setUserRespuesta(userRespuesta);
-		consulta.setTipoConsulta("consulta");
 		consulta.setComentario(respuesta.getDescripcion());
 		respuesta.setAsunto(consulta.getAsunto());
-		
-	
+
 	}
-	
+
 
 }

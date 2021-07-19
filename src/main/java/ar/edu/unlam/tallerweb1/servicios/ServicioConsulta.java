@@ -16,6 +16,4 @@ public interface ServicioConsulta {
 	Consulta buscarConsulta(Long idConsulta);
 	List<Consulta> listarConsultaPorUsuario(Long idUsuario);
 	List<Consulta> listarConsultas();
-
-
 }

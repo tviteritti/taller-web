@@ -17,11 +17,12 @@ public class Consulta {
 	private String asunto;
 	private String descripcion;
 	private String userRespuesta;
+	private String comentario;
 	
 	@ManyToOne
 	private Usuario usuario;
 	
-	@OneToOne
+	@ManyToOne
 	private Consulta respuesta;
 	
 	private String tipoConsulta; 
@@ -58,6 +59,13 @@ public class Consulta {
 		this.usuario = usuario;
 	}
 
+	public String getTipoConsulta() {
+		return tipoConsulta;
+	}
+
+	public void setTipoConsulta(String tipoConsulta) {
+		this.tipoConsulta = tipoConsulta;
+	}
 
 	public String getUserRespuesta() {
 		return userRespuesta;
@@ -67,6 +75,14 @@ public class Consulta {
 		this.userRespuesta = userRespuesta;
 	}
 
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+
 	public Consulta getRespuesta() {
 		return respuesta;
 	}
@@ -74,14 +90,7 @@ public class Consulta {
 	public void setRespuesta(Consulta respuesta) {
 		this.respuesta = respuesta;
 	}
-
-	public String getTipoConsulta() {
-		return tipoConsulta;
-	}
-
-	public void setTipoConsulta(String tipoConsulta) {
-		this.tipoConsulta = tipoConsulta;
-	}
-
 	
+	
+
 }

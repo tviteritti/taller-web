@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Consulta;
+import ar.edu.unlam.tallerweb1.modelo.ConsultaRespuesta;
 import ar.edu.unlam.tallerweb1.modelo.ContratacionPlanes;
 import ar.edu.unlam.tallerweb1.modelo.Especialidad;
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
@@ -24,6 +25,7 @@ import ar.edu.unlam.tallerweb1.modelo.TipoAnimal;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioConsulta;
+import ar.edu.unlam.tallerweb1.servicios.ServicioConsultaRespuesta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDias;
 import ar.edu.unlam.tallerweb1.servicios.ServicioHorarios;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMascotas;
@@ -40,6 +42,7 @@ public class ControladorDuenio {
 	private ServicioPlanes servicioPlanes;
 	private ServicioConsulta servicioConsulta;
 	private ServicioNotificaciones servicioNotificaciones;
+	private ServicioConsultaRespuesta servicioConsultaRespuesta;
 
 	
 	@Autowired
@@ -54,6 +57,7 @@ public class ControladorDuenio {
 		this.servicioPlanes = servicioPlanes;
 		this.servicioConsulta = servicioConsulta;
 		this.servicioNotificaciones = servicioNotificaciones;
+		
 	}
 	
 	
@@ -151,11 +155,13 @@ public class ControladorDuenio {
 		miConsulta.setAsunto(asunto);
 		miConsulta.setDescripcion(consulta);
 		miConsulta.setUsuario(duenio);
+		miConsulta.setTipoConsulta("consulta");
 		
 		Consulta respuesta = new Consulta();
 		respuesta.setDescripcion(comentario);
 		respuesta.setUsuario(usuarioLogueado);
 		respuesta.setTipoConsulta("respuesta");
+		respuesta.setAsunto(asunto);
 		
 		if(idConsulta!=null && usuarioLogueado!=null) {
 			
@@ -168,10 +174,10 @@ public class ControladorDuenio {
 		List <Consulta> consultas = servicioConsulta.listarConsultaPorUsuario(idDuenio);
 		List <Consulta> consultasDeTodosLosUsuarios = servicioConsulta.listarConsultas();
 		
+		
 		modelo.put("duenio", duenio);
 		modelo.put("consultas", consultas);
 		modelo.put("todasLasConsultas", consultasDeTodosLosUsuarios);
-		modelo.put("comentario", comentario);
 		modelo.put("usuario", usuarioLogueado);
 		
 		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorUsuario(usuarioLogueado.getId());
@@ -179,7 +185,7 @@ public class ControladorDuenio {
 		if(notificacion!=null) {
 			
 			Consulta consultaBuscada = servicioConsulta.buscarConsulta(idConsulta);
-			String usuarioRespuesta = consultaBuscada.getUserRespuesta();
+			String usuarioRespuesta = usuarioLogueado.getUser();
 			String mensaje = usuarioRespuesta + " respondio tu consulta: "+consultaBuscada.getAsunto();
 			
 			Notificacion notificacionUsuario = new Notificacion();

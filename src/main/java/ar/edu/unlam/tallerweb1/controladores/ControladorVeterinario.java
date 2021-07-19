@@ -292,7 +292,7 @@ public class ControladorVeterinario {
 			if(notificacion!=null) {
 				
 				Consulta consultaBuscada = servicioConsulta.buscarConsulta(idConsulta);
-				String usuarioRespuesta = consultaBuscada.getUserRespuesta();
+				String usuarioRespuesta = usuarioLogueado.getUser();
 				String mensaje = usuarioRespuesta + " respondio tu consulta: "+consultaBuscada.getAsunto();
 				
 				Notificacion notificacionUsuario = new Notificacion();
