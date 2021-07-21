@@ -593,7 +593,7 @@ public class ControladorLoginVeterinaria {
 	@RequestMapping("/mascotaAEligir")
 	public ModelAndView mascotaAEligir(HttpServletRequest request) {
 		ModelMap modelo = new ModelMap();
-		List<Mascota> listaDeMascotas = servicioMascota.listarMascotasPorDuenio((Usuario)request.getSession().getAttribute("idUsuarioTurno"));
+		List<Mascota> listaDeMascotas = servicioMascota.listarMascotasPorDuenio((Long)request.getSession().getAttribute("idUsuarioTurno"));
 		
 		modelo.put("listaDeMascotas", listaDeMascotas);
 	return new ModelAndView("listarMascotas", modelo);

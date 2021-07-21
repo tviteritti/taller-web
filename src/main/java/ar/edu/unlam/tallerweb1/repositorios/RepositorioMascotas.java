@@ -12,12 +12,14 @@ import ar.edu.unlam.tallerweb1.modelo.Usuario;
 public interface RepositorioMascotas {
 	
 	List<Mascota> listarMascotas();
-	List<Mascota> listarMascotasPorDuenio(Usuario id_duenio);
+	List<Mascota> listarMascotasPorDuenio(Long id_duenio);
 	List<TipoAnimal> listarTipoAnimal();
 	TipoAnimal obtenerTipoAnimal(Long id);
+	TipoAnimal obtenerTipoAnimal(String tipo);
 	Mascota buscarMascotaPorDuenio(Long idDuenio);
 	
 	void cargarMascota(Long id_tipo, Long id_duenio, String fecha_nac, String nombre)throws ParseException;
+	void modificarPerfilMascota(Long idMascota, String nombre, Date fechaNacimineto, String tipoAnimal);
 	void modificarPerfilMascota(Long idMascota, String nombre, Date fechaNacimineto, TipoAnimal tipoAnimal);
 	
 	

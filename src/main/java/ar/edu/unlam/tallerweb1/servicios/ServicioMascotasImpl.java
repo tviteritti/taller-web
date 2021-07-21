@@ -68,7 +68,7 @@ public class ServicioMascotasImpl implements ServicioMascotas{
 
 
 	@Override
-	public List<Mascota> listarMascotasPorDuenio(Usuario id_duenio) {
+	public List<Mascota> listarMascotasPorDuenio(Long id_duenio) {
 		return servicioMascotasDao.listarMascotasPorDuenio(id_duenio);
 	}
 
@@ -80,7 +80,7 @@ public class ServicioMascotasImpl implements ServicioMascotas{
 
 
 	@Override
-	public void modificarPerfilMascota(Long idMascota, String nombre, Date fechaNacimineto, TipoAnimal tipoAnimal) {
+	public void modificarPerfilMascota(Long idMascota, String nombre, Date fechaNacimineto, String tipoAnimal) {
 		
 		servicioMascotasDao.modificarPerfilMascota(idMascota, nombre, fechaNacimineto, tipoAnimal);
 		
@@ -92,6 +92,23 @@ public class ServicioMascotasImpl implements ServicioMascotas{
 		
 		return servicioMascotasDao.buscarMascotaPorDuenio(idDuenio);
 	}
+
+
+	@Override
+	public TipoAnimal obtenerTipoAnimal(String tipo) {
+		
+		return servicioMascotasDao.obtenerTipoAnimal(tipo);
+	}
+
+
+	@Override
+	public void modificarPerfilMascota(Long idMascota, String nombre, Date fechaNacimineto, TipoAnimal tipoAnimal) {
+		
+		servicioMascotasDao.modificarPerfilMascota(idMascota, nombre, fechaNacimineto, tipoAnimal);
+		
+	}
+	
+	
 	
 	
 	

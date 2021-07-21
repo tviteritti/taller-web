@@ -73,11 +73,13 @@ public class RepositorioMascotasImpl implements RepositorioMascotas{
 	}
 
 	@Override
-	public List<Mascota> listarMascotasPorDuenio(Usuario id_duenio) {
+	public List<Mascota> listarMascotasPorDuenio(Long id_duenio) {
 		
 		return (List<Mascota>) sessionFactory.getCurrentSession()
 				 .createCriteria(Mascota.class)
-				 .add(Restrictions.eq("duenio", id_duenio)).list();
+				 .createAlias("duenio", "duenioBuscado")
+				 .add(Restrictions.eq("duenioBuscado.id", id_duenio))
+				 .list();
 	}
 
 	@Override
@@ -91,16 +93,21 @@ public class RepositorioMascotasImpl implements RepositorioMascotas{
 	}
 
 	@Override
-	public void modificarPerfilMascota(Long idMascota, String nombre, Date fechaNacimineto, TipoAnimal tipoAnimal) {
+	public void modificarPerfilMascota(Long idMascota, String nombre, Date fechaNacimineto, String tipoAnimal) {
 		
 		Mascota mascota = (Mascota) sessionFactory.getCurrentSession()
 				 .createCriteria(Mascota.class)
 				 .add(Restrictions.eq("id", idMascota))
 				 .uniqueResult();
 		
+		TipoAnimal tipo = new TipoAnimal();
+		tipo.setDescripcion(tipoAnimal);
+		
+		sessionFactory.getCurrentSession().save(tipo);
+		
 		mascota.setNombre(nombre);
 		mascota.setFecha_nacimiento(fechaNacimineto);
-		mascota.setTipo(tipoAnimal);
+		mascota.setTipo(tipo);
 		
 	}
 
@@ -116,6 +123,36 @@ public class RepositorioMascotasImpl implements RepositorioMascotas{
 		
 		return mascota;
 	}
+
+
+	@Override
+	public TipoAnimal obtenerTipoAnimal(String tipo) {
+		
+		TipoAnimal tipoAnimal = (TipoAnimal) sessionFactory.getCurrentSession()
+				 .createCriteria(TipoAnimal.class)
+				 .add(Restrictions.eq("descripcion", tipo))
+				 .uniqueResult();
+		
+		return tipoAnimal;
+		
+	}
+
+
+	@Override
+	public void modificarPerfilMascota(Long idMascota, String nombre, Date fechaNacimineto, TipoAnimal tipoAnimal) {
+		
+		Mascota mascota = (Mascota) sessionFactory.getCurrentSession()
+				 .createCriteria(Mascota.class)
+				 .add(Restrictions.eq("id", idMascota))
+				 .uniqueResult();
+	
+		mascota.setNombre(nombre);
+		mascota.setFecha_nacimiento(fechaNacimineto);
+		mascota.setTipo(tipoAnimal);
+		
+	}
+	
+	
 	
 	
 }

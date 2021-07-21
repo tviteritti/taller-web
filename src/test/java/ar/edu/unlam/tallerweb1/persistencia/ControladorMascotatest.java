@@ -70,7 +70,7 @@ public class ControladorMascotatest extends SpringTest{
 		when(requestMock.getSession().getAttribute("usuario")).thenReturn(usuarioMock);
 		when(usuarioMock.getRol()).thenReturn("duenio");
 		
-		ModelAndView modelAndView = controladorMascota.verPerfilMascota(1L, requestMock);
+		ModelAndView modelAndView = controladorMascota.verPerfilMascota(1L,requestMock);
 		
 		assertThat(modelAndView.getViewName()).isEqualTo("perfilMascota");
 	}
@@ -85,9 +85,9 @@ public class ControladorMascotatest extends SpringTest{
 		when(requestMock.getSession().getAttribute("usuario")).thenReturn(usuarioMock);
 		when(usuarioMock.getRol()).thenReturn("duenio");
 		
-		ModelAndView modelAndView = controladorMascota.modificarPerfilMascota(1L, 1L, "asd", null, 1L, requestMock);
+		ModelAndView modelAndView = controladorMascota.modificarPerfilMascota(1L, 1L, "asd", null, "asd", requestMock);
 		
-		assertThat(modelAndView.getViewName()).isEqualTo("redirect:/perfilMascota");
+		assertThat(modelAndView.getViewName()).isEqualTo("redirect:/perfilMiMascota");
 	}
 	
 	

@@ -15,10 +15,11 @@ public interface ServicioMascotas {
 	Mascota obtenerMascota(Long id);
 	Mascota buscarMascotaPorDuenio(Long idDuenio);
 	TipoAnimal obtenerTipoAnimal(Long id);
-	List<Mascota> listarMascotasPorDuenio(Usuario id_duenio);
+	TipoAnimal obtenerTipoAnimal(String tipo);
+	List<Mascota> listarMascotasPorDuenio(Long id_duenio);
 	
 	void cargarMascota(Long id_tipo, Long id_duenio, String fecha_nac, String nombre)throws ParseException;
+	void modificarPerfilMascota(Long idMascota, String nombre, Date fechaNacimineto, String tipoAnimal);
 	void modificarPerfilMascota(Long idMascota, String nombre, Date fechaNacimineto, TipoAnimal tipoAnimal);
-	
 
 }

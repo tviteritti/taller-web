@@ -10,14 +10,15 @@
 <link rel="shortcut icon" type="image/png" href="img/logo.png">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
 integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/b883f5a3c0.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
 <h4 class="text-center container p-2">Perfil Mascotas</h4>
     <br>
-    
-    <form action="modificarPerfilMascota" method="post" class="container">
-    <c:forEach var="mascota" items="${mascota}">
+     <c:forEach var="mascota" items="${mascota}">
+    <form action="modificarMascota" method="post" class="container">
+   
     	<div class="row  container" style="margin-top:50px;">
     		
     		<div class="col">
@@ -35,24 +36,32 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
     		<div class="col">	
     		 <label for="exampleFormControlSelect1">Tipo Animal:</label>
 	    	   <select name="tipoMascota"  class="form-control" id="exampleFormControlSelect1">
-				 <option> ${mascota.tipo.descripcion} </option> 
-					<c:forEach items="${tipos}" var="t">
+	    	   <option> ${mascota.tipo.descripcion} </option> 
+	    	   
+	    	   <c:forEach items="${tipos}" var="t">
 					  <option value="${t.descripcion}">${t.descripcion}</option>
-					  <input type="hidden" name="tipo" value="${t.id}"/>
 				   </c:forEach>
+				  
 		 	</select>
+		 
     		</div>
 	   
     	</div>
-    	</c:forEach>
+    	
        <br>
        <div class="container">
+        
         <input type="hidden" name="duenioId" value="${duenio.id}"/>
-        <!--<button type="submit" class="btn btn-success btn-lg" name="modificar">Modificar</button>-->
-     <a href="cuentaDuenio" class="btn btn-success btn-lg" name="modificar">Volver</a>
+        
+     	<input type="submit" class="btn btn-success btn-lg" value="Modificar" />
+     	
      </div>
+     
     </form>
     
+    </c:forEach>
+    <br>
+    <a href="cuentaDuenio" class="btn btn-success btn-lg m-5" name="modificar"><i class="fas fa-caret-left"></i> Volver</a>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 

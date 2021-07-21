@@ -28,6 +28,7 @@ import ar.edu.unlam.tallerweb1.modelo.Planes;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioConsulta;
+import ar.edu.unlam.tallerweb1.servicios.ServicioConsultaRespuesta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDias;
 import ar.edu.unlam.tallerweb1.servicios.ServicioHorarios;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMascotas;

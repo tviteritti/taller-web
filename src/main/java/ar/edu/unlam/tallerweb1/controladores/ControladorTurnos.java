@@ -116,7 +116,7 @@ private ServicioNotificaciones servicioNotificaciones;
 		modelo.put("turnosPorVT", turnosVeterinario);
 		
 		
-		List<Mascota> listaDeMascotas = servicioMascotas.listarMascotasPorDuenio(duenio);
+		List<Mascota> listaDeMascotas = servicioMascotas.listarMascotasPorDuenio(duenio.getId());
 		
 		modelo.put("listaDeMascotas", listaDeMascotas);
 		

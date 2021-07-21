@@ -6,9 +6,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,7 +33,7 @@ public class ControladorMascota {
 		this.servicioMascota = servicioMascota;
 	}
 	
-	@RequestMapping("/perfilMascota")
+	@RequestMapping("/perfilMiMascota")
 	public ModelAndView verPerfilMascota(
 			@RequestParam(value="duenioId",required=false) Long idDuenio,
 			HttpServletRequest request) {
@@ -40,39 +42,58 @@ public class ControladorMascota {
 			
 			Usuario usuarioLogueado = (Usuario) request.getSession().getAttribute("usuario");
 			
+			if(usuarioLogueado == null) {
+				
+				return new ModelAndView("redirect:/loginVeterinaria");
+				
+			}
+			
 			Usuario duenio = servicioDuenio.getDuenio(usuarioLogueado.getId());
 			
-			List<Mascota>  mascota = servicioMascota.listarMascotasPorDuenio(usuarioLogueado);
+			List<Mascota>  mascota = servicioMascota.listarMascotasPorDuenio(usuarioLogueado.getId());
+			List<TipoAnimal> tipos = servicioMascota.listarTipoAnimal();
 			
 			modelo.put("duenio", duenio);
 			modelo.put("duenioId", idDuenio);
 			modelo.put("mascota", mascota);
+			modelo.put("tipos", tipos);
 			
 		return new ModelAndView("perfilMascota", modelo);
 	}
 	
-	@RequestMapping("/modificarPerfilMascota")
+	@RequestMapping("/modificarMascota")
 	public ModelAndView modificarPerfilMascota(
 			@RequestParam(value="duenioId",required=false) Long idDuenio,
 			@RequestParam(value="mascotaId",required=false) Long mascotaId,
 			@RequestParam(value="mascotaNombre",required=false)String mascotaNombre,
-			@RequestParam(value="mascotaFN",required=false) Date fechaNacimiento,
-			@RequestParam(value="tipo",required=false) Long idTipo,
+			@RequestParam(value="mascotaFN",required=false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimiento,
+			@RequestParam(value="tipoMascota",required=false) String tipo,
 			HttpServletRequest request) {
 		
 			ModelMap modelo = new ModelMap();
 			
 			Usuario usuarioLogueado = (Usuario) request.getSession().getAttribute("usuario");
 			
-			Mascota  mascota = servicioMascota.buscarMascotaPorDuenio(usuarioLogueado.getId());
+			if(usuarioLogueado == null) {
+				
+				return new ModelAndView("redirect:/loginVeterinaria");
+				
+			}
 			
-			TipoAnimal tipo = servicioMascota.obtenerTipoAnimal(idTipo);
+			List<Mascota>  mascota = servicioMascota.listarMascotasPorDuenio(usuarioLogueado.getId());
 			
+			
+			List<TipoAnimal> tipos = servicioMascota.listarTipoAnimal();
+			
+			TipoAnimal tipoAnimal = servicioMascota.obtenerTipoAnimal(tipo);
+	
 			modelo.put("duenio", usuarioLogueado);
 			modelo.put("mascota", mascota);
-			servicioMascota.modificarPerfilMascota(mascotaId, mascotaNombre, fechaNacimiento, tipo);
+			modelo.put("tipos", tipos);
 			
-		return new ModelAndView("redirect:/perfilMascota", modelo);
+			servicioMascota.modificarPerfilMascota(mascotaId, mascotaNombre, fechaNacimiento, tipoAnimal);
+			
+		return new ModelAndView("redirect:/perfilMiMascota", modelo);
 	}
 
 	public void setServicioDuenio(ServicioUsuario servicioDuenio) {
