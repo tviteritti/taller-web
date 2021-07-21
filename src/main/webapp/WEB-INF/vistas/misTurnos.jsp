@@ -12,12 +12,17 @@
 <link rel="shortcut icon" type="image/png" href="img/logo.png">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
 integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/b883f5a3c0.js" crossorigin="anonymous"></script>
 </head>
 <body>
-      <h4 class="text-center container p-2">Turnos Solicitados</h4>
+
+      <%@ include file="menuCuentaDuenio.jsp"%>
+      </div>
+      
+      <h4 class="text-center container p-3">Turnos Solicitados</h4>
       <br>
        <c:if test="${not empty turnos}">
-       	<table class="table">
+       	<table class="table container">
 		  <thead>
 		    <tr>
 		      <th scope="col">Fecha</th>

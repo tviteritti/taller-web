@@ -14,7 +14,13 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 <script src="https://kit.fontawesome.com/b883f5a3c0.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <h4 class="text-center container p-5">Encontra el especialista y solicita un turnoa</h4>
+
+
+	<%@ include file="menuCuentaDuenio.jsp"%>
+      </div>
+
+
+  <h4 class="text-center container p-5">Encontra el especialista y solicita un turno</h4>
   
 
 	<c:forEach items="${veterinarios}" var="v">
@@ -64,9 +70,10 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 					     
 					<c:if test="${t.veterinario.id eq v.id}">
 						 <c:if test="${t.estado == false}">
-							<input type="radio" name="idTurno" value="${t.id}" id="turno${t.id}" required="required">
+						 <div class="form-check">
+							<input class="form-check-input" type="radio" name="idTurno" value="${t.id}" id="turno${t.id}" required="required">
 									    
-							<label for="turno${t.id}">
+							<label class="form-check-label" for="turno${t.id}">
 								<p>Fecha: 
 									       
 									<c:out value="${t.fecha}" />
@@ -78,8 +85,32 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 									 <input type="hidden" value="${t.horario}" name="hora"> 
 									         
 								 </p>
-							</label><br>
+							</label>
+							</div>
+							<br>
+							
 						 </c:if>  
+						  <c:if test="${t.estado == true}">
+						  
+						   <div class="form-check">
+							<input class="form-check-input" type="radio" name="idTurno" value="${t.id}" id="turno${t.id}" required="required" disabled>
+									    
+							<label class="form-check-label" for="turno${t.id}">
+								<p>Fecha: 
+									       
+									<c:out value="${t.fecha}" />
+									<input type="hidden" value="${t.fecha}" name="fecha">
+									  
+									  Hora: 
+									       
+									 <c:out value="${t.horario}" />
+									 <input type="hidden" value="${t.horario}" name="hora"> 
+									         
+								 </p>
+							</label>
+							</div>
+							<br>
+						 </c:if>
 					</c:if>      
 				</c:forEach>
 					    

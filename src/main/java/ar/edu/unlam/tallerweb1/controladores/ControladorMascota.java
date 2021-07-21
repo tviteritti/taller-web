@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Mascota;
+import ar.edu.unlam.tallerweb1.modelo.Notificacion;
 import ar.edu.unlam.tallerweb1.modelo.TipoAnimal;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMascotas;
+import ar.edu.unlam.tallerweb1.servicios.ServicioNotificaciones;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
 @Controller
@@ -25,12 +27,17 @@ public class ControladorMascota {
 	
 	private ServicioUsuario servicioDuenio;
 	private ServicioMascotas servicioMascota;
+	private ServicioNotificaciones servicioNotificaciones;
 	
 	@Autowired
-	public ControladorMascota( ServicioUsuario servicioDuenio, ServicioMascotas servicioMascota) {
+	public ControladorMascota( ServicioUsuario servicioDuenio, 
+							   ServicioMascotas servicioMascota,
+							   ServicioNotificaciones servicioNotificaciones) {
 		
 		this.servicioDuenio = servicioDuenio;	
 		this.servicioMascota = servicioMascota;
+		this.servicioNotificaciones =servicioNotificaciones;
+	
 	}
 	
 	@RequestMapping("/perfilMiMascota")
@@ -52,6 +59,13 @@ public class ControladorMascota {
 			
 			List<Mascota>  mascota = servicioMascota.listarMascotasPorDuenio(usuarioLogueado.getId());
 			List<TipoAnimal> tipos = servicioMascota.listarTipoAnimal();
+			
+			List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorUsuario(usuarioLogueado.getId());
+			
+			Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(usuarioLogueado.getId());
+			modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
+			
+			modelo.put("notificacion",misNotificaciones);
 			
 			modelo.put("duenio", duenio);
 			modelo.put("duenioId", idDuenio);
@@ -103,9 +117,11 @@ public class ControladorMascota {
 	public void setServicioMascota(ServicioMascotas servicioMascota) {
 		this.servicioMascota = servicioMascota;
 	}
+
 	
-	
-	
-	
+	public void setServicioNotificaciones(ServicioNotificaciones servicioNotificaciones) {
+		this.servicioNotificaciones = servicioNotificaciones;
+	}
+
 
 }

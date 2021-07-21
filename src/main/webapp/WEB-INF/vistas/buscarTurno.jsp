@@ -15,7 +15,10 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 <script src="https://kit.fontawesome.com/b883f5a3c0.js" crossorigin="anonymous"></script>
 </head>
 <body>
-      <h4 class="text-center container p-2">Busque un turno mas cercano</h4>
+
+	  <%@ include file="menuCuentaDuenio.jsp"%>
+      </div>
+      <h4 class="text-center container p-4">Busque un turno mas cercano</h4>
       <form:form action="buscarServicioVeterinario" method="post" name="formTurno" modelAttribute="zona" class="container">
         <div class="form-group">
 		    <label for="exampleFormControlSelect1">Servicio</label>

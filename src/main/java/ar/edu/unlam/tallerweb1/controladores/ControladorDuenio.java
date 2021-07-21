@@ -228,6 +228,12 @@ public class ControladorDuenio {
 		
 		List <Consulta> consultas = servicioConsulta.listarConsultaPorUsuario(idDuenio);
 		
+		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorUsuario(duenio.getId());
+		
+		Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(duenio.getId());
+		
+		modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
+		modelo.put("notificacion",misNotificaciones);
 		modelo.put("duenio", duenio);
 		modelo.put("consultas", consultas);
 		

@@ -67,6 +67,13 @@ private ServicioNotificaciones servicioNotificaciones;
 		List<Especialidad> listadoEspecialidad=servicioUsuario.getEspecialidades();
 		List<Zona> listadoZona=servicioUsuario.getZonas();
 		
+		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorUsuario(duenio.getId());
+		
+		Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(duenio.getId());
+		modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
+		
+		modelo.put("notificacion",misNotificaciones);
+		
 		modelo.put("listadoZonas", listadoZona);
 		modelo.put("listadoEspecialidad", listadoEspecialidad);
 		modelo.put("zona", zona);
@@ -88,6 +95,13 @@ private ServicioNotificaciones servicioNotificaciones;
 		modelo.put("duenioId",duenioId);
 		
 		Usuario usuarioLogueado = (Usuario) request.getSession().getAttribute("usuario");
+		
+		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorUsuario(duenioId);
+		Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(duenioId);
+		
+		modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
+		modelo.put("notificacion",misNotificaciones);
+		
 		
 		modelo.put("servicio", servicioUsuario.getEspecialidad(id_especialidad).getDescripcion());
 		modelo.put("zona",servicioUsuario.getZona(id_zona).getDescripcion());
@@ -135,9 +149,7 @@ private ServicioNotificaciones servicioNotificaciones;
 			request.getSession().setAttribute("errorExede", error);
 			
 		}
-		
-		
-		
+
 		return new ModelAndView("servicioVeterinario", modelo);
 	}
 
@@ -225,6 +237,12 @@ private ServicioNotificaciones servicioNotificaciones;
 		List<Turno> conVoto = servicioTurno.getTurnosConVotosDuenio(duenioId);
 		List<Turno> sinVoto = servicioTurno.getTurnosSinVotosDuenio(duenioId);
 		
+		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorUsuario(duenio.getId());
+		
+		Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(duenio.getId());
+		
+		modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
+		modelo.put("notificacion",misNotificaciones);
 		modelo.put("conVoto", conVoto);
 		modelo.put("sinVoto", sinVoto);
 		modelo.put("votos", votos);

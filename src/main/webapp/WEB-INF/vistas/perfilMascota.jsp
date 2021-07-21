@@ -14,7 +14,10 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 </head>
 <body>
 
-<h4 class="text-center container p-2">Perfil Mascotas</h4>
+	  <%@ include file="menuCuentaDuenio.jsp"%>
+      </div>
+      
+	<h4 class="text-center container mt-4">Perfil Mascotas</h4>
     <br>
      <c:forEach var="mascota" items="${mascota}">
     <form action="modificarMascota" method="post" class="container">
@@ -61,7 +64,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
     
     </c:forEach>
     <br>
-    <a href="cuentaDuenio" class="btn btn-success btn-lg m-5" name="modificar"><i class="fas fa-caret-left"></i> Volver</a>
+   
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 

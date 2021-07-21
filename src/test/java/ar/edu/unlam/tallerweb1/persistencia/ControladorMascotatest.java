@@ -35,14 +35,16 @@ public class ControladorMascotatest extends SpringTest{
 	private ServicioUsuario servicioDuenio;
 	private ServicioMascotas servicioMascota;
 	private ServicioNotificaciones servicioNotificaciones;
-	private ControladorMascota controladorMascota = new ControladorMascota(servicioDuenio, servicioMascota);
+	private ControladorMascota controladorMascota = new ControladorMascota(servicioDuenio, servicioMascota , servicioNotificaciones);
 	private Usuario usuarioMock;
 	private Turno turnoMock;
 	private Mascota mascotaMock;
+	private Notificacion notificacionMock;
 	private HttpServletRequest requestMock;
 	private HttpSession sessionMock;
 	private ServicioUsuario servicioUsuarioMock;
 	private ServicioMascotas servicioMascotasMock;
+	private ServicioNotificaciones servicioNotificacionesMock;
 	
 	
 
@@ -51,12 +53,15 @@ public class ControladorMascotatest extends SpringTest{
 	public void init(){
 		usuarioMock = mock(Usuario.class);
 		mascotaMock = mock(Mascota.class);
+		notificacionMock = mock(Notificacion.class);
 		requestMock = mock(HttpServletRequest.class);
 		sessionMock = mock(HttpSession.class);
 		servicioUsuarioMock = mock(ServicioUsuario.class);
 		controladorMascota.setServicioDuenio(servicioUsuarioMock);
 		servicioMascotasMock = mock(ServicioMascotas.class);
 		controladorMascota.setServicioMascota(servicioMascotasMock);
+		servicioNotificacionesMock = mock(ServicioNotificaciones.class);
+		controladorMascota.setServicioNotificaciones(servicioNotificacionesMock);
 	}
 	
 	
