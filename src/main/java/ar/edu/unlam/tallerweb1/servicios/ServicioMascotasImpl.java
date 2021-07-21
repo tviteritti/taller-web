@@ -107,10 +107,14 @@ public class ServicioMascotasImpl implements ServicioMascotas{
 		servicioMascotasDao.modificarPerfilMascota(idMascota, nombre, fechaNacimineto, tipoAnimal);
 		
 	}
-	
-	
-	
-	
-	
+
+
+	@Override
+	public List<Mascota> listarMascotasPorDuenio(Usuario usuario) {
+		
+		return servicioMascotasDao.listarMascotasPorDuenio(usuario);
+	}
+
+
 
 }

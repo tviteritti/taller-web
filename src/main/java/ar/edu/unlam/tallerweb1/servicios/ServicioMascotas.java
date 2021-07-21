@@ -17,6 +17,7 @@ public interface ServicioMascotas {
 	TipoAnimal obtenerTipoAnimal(Long id);
 	TipoAnimal obtenerTipoAnimal(String tipo);
 	List<Mascota> listarMascotasPorDuenio(Long id_duenio);
+	List<Mascota> listarMascotasPorDuenio(Usuario usuario);
 	
 	void cargarMascota(Long id_tipo, Long id_duenio, String fecha_nac, String nombre)throws ParseException;
 	void modificarPerfilMascota(Long idMascota, String nombre, Date fechaNacimineto, String tipoAnimal);

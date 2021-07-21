@@ -151,8 +151,16 @@ public class RepositorioMascotasImpl implements RepositorioMascotas{
 		mascota.setTipo(tipoAnimal);
 		
 	}
-	
-	
-	
+
+
+	@Override
+	public List<Mascota> listarMascotasPorDuenio(Usuario usuario) {
+		
+		return (List<Mascota>) sessionFactory.getCurrentSession()
+				 .createCriteria(Mascota.class)
+				 .add(Restrictions.eq("duenio", usuario))
+				 .list();
+	}
+
 	
 }

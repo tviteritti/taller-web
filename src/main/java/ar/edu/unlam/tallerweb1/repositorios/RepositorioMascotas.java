@@ -13,6 +13,7 @@ public interface RepositorioMascotas {
 	
 	List<Mascota> listarMascotas();
 	List<Mascota> listarMascotasPorDuenio(Long id_duenio);
+	List<Mascota> listarMascotasPorDuenio(Usuario usuario);
 	List<TipoAnimal> listarTipoAnimal();
 	TipoAnimal obtenerTipoAnimal(Long id);
 	TipoAnimal obtenerTipoAnimal(String tipo);

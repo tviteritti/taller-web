@@ -23,7 +23,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
   <div class="container">
         <div class="row vh-100 justify-content-center align-items-center">
             <div class="col-auto bg-light p-5">
-                <form action="procesarMascota" method="POST" >
+                <form:form action="procesarMascota" method="POST" modelAtributte="mascota">
                 <div class="input-group p-2">
                 	<c:if test = "${errorSinPlan != null}">
                 		<div class="input-group p-1"><p>${errorSinPlan}. </p></div>
@@ -40,22 +40,26 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
                    	<div class="input-group p-2">
                         <input type="hidden" name="id_turno" value="${id_turno }"/>
                     </div><br>
-                    <div class="alert alert-warning mb-3" role="alert">
-							Si aun no cargo su mascota, inicie sesion e ingrese los datos
-							<a href="iniciarSesion"><strong class="text-dark text-decoration-none">ingresar</strong></a>
-					</div>
+                    
                     <div class="input-group p-2">
-                    	 <select class="form-control" name="id_mascotas">
-					       <option >Seleccione su mascota</option> 
-					       <c:forEach items="${listaDeMascotas}" var="mascota">
-					          <option value="${mascota.id}">${mascota.nombre}</option>
-					       </c:forEach>
-						</select>
+                    
+                         <div >
+                    	 	<label>Seleccione su mascota</label>
+                    	 </div>
+                    	 <div >
+	                    	 <select class="form-control" name="id_mascotas">
+						       
+						       <c:forEach items="${listaDeMascotas}" var="mascota">
+						          <option value="${mascota.id}">${mascota.nombre}</option>
+						       </c:forEach>
+							</select>
+						</div>
+						
                     </div><br>                    
                     <br>
                     <br>
                     <input type="submit" class="btn btn-success w-100" value="registrar">
-     			</form>             
+     			</form:form>             
 			</div>
 		</div>
 	</div>

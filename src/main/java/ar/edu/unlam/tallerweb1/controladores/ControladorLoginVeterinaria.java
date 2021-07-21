@@ -592,35 +592,40 @@ public class ControladorLoginVeterinaria {
 	
 	@RequestMapping("/mascotaAEligir")
 	public ModelAndView mascotaAEligir(HttpServletRequest request) {
+		
 		ModelMap modelo = new ModelMap();
-		List<Mascota> listaDeMascotas = servicioMascota.listarMascotasPorDuenio((Long)request.getSession().getAttribute("idUsuarioTurno"));
+		
+		List<Mascota> listaDeMascotas = servicioMascota.listarMascotasPorDuenio((Usuario)request.getSession().getAttribute("idUsuarioTurno"));
 		
 		modelo.put("listaDeMascotas", listaDeMascotas);
+		
 	return new ModelAndView("listarMascotas", modelo);
+	
 	}
 	
 	@RequestMapping("/procesarMascota")
 	public ModelAndView procesarMascota(
-			@RequestParam("id_mascotas") Long id_mascota,
+			@RequestParam(value="id_mascotas",required=false) Long id_mascota,
 			@RequestParam(value="id_turno",required=false) Long id_turno, HttpServletRequest request){
 		
 		Usuario vet = (Usuario) request.getSession().getAttribute("veterinarioTurno");
-		Mascota mascota = servicioMascota.obtenerMascota(id_mascota);
 		Turno turno = servicioTurno.obtenerTurno(id_turno);
 		
 		if(id_mascota!=null){
 			
 			servicioTurno.tomarTurno(id_turno, id_mascota);
 			Notificacion notificacionTurno = new Notificacion();
-			
+			Mascota mascota = servicioMascota.obtenerMascota(id_mascota);
 			notificacionTurno.setUsuario(vet);
 			notificacionTurno.setEstado(true);
 			String mensajeNotificacion = mascota.getDuenio().getUser()+" solicito turno";
 			notificacionTurno.setMensaje(mensajeNotificacion);
 			notificacionTurno.setTurno(turno);
 			servicioNotificaciones.cargarNotificacion(notificacionTurno);
-		}else {
-			return new ModelAndView("redirect:/tomarUnTurno?turnoId="+id_turno);
+		}
+		
+		if(id_mascota==null) {
+			return new ModelAndView("mascotaNull");
 		}
 		
 		if(request.getSession().getAttribute("errorExede") != null) {
