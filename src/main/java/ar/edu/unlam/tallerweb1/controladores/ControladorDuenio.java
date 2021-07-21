@@ -25,7 +25,6 @@ import ar.edu.unlam.tallerweb1.modelo.TipoAnimal;
 import ar.edu.unlam.tallerweb1.modelo.Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioConsulta;
-import ar.edu.unlam.tallerweb1.servicios.ServicioConsultaRespuesta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDias;
 import ar.edu.unlam.tallerweb1.servicios.ServicioHorarios;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMascotas;
@@ -42,9 +41,7 @@ public class ControladorDuenio {
 	private ServicioPlanes servicioPlanes;
 	private ServicioConsulta servicioConsulta;
 	private ServicioNotificaciones servicioNotificaciones;
-	private ServicioConsultaRespuesta servicioConsultaRespuesta;
 
-	
 	@Autowired
 	public ControladorDuenio( ServicioUsuario servicioDuenio, 
 							  ServicioMascotas servicioMascota,
