@@ -38,11 +38,26 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 					   <td><c:out value="${t.fecha}" />	</td>
 					   <td><c:out value="${t.horario}" /></td>
 					   <td><c:out value="${t.servicio}" /></td>
-					   <td><c:out value="${t.duenio.nombre} ${t.duenio.apellido}" /></td>
+					   <td>
+						   <c:if test="${not empty t.duenio.id}">
+						   <c:out value="${t.duenio.nombre} ${t.duenio.apellido}" />
+						   </c:if>
+						    <c:if test="${empty t.duenio.id}">
+						     -
+						    </c:if>
+					   </td>
 					   
 					   <td>
+					      <c:if test="${not empty t.duenio.id}">
+					      
 						   <input type="hidden" name="duenio" value="${t.duenio.id}"/>
 						   <button type="submit" class="btn btn-success">Contactar</button>
+						   
+						   </c:if>
+						   <c:if test="${empty t.duenio.id}">
+						   	 <button type="submit" class="btn btn-success" disabled>Contactar</button>
+						   </c:if>
+						   
 					   </td> 
 					  </tr>
 					</form>	     

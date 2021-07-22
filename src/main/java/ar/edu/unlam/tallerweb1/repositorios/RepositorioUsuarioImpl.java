@@ -349,6 +349,18 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		return  calificacion;
 	}
 
+	@Override
+	public void cargarZona(Zona zona) {
+		sessionFactory.getCurrentSession().save(zona);
+		
+	}
+
+	@Override
+	public void cargarEspecialidad(Especialidad especialidad) {
+		sessionFactory.getCurrentSession().save(especialidad);
+		
+	}
+
 	
 
 }

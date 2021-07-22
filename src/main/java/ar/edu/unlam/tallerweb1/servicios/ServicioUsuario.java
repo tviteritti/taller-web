@@ -24,6 +24,9 @@ public interface ServicioUsuario {
 	Boolean buscarUsuario(String usuario, String password);
 	Usuario devolverUsuario(String usuario, String password);
 	
+	void cargarZona(Zona zona);
+	void cargarEspecialidad(Especialidad especialidad);
+	
 	
 	void registrarOMOdificarUsuario (Usuario usuario);
 	void eliminarUsuario(Long id);

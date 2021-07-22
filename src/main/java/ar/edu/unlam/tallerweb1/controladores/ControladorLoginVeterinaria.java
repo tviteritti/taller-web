@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -143,19 +144,20 @@ public class ControladorLoginVeterinaria {
 			return new ModelAndView("redirect:/loginVeterinaria");
 		}
 		if(usuarioLogueado.getRol().equals("duenio")) {
+			
+			List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorUsuario(usuarioLogueado.getId());
+			modelo.put("notificacion",misNotificaciones);
+			Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(usuarioLogueado.getId());
+			modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
+			
 			if(servicioPlanes.mostrarPlanesOContrataciones(usuarioLogueado)) {
+				
 				List<ContratacionPlanes> listaContrataciones=servicioPlanes.listarContrataciones();
 				modelo.put("listaContrataciones", listaContrataciones);
 				
-				List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorUsuario(usuarioLogueado.getId());
-				modelo.put("notificacion",misNotificaciones);
-				
 				List <Turno> misTurnos = servicioTurno.buscarTurnoPorDuenio(usuarioLogueado.getId());
 				modelo.put("turnos",misTurnos);
-				
-				Integer cantidadTotalNotificaciones = servicioNotificaciones.cantidadNotificaciones(usuarioLogueado.getId());
-				modelo.put("cantidadNotificaciones", cantidadTotalNotificaciones);
-				
+
 			}else {
 				List<Planes> listaPlanes=servicioPlanes.listarPlanes();			
 				modelo.put("listaPlanes", listaPlanes);
@@ -277,6 +279,49 @@ public class ControladorLoginVeterinaria {
 		}
 			ModelMap modelo = new ModelMap();
 			Usuario usuario = new Usuario();
+			
+			Especialidad especialidad1 = new Especialidad();
+			especialidad1.setDescripcion("Cirugia");
+			
+			Especialidad especialidad2 = new Especialidad();
+			especialidad2.setDescripcion("Laboratorio");
+			
+			Especialidad especialidad3 = new Especialidad();
+			especialidad3.setDescripcion("Rayos X");
+			
+			Especialidad especialidad4 = new Especialidad();
+			especialidad4.setDescripcion("Ecografias");
+			
+			Especialidad especialidad5 = new Especialidad();
+			especialidad5.setDescripcion("Castraciones");
+			
+			Especialidad especialidad6 = new Especialidad();
+			especialidad6.setDescripcion("Cardiologia");
+			
+			Especialidad especialidad7 = new Especialidad();
+			especialidad7.setDescripcion("Planes Nutricionales");
+			
+			servicioUsuario.cargarEspecialidad(especialidad1);
+			servicioUsuario.cargarEspecialidad(especialidad2);
+			servicioUsuario.cargarEspecialidad(especialidad3);
+			servicioUsuario.cargarEspecialidad(especialidad4);
+			servicioUsuario.cargarEspecialidad(especialidad5);
+			servicioUsuario.cargarEspecialidad(especialidad6);
+			servicioUsuario.cargarEspecialidad(especialidad7);
+			
+			Zona zona1 = new Zona();
+			zona1.setDescripcion("Norte");
+			
+			Zona zona2 = new Zona();
+			zona2.setDescripcion("Sur");
+			
+			Zona zona3 = new Zona();
+			zona3.setDescripcion("Oeste");
+			
+			servicioUsuario.cargarZona(zona1);
+			servicioUsuario.cargarZona(zona2);
+			servicioUsuario.cargarZona(zona3);
+			
 			List<Especialidad> listadoEspecialidad=servicioUsuario.getEspecialidades();
 			List<Zona> listadoZonas=servicioUsuario.getZonas();
 			modelo.put("listadoZonas", listadoZonas);

@@ -20,6 +20,9 @@ public interface RepositorioUsuario {
 	Usuario getVeterinario(Long id);
 	List<Usuario> listarVeterinarios();
 	
+	void cargarZona(Zona zona);
+	void cargarEspecialidad(Especialidad especialidad);
+	
 	void registrarOMOdificarUsuario (Usuario usuario);
 	void eliminarUsuario(Long id);
 	void ingresarEspecialidad(Long id, Long id_especialidad);

@@ -268,6 +268,20 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 	}
 
 
+	@Override
+	public void cargarZona(Zona zona) {
+		ServicioUsuarioDao.cargarZona(zona);
+		
+	}
+
+
+	@Override
+	public void cargarEspecialidad(Especialidad especialidad) {
+		ServicioUsuarioDao.cargarEspecialidad(especialidad);
+		
+	}
+
+
 	
 			
 			
