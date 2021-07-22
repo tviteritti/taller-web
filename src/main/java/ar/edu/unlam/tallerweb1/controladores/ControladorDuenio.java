@@ -151,18 +151,18 @@ public class ControladorDuenio {
 		miConsulta.setAsunto(asunto);
 		miConsulta.setDescripcion(consulta);
 		miConsulta.setUsuario(duenio);
-		miConsulta.setTipoConsulta("consulta");
+		
+		servicioConsulta.cargarConsulta(miConsulta);
 		
 		Consulta respuesta = new Consulta();
 		respuesta.setDescripcion(comentario);
 		respuesta.setUsuario(usuarioLogueado);
 		respuesta.setTipoConsulta("respuesta");
-		respuesta.setAsunto(asunto);
 		
-		if(idConsulta!=null && usuarioLogueado!=null) {
-			
-			servicioConsulta.cargarConsulta(miConsulta);
-			servicioConsulta.cargarConsulta(respuesta);
+		servicioConsulta.cargarConsulta(respuesta);
+		
+		if(idConsulta!=null) {
+	
 			servicioConsulta.guardarRespuesta(idConsulta, respuesta, usuarioLogueado.getUser());
 		}
 
@@ -170,10 +170,10 @@ public class ControladorDuenio {
 		List <Consulta> consultas = servicioConsulta.listarConsultaPorUsuario(idDuenio);
 		List <Consulta> consultasDeTodosLosUsuarios = servicioConsulta.listarConsultas();
 		
-		
 		modelo.put("duenio", duenio);
 		modelo.put("consultas", consultas);
 		modelo.put("todasLasConsultas", consultasDeTodosLosUsuarios);
+		modelo.put("comentario", comentario);
 		modelo.put("usuario", usuarioLogueado);
 		
 		List <Notificacion> misNotificaciones = servicioNotificaciones.listarNotificacionesPorUsuario(usuarioLogueado.getId());
@@ -181,7 +181,7 @@ public class ControladorDuenio {
 		if(notificacion!=null) {
 			
 			Consulta consultaBuscada = servicioConsulta.buscarConsulta(idConsulta);
-			String usuarioRespuesta = usuarioLogueado.getUser();
+			String usuarioRespuesta = consultaBuscada.getUserRespuesta();
 			String mensaje = usuarioRespuesta + " respondio tu consulta: "+consultaBuscada.getAsunto();
 			
 			Notificacion notificacionUsuario = new Notificacion();
@@ -206,6 +206,7 @@ public class ControladorDuenio {
 			 modelo.put("notificacion",misNotificaciones);
 			 return new ModelAndView("miConsulta",modelo);
 		}
+		
 		
 		
 
@@ -282,6 +283,32 @@ public class ControladorDuenio {
 			return new ModelAndView("redirect:/cuentaVeterinario");
 		}
 			ModelMap modelo = new ModelMap();
+			
+			TipoAnimal tipoAnimal1 = new TipoAnimal();
+			tipoAnimal1.setDescripcion("Perro");
+			
+			TipoAnimal tipoAnimal2 = new TipoAnimal();
+			tipoAnimal2.setDescripcion("Gato");
+			
+			TipoAnimal tipoAnimal3 = new TipoAnimal();
+			tipoAnimal3.setDescripcion("Pez");
+			
+			TipoAnimal tipoAnimal4 = new TipoAnimal();
+			tipoAnimal4.setDescripcion("Ave");
+			
+			TipoAnimal tipoAnimal5 = new TipoAnimal();
+			tipoAnimal5.setDescripcion("Roedor");
+			
+			TipoAnimal tipoAnimal6 = new TipoAnimal();
+			tipoAnimal6.setDescripcion("Reptil");
+			
+			servicioMascota.cargarTipoAnimal(tipoAnimal1);
+			servicioMascota.cargarTipoAnimal(tipoAnimal2);
+			servicioMascota.cargarTipoAnimal(tipoAnimal3);
+			servicioMascota.cargarTipoAnimal(tipoAnimal4);
+			servicioMascota.cargarTipoAnimal(tipoAnimal5);
+			servicioMascota.cargarTipoAnimal(tipoAnimal6);
+			
 			List<TipoAnimal> listadoTipos=servicioMascota.listarTipoAnimal();
 			modelo.put("listadoTipos", listadoTipos);
 

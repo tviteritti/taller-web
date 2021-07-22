@@ -19,6 +19,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 	</div>
 <h4 class="text-center container p-3">Responde las dudas de nuestros usuarios</h4>
    <c:forEach items="${consultas}" var="c">
+   <c:if test="${not empty c.id}">
 	   <c:if test="${not empty c.asunto}">
 	   <c:if test="${not empty c.descripcion}">
 		<div class="card p-3">
@@ -34,7 +35,17 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 		    <div class="card-footer text-muted">
 		    	<c:if test="${not empty c.comentario}">
 		    	
-		    		  <form method="post" action="responderConsultas" class="d-flex flex-column m-3" style="border-left:3px solid #17a2b8">
+		    			
+		    		  <form method="post" action="responderConsultas" class="d-flex flex-column  p-0 mb-3 jumbotron jumbotron-fluid" style="border-left:3px solid #17a2b8">
+		    		  			<div class="col-auto p-0">
+									      <label class="sr-only" for="inlineFormInputGroup">Username</label>
+									      <div class="input-group mb-2 p-0">
+									        <div class="input-group-prepend p-0">
+									          <div class="input-group-text">@</div>
+									        </div>
+									        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username" value="${c.usuario.user}">
+									      </div>
+						</div>
 								<p class="text-left ml-2">${c.respuesta.descripcion} - <cite title="Source Title"><strong>${c.userRespuesta}</strong></cite></p>
 								<input type="hidden" value="${c.usuario.id}" name="usuarioRespuesta">
 								<textarea name="comentario" placeholder="comentar" class="mr-3"></textarea>
@@ -43,7 +54,16 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 						</form>
 			
 		    	</c:if>
-		    	 <form method="post" action="responderConsultas">
+		    	 <form method="post" action="responderConsultas" class="d-flex flex-column  p-0 mb-3 jumbotron jumbotron-fluid">
+		    	 			<div class="col-auto p-0">
+									      <label class="sr-only" for="inlineFormInputGroup">Username</label>
+									      <div class="input-group mb-2 p-0">
+									        <div class="input-group-prepend p-0">
+									          <div class="input-group-text">@</div>
+									        </div>
+									        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username" value="${c.usuario.user}">
+									      </div>
+						</div>
 					        <input type="hidden" value="${c.id}" name="idConsulta">
 							<textarea class="form-control" rows="3" placeholder="comentar" name="comentario"></textarea>
 							<input type="hidden" value="true" name="notificacion">
@@ -52,6 +72,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 				
   			</div>
 		</div>
+		</c:if>
 		</c:if>
 		</c:if>
 	</c:forEach>

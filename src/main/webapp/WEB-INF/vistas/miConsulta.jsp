@@ -58,62 +58,95 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 			
 			
 		<c:if test="${not empty todasLasConsultas}">
-			
-			<c:forEach items="${todasLasConsultas}" var="tc">
-			
-			<c:if test="${not empty tc.asunto}">
-      		<c:if test="${not empty tc.descripcion}">
-      		
-		      	<div class="card text-center p-3 container">
-					    <blockquote class="blockquote mb-0 p-3">
-					     <h5 class="card-title">${tc.asunto}</h5>
-					      <p  style="font-size:16px">${tc.descripcion}</p>
-					      <footer class="blockquote-footer ">
-					        <small class="text-dark">
-					          Realizado por <cite title="Source Title">${tc.usuario.user}</cite>
-					        </small>
-					      </footer>
-					    </blockquote>
-					    
-					    <c:if test="${not empty tc.comentario}">
-
-						  <form method="post" action="miConsulta" class="d-flex flex-column p-0 mb-3 jumbotron jumbotron-fluid" style="border-left:3px solid #17a2b8;">
-						  
-						  		 <div class="col-auto p-0">
-							      <label class="sr-only" for="inlineFormInputGroup">Username</label>
-							      <div class="input-group mb-2 p-0">
-							        <div class="input-group-prepend p-0">
-							          <div class="input-group-text">@</div>
-							        </div>
-							        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username" value="${tc.usuario.user}">
-							      </div>
-								</div>
-						
-								 <p class="text-left ml-2 p-0">${tc.respuesta.descripcion} - <cite title="Source Title"><strong>${tc.userRespuesta}</strong></cite></p>
-								 <textarea name="comentario" placeholder="comentar" class="container-fluid p-0" style="resize:none;outline:0;border: 1px solid #ced4da"></textarea>
-								 
+				
+				<c:forEach items="${todasLasConsultas}" var="tc">
+					<c:if test="${not empty tc.asunto}">
+		      		<c:if test="${not empty tc.descripcion}">
+		      		
+				      	<div class="card text-center p-3 container">
+							    <blockquote class="blockquote mb-0 p-3">
+							     <h5 class="card-title">${tc.asunto}</h5>
+							      <p  style="font-size:16px">${tc.descripcion}</p>
+							      <footer class="blockquote-footer ">
+							        <small class="text-dark">
+							          Realizado por <cite title="Source Title">${tc.usuario.user}</cite>
+							        </small>
+							      </footer>
+							    </blockquote>
+							    
+							    <c:if test="${not empty tc.comentario}">
+		
+								  <form method="post" action="miConsulta" class="d-flex flex-column p-0 mb-3 jumbotron jumbotron-fluid" style="border-left:3px solid #17a2b8;">
+								  
+								  		 <div class="col-auto p-0">
+									      <label class="sr-only" for="inlineFormInputGroup">Username</label>
+									      <div class="input-group mb-2 p-0">
+									        <div class="input-group-prepend p-0">
+									          <div class="input-group-text">@</div>
+									        </div>
+									        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username" value="${tc.usuario.user}">
+									      </div>
+										</div>
 								
-					  
-								<input type="hidden" value="${tc.usuario.id}" name="usuarioRespuesta" class="p-0">			
-								<input type="hidden" value="${tc.respuesta.id}" name="idConsulta" class="p-0">
+										 <p class="text-left ml-2 p-0">${tc.respuesta.descripcion} - <cite title="Source Title"><strong>${tc.userRespuesta}</strong></cite></p>
+										 <textarea name="comentario" placeholder="comentar" class="container-fluid p-0" style="resize:none;outline:0;border: 1px solid #ced4da"></textarea>
+										 
+										
+							  
+										<input type="hidden" value="${tc.usuario.id}" name="usuarioRespuesta" class="p-0">			
+										<input type="hidden" value="${tc.respuesta.id}" name="idConsulta" class="p-0">
+										
+										<button type="submit" class="btn btn-link text-decoration-none p-0" id="responder">Responder</button>
+								</form>
+			
+				    			</c:if>
+				    			 <c:if test="${tc.tipoConsulta eq 'respuesta'}">
+				    			 	  <form method="post" action="miConsulta" class="d-flex flex-column p-0 mb-3 jumbotron jumbotron-fluid" style="border-left:3px solid #17a2b8;">
+								  
+								  		 <div class="col-auto p-0">
+									      <label class="sr-only" for="inlineFormInputGroup">Username</label>
+									      <div class="input-group mb-2 p-0">
+									        <div class="input-group-prepend p-0">
+									          <div class="input-group-text">@</div>
+									        </div>
+									        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username" value="${tc.usuario.user}">
+									      </div>
+										</div>
 								
-								<button type="submit" class="btn btn-link text-decoration-none p-0" id="responder">Responder</button>
-						</form>
-	
-		    			</c:if>
-		    			
-					    <form method="post" action="miConsulta">
-					        <input type="hidden" value="${tc.id}" name="idConsulta">
-							<textarea class="form-control" rows="3" placeholder="comentar" name="comentario"></textarea>
-							<input type="hidden" value="true" name="notificacion">
-						    <button type="submit" class="btn btn-primary btn-sm">Responder</button>
-					   </form>
-		  		</div>
-		  		<br>
-		  		
+										 <p class="text-left ml-2 p-0">${tc.descripcion} - <cite title="Source Title"><strong>${tc.userRespuesta}</strong></cite></p>
+										 <textarea name="comentario" placeholder="comentar" class="container-fluid p-0" style="resize:none;outline:0;border: 1px solid #ced4da"></textarea>
+										 
+										
+							  
+										<input type="hidden" value="${tc.usuario.id}" name="usuarioRespuesta" class="p-0">			
+										<input type="hidden" value="${tc.respuesta.id}" name="idConsulta" class="p-0">
+										
+										<button type="submit" class="btn btn-link text-decoration-none p-0" id="responder">Responder</button>
+								</form>
+				    			 </c:if>
+				    			
+							    <form method="post" action="miConsulta" class="d-flex flex-column  p-0 mb-3 jumbotron jumbotron-fluid">
+							    	<div class="col-auto p-0">
+									      <label class="sr-only" for="inlineFormInputGroup">Username</label>
+									      <div class="input-group mb-2 p-0">
+									        <div class="input-group-prepend p-0">
+									          <div class="input-group-text">@</div>
+									        </div>
+									        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username" value="${tc.usuario.user}">
+									      </div>
+										</div>
+							        <input type="hidden" value="${tc.id}" name="idConsulta">
+									<textarea class="form-control p-0" rows="3" placeholder="comentar" name="comentario"></textarea>
+									<input type="hidden" value="true" name="notificacion">
+								    <button type="submit" class="btn btn-primary btn-sm">Responder</button>
+							   </form>
+				  		</div>
+				  		<br>
+				  		
+				  		</c:if>
 		  		</c:if>
-		  		</c:if>
-       		</c:forEach>
+				</c:forEach>
+		
 		</c:if>
 			
 	 <!-- Optional JavaScript -->

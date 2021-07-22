@@ -162,5 +162,15 @@ public class RepositorioMascotasImpl implements RepositorioMascotas{
 				 .list();
 	}
 
+
+	@Override
+	public void cargarTipoAnimal(TipoAnimal tipo) {
+
+		sessionFactory.getCurrentSession().save(tipo);
+		
+	}
+	
+	
+
 	
 }

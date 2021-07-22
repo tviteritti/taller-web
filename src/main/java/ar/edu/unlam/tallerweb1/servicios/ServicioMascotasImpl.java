@@ -116,5 +116,13 @@ public class ServicioMascotasImpl implements ServicioMascotas{
 	}
 
 
+	@Override
+	public void cargarTipoAnimal(TipoAnimal tipo) {
+		
+		servicioMascotasDao.cargarTipoAnimal(tipo);
+		
+	}
+
+
 
 }

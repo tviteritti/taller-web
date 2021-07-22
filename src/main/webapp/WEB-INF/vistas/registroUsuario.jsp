@@ -45,9 +45,10 @@
 	</nav></div>
 	
 	<div class="d-flex align-items-center justify-content-center vh-100">
-		<div class="w-50 vh-100 text-center d-flex align-items-center justify-content-center" style="background-color: #289470;">			
+		<div class="w-50 vh-100 text-center d-flex align-items-center justify-content-center" style="background: #289470;">			
 			<form action="registrarDuenio">
     			<input type="submit" value="Tengo una mascota" class="btn btn-outline-light" />
+    			
 			</form>
 		</div>
 		<div class="w-50 vh-100 text-center d-flex align-items-center justify-content-center" style="background-color: #fff;">
